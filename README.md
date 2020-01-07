@@ -1,6 +1,6 @@
 [![HitCount](http://hits.dwyl.io/fanwangecon/REconTools.svg)](https://github.com/FanWangEcon/REconTools)  [![Star](https://img.shields.io/github/stars/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/stargazers) [![Fork](https://img.shields.io/github/forks/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/network/members) [![Star](https://img.shields.io/github/watchers/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/watchers)
 
-## R Code from Various Projects using Panel Data
+# R Tools for Panel Data and Optimization
 
 This is a work-in-progress [website](https://fanwangecon.github.io/REconTools/) consisting of files for doing Panel Data Statistics/Econometrics Analysis. Materials gathered from various [projects](https://fanwangecon.github.io/research) in which R code is used. Files are from [**Fan**](https://fanwangecon.github.io/)'s [REconTools](https://github.com/FanWangEcon/REconTools) repository.
 
@@ -39,7 +39,7 @@ Click on the reference tab on top to see all functions. Some functions are also 
 
 ## 2. Panel
 
-1. [Long Panel Duplicate One Variable to Wide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html) | [vignette](https://fanwangecon.github.io/REconTools/panel/expand/fst_panel_lag_expand.html)
+1. [Long Panel Duplicate One Variable to Wide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html)
     + long panel var X, average X by within i t subgroups, expand avgX_{i,tgroup} to wide, merge to long panel
     + **tidy**: *group_by + summarise + spread + left_join*
 

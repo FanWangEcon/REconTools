@@ -1,0 +1,21 @@
+Package: REconTools
+Title: R Tools for Panel Data and Optimization
+Version: 0.0.0.9000
+Authors@R: person("Fan", "Wang", email = "fanwecon@gmail.com", role = c("aut", "cre"))
+Description: A R package with reusable functions shared by research projects
+Depends: R (>= 3.6.1)
+License: MIT + file LICENSE
+URL: https://fanwangecon.github.io/REconTools/
+BugReports: https://github.com/FanWangEcon/REconTools/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+VignetteBuilder: knitr
+Imports:
+    dplyr,
+    tidyr,
+    tibble,
+    purrr,
+    readr
+Suggests: knitr,
+    rmarkdown

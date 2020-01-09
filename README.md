@@ -43,6 +43,11 @@ Click on the reference tab on top to see all functions. Some functions are also 
     + long panel var X, average X by within i t subgroups, expand avgX_{i,tgroup} to wide, merge to long panel
     + **tidy**: *group_by + summarise + spread + left_join*
 
+## 3. Distributions
+
+1. [Compute Gini for a non-negative Vector](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html)
+    + Single line gini inequality formula.
+
 ----
 Please contact [![](https://img.shields.io/github/followers/fanwangecon?label=FanWangEcon&style=social)](https://github.com/FanWangEcon) [![](https://img.shields.io/twitter/follow/fanwangecon?label=%20&style=social)](https://twitter.com/fanwangecon) for issues or problems.
 

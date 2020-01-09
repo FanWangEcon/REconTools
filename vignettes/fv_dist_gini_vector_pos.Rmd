@@ -1,0 +1,229 @@
+---
+title: DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DIST GINI--Compute Gini Inequality Coefficient Given Sample (One Variable)}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+urlcolor: blue
+---
+
+Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools Homepage **[Table of Content](https://fanwangecon.github.io/REconTools/)**
+
+# Objective
+
+This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package
+
+
+There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the [GINI](https://en.wikipedia.org/wiki/Gini_coefficient) coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.
+
+See the formula below, note that when the sample size is small, there is a limit to inequality using the formula defined below given each $N$. So for small $N$, can not really compare inequality across arrays with different $N$, can only compare arrays with the same $N$. In another word, if 1 of N individual holds all resource, as $N$ increases, GINI will asymptote to 0, but it is very far away from 0 for low N.
+
+# Formula
+
+Not sure if this a standard way of computing GINI, but this is how I decided to compute this, the thought process is as follows, given monotonimcally increasing array $X$, with $x_1,...,x_N$:
+
+1. There is a box, width = 1, height = 1
+2. The width is discretized into $N$ individuals, so each individual's width is $\frac{1}{N}$
+3. The height is normalized to 1, for the nth individual, total height is the sum of all $x$, so need to rescale all bars by $\sum_i^{N} x_i$
+
+The GINI formula I use is:
+$$
+ GINI =
+  \frac{2}{N+1}
+  \cdot
+  \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
+  \cdot
+  \left(
+    \sum_{i=1}^N x_i
+  \right)^{-1}
+$$
+
+I derive the formula in the steps below.
+
+## Step 1 Area Formula
+
+$$
+ \Gamma = \sum_{i=1}^N \frac{1}{N} \cdot \left(
+     \sum_{j=1}^{i} \left(
+      \frac{x_j}{\sum_{\widehat{j}=1}^N x_{\widehat{j}} }
+      \right)
+  \right)
+$$
+
+## Step 2 Total Area Given Perfect equality
+
+With perfect equality $x_i=a$ for all $i$, so need to divide by that.
+
+$$
+ \Gamma^{\text{equal}} = \sum_{i=1}^N \frac{1}{N} \cdot \left(
+     \sum_{j=1}^{i} \left(
+      \frac{a}{\sum_{\widehat{j}=1}^N a }
+      \right)
+  \right)
+  = \frac{N+1}{N}\cdot\frac{1}{2}
+$$
+
+As the number of elements of the vecotr increases:
+$$
+ \lim_{N \rightarrow \infty}\Gamma^{\text{equal}}
+  = \lim_{N \rightarrow \infty} \frac{N+1}{N}\cdot\frac{1}{2}
+  = \frac{1}{2}
+$$
+
+## Step 3 Arriving at Finite Vector Gini Formula
+
+Given what we have from above, we obtain the gini formula
+$$
+ GINI =
+  \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
+  \cdot
+  \left(
+    N \cdot \sum_{i=1}^N X_i
+  \right)^{-1}
+  \cdot
+  \left( \frac{N+1}{N}\cdot\frac{1}{2} \right)^{-1}
+  =
+  \frac{2}{N+1}
+  \cdot
+  \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
+  \cdot
+  \left(
+    \sum_{i=1}^N x_i
+  \right)^{-1}
+$$
+
+## Step 4 Maximum Inequality given N
+
+Suppose $x_i=0$ for all $i<N$, then:
+
+$$
+ GINI^{x_i = 0 \text{ except } i=N}
+ =
+  \frac{2}{N+1}
+  \cdot
+  X_N
+  \cdot
+  \left(
+    X_N
+  \right)^{-1}
+ =
+ \frac{2}{N+1}
+$$
+
+$$
+ \lim_{N \rightarrow \infty} GINI^{x_i = 0 \text{ except } i=N}
+ =
+ \lim_{N \rightarrow \infty}
+ \frac{2}{N+1}
+ = 0
+$$
+
+Note that for small N, for example if $N=10$, even when one person holds all income, all others have 0 income, the formula will not produce gini is zero, but that gini is equal to $\frac{2}{11}\approx 0.1818$. If $N=2$, inequality is at most, $\frac{2}{3}\approx 0.667$.
+
+$$
+ MostUnequalGINI\left(N\right) = \frac{2}{N+1}
+$$
+
+# Implement GINI Formula in R
+
+The **GINI** formula just derived is trivial to compute.
+
+1. scalar: $\frac{2}{N+1}$
+2. cumsum: $\sum_{j=1}^{i} x_j$
+3. sum of cumsum: $\left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)$
+3. sum: $\sum_{i=1}^N X_i$
+
+There are no package dependencies. Define the formula here:
+
+```{r}
+# Load Library
+rm(list = ls())
+# Formula, directly implement the GINI formula Following Step 4 above
+fv_dist_gini_vector_pos_test <- function(ar_pos) {
+  # Check length and given warning
+  it_n <- length(ar_pos)
+  if (it_n <= 100)  warning('Data vector has n=',it_n,', max-inequality/min-gini=',2/(it_n + 1))
+  # Sort
+  ar_pos <- sort(ar_pos)
+  # formula implement
+  fl_gini <- (2/(it_n+1)) * sum(cumsum(ar_pos))*(sum(ar_pos))^(-1)
+  return(fl_gini)
+}
+```
+
+## Testing
+
+Generate a number of examples Arrays for testing
+
+```{r}
+# Example Arrays of data
+ar_equal_n1 = c(1)
+ar_ineql_n1 = c(100)
+
+ar_equal_n2 = c(1,1)
+ar_ineql_alittle_n2 = c(1,2)
+ar_ineql_somewht_n2 = c(1,2^3)
+ar_ineql_alotine_n2 = c(1,2^5)
+ar_ineql_veryvry_n2 = c(1,2^8)
+ar_ineql_mostmst_n2 = c(1,2^13)
+
+ar_equal_n10 = c(2,2,2,2,2,2, 2, 2, 2, 2)
+ar_ineql_some_n10 = c(1,2,3,5,8,13,21,34,55,89)
+ar_ineql_very_n10 = c(1,2^2,3^2,5^2,8^2,13^2,21^2,34^2,55^2,89^2)
+ar_ineql_extr_n10 = c(1,2^2,3^3,5^4,8^5,13^6,21^7,34^8,55^9,89^10)
+
+# Uniform draw testing
+ar_unif_n1000 = runif(1000, min=0, max=1)
+
+# Normal draw testing
+ar_norm_lowsd_n1000 = rnorm(1000, mean=100, sd =1)
+ar_norm_lowsd_n1000[ar_norm_lowsd_n1000<0] = 0
+ar_norm_highsd_n1000 = rnorm(1000, mean=100, sd =20)
+ar_norm_highsd_n1000[ar_norm_highsd_n1000<0] = 0
+
+# Beta draw testing
+ar_beta_mostrich_n1000 = rbeta(1000, 5, 1)
+ar_beta_mostpoor_n1000 = rbeta(1000, 1, 5)
+ar_beta_manyrichmanypoor_nomiddle_n1000 = rbeta(1000, 0.5, 0.5)
+```
+
+Now test the example arrays above using the function based no our formula:
+
+```{r, eval=TRUE, echo=FALSE}
+# Hard-Code Small N Dist Tests
+cat('\nSmall N=1 Hard-Code\n')
+cat('ar_equal_n1:', fv_dist_gini_vector_pos_test(ar_equal_n1), '\n')
+cat('ar_ineql_n1:', fv_dist_gini_vector_pos_test(ar_ineql_n1), '\n')
+
+cat('\nSmall N=2 Hard-Code, converge to 0.67, see formula above\n')
+cat('ar_ineql_alittle_n2:', fv_dist_gini_vector_pos_test(ar_ineql_alittle_n2), '\n')
+cat('ar_ineql_somewht_n2:', fv_dist_gini_vector_pos_test(ar_ineql_somewht_n2), '\n')
+cat('ar_ineql_alotine_n2:', fv_dist_gini_vector_pos_test(ar_ineql_alotine_n2), '\n')
+cat('ar_ineql_veryvry_n2:', fv_dist_gini_vector_pos_test(ar_ineql_veryvry_n2), '\n')
+
+cat('\nSmall N=10 Hard-Code, convege to 0.18, see formula above\n')
+cat('ar_equal_n10:', fv_dist_gini_vector_pos_test(ar_equal_n10), '\n')
+cat('ar_ineql_some_n10:', fv_dist_gini_vector_pos_test(ar_ineql_some_n10), '\n')
+cat('ar_ineql_very_n10:', fv_dist_gini_vector_pos_test(ar_ineql_very_n10), '\n')
+cat('ar_ineql_extr_n10:', fv_dist_gini_vector_pos_test(ar_ineql_extr_n10), '\n')
+
+# Uniform Dist Tests
+cat('\nUNIFORM Distribution\n')
+cat('ar_unif_n1000:', fv_dist_gini_vector_pos_test(ar_unif_n1000), '\n')
+
+# Normal Dist Tests
+cat('\nNORMAL Distribution\n')
+cat('ar_norm_lowsd_n1000:', fv_dist_gini_vector_pos_test(ar_norm_lowsd_n1000), '\n')
+cat('ar_norm_highsd_n1000:', fv_dist_gini_vector_pos_test(ar_norm_highsd_n1000), '\n')
+
+# Beta Dist Tests
+cat('\nBETA Distribution\n')
+cat('ar_beta_mostpoor_n1000:', fv_dist_gini_vector_pos_test(ar_beta_mostpoor_n1000), '\n')
+cat('ar_beta_manyrichmanypoor_nomiddle_n1000:', fv_dist_gini_vector_pos_test(ar_beta_manyrichmanypoor_nomiddle_n1000), '\n')
+cat('ar_beta_mostrich_n1000:', fv_dist_gini_vector_pos_test(ar_beta_mostrich_n1000), '\n')
+
+# Example when it does not work
+ar_unif_n1000_NEGATIVE = runif(1000, min=-1, max=1)
+cat('\n\nSHOULD/DOES NOT WORK TEST\n ar_unif_n1000_NEGATIVE:', fv_dist_gini_vector_pos_test(ar_unif_n1000_NEGATIVE), '\n')
+```

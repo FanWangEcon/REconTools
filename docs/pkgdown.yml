@@ -2,5 +2,6 @@ pandoc: 2.7.2
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  fv_dist_gini_vector_pos: fv_dist_gini_vector_pos.html
   fv_panel_expand_longandwide: fv_panel_expand_longandwide.html
 

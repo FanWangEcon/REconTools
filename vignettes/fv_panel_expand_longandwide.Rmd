@@ -1,8 +1,8 @@
 ---
-title: Append Group Mean Lagged Values as Additional Panel Variables
+title: PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Append Group Mean Lagged Values as Additional Panel Variables}
+  %\VignetteIndexEntry{PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 urlcolor: blue

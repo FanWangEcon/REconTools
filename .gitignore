@@ -82,3 +82,5 @@ local.properties
 .scala_dependencies
 .worksheet
 inst/doc
+doc
+Meta

@@ -419,7 +419,7 @@ return(df_bisec)
 Here we use the same function as earlier, but modify number of parameters:
 
 ```{r}
-# 
+# Define Inputs
 df <- tb_states_choices
 fc_withroot <- function(fl_A, fl_alpha, x){
   # Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg
@@ -501,6 +501,8 @@ Use *df_esti* from [*ffy_opt_dtgch_cbem4*](https://fanwangecon.github.io/PrjOpti
 
 The function is the same as before: *fc_withroot*, in fact, this function is the solution to the log linear allocation from problem [PrjOptiAlloc](https://fanwangecon.github.io/PrjOptiAlloc/).
 
+First define the data frame:
+
 ```{r}
 # Load Package and Data
 library(PrjOptiAlloc)
@@ -509,16 +511,39 @@ df_esti <- ls_opti_alpha_A$df_esti
 
 # Select only A and Alpha and Index 
 # %>% mutate(A_log =(A_log))
-df_dtgch_cbem4_bisec <- df_esti[1:2,] %>% select(indi.id, A_log, alpha_log) 
+df_dtgch_cbem4_bisec <- df_esti %>% select(indi.id, A_log, alpha_log) 
 ar_st_col_names = c('INDI_ID', 'fl_A', 'fl_alpha')
-df_dtgch_cbem4_bisec <- df_esti[1:2,] %>% select(A_log, alpha_log) 
-ar_st_col_names = c('fl_A', 'fl_alpha')
-df_dtgch_cbem4_bisec <- df_dtgch_cbem4_bisec %>% rename_all(~c(ar_st_col_names))
+df <- df_dtgch_cbem4_bisec %>% rename_all(~c(ar_st_col_names))
+```
 
+Crucially, also need to redefine the function, note that the function formula we are using here is the same as before, however, there are Hard-Coded vectors in the formula, that need to reflect the new dataframe.
+
+```{r}
+# hard-coded parameters
+ar_nN_A <- df %>% pull(fl_A)
+ar_nN_alpha <- df %>% pull(fl_alpha)
+# Function again updating the hard-coded parameters
+fc_withroot <- function(fl_A, fl_alpha, x){
+  # Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg
+  # Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. 
+  ar_p1_s1 = exp((fl_A - ar_nN_A)*fl_rho)
+  ar_p1_s2 = (fl_alpha/ar_nN_alpha)
+  ar_p1_s3 = (1/(ar_nN_alpha*fl_rho - 1))
+  ar_p1 = (ar_p1_s1*ar_p1_s2)^ar_p1_s3
+  ar_p2 = x^((fl_alpha*fl_rho-1)/(ar_nN_alpha*fl_rho-1))
+  ar_overall = ar_p1*ar_p2
+  fl_overall = fl_N_agg - sum(ar_overall)
+  return(fl_overall)
+}
+```
+
+Finally call and solve with the bisection function:
+
+```{r}
 # Bisect and Solve
 ls_svr_df_in_func <- c('fl_A', 'fl_alpha')
 svr_root_x <- 'x'
-df_bisec_dtgch_cbem4 <- fv_opti_bisect_pmap_multi_test(df_dtgch_cbem4_bisec, fc_withroot,
+df_bisec_dtgch_cbem4 <- fv_opti_bisect_pmap_multi_test(df, fc_withroot,
                                                        0, fl_upper_x,
                                                        ls_svr_df_in_func, svr_root_x,
                                                        bl_keep_iter = FALSE)
@@ -527,6 +552,7 @@ df_bisec_dtgch_cbem4 <- fv_opti_bisect_pmap_multi_test(df_dtgch_cbem4_bisec, fc_
 fl_allocated <- sum(df_bisec_dtgch_cbem4 %>% pull(svr_root_x))
 if (fl_N_agg == fl_allocated){
   message('Total Input Available = Sum of Optimal Individual Allocations')
+  cat('fl_N_agg =', fl_N_agg, ', and, sum(df_bisec_dtgch_cbem4 %>% pull(svr_root_x))=', fl_allocated)
 } else {
   cat('fl_N_agg =', fl_N_agg, ', but, sum(df_bisec_dtgch_cbem4 %>% pull(svr_root_x))=', fl_allocated)
 }

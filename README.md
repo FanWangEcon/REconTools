@@ -4,7 +4,7 @@
 
 This is a work-in-progress [website](https://fanwangecon.github.io/REconTools/) consisting of files for doing Panel Data Statistics/Econometrics Analysis. Materials gathered from various [projects](https://fanwangecon.github.io/research) in which R code is used. Files are from [**Fan**](https://fanwangecon.github.io/)'s [REconTools](https://github.com/FanWangEcon/REconTools) repository.
 
-From [Fan](https://fanwangecon.github.io/)'s other repositories: For dynamic borrowing and savings problems, see [Dynamic Asset Repository](https://fanwangecon.github.io/CodeDynaAsset/); For code examples, see also [R Example Code](https://fanwangecon.github.io/REconTools/), [Matlab Example Code](https://fanwangecon.github.io/M4Econ/) and [Stata Example Code](https://fanwangecon.github.io/Stata4Econ/); For intro econ with Matlab, see [Intro Mathematics for Economists](https://fanwangecon.github.io/Math4Econ/), and for intro stat with R, see [Intro Statistics for Undergraduates](https://fanwangecon.github.io/Stat4Econ/). See [here](https://github.com/FanWangEcon) for all of [Fan](https://fanwangecon.github.io/)'s public repositories.
+From [Fan](https://fanwangecon.github.io/)'s other repositories: For dynamic borrowing and savings problems, see [Dynamic Asset Repository](https://fanwangecon.github.io/CodeDynaAsset/); For code examples, see also [R Example Code](https://fanwangecon.github.io/R4Econ/), [Matlab Example Code](https://fanwangecon.github.io/M4Econ/) and [Stata Example Code](https://fanwangecon.github.io/Stata4Econ/); For intro econ with Matlab, see [Intro Mathematics for Economists](https://fanwangecon.github.io/Math4Econ/), and for intro stat with R, see [Intro Statistics for Undergraduates](https://fanwangecon.github.io/Stat4Econ/). See [here](https://github.com/FanWangEcon) for all of [Fan](https://fanwangecon.github.io/)'s public repositories.
 
 Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
 
@@ -50,7 +50,7 @@ Click on the reference tab on top to see all functions. Some functions are also 
 
 ## 4. Optimization
 
-1. [Concurrent Bisection Different Parameters](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_opti_bisect_pmap_multi.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html)
+1. [Concurrent Bisection Different Parameters](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_opti_bisect.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html)
     + A strictly monotonic linear or nonlinear function with one root
     + A dataframe where each column is a different parameter for the function, and each row parameter values
     + Find roots for this function concurrently over all rows at the row specific parameters

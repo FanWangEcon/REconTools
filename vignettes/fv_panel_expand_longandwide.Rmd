@@ -8,7 +8,7 @@ vignette: >
 urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools Homepage **[Table of Content](https://fanwangecon.github.io/REconTools/)**
+Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
 
 # Outline
 

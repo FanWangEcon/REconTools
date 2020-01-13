@@ -8,12 +8,11 @@ vignette: >
 urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools Homepage **[Table of Content](https://fanwangecon.github.io/REconTools/)**
+Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
 
 # Objective
 
-This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package
-
+This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package.
 
 There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the [GINI](https://en.wikipedia.org/wiki/Gini_coefficient) coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.
 

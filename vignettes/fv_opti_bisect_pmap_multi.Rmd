@@ -1,0 +1,535 @@
+---
+title: OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single
+  Zero-Crossing
+urlcolor: blue
+vignette: |
+  %\VignetteIndexEntry{OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+---
+
+Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
+
+# Objective
+
+This file works out how the [ff_opti_bisect_pmap_multi](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package. Also see a closely related file from [R4Econ](https://fanwangecon.github.io/R4Econ/), [DPLYR Bisection](https://fanwangecon.github.io/R4Econ/optimization/root_bisect/fs_func_graph_eval.html), which works out in greater detail the bisection algorithm.
+
+We want solve for function $0=f(z_{ij}, x_i, y_i, \textbf{X}, \textbf{Y}, c, d)$. There are $i$ functions that have $i$ specific $x$ and $y$. For each $i$ function, we evaluate along a grid of feasible values for $z$, over $j\in J$ grid points, potentially looking for the $j$ that is closest to the root. $j$ could be interpreted as iterations. $\textbf{X}$ and $\textbf{Y}$ are arrays common across the $i$ equations, and $c$ and $d$ are constants.
+
+As we iterate over $j$, find the $z_{ij}$ that is $i$ specific that allows for $f_{i}(z_{ij})=0$.
+
+In the code below, we develop the bisection code line by line, then we write it as a function using pmap. At the end, we test the concurrent bisection code over tibble dataframe with a set of straight lines (negative intercepts and positive slopes), and the log-linear solution for optimal allocation function from [fan](http://fanwangecon.github.io/)'s [PrjOptiAlloc](https://fanwangecon.github.io/PrjOptiAlloc/) Project.
+
+## Bisection Algorithm
+
+This is how I implement the bisection algorithm, when we know the bounding minimum and maximum to be below and above zero already.
+
+1. Evaluate $f^0_a = f(a^0)$ and $f^0_b = f(b^0)$, min and max points.
+2. Evaluate at $f^0_p = f(p^0)$, where $p_0 = \frac{a^0+b^0}{2}$.
+3. if $f^i_a \cdot f^i_p < 0$, then $b_{i+1} = p_i$, else, $a_{i+1} = p_i$ and $f^{i+1}_a = p_i$.
+4. iteratre until convergence.
+
+And for the function we want to bisect over, as stated earlier, it has three types of variables:
+
+1. variables in file for grouping, each group is an individual for whom we want to calculate optimal choice for using bisection.
+2. variables that change each row and each iteration, the root we are looking for.
+3. scalar and array values that are applied to every row and persist across iterations.
+
+# Set up for Implementation
+
+Invoking the algorithm uses several key tidyverse functions:
+
+1. *pmap* from [purrr](https://purrr.tidyverse.org/index.html) to evaluate function row by row.
+2. *case_when* from [dplyr](https://dplyr.tidyverse.org/reference/case_when.html) to set new lower and upper bound.
+3. *pivot_wider* and *pivot_longer* from [tidyr](https://tidyr.tidyverse.org/index.html) to reshape resulting file if record all iteration results.
+
+## Load Packages
+
+```{r loadlib, echo = T, results = 'hide', message=F, warning=F}
+rm(list = ls(all.names = TRUE))
+library(tibble)
+library(tidyr)
+library(purrr)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(kableExtra)
+```
+
+## Set up Input Arrays
+
+There is a function that takes $M=Q+P$ inputs, we want to evaluate this function $N$ times. Each time, there are $M$ inputs, where all but $Q$ of the $M$ inputs, meaning $P$ of the $M$ inputs, are the same. In particular, $P=Q*N$.
+
+$$M = Q+P = Q + Q*N$$
+
+Now we need to expand this by the number of choice grid. Each row, representing one equation, is expanded by the number of choice grids. We are graphically searching, or rather brute force searching, which means if we have 100 individuals, we want to plot out the nonlinear equation for each of these lines, and show graphically where each line crosses zero. We achieve this, by evaluating the equation for each of the 100 individuals along a grid of feasible choices.
+
+In this problem here, the feasible choices are shared across individuals.
+
+```{r setup}
+# Parameters
+fl_rho = 0.20
+svr_id_var = 'INDI_ID'
+
+# it_child_count = N, the number of children
+it_N_child_cnt = 9
+# it_heter_param = Q, number of parameters that are heterogeneous across children
+it_Q_hetpa_cnt = 2
+
+# P fixed parameters, nN is N dimensional, nP is P dimensional
+ar_nN_A = seq(-2, 2, length.out = it_N_child_cnt)
+ar_nN_alpha = seq(0.1, 0.9, length.out = it_N_child_cnt)
+ar_nP_A_alpha = c(ar_nN_A, ar_nN_alpha)
+
+# N by Q varying parameters
+mt_nN_by_nQ_A_alpha = cbind(ar_nN_A, ar_nN_alpha)
+
+# Choice Grid for nutritional feasible choices for each
+fl_N_agg = 100
+fl_N_min = 0
+
+# Mesh Expand
+tb_states_choices <- as_tibble(mt_nN_by_nQ_A_alpha) %>% rowid_to_column(var=svr_id_var)
+ar_st_col_names = c(svr_id_var,'fl_A', 'fl_alpha')
+tb_states_choices <- tb_states_choices %>% rename_all(~c(ar_st_col_names))
+
+# display
+summary(tb_states_choices)
+kable(tb_states_choices) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
+## Create Nonlinear Root Function 
+
+These is a test functions over which we will searh for roots. 
+
+```{r}
+# Define Implicit Function
+ffi_nonlin_dplyrdo <- function(fl_A, fl_alpha, fl_N, ar_A, ar_alpha, fl_N_agg, fl_rho){
+  # scalar value that are row-specific, in dataframe already: *fl_A*, *fl_alpha*, *fl_N*
+  # array and scalars not in dataframe, common all rows: *ar_A*, *ar_alpha*, *fl_N_agg*, *fl_rho*
+
+  # Test Parameters
+  # ar_A = ar_nN_A
+  # ar_alpha = ar_nN_alpha
+  # fl_N = 100
+  # fl_rho = -1
+  # fl_N_q = 10
+
+  # Apply Function
+  ar_p1_s1 = exp((fl_A - ar_A)*fl_rho)
+  ar_p1_s2 = (fl_alpha/ar_alpha)
+  ar_p1_s3 = (1/(ar_alpha*fl_rho - 1))
+  ar_p1 = (ar_p1_s1*ar_p1_s2)^ar_p1_s3
+  ar_p2 = fl_N^((fl_alpha*fl_rho-1)/(ar_alpha*fl_rho-1))
+  ar_overall = ar_p1*ar_p2
+  fl_overall = fl_N_agg - sum(ar_overall)
+
+  return(fl_overall)
+}
+```
+
+# Step by Step Implmentation of Algorithm
+
+Generate New columns of a and b as we iteratre, do not need to store p, p is temporary. Evaluate the function below which we have already tested, but now, in the dataframe before generating all permutations, *tb_states_choices*, now the *fl_N* element will be changing with each iteration, it will be row specific. *fl_N* are first min and max, then each subsequent ps.
+
+## Initialize Matrix
+
+First, initialize the matrix with $a_0$ and $b_0$, the initial min and max points:
+```{r}
+
+# common prefix to make reshaping easier
+st_bisec_prefix <- 'bisec_'
+svr_a_lst <- paste0(st_bisec_prefix, 'a_0')
+svr_b_lst <- paste0(st_bisec_prefix, 'b_0')
+svr_fa_lst <- paste0(st_bisec_prefix, 'fa_0')
+svr_fb_lst <- paste0(st_bisec_prefix, 'fb_0')
+
+# Add initial a and b
+tb_states_choices_bisec <- tb_states_choices %>%
+                            mutate(!!sym(svr_a_lst) := fl_N_min, !!sym(svr_b_lst) := fl_N_agg)
+
+# Evaluate function f(a_0) and f(b_0)
+tb_states_choices_bisec <- tb_states_choices_bisec %>% rowwise() %>%
+                            mutate(!!sym(svr_fa_lst) := ffi_nonlin_dplyrdo(fl_A, fl_alpha, !!sym(svr_a_lst),
+                                                                          ar_nN_A, ar_nN_alpha,
+                                                                          fl_N_agg, fl_rho),
+                                   !!sym(svr_fb_lst) := ffi_nonlin_dplyrdo(fl_A, fl_alpha, !!sym(svr_b_lst),
+                                                                          ar_nN_A, ar_nN_alpha,
+                                                                          fl_N_agg, fl_rho))
+# Summarize
+dim(tb_states_choices_bisec)
+summary(tb_states_choices_bisec)
+```
+
+## Iterate and Solve for f(p), update f(a) and f(b)
+
+Implement the DPLYR based Concurrent bisection algorithm.
+
+```{r}
+
+# fl_tol = float tolerance criteria
+# it_tol = number of interations to allow at most
+fl_tol <- 10^-2
+it_tol <- 100
+
+# fl_p_dist2zr = distance to zero to initalize
+fl_p_dist2zr <- 1000
+it_cur <- 0
+while (it_cur <= it_tol && fl_p_dist2zr >= fl_tol ) {
+
+  it_cur <- it_cur + 1
+
+  # New Variables
+  svr_a_cur <- paste0(st_bisec_prefix, 'a_', it_cur)
+  svr_b_cur <- paste0(st_bisec_prefix, 'b_', it_cur)
+  svr_fa_cur <- paste0(st_bisec_prefix, 'fa_', it_cur)
+  svr_fb_cur <- paste0(st_bisec_prefix, 'fb_', it_cur)
+
+  # Evaluate function f(a_0) and f(b_0)
+  # 1. generate p
+  # 2. generate f_p
+  # 3. generate f_p*f_a
+  tb_states_choices_bisec <- tb_states_choices_bisec %>% rowwise() %>%
+                              mutate(p = ((!!sym(svr_a_lst) + !!sym(svr_b_lst))/2)) %>%
+                              mutate(f_p = ffi_nonlin_dplyrdo(fl_A, fl_alpha, p,
+                                                              ar_nN_A, ar_nN_alpha,
+                                                              fl_N_agg, fl_rho)) %>%
+                              mutate(f_p_t_f_a = f_p*!!sym(svr_fa_lst))
+  # fl_p_dist2zr = sum(abs(p))
+  fl_p_dist2zr <- mean(abs(tb_states_choices_bisec %>% pull(f_p)))
+
+  # Update a and b
+  tb_states_choices_bisec <- tb_states_choices_bisec %>%
+                              mutate(!!sym(svr_a_cur) :=
+                                       case_when(f_p_t_f_a < 0 ~ !!sym(svr_a_lst),
+                                                 TRUE ~ p)) %>%
+                              mutate(!!sym(svr_b_cur) :=
+                                       case_when(f_p_t_f_a < 0 ~ p,
+                                                 TRUE ~ !!sym(svr_b_lst)))
+  # Update f(a) and f(b)
+  tb_states_choices_bisec <- tb_states_choices_bisec %>%
+                              mutate(!!sym(svr_fa_cur) :=
+                                       case_when(f_p_t_f_a < 0 ~ !!sym(svr_fa_lst),
+                                                 TRUE ~ f_p)) %>%
+                              mutate(!!sym(svr_fb_cur) :=
+                                       case_when(f_p_t_f_a < 0 ~ f_p,
+                                                 TRUE ~ !!sym(svr_fb_lst)))
+  # Save from last
+  svr_a_lst <- svr_a_cur
+  svr_b_lst <- svr_b_cur
+  svr_fa_lst <- svr_fa_cur
+  svr_fb_lst <- svr_fb_cur
+
+  # Summar current round
+  print(paste0('it_cur:', it_cur, ', fl_p_dist2zr:', fl_p_dist2zr))
+  summary(tb_states_choices_bisec %>% select(one_of(svr_a_cur, svr_b_cur, svr_fa_cur, svr_fb_cur)))
+}
+```
+
+## Reshape Wide to long to Wide
+
+To view results easily, how iterations improved to help us find the roots, convert table from wide to long. Pivot twice. This allows us to easily graph out how bisection is working out iterationby iteration.
+
+Here, we will first show what the raw table looks like, the wide only table, and then show the long version, and finally the version that is medium wide.
+
+```{r reshape solution from wide to very long}
+# New variables
+svr_bisect_iter <- 'biseciter'
+svr_abfafb_long_name <- 'varname'
+svr_number_col <- 'value'
+svr_id_bisect_iter <- paste0(svr_id_var, '_bisect_ier')
+
+# Pivot wide to very long
+tb_states_choices_bisec_long <- tb_states_choices_bisec %>%
+  pivot_longer(
+    cols = starts_with(st_bisec_prefix),
+    names_to = c(svr_abfafb_long_name, svr_bisect_iter),
+    names_pattern = paste0(st_bisec_prefix, "(.*)_(.*)"),
+    values_to = svr_number_col
+  )
+
+# Print
+summary(tb_states_choices_bisec_long)
+head(tb_states_choices_bisec_long %>% select(-one_of('p','f_p','f_p_t_f_a')), 30)
+tail(tb_states_choices_bisec_long %>% select(-one_of('p','f_p','f_p_t_f_a')), 30)
+
+# Pivot wide to very long to a little wide
+tb_states_choices_bisec_wider <- tb_states_choices_bisec_long %>%
+  pivot_wider(
+    names_from = !!sym(svr_abfafb_long_name),
+    values_from = svr_number_col
+  )
+
+# Print
+summary(tb_states_choices_bisec_wider)
+head(tb_states_choices_bisec_wider %>% select(-one_of('p','f_p','f_p_t_f_a')), 30)
+tail(tb_states_choices_bisec_wider %>% select(-one_of('p','f_p','f_p_t_f_a')), 30)
+```
+
+## Graph Bisection Iteration Results
+
+Actually we want to graph based on the long results, not the wider. Wider easier to view in table.
+
+```{r reshape solution for graphing}
+# Graph results
+lineplot <- tb_states_choices_bisec_long %>%
+    mutate(!!sym(svr_bisect_iter) := as.numeric(!!sym(svr_bisect_iter))) %>%
+    filter(!!sym(svr_abfafb_long_name) %in% c('a', 'b')) %>%
+    ggplot(aes(x=!!sym(svr_bisect_iter), y=!!sym(svr_number_col),
+               colour=!!sym(svr_abfafb_long_name),
+               linetype=!!sym(svr_abfafb_long_name),
+               shape=!!sym(svr_abfafb_long_name))) +
+        facet_wrap( ~ INDI_ID) +
+        geom_line() +
+        geom_point() +    
+        labs(title = 'Bisection Iteration over individuals Until Convergence',
+             x = 'Bisection Iteration',
+             y = 'a (left side point) and b (right side point) values',
+             caption = 'DPLYR concurrent bisection nonlinear multple individuals') +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+print(lineplot)
+```
+
+# Implement Bisection as A Function over Dataframe
+
+## Define Bisection Algorithm Function 
+
+Note the *df* input must have the not hard-coded input variables in *fc_withroot*, identical names. In particular, *svr_bisect_solu* should specify the name of the root variable: the x variable, which we are changing to solve for zero, whatever it is called in the *df* dataframe.
+
+
+Inputs:
+
+- *ls_svr_df_in_func*: string list of variables in df that are inputs for fc_withroot.
+- *svr_root_x*: the x variable name that appears n fc_withroot. 
+
+```{r define function}
+fv_opti_bisect_pmap_multi_test <- function(df, fc_withroot,
+                                           fl_lower_x, fl_upper_x,
+                                           ls_svr_df_in_func,
+                                           svr_root_x = 'x',
+                                           it_iter_tol = 50, fl_zero_tol = 10^-5,
+                                           bl_keep_iter = TRUE,
+                                           st_bisec_prefix = 'bisec_',
+                                           st_lower_x = 'a', st_lower_fx = 'fa',
+                                           st_upper_x = 'b', st_upper_fx = 'fb') {
+
+  
+# A. common prefix to make reshaping easier
+svr_a_lst <- paste0(st_bisec_prefix, st_lower_x, '_0')
+svr_b_lst <- paste0(st_bisec_prefix, st_upper_x, '_0')
+svr_fa_lst <- paste0(st_bisec_prefix, st_lower_fx, '_0')
+svr_fb_lst <- paste0(st_bisec_prefix, st_upper_fx, '_0')
+svr_fxvr_name <- paste0('f', svr_root_x)
+ls_pmap_vars <- unique(c(ls_svr_df_in_func, svr_root_x))
+
+# B. Add initial a and b
+df_bisec <- df %>% mutate(!!sym(svr_a_lst) := fl_lower_x, !!sym(svr_b_lst) := fl_upper_x)
+
+# C. Evaluate function f(a_0) and f(b_0)
+# 1. set x = a_0
+# 2. evaluate f(a_0)
+# 3. set x = b_0
+# 4. evaluate f(b_0)
+df_bisec <- df_bisec %>% mutate(!!sym(svr_root_x) := !!sym(svr_a_lst))
+df_bisec <- df_bisec %>% mutate(
+                !!sym(svr_fa_lst) :=
+                  unlist(
+                    pmap(df_bisec %>% select(ls_pmap_vars), fc_withroot)
+                    )
+                )
+df_bisec <- df_bisec %>% mutate(!!sym(svr_root_x) := !!sym(svr_b_lst))
+df_bisec <- df_bisec %>% mutate(
+                !!sym(svr_fb_lst) :=
+                  unlist(
+                    pmap(df_bisec %>% select(ls_pmap_vars), fc_withroot)
+                    )
+                )
+
+# D. Iteration Convergence Criteria
+# fl_p_dist2zr = distance to zero to initalize
+fl_p_dist2zr <- 1000
+it_cur <- 0
+while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
+
+  it_cur <- it_cur + 1
+
+  # New Variables
+  svr_a_cur <- paste0(st_bisec_prefix, st_lower_x, '_', it_cur)
+  svr_b_cur <- paste0(st_bisec_prefix, st_upper_x, '_', it_cur)
+  svr_fa_cur <- paste0(st_bisec_prefix, st_lower_fx, '_', it_cur)
+  svr_fb_cur <- paste0(st_bisec_prefix, st_upper_fx, '_', it_cur)
+
+  # Evaluate function f(a_0) and f(b_0)
+  # 1. generate p
+  # 2. generate f_p
+  # 3. generate f_p*f_a
+  df_bisec <- df_bisec %>% mutate(!!sym(svr_root_x) := ((!!sym(svr_a_lst) + !!sym(svr_b_lst))/2))
+  df_bisec <- df_bisec %>% mutate(
+                  !!sym(svr_fxvr_name) :=
+                    unlist(
+                      pmap(df_bisec %>% select(ls_pmap_vars), fc_withroot)
+                      )
+                  ) %>%
+                  mutate(f_p_t_f_a = !!sym(svr_fxvr_name)*!!sym(svr_fa_lst))
+  
+  # fl_p_dist2zr = sum(abs(p))
+  fl_p_dist2zr <- mean(abs(df_bisec %>% pull(!!sym(svr_fxvr_name))))
+
+  # Update a and b
+  df_bisec <- df_bisec %>%
+                  mutate(!!sym(svr_a_cur) :=
+                           case_when(f_p_t_f_a < 0 ~ !!sym(svr_a_lst),
+                                     TRUE ~ !!sym(svr_root_x))) %>%
+                  mutate(!!sym(svr_b_cur) :=
+                           case_when(f_p_t_f_a < 0 ~ !!sym(svr_root_x),
+                                     TRUE ~ !!sym(svr_b_lst)))
+  
+  # Update f(a) and f(b)
+  df_bisec <- df_bisec %>%
+                  mutate(!!sym(svr_fa_cur) :=
+                           case_when(f_p_t_f_a < 0 ~ !!sym(svr_fa_lst),
+                                     TRUE ~ !!sym(svr_fxvr_name))) %>%
+                  mutate(!!sym(svr_fb_cur) :=
+                           case_when(f_p_t_f_a < 0 ~ !!sym(svr_fxvr_name),
+                                     TRUE ~ !!sym(svr_fb_lst)))
+  
+  # Drop past record possibly
+  if(!bl_keep_iter) {
+    df_bisec <- df_bisec %>% select(-one_of(c(svr_a_lst, svr_b_lst, svr_fa_lst, svr_fb_lst)))
+  }
+  
+  # Save from last
+  svr_a_lst <- svr_a_cur
+  svr_b_lst <- svr_b_cur
+  svr_fa_lst <- svr_fa_cur
+  svr_fb_lst <- svr_fb_cur
+
+  # Summar current round
+  message(paste0('it_cur:', it_cur, ', fl_p_dist2zr:', fl_p_dist2zr))
+}
+
+
+# return
+return(df_bisec)
+
+}
+```
+
+## Prepare Inputs to Invoke Bisection Function
+
+Here we use the same function as earlier, but modify number of parameters:
+
+```{r}
+# 
+df <- tb_states_choices
+fc_withroot <- function(fl_A, fl_alpha, x){
+  # Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg
+  # Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. 
+  ar_p1_s1 = exp((fl_A - ar_nN_A)*fl_rho)
+  ar_p1_s2 = (fl_alpha/ar_nN_alpha)
+  ar_p1_s3 = (1/(ar_nN_alpha*fl_rho - 1))
+  ar_p1 = (ar_p1_s1*ar_p1_s2)^ar_p1_s3
+  ar_p2 = x^((fl_alpha*fl_rho-1)/(ar_nN_alpha*fl_rho-1))
+  ar_overall = ar_p1*ar_p2
+  fl_overall = fl_N_agg - sum(ar_overall)
+  return(fl_overall)
+}
+fl_lower_x <- 0
+fl_upper_x <- 200
+ls_svr_df_in_func <- c('fl_A', 'fl_alpha')
+svr_root_x <- 'x'
+fl_zero_tol = 10^-6
+```
+
+Additionally, let's prepare a very simple linear test:
+
+```{r}
+ar_intercept = seq(-10, -1, length.out = it_N_child_cnt)
+ar_slope = seq(0.1, 1, length.out = it_N_child_cnt)
+df_lines <- as_tibble(cbind(ar_intercept, ar_slope)) %>% rowid_to_column(var='ID')
+ar_st_col_names = c('ID','fl_int', 'fl_slope')
+df_lines <- df_lines %>% rename_all(~c(ar_st_col_names))
+fc_withroot_line <- function(fl_int, fl_slope, x){
+  return(fl_int + fl_slope*x)
+}
+fl_lower_x_line <- 0
+fl_upper_x_line <- 100000
+ls_svr_df_in_func_line <- c('fl_int', 'fl_slope')
+svr_root_x_line <- 'x'
+fl_zero_tol = 10^-6
+```
+
+## Test Function 
+
+Now we call the function to see if it works:
+
+```{r}
+df_bisec <- fv_opti_bisect_pmap_multi_test(df, fc_withroot, fl_lower_x,fl_upper_x,
+                                           ls_svr_df_in_func, svr_root_x, bl_keep_iter = TRUE)
+
+# Do individual inputs sum up to total allocations available
+fl_allocated <- sum(df_bisec %>% pull(svr_root_x))
+if (fl_N_agg == fl_allocated){
+  message('Total Input Available = Sum of Optimal Individual Allocations')
+} else {
+  cat('fl_N_agg =', fl_N_agg, ', but, sum(df_bisec %>% pull(svr_root_x))=', fl_allocated)
+}
+
+# Show all 
+df_bisec
+```
+
+Call the same function, but do not save history:
+
+```{r}
+df_bisec <- suppressMessages(fv_opti_bisect_pmap_multi_test(df, fc_withroot, fl_lower_x, fl_upper_x,
+                                                            ls_svr_df_in_func, svr_root_x, bl_keep_iter = FALSE))
+df_bisec %>% select(-one_of('f_p_t_f_a'))
+```
+
+Call the linear root function:
+
+```{r}
+df_bisec <- fv_opti_bisect_pmap_multi_test(df_lines, fc_withroot_line,
+                                           fl_lower_x_line, fl_upper_x_line,
+                                           ls_svr_df_in_func_line, svr_root_x_line, bl_keep_iter = FALSE)
+df_bisec %>% select(-one_of('f_p_t_f_a'))
+```
+
+## Test with PrjOptiAlloc log results
+
+Use *df_esti* from [*ffy_opt_dtgch_cbem4*](https://fanwangecon.github.io/PrjOptiAlloc/reference/df_opt_dtgch_cbem4.html) function of project *PrjOptiAlloc*. Select only the *fl_A* and *fl_alpha* variables, should look like *tb_states_choices*. The difference is that *tb_states_choices* values were made up, but the *alpha* and *A* values from *df_esti* are estimated. 
+
+The function is the same as before: *fc_withroot*, in fact, this function is the solution to the log linear allocation from problem [PrjOptiAlloc](https://fanwangecon.github.io/PrjOptiAlloc/).
+
+```{r}
+# Load Package and Data
+library(PrjOptiAlloc)
+ls_opti_alpha_A <- ffy_opt_dtgch_cbem4()
+df_esti <- ls_opti_alpha_A$df_esti
+
+# Select only A and Alpha and Index 
+# %>% mutate(A_log =(A_log))
+df_dtgch_cbem4_bisec <- df_esti[1:2,] %>% select(indi.id, A_log, alpha_log) 
+ar_st_col_names = c('INDI_ID', 'fl_A', 'fl_alpha')
+df_dtgch_cbem4_bisec <- df_esti[1:2,] %>% select(A_log, alpha_log) 
+ar_st_col_names = c('fl_A', 'fl_alpha')
+df_dtgch_cbem4_bisec <- df_dtgch_cbem4_bisec %>% rename_all(~c(ar_st_col_names))
+
+# Bisect and Solve
+ls_svr_df_in_func <- c('fl_A', 'fl_alpha')
+svr_root_x <- 'x'
+df_bisec_dtgch_cbem4 <- fv_opti_bisect_pmap_multi_test(df_dtgch_cbem4_bisec, fc_withroot,
+                                                       0, fl_upper_x,
+                                                       ls_svr_df_in_func, svr_root_x,
+                                                       bl_keep_iter = FALSE)
+
+# Do individual inputs sum up to total allocations available
+fl_allocated <- sum(df_bisec_dtgch_cbem4 %>% pull(svr_root_x))
+if (fl_N_agg == fl_allocated){
+  message('Total Input Available = Sum of Optimal Individual Allocations')
+} else {
+  cat('fl_N_agg =', fl_N_agg, ', but, sum(df_bisec_dtgch_cbem4 %>% pull(svr_root_x))=', fl_allocated)
+}
+  
+df_bisec_dtgch_cbem4
+```

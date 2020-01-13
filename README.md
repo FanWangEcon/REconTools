@@ -23,7 +23,7 @@ devtools::install_github("fanwangecon/REconTools")
 
 Click on the reference tab on top to see all functions. Some functions are also summarized below.
 
-## 1. DPLYR-based Data Wrangling
+## 1. Arithmetics
 
 ### 1.1 Tabulate and Counting
 
@@ -47,6 +47,14 @@ Click on the reference tab on top to see all functions. Some functions are also 
 
 1. [Compute Gini for a non-negative Vector](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html)
     + Single line gini inequality formula.
+
+## 4. Optimization
+
+1. [Concurrent Bisection Different Parameters](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_opti_bisect_pmap_multi.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html)
+    + A strictly monotonic linear or nonlinear function with one root
+    + A dataframe where each column is a different parameter for the function, and each row parameter values
+    + Find roots for this function concurrently over all rows at the row specific parameters
+    + **tidy**: *case_when + pmap*
 
 ----
 Please contact [![](https://img.shields.io/github/followers/fanwangecon?label=FanWangEcon&style=social)](https://github.com/FanWangEcon) [![](https://img.shields.io/twitter/follow/fanwangecon?label=%20&style=social)](https://twitter.com/fanwangecon) for issues or problems.

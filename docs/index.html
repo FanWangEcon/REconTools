@@ -57,6 +57,9 @@
       <a href="articles/fv_dist_gini_vector_pos.html">DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)</a>
     </li>
     <li>
+      <a href="articles/fv_opti_bisect_pmap_multi.html">OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing</a>
+    </li>
+    <li>
       <a href="articles/fv_panel_expand_longandwide.html">PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables</a>
     </li>
   </ul>
@@ -95,9 +98,9 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 <h1 class="hasAnchor">
 <a href="#function-descriptions" class="anchor"></a>Function Descriptions</h1>
 <p>Click on the reference tab on top to see all functions. Some functions are also summarized below.</p>
-<div id="1-dplyr-based-data-wrangling" class="section level2">
+<div id="1-arithmetics" class="section level2">
 <h2 class="hasAnchor">
-<a href="#1-dplyr-based-data-wrangling" class="anchor"></a>1. DPLYR-based Data Wrangling</h2>
+<a href="#1-arithmetics" class="anchor"></a>1. Arithmetics</h2>
 <div id="11-tabulate-and-counting" class="section level3">
 <h3 class="hasAnchor">
 <a href="#11-tabulate-and-counting" class="anchor"></a>1.1 Tabulate and Counting</h3>
@@ -152,6 +155,23 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">Compute Gini for a non-negative Vector</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">ref</a> | <a href="https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html">vignette</a>
 <ul>
 <li>Single line gini inequality formula.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div id="4-optimization" class="section level2">
+<h2 class="hasAnchor">
+<a href="#4-optimization" class="anchor"></a>4. Optimization</h2>
+<ol>
+<li>
+<a href="https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html">Concurrent Bisection Different Parameters</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_opti_bisect_pmap_multi.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html">ref</a> | <a href="https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html">vignette</a>
+<ul>
+<li>A strictly monotonic linear or nonlinear function with one root</li>
+<li>A dataframe where each column is a different parameter for the function, and each row parameter values</li>
+<li>Find roots for this function concurrently over all rows at the row specific parameters</li>
+<li>
+<strong>tidy</strong>: <em>case_when + pmap</em>
+</li>
 </ul>
 </li>
 </ol>

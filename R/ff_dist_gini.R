@@ -1,10 +1,10 @@
 ff_dist_gini_vector_pos <- function(ar_pos) {
-    #' Compute gini coefficient between 1 (equality) and 2/(n+1) (inequality) where n is vector length.
+    #' Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.
     #'
     #' @description
     #' See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
     #' This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
-    #' Also note while the highest equality is 1, the greatest inequality only asymptotes to 0, but equals to 2/(n+1).
+    #' Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1).
     #'
     #' @param ar_pos array of numeric values that are all non-negative
     #' @return a scalar value of the gini coefficient
@@ -36,10 +36,10 @@ ff_dist_gini_vector_pos <- function(ar_pos) {
     message('see REconTools for formula: DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)')
     # Check length and given warning
     it_n <- length(ar_pos)
-    if (it_n <= 100)  warning('Data vector has only n=',it_n,', max-inequality/min-gini=',2/(it_n + 1))
+    if (it_n <= 100)  warning('Data vector has only n=',it_n,', max-inequality/min-gini=',(it_n - 1)/(it_n + 1))
     # Sort
     ar_pos <- sort(ar_pos)
     # formula implement
-    fl_gini <- (2/(it_n+1)) * sum(cumsum(ar_pos))*(sum(ar_pos))^(-1)
+    fl_gini <- 1 - ((2/(it_n+1)) * sum(cumsum(ar_pos))*(sum(ar_pos))^(-1))
     return(fl_gini)
 }

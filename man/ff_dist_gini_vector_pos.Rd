@@ -2,7 +2,7 @@
 % Please edit documentation in R/ff_dist_gini.R
 \name{ff_dist_gini_vector_pos}
 \alias{ff_dist_gini_vector_pos}
-\title{Compute gini coefficient between 1 (equality) and 2/(n+1) (inequality) where n is vector length.}
+\title{Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.}
 \usage{
 ff_dist_gini_vector_pos(ar_pos)
 }
@@ -15,7 +15,7 @@ a scalar value of the gini coefficient
 \description{
 See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
 This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
-Also note while the highest equality is 1, the greatest inequality only asymptotes to 0, but equals to 2/(n+1).
+Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1).
 }
 \examples{
 ar_equal_n2 = c(1,1)

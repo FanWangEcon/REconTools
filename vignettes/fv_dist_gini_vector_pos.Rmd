@@ -16,7 +16,7 @@ This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github
 
 There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the [GINI](https://en.wikipedia.org/wiki/Gini_coefficient) coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.
 
-See the formula below, note that when the sample size is small, there is a limit to inequality using the formula defined below given each $N$. So for small $N$, can not really compare inequality across arrays with different $N$, can only compare arrays with the same $N$. In another word, if 1 of N individual holds all resource, as $N$ increases, GINI will asymptote to 0, but it is very far away from 0 for low N.
+See the formula below, note that when the sample size is small, there is a limit to inequality using the formula defined below given each $N$. So for small $N$, can not really compare inequality across arrays with different $N$, can only compare arrays with the same $N$. In another word, if 1 of N individual holds all resource, as $N$ increases, GINI will asymptote to 1, but it is very far away from 1 for low N.
 
 # Formula
 
@@ -26,10 +26,10 @@ Not sure if this a standard way of computing GINI, but this is how I decided to 
 2. The width is discretized into $N$ individuals, so each individual's width is $\frac{1}{N}$
 3. The height is normalized to 1, for the nth individual, total height is the sum of all $x$, so need to rescale all bars by $\sum_i^{N} x_i$
 
-The GINI formula I use is:
+The GINI formula used here is:
 $$
  GINI =
-  \frac{2}{N+1}
+  1 - \frac{2}{N+1}
   \cdot
   \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
   \cdot
@@ -38,7 +38,7 @@ $$
   \right)^{-1}
 $$
 
-I derive the formula in the steps below.
+Derive the formula in the steps below.
 
 ## Step 1 Area Formula
 
@@ -72,18 +72,20 @@ $$
 
 ## Step 3 Arriving at Finite Vector Gini Formula
 
-Given what we have from above, we obtain the gini formula
+Given what we have from above, we obtain the gini formula, divide by total area below 45 degree line.
+
 $$
  GINI =
+  1 - 
   \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
   \cdot
   \left(
-    N \cdot \sum_{i=1}^N X_i
+    N \cdot \sum_{i=1}^N x_i
   \right)^{-1}
   \cdot
   \left( \frac{N+1}{N}\cdot\frac{1}{2} \right)^{-1}
   =
-  \frac{2}{N+1}
+  1 - \frac{2}{N+1}
   \cdot
   \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
   \cdot
@@ -99,7 +101,7 @@ Suppose $x_i=0$ for all $i<N$, then:
 $$
  GINI^{x_i = 0 \text{ except } i=N}
  =
-  \frac{2}{N+1}
+  1 - \frac{2}{N+1}
   \cdot
   X_N
   \cdot
@@ -107,21 +109,22 @@ $$
     X_N
   \right)^{-1}
  =
- \frac{2}{N+1}
+ 1 - \frac{2}{N+1}
 $$
 
 $$
  \lim_{N \rightarrow \infty} GINI^{x_i = 0 \text{ except } i=N}
  =
+ 1 - 
  \lim_{N \rightarrow \infty}
  \frac{2}{N+1}
- = 0
+ = 1
 $$
 
 Note that for small N, for example if $N=10$, even when one person holds all income, all others have 0 income, the formula will not produce gini is zero, but that gini is equal to $\frac{2}{11}\approx 0.1818$. If $N=2$, inequality is at most, $\frac{2}{3}\approx 0.667$.
 
 $$
- MostUnequalGINI\left(N\right) = \frac{2}{N+1}
+ MostUnequalGINI\left(N\right) = 1 - \frac{2}{N+1} = \frac{N-1}{N+1}
 $$
 
 # Implement GINI Formula in R
@@ -142,11 +145,11 @@ rm(list = ls())
 fv_dist_gini_vector_pos_test <- function(ar_pos) {
   # Check length and given warning
   it_n <- length(ar_pos)
-  if (it_n <= 100)  warning('Data vector has n=',it_n,', max-inequality/min-gini=',2/(it_n + 1))
+  if (it_n <= 100)  warning('Data vector has n=',it_n,', max-inequality/max-gini=',(it_n-1)/(it_n + 1))
   # Sort
   ar_pos <- sort(ar_pos)
   # formula implement
-  fl_gini <- (2/(it_n+1)) * sum(cumsum(ar_pos))*(sum(ar_pos))^(-1)
+  fl_gini <- 1 - ((2/(it_n+1)) * sum(cumsum(ar_pos))*(sum(ar_pos))^(-1))
   return(fl_gini)
 }
 ```
@@ -195,13 +198,13 @@ cat('\nSmall N=1 Hard-Code\n')
 cat('ar_equal_n1:', fv_dist_gini_vector_pos_test(ar_equal_n1), '\n')
 cat('ar_ineql_n1:', fv_dist_gini_vector_pos_test(ar_ineql_n1), '\n')
 
-cat('\nSmall N=2 Hard-Code, converge to 0.67, see formula above\n')
+cat('\nSmall N=2 Hard-Code, converge to 1/3, see formula above\n')
 cat('ar_ineql_alittle_n2:', fv_dist_gini_vector_pos_test(ar_ineql_alittle_n2), '\n')
 cat('ar_ineql_somewht_n2:', fv_dist_gini_vector_pos_test(ar_ineql_somewht_n2), '\n')
 cat('ar_ineql_alotine_n2:', fv_dist_gini_vector_pos_test(ar_ineql_alotine_n2), '\n')
 cat('ar_ineql_veryvry_n2:', fv_dist_gini_vector_pos_test(ar_ineql_veryvry_n2), '\n')
 
-cat('\nSmall N=10 Hard-Code, convege to 0.18, see formula above\n')
+cat('\nSmall N=10 Hard-Code, convege to 9/11=0.8181, see formula above\n')
 cat('ar_equal_n10:', fv_dist_gini_vector_pos_test(ar_equal_n10), '\n')
 cat('ar_ineql_some_n10:', fv_dist_gini_vector_pos_test(ar_ineql_some_n10), '\n')
 cat('ar_ineql_very_n10:', fv_dist_gini_vector_pos_test(ar_ineql_very_n10), '\n')

@@ -50,6 +50,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-5');
+</script>
+
 
   </head>
 
@@ -130,34 +140,16 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-summary-statistics-functions" class="hasAnchor"><a href="#section-summary-statistics-functions" class="anchor"></a>Summary Statistics Functions</h2>
+          <p class="section-desc"><p>Functions that summarize dataframes</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="df_hgt_wgt.html">df_hgt_wgt</a></code> </p>
+          <p><code><a href="ff_summ_by_group.html">ff_summ_by_group()</a></code> </p>
         </td>
-        <td><p>Test Dataset Panel Height and Weight, Guatemala and Philippines, scrambled data, not actual.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ff_dist_gini_vector_pos.html">ff_dist_gini_vector_pos()</a></code> </p>
-        </td>
-        <td><p>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ff_opti_bisect_pmap_multi.html">ff_opti_bisect_pmap_multi()</a></code> </p>
-        </td>
-        <td><p>Dataframe rows are individuals, find root for each individual, given cts diff monotonic function with root.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ff_panel_expand_longandwide.html">ff_panel_expand_longandwide()</a></code> </p>
-        </td>
-        <td><p>Append Group Mean Lagged Values as Additional Panel Variables</p></td>
+        <td><p>Summarize one variable in a dataset, by another categorical variable</p></td>
       </tr><tr>
         
         <td>
@@ -170,12 +162,62 @@
           <p><code><a href="ff_summ_percentiles.html">ff_summ_percentiles()</a></code> </p>
         </td>
         <td><p>Summarize each variable in a dataset</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-distributional-functions" class="hasAnchor"><a href="#section-distributional-functions" class="anchor"></a>Distributional Functions</h2>
+          <p class="section-desc"><p>Functions that compute distributional statistics that do not have default functions</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
-          <p><code><a href="ff_summ_percentiles_by_groups.html">ff_summ_percentiles_by_groups()</a></code> </p>
+          <p><code><a href="ff_dist_gini_vector_pos.html">ff_dist_gini_vector_pos()</a></code> </p>
         </td>
-        <td><p>Percentiles mean and sd for as columns, variables as rows, groups vars super-rows</p></td>
+        <td><p>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-panel-data-function" class="hasAnchor"><a href="#section-panel-data-function" class="anchor"></a>Panel Data Function</h2>
+          <p class="section-desc"><p>Functions that process dataframes with panel characteristics</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="ff_panel_expand_longandwide.html">ff_panel_expand_longandwide()</a></code> </p>
+        </td>
+        <td><p>Append Group Mean Lagged Values as Additional Panel Variables</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-optimization-functions" class="hasAnchor"><a href="#section-optimization-functions" class="anchor"></a>Optimization Functions</h2>
+          <p class="section-desc"><p>Functions that optimize to minimize, maximize, etc</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="ff_opti_bisect_pmap_multi.html">ff_opti_bisect_pmap_multi()</a></code> </p>
+        </td>
+        <td><p>Dataframe rows are individuals, find root for each individual, given cts diff monotonic function with root.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-testing-data" class="hasAnchor"><a href="#section-testing-data" class="anchor"></a>Testing Data</h2>
+          <p class="section-desc"><p>Testing datasets</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="df_hgt_wgt.html">df_hgt_wgt</a></code> </p>
+        </td>
+        <td><p>Test Dataset Panel Height and Weight, Guatemala and Philippines, scrambled data, not actual.</p></td>
       </tr>
     </tbody>
     </table>
@@ -184,7 +226,11 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-summary-statistics-functions">Summary Statistics Functions</a></li>
+      <li><a href="#section-distributional-functions">Distributional Functions</a></li>
+      <li><a href="#section-panel-data-function">Panel Data Function</a></li>
+      <li><a href="#section-optimization-functions">Optimization Functions</a></li>
+      <li><a href="#section-testing-data">Testing Data</a></li>
     </ul>
   </div>
 </div>

@@ -87,6 +87,7 @@ df_bisec \%>\% select(-one_of('f_p_t_f_a'))
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html}
 \url{https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html}
+\url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_opti_bisect.R}
 }
 \author{
 Fan Wang, \url{http://fanwangecon.github.io}

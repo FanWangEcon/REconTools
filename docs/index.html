@@ -16,7 +16,13 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-5"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-5');
+</script>
 </head>
 <body>
     <div class="container template-home">
@@ -126,6 +132,16 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 <li>All Variables: N + NAcount + Mean + SD + Percentiles.</li>
 <li>
 <strong>tidy</strong>: <em>summarise_if(is.numeric) + gather + separate + spread + select</em>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">By Groups One Variable All Statistics</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">ref</a> | vignette
+<ul>
+<li>One Variable: mean + median + sd + IQR + mad + min + max + first + last + n.distinct</li>
+<li>The above statistics categorized by variable factors jointly</li>
+<li>
+<strong>tidy</strong>: <em>group_by + summarize_at(, funs()) + rename(!!var := !!sym(var)) + mutate(!!var := paste0(var,’str’,!!!syms(vars))) + gather + unite + spread(varcates, value)</em>
 </li>
 </ul>
 </li>

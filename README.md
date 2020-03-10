@@ -36,6 +36,10 @@ Click on the reference tab on top to see all functions. Some functions are also 
 1. [All Variables Summary Stats](https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_percentiles.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html) | vignette
     + All Variables: N + NAcount + Mean + SD + Percentiles.
     + **tidy**: *summarise_if(is.numeric) + gather + separate + spread  + select*
+2. [By Groups One Variable All Statistics](https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html) | vignette
+    + One Variable: mean + median + sd + IQR + mad + min + max + first + last + n.distinct
+    + The above statistics categorized by variable factors jointly
+    + **tidy**: *group_by + summarize_at(, funs()) + rename(!!var := !!sym(var)) + mutate(!!var := paste0(var,’str’,!!!syms(vars))) + gather + unite + spread(varcates, value)*
 
 ## 2. Panel
 

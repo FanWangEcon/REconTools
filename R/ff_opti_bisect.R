@@ -24,7 +24,7 @@ ff_opti_bisect_pmap_multi <- function(df, fc_withroot,
 #' @param fl_lower_x float value of common lower bound
 #' @param fl_upper_x float value of common upper bound, opposing sign
 #' @param ls_svr_df_in_func list of string names variables in df that are inputs for fc_withroot.
-#' @param svr_root_x string the x variable name that appears n fc_withroot. 
+#' @param svr_root_x string the x variable name that appears n fc_withroot.
 #' @param it_iter_tol integer how many maximum iterations to allow for bisection at most
 #' @param fl_zero_tol float at what gap to zero will algorithm stop
 #' @param bl_keep_iter whether to keep all iteration results as data columns
@@ -38,6 +38,7 @@ ff_opti_bisect_pmap_multi <- function(df, fc_withroot,
 #' @references
 #' \url{https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html}
 #' \url{https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html}
+#' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_opti_bisect.R}    
 #' @export
 #' @import tibble tidyr purrr dplyr
 #' @examples
@@ -62,7 +63,7 @@ ff_opti_bisect_pmap_multi <- function(df, fc_withroot,
 #'                                            ls_svr_df_in_func_line, svr_root_x_line, bl_keep_iter = FALSE)
 #' df_bisec %>% select(-one_of('f_p_t_f_a'))
 
-  
+
 # A. common prefix to make reshaping easier
 svr_a_lst <- paste0(st_bisec_prefix, st_lower_x, '_0')
 svr_b_lst <- paste0(st_bisec_prefix, st_upper_x, '_0')
@@ -120,7 +121,7 @@ while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
                       )
                   ) %>%
                   mutate(f_p_t_f_a = !!sym(svr_fxvr_name)*!!sym(svr_fa_lst))
-  
+
   # fl_p_dist2zr = sum(abs(p))
   fl_p_dist2zr <- mean(abs(df_bisec %>% pull(!!sym(svr_fxvr_name))))
 
@@ -132,7 +133,7 @@ while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
                   mutate(!!sym(svr_b_cur) :=
                            case_when(f_p_t_f_a < 0 ~ !!sym(svr_root_x),
                                      TRUE ~ !!sym(svr_b_lst)))
-  
+
   # Update f(a) and f(b)
   df_bisec <- df_bisec %>%
                   mutate(!!sym(svr_fa_cur) :=
@@ -141,12 +142,12 @@ while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
                   mutate(!!sym(svr_fb_cur) :=
                            case_when(f_p_t_f_a < 0 ~ !!sym(svr_fxvr_name),
                                      TRUE ~ !!sym(svr_fb_lst)))
-  
+
   # Drop past record possibly
   if(!bl_keep_iter) {
     df_bisec <- df_bisec %>% select(-one_of(c(svr_a_lst, svr_b_lst, svr_fa_lst, svr_fb_lst)))
   }
-  
+
   # Save from last
   svr_a_lst <- svr_a_cur
   svr_b_lst <- svr_b_cur

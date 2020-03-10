@@ -16,6 +16,7 @@ ff_panel_expand_longandwide <- function(df, svr_id_t, svr_id_i, svr_data) {
     #' @references
     #' \url{https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html}
     #' \url{https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html}
+    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R}    
     #' @export
     #' @import dplyr tidyr tibble
     #' @examples

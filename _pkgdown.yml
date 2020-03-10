@@ -1,0 +1,24 @@
+reference:
+- title: Summary Statistics Functions
+  desc: Functions that summarize dataframes
+  contents:
+  - starts_with("ff_summ")
+- title: Distributional Functions
+  desc: Functions that compute distributional statistics that do not have default functions
+  contents:
+  - starts_with("ff_dist")
+- title: Panel Data Function
+  desc: Functions that process dataframes with panel characteristics
+  contents:
+  - starts_with("ff_panel")
+- title: Optimization Functions
+  desc: Functions that optimize to minimize, maximize, etc
+  contents:
+  - starts_with("ff_opti")
+- title: Testing Data
+  desc: Testing datasets
+  contents:
+  - df_hgt_wgt
+template:
+  params:
+    ganalytics: UA-92953468-5

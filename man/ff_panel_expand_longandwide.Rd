@@ -40,6 +40,7 @@ print(df_longandwide \%>\% select(indi.id, svymthRound, mth6, cal, matches('mth6
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html}
 \url{https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html}
+\url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R}
 }
 \author{
 Fan Wang, \url{http://fanwangecon.github.io}

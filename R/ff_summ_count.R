@@ -13,7 +13,9 @@ ff_summ_count_unique_by_groups <- function(df,
     #' @param svr_unique_identifier string variable that has the unique key of interest
     #' @return a dataframe with stats outputs.
     #' @author Fan Wang, \url{http://fanwangecon.github.io}
-    #' @references \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_count_unique_by_groups.html}
+    #' @references
+    #' \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_count_unique_by_groups.html}
+    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_count.R}
     #' @export
     #' @import dplyr tidyr tibble
     #' @examples

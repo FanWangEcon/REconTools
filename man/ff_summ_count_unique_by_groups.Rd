@@ -41,6 +41,7 @@ print(df_uniques_count_by_country)
 }
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_count_unique_by_groups.html}
+\url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_count.R}
 }
 \author{
 Fan Wang, \url{http://fanwangecon.github.io}

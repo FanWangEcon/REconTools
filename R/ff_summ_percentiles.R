@@ -10,7 +10,9 @@ ff_summ_percentiles <- function(df = iris, bl_statsasrows = TRUE, col2varname = 
     #' @param bl_statsasrows boolean if true then rotate table
     #' @return a dataframe with summary statistics.
     #' @author Fan Wang, \url{http://fanwangecon.github.io}
-    #' @references \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html}
+    #' @references
+    #' \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html}
+    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_percentiles.R}
     #' @export
     #' @import dplyr tidyr tibble
     #' @examples
@@ -53,22 +55,4 @@ ff_summ_percentiles <- function(df = iris, bl_statsasrows = TRUE, col2varname = 
     }
 
     return(tb_summ_stats)
-}
-
-ff_summ_percentiles_by_groups <- function(df, vars.group.by, it.round = 4, col2varname = FALSE) {
-    #' Percentiles mean and sd for as columns, variables as rows, groups vars super-rows
-    #' @export ff_summ_percentiles_by_groups
-
-    # @description This calls: uses do.frame to generate by group all percentile results @references
-    # SummPercentiles.R @examples options(warn=-1) vars.group.by <- c(var.country, var.mth) vars.generated <-
-    # c(var.dhgt, var.input, var.input.cumu, var.log.h.div.lagh, var.input.log, var.input.log.cumu) df.summ <-
-    # ff.by.groups.summ.percentiles(df.reg %>% select(one_of(vars.group.by,vars.generated)), vars.group.by,
-    # it.round=4, col2varname = FALSE) options(repr.matrix.max.rows=Inf, repr.matrix.max.cols=Inf)
-    # lapply(vars.generated, function(var.gen) df.summ %>% filter(var == var.gen))
-
-    df.summ <- df %>% arrange(!!!syms(vars.group.by)) %>% group_by(!!!syms(vars.group.by)) %>% do(data.frame(ff_summ_percentiles(.,
-        col2varname = col2varname) %>% mutate_if(is.numeric, round, it.round))) %>% filter(!grepl(paste0(vars.group.by,
-        collapse = "|"), var))
-
-    return(df.summ)
 }

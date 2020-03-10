@@ -1,4 +1,4 @@
-ff_summ_by_group <- function(df, vars.group, var.numeric, str.stats.group = 'main',
+ff_summ_bygroup <- function(df, vars.group, var.numeric, str.stats.group = 'main',
                                       str.stats.specify = NULL, boo.overall.stats = TRUE){
     #' Summarize one variable in a dataset, by another categorical variable
     #'
@@ -19,7 +19,7 @@ ff_summ_by_group <- function(df, vars.group, var.numeric, str.stats.group = 'mai
     #' }
     #' @author Fan Wang, \url{http://fanwangecon.github.io}
     #' @references
-    #' \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_by_group.html}
+    #' \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html}
     #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R}
     #' @export
     #' @import dplyr tidyr tibble
@@ -30,7 +30,7 @@ ff_summ_by_group <- function(df, vars.group, var.numeric, str.stats.group = 'mai
     #' vars.group <- c('am', 'vs')
     #' var.numeric <- 'mpg'
     #' str.stats.group <- 'all'
-    #' ls_summ_by_group <- ff_summ_by_group(df, vars.group, var.numeric, str.stats.group)
+    #' ls_summ_by_group <- ff_summ_bygroup(df, vars.group, var.numeric, str.stats.group)
     #' df_table_grp_stats <- ls_summ_by_group$df_table_grp_stats
     #' df_row_grp_stats <- ls_summ_by_group$df_row_grp_stats
     #' df_overall_stats <- ls_summ_by_group$df_overall_stats

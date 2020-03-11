@@ -68,6 +68,9 @@
     <li>
       <a href="../articles/fv_panel_expand_longandwide.html">PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables</a>
     </li>
+    <li>
+      <a href="../articles/fv_summ_bygroup.html">SUMM BYGROUP--Summarize Variable by Factor Groups</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -940,11 +943,14 @@ fl_alpha
 <a class="sourceLine" id="cb98-3" title="3">ls_opti_alpha_A &lt;-<span class="st"> </span><span class="kw">ffy_opt_dtgch_cbem4</span>()</a>
 <a class="sourceLine" id="cb98-4" title="4">df_esti &lt;-<span class="st"> </span>ls_opti_alpha_A<span class="op">$</span>df_esti</a>
 <a class="sourceLine" id="cb98-5" title="5"></a>
-<a class="sourceLine" id="cb98-6" title="6"><span class="co"># Select only A and Alpha and Index </span></a>
-<a class="sourceLine" id="cb98-7" title="7"><span class="co"># %&gt;% mutate(A_log =(A_log))</span></a>
-<a class="sourceLine" id="cb98-8" title="8">df_dtgch_cbem4_bisec &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(indi.id, A_log, alpha_log) </a>
-<a class="sourceLine" id="cb98-9" title="9">ar_st_col_names =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)</a>
-<a class="sourceLine" id="cb98-10" title="10">df &lt;-<span class="st"> </span>df_dtgch_cbem4_bisec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename_all</span>(<span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(ar_st_col_names))</a></code></pre></div>
+<a class="sourceLine" id="cb98-6" title="6"><span class="co"># Select only some individuals to speed up test</span></a>
+<a class="sourceLine" id="cb98-7" title="7">df_esti &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(indi.id <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb98-8" title="8"></a>
+<a class="sourceLine" id="cb98-9" title="9"><span class="co"># Select only A and Alpha and Index </span></a>
+<a class="sourceLine" id="cb98-10" title="10"><span class="co"># %&gt;% mutate(A_log =(A_log))</span></a>
+<a class="sourceLine" id="cb98-11" title="11">df_dtgch_cbem4_bisec &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(indi.id, A_log, alpha_log) </a>
+<a class="sourceLine" id="cb98-12" title="12">ar_st_col_names =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)</a>
+<a class="sourceLine" id="cb98-13" title="13">df &lt;-<span class="st"> </span>df_dtgch_cbem4_bisec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename_all</span>(<span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(ar_st_col_names))</a></code></pre></div>
 <p>Crucially, also need to redefine the function, note that the function formula we are using here is the same as before, however, there are Hard-Coded vectors in the formula, that need to reflect the new dataframe.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="co"># hard-coded parameters</span></a>
 <a class="sourceLine" id="cb99-2" title="2">ar_nN_A &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(fl_A)</a>
@@ -970,65 +976,56 @@ fl_alpha
 <a class="sourceLine" id="cb100-5" title="5">                                                       <span class="dv">0</span>, fl_upper_x,</a>
 <a class="sourceLine" id="cb100-6" title="6">                                                       ls_svr_df_in_func, svr_root_x,</a>
 <a class="sourceLine" id="cb100-7" title="7">                                                       <span class="dt">bl_keep_iter =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>## it_cur:1, fl_p_dist2zr:114259.103730916</code></pre>
-<pre><code>## it_cur:2, fl_p_dist2zr:57065.8515924507</code></pre>
-<pre><code>## it_cur:3, fl_p_dist2zr:28476.0859665553</code></pre>
-<pre><code>## it_cur:4, fl_p_dist2zr:14184.6282193769</code></pre>
-<pre><code>## it_cur:5, fl_p_dist2zr:7040.60930196585</code></pre>
-<pre><code>## it_cur:6, fl_p_dist2zr:3469.45353361675</code></pre>
-<pre><code>## it_cur:7, fl_p_dist2zr:1684.30185106396</code></pre>
-<pre><code>## it_cur:8, fl_p_dist2zr:791.938788974897</code></pre>
-<pre><code>## it_cur:9, fl_p_dist2zr:345.863486789484</code></pre>
-<pre><code>## it_cur:10, fl_p_dist2zr:122.878869797614</code></pre>
-<pre><code>## it_cur:11, fl_p_dist2zr:30.3977559686063</code></pre>
-<pre><code>## it_cur:12, fl_p_dist2zr:25.3181374761203</code></pre>
-<pre><code>## it_cur:13, fl_p_dist2zr:12.0886419051021</code></pre>
-<pre><code>## it_cur:14, fl_p_dist2zr:2.06815551406747</code></pre>
-<pre><code>## it_cur:15, fl_p_dist2zr:4.89604753960856</code></pre>
-<pre><code>## it_cur:16, fl_p_dist2zr:1.93331480031098</code></pre>
-<pre><code>## it_cur:17, fl_p_dist2zr:0.614579561133518</code></pre>
-<pre><code>## it_cur:18, fl_p_dist2zr:0.314081026590978</code></pre>
-<pre><code>## it_cur:19, fl_p_dist2zr:0.207595932727363</code></pre>
-<pre><code>## it_cur:20, fl_p_dist2zr:0.112869498156886</code></pre>
-<pre><code>## it_cur:21, fl_p_dist2zr:0.0559799114586833</code></pre>
-<pre><code>## it_cur:22, fl_p_dist2zr:0.027032944900061</code></pre>
-<pre><code>## it_cur:23, fl_p_dist2zr:0.0132672918026609</code></pre>
-<pre><code>## it_cur:24, fl_p_dist2zr:0.00680454432702988</code></pre>
-<pre><code>## it_cur:25, fl_p_dist2zr:0.00333360097714742</code></pre>
-<pre><code>## it_cur:26, fl_p_dist2zr:0.00168437455159884</code></pre>
-<pre><code>## it_cur:27, fl_p_dist2zr:0.000848467303071653</code></pre>
-<pre><code>## it_cur:28, fl_p_dist2zr:0.000427696340068737</code></pre>
-<pre><code>## it_cur:29, fl_p_dist2zr:0.000218673312373287</code></pre>
-<pre><code>## it_cur:30, fl_p_dist2zr:0.000108180725121156</code></pre>
-<pre><code>## it_cur:31, fl_p_dist2zr:5.24326238874592e-05</code></pre>
-<pre><code>## it_cur:32, fl_p_dist2zr:2.67010139017832e-05</code></pre>
-<pre><code>## it_cur:33, fl_p_dist2zr:1.33128324107031e-05</code></pre>
-<pre><code>## it_cur:34, fl_p_dist2zr:6.65284808581866e-06</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1"><span class="co"># Do individual inputs sum up to total allocations available</span></a>
-<a class="sourceLine" id="cb135-2" title="2">fl_allocated &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(df_bisec_dtgch_cbem4 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(svr_root_x))</a>
-<a class="sourceLine" id="cb135-3" title="3"><span class="cf">if</span> (fl_N_agg <span class="op">==</span><span class="st"> </span>fl_allocated){</a>
-<a class="sourceLine" id="cb135-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)</a>
-<a class="sourceLine" id="cb135-5" title="5">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', and, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
-<a class="sourceLine" id="cb135-6" title="6">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb135-7" title="7">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
-<a class="sourceLine" id="cb135-8" title="8">}</a></code></pre></div>
+<pre><code>## it_cur:1, fl_p_dist2zr:899.86958899644</code></pre>
+<pre><code>## it_cur:2, fl_p_dist2zr:399.795325546567</code></pre>
+<pre><code>## it_cur:3, fl_p_dist2zr:149.82803720318</code></pre>
+<pre><code>## it_cur:4, fl_p_dist2zr:39.6981877915583</code></pre>
+<pre><code>## it_cur:5, fl_p_dist2zr:22.7544373106979</code></pre>
+<pre><code>## it_cur:6, fl_p_dist2zr:13.6648690730157</code></pre>
+<pre><code>## it_cur:7, fl_p_dist2zr:4.00882580615786</code></pre>
+<pre><code>## it_cur:8, fl_p_dist2zr:5.16853400177715</code></pre>
+<pre><code>## it_cur:9, fl_p_dist2zr:1.51302257271096</code></pre>
+<pre><code>## it_cur:10, fl_p_dist2zr:0.652943611605188</code></pre>
+<pre><code>## it_cur:11, fl_p_dist2zr:0.600480528493414</code></pre>
+<pre><code>## it_cur:12, fl_p_dist2zr:0.250509919781611</code></pre>
+<pre><code>## it_cur:13, fl_p_dist2zr:0.0896781862774658</code></pre>
+<pre><code>## it_cur:14, fl_p_dist2zr:0.0538247482166633</code></pre>
+<pre><code>## it_cur:15, fl_p_dist2zr:0.0239801341471519</code></pre>
+<pre><code>## it_cur:16, fl_p_dist2zr:0.0140266432007429</code></pre>
+<pre><code>## it_cur:17, fl_p_dist2zr:0.00893928482057681</code></pre>
+<pre><code>## it_cur:18, fl_p_dist2zr:0.00357052465549164</code></pre>
+<pre><code>## it_cur:19, fl_p_dist2zr:0.00185480902755507</code></pre>
+<pre><code>## it_cur:20, fl_p_dist2zr:0.0008568164157244</code></pre>
+<pre><code>## it_cur:21, fl_p_dist2zr:0.000597378694812455</code></pre>
+<pre><code>## it_cur:22, fl_p_dist2zr:0.000310870384761112</code></pre>
+<pre><code>## it_cur:23, fl_p_dist2zr:0.000106146686901651</code></pre>
+<pre><code>## it_cur:24, fl_p_dist2zr:7.78112187778864e-05</code></pre>
+<pre><code>## it_cur:25, fl_p_dist2zr:2.60678871689556e-05</code></pre>
+<pre><code>## it_cur:26, fl_p_dist2zr:1.31156909364765e-05</code></pre>
+<pre><code>## it_cur:27, fl_p_dist2zr:9.57136451360283e-06</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="co"># Do individual inputs sum up to total allocations available</span></a>
+<a class="sourceLine" id="cb128-2" title="2">fl_allocated &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(df_bisec_dtgch_cbem4 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(svr_root_x))</a>
+<a class="sourceLine" id="cb128-3" title="3"><span class="cf">if</span> (fl_N_agg <span class="op">==</span><span class="st"> </span>fl_allocated){</a>
+<a class="sourceLine" id="cb128-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)</a>
+<a class="sourceLine" id="cb128-5" title="5">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', and, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
+<a class="sourceLine" id="cb128-6" title="6">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb128-7" title="7">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
+<a class="sourceLine" id="cb128-8" title="8">}</a></code></pre></div>
 <pre><code>## fl_N_agg = 100 , but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))= 100</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">df_bisec_dtgch_cbem4</a></code></pre></div>
-<pre><code>## # A tibble: 1,043 x 10
-##    INDI_ID  fl_A fl_alpha      x       fx f_p_t_f_a bisec_a_34 bisec_b_34
-##      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1       2  4.34  0.00669 0.0622 -1.19e-5 -8.17e-11     0.0622     0.0622
-##  2       3  4.36  0.00925 0.0862  1.32e-5  3.54e-10     0.0862     0.0862
-##  3       4  4.35  0.00925 0.0860  3.76e-6  6.51e-11     0.0860     0.0860
-##  4       5  4.37  0.0139  0.130   5.33e-6  7.60e-11     0.130      0.130 
-##  5       6  4.34  0.00669 0.0621  1.30e-5  4.15e-10     0.0621     0.0621
-##  6       7  4.36  0.0139  0.130  -6.38e-6 -1.65e-11     0.130      0.130 
-##  7       8  4.34  0.00669 0.0621  1.62e-6  3.31e-11     0.0621     0.0621
-##  8       9  4.34  0.00669 0.0621 -1.78e-6 -3.02e-11     0.0621     0.0621
-##  9      10  4.36  0.0139  0.130  -4.43e-7 -3.77e-12     0.130      0.130 
-## 10      11  4.33  0.0121  0.112   7.74e-6  1.40e-10     0.112      0.112 
-## # … with 1,033 more rows, and 2 more variables: bisec_fa_34 &lt;dbl&gt;,
-## #   bisec_fb_34 &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">df_bisec_dtgch_cbem4</a></code></pre></div>
+<pre><code>## # A tibble: 9 x 10
+##   INDI_ID  fl_A fl_alpha     x       fx f_p_t_f_a bisec_a_27 bisec_b_27
+##     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1       2  4.34  0.00669  7.64 -1.35e-5 -8.09e-11       7.64       7.64
+## 2       3  4.36  0.00925 10.6   4.08e-6  7.39e-11      10.6       10.6 
+## 3       4  4.35  0.00925 10.6   8.10e-6  1.80e-10      10.6       10.6 
+## 4       5  4.37  0.0139  16.1  -5.42e-7 -4.72e-12      16.1       16.1 
+## 5       6  4.34  0.00669  7.63 -1.78e-5 -3.08e-11       7.63       7.63
+## 6       7  4.36  0.0139  16.1   5.60e-6  8.34e-11      16.1       16.1 
+## 7       8  4.34  0.00669  7.63 -1.17e-5 -9.18e-11       7.63       7.63
+## 8       9  4.34  0.00669  7.63  1.56e-5  5.49e-10       7.63       7.63
+## 9      10  4.36  0.0139  16.1   9.17e-6  1.69e-10      16.1       16.1 
+## # … with 2 more variables: bisec_fa_27 &lt;dbl&gt;, bisec_fb_27 &lt;dbl&gt;</code></pre>
 </div>
 </div>
   </div>

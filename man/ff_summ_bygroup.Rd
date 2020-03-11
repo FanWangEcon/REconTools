@@ -9,6 +9,7 @@ ff_summ_bygroup(
   vars.group,
   var.numeric,
   str.stats.group = "main",
+  ar.perc = c(0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99),
   str.stats.specify = NULL,
   boo.overall.stats = TRUE
 )
@@ -21,6 +22,8 @@ ff_summ_bygroup(
 \item{var.numeric}{string variable name of continuous quantitative variable to summarize}
 
 \item{str.stats.group}{string what type of statistics to consider see line 31 and below}
+
+\item{ar.perc}{array of percentiles to calculate, only calculated if str.stats.group = 'mainperc'}
 }
 \value{
 a list of various variables
@@ -41,8 +44,9 @@ df_mtcars <- mtcars
 df <- df_mtcars
 vars.group <- c('am', 'vs')
 var.numeric <- 'mpg'
-str.stats.group <- 'all'
-ls_summ_by_group <- ff_summ_bygroup(df, vars.group, var.numeric, str.stats.group)
+str.stats.group <- 'allperc'
+ar.perc <- c(0.01, 0.05, 0.10, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99)
+ls_summ_by_group <- ff_summ_bygroup(df, vars.group, var.numeric, str.stats.group, ar.perc)
 df_table_grp_stats <- ls_summ_by_group$df_table_grp_stats
 df_row_grp_stats <- ls_summ_by_group$df_row_grp_stats
 df_overall_stats <- ls_summ_by_group$df_overall_stats
@@ -54,6 +58,7 @@ print(df_row_stats_all)
 }
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html}
+\url{https://fanwangecon.github.io/REconTools/articles/fv_summ_bygroup.html}
 \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R}
 }
 \author{

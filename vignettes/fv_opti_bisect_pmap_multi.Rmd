@@ -512,6 +512,9 @@ library(PrjOptiAlloc)
 ls_opti_alpha_A <- ffy_opt_dtgch_cbem4()
 df_esti <- ls_opti_alpha_A$df_esti
 
+# Select only some individuals to speed up test
+df_esti <- df_esti %>% filter(indi.id <= 10)
+
 # Select only A and Alpha and Index 
 # %>% mutate(A_log =(A_log))
 df_dtgch_cbem4_bisec <- df_esti %>% select(indi.id, A_log, alpha_log) 

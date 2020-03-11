@@ -68,6 +68,9 @@
     <li>
       <a href="articles/fv_panel_expand_longandwide.html">PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables</a>
     </li>
+    <li>
+      <a href="articles/fv_summ_bygroup.html">SUMM BYGROUP--Summarize Variable by Factor Groups</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -141,7 +144,7 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 <li>One Variable: mean + median + sd + IQR + mad + min + max + first + last + n.distinct</li>
 <li>The above statistics categorized by variable factors jointly</li>
 <li>
-<strong>tidy</strong>: <em>group_by + summarize_at(, funs()) + rename(!!var := !!sym(var)) + mutate(!!var := paste0(var,’str’,!!!syms(vars))) + gather + unite + spread(varcates, value)</em>
+<strong>tidy</strong>: <em>map(ar_fl, !partial(quantile, probs = .x)) + set_names(nm = ar_st) + group_by + summarize_at(, funs()) + rename(!!var := !!sym(var)) + mutate(!!var := paste0(var,’str’,!!!syms(vars))) + gather + unite + spread(varcates, value)</em>
 </li>
 </ul>
 </li>

@@ -66,6 +66,9 @@
       <a href="articles/fv_opti_bisect_pmap_multi.html">OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing</a>
     </li>
     <li>
+      <a href="articles/fv_panel_cumsum_grouplast.html">PANEL CUMSUM LAST--Cumulative Sum by Index Up to Last in Group</a>
+    </li>
+    <li>
       <a href="articles/fv_panel_expand_longandwide.html">PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables</a>
     </li>
     <li>
@@ -139,7 +142,7 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 </ul>
 </li>
 <li>
-<a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">By Groups One Variable All Statistics</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">ref</a> | vignette
+<a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">By Groups One Variable All Statistics</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">ref</a> | <a href="https://fanwangecon.github.io/REconTools/articles/fv_summ_bygroup.html">vignette</a>
 <ul>
 <li>One Variable: mean + median + sd + IQR + mad + min + max + first + last + n.distinct</li>
 <li>The above statistics categorized by variable factors jointly</li>
@@ -161,6 +164,15 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 <li>long panel var X, average X by within i t subgroups, expand avgX_{i,tgroup} to wide, merge to long panel</li>
 <li>
 <strong>tidy</strong>: <em>group_by + summarise + spread + left_join</em>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html">Cumulative Stat Last Observation Across Individuals</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html">ref</a> | <a href="https://fanwangecon.github.io/REconTools/articles/fv_panel_cumsum_grouplast.html">vignette</a>
+<ul>
+<li>Summing latest at current date SAT score from N individuals where dataframe contains all scores, dataframe by date, moving statistics with date.</li>
+<li>
+<strong>tidy</strong>: <em>for (ctr) + data[1:ctr,] + groupby + slice(n()) + summarize</em>
 </li>
 </ul>
 </li>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cumulative sum value from each group from the latest date of availability — ff_panel_cumsum_grouplast • REconTools</title>
+<title>Cumulative stat value from each group from the latest date of availability. Sum or Average — ff_panel_cumsum_grouplast • REconTools</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Cumulative sum value from each group from the latest date of availability — ff_panel_cumsum_grouplast" />
+<meta property="og:title" content="Cumulative stat value from each group from the latest date of availability. Sum or Average — ff_panel_cumsum_grouplast" />
 <meta property="og:description" content="svr_id are individuals, observed at multiple points; svr_x is date of observation;
 svr_y is some value observed at each time point. Imagine these are SAT scores for individuals.
 we want to calculate the sum/avg etc cumulatively at each date for all individuals, but only using their last score." />
@@ -136,7 +136,7 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Cumulative sum value from each group from the latest date of availability</h1>
+    <h1>Cumulative stat value from each group from the latest date of availability. Sum or Average</h1>
     
     <div class="hidden name"><code>ff_panel_cumsum_grouplast.Rd</code></div>
     </div>
@@ -152,8 +152,8 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
   <span class='no'>svr_id</span>,
   <span class='no'>svr_x</span>,
   <span class='no'>svr_y</span>,
-  <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>"y_cumsum"</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"sum"</span>
+  <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>"y_movingavg_lastestscores"</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"mean"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -225,30 +225,30 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
 #&gt; </span><span style='color: #555555;'>17</span><span>     5    16 4.12 
 #&gt; </span><span style='color: #555555;'>18</span><span>     5    18 5.12 
 #&gt; </span><span style='color: #555555;'>19</span><span>     5    19 5.98 
-#&gt; </span><span style='color: #555555;'>20</span><span>     5    20 6.44 </div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>, <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_cumsum'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'sum'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 4</span><span>
+#&gt; </span><span style='color: #555555;'>20</span><span>     5    20 6.44 </div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>, <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingavg_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 4</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
-#&gt;       id     x     y y_cumsum
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.614    0.614
-#&gt; </span><span style='color: #555555;'> 2</span><span>     1     2 0.411    1.03 
-#&gt; </span><span style='color: #555555;'> 3</span><span>     4     3 0.804    1.83 
-#&gt; </span><span style='color: #555555;'> 4</span><span>     5     4 0.951    2.78 
-#&gt; </span><span style='color: #555555;'> 5</span><span>     3     5 0.965    3.13 
-#&gt; </span><span style='color: #555555;'> 6</span><span>     5     6 1.63     3.81 
-#&gt; </span><span style='color: #555555;'> 7</span><span>     5     7 2.30     4.48 
-#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.33     4.51 
-#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.163    4.67 
-#&gt; </span><span style='color: #555555;'>10</span><span>     5    10 3.13     5.47 
-#&gt; </span><span style='color: #555555;'>11</span><span>     3    11 1.57     6.07 
-#&gt; </span><span style='color: #555555;'>12</span><span>     5    12 3.28     6.23 
-#&gt; </span><span style='color: #555555;'>13</span><span>     3    13 2.06     6.72 
-#&gt; </span><span style='color: #555555;'>14</span><span>     3    14 2.56     7.22 
-#&gt; </span><span style='color: #555555;'>15</span><span>     4    15 1.23     7.65 
-#&gt; </span><span style='color: #555555;'>16</span><span>     5    16 4.12     8.49 
-#&gt; </span><span style='color: #555555;'>17</span><span>     4    17 1.53     8.79 
-#&gt; </span><span style='color: #555555;'>18</span><span>     5    18 5.12     9.79 
-#&gt; </span><span style='color: #555555;'>19</span><span>     5    19 5.98    10.6  
-#&gt; </span><span style='color: #555555;'>20</span><span>     5    20 6.44    11.1  </div></span></pre>
+#&gt;       id     x     y y_movingavg_lastestscore
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.614                    0.614
+#&gt; </span><span style='color: #555555;'> 2</span><span>     1     2 0.411                    0.513
+#&gt; </span><span style='color: #555555;'> 3</span><span>     4     3 0.804                    0.610
+#&gt; </span><span style='color: #555555;'> 4</span><span>     5     4 0.951                    0.695
+#&gt; </span><span style='color: #555555;'> 5</span><span>     3     5 0.965                    0.783
+#&gt; </span><span style='color: #555555;'> 6</span><span>     5     6 1.63                     0.953
+#&gt; </span><span style='color: #555555;'> 7</span><span>     5     7 2.30                     1.12 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.33                     1.13 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.163                    0.934
+#&gt; </span><span style='color: #555555;'>10</span><span>     5    10 3.13                     1.09 
+#&gt; </span><span style='color: #555555;'>11</span><span>     3    11 1.57                     1.21 
+#&gt; </span><span style='color: #555555;'>12</span><span>     5    12 3.28                     1.25 
+#&gt; </span><span style='color: #555555;'>13</span><span>     3    13 2.06                     1.34 
+#&gt; </span><span style='color: #555555;'>14</span><span>     3    14 2.56                     1.44 
+#&gt; </span><span style='color: #555555;'>15</span><span>     4    15 1.23                     1.53 
+#&gt; </span><span style='color: #555555;'>16</span><span>     5    16 4.12                     1.70 
+#&gt; </span><span style='color: #555555;'>17</span><span>     4    17 1.53                     1.76 
+#&gt; </span><span style='color: #555555;'>18</span><span>     5    18 5.12                     1.96 
+#&gt; </span><span style='color: #555555;'>19</span><span>     5    19 5.98                     2.13 
+#&gt; </span><span style='color: #555555;'>20</span><span>     5    20 6.44                     2.22 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

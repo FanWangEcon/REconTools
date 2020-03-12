@@ -12,6 +12,7 @@ ff_dist_gini_vector_pos <- function(ar_pos) {
     #' @references
     #' \url{https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html}
     #' \url{https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html}
+    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R}    
     #' @export
     #' @examples
     #' ar_equal_n2 = c(1,1)

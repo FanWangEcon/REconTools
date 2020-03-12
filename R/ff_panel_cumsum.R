@@ -1,4 +1,4 @@
-ff_panel_cumsum_grouplast <- function(df, svr_id, svr_x, svr_y, svr_cumsumtop = 'y_movingavg_mean', stat='mean') {
+ff_panel_cumsum_grouplast <- function(df, svr_id, svr_x, svr_y, svr_cumsumtop = 'y_movingavg_lastestscores', stat='mean') {
     #' Cumulative stat value from each group from the latest date of availability. Sum or Average
     #'
     #' @description
@@ -32,7 +32,7 @@ ff_panel_cumsum_grouplast <- function(df, svr_id, svr_x, svr_y, svr_cumsumtop = 
     #' tb_long <- tb_long %>% arrange(id, x) %>% group_by(id) %>% mutate(rank_l = row_number())
     #' df <- tb_long %>% select(id, x) %>% add_column(y = runif(dim(tb_long)[1])) %>% arrange(id,x) %>% group_by(id) %>% mutate(y = cumsum(y))
     #' print(df)
-    #' ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingavg_mean', stat='mean')
+    #' ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingavg_lastestscore', stat='mean')
 
     tb_data <- df %>% arrange(x)
     tb_data_cum_sum_top <- tb_data %>% mutate(!!sym(svr_cumsumtop) := 0)

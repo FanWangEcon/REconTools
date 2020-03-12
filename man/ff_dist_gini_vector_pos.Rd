@@ -40,6 +40,7 @@ ff_dist_gini_vector_pos(ar_beta_manyrichmanypoor_nomiddle_n1000)
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html}
 \url{https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html}
+\url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R}
 }
 \author{
 Fan Wang, \url{http://fanwangecon.github.io}

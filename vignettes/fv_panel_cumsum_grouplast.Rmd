@@ -107,10 +107,27 @@ kable(tb_data_cum_sum_top) %>%
     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-## Test Function
+# Test Function
 
-Test the function 
+Testing [ff_panel_cumsum_grouplast](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html).
+
+## Cumulative Sum the Last
+
+Within group last occurance, cumulative sum of last occurance of individual by date. Think of date as x, y as individual outcomes, and id as individual ID. Each individual is observed at multiple x points. In the example here, at each x, only one id observed.
+
 
 ```{r}
 ff_panel_cumsum_grouplast(tb_data, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_cumsum', stat='sum')
 ```
+
+## Cumulative Average Last
+
+Thinking of taking Average SAT scores but, only of the last score people have. Calculate a moving average, where the moving window is all past information, and the average is across individuals, and for each individual, we only take the most recent score. 
+
+```{r}
+ff_panel_cumsum_grouplast(tb_data, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingaverage_mean', stat='mean')
+```
+
+## Much Large Dataframe Cumulative Sum
+
+Suppose I have 100,000 records each at a unique sequencial date, records for over 500 individuals, each individual multiple times. Cumulative sum at each date, only summing the latest value for each individual. What is the speed of the algorithm here. 

@@ -2,15 +2,15 @@
 % Please edit documentation in R/ff_panel_cumsum.R
 \name{ff_panel_cumsum_grouplast}
 \alias{ff_panel_cumsum_grouplast}
-\title{Cumulative sum value from each group from the latest date of availability}
+\title{Cumulative stat value from each group from the latest date of availability. Sum or Average}
 \usage{
 ff_panel_cumsum_grouplast(
   df,
   svr_id,
   svr_x,
   svr_y,
-  svr_cumsumtop = "y_cumsum",
-  stat = "sum"
+  svr_cumsumtop = "y_movingavg_lastestscores",
+  stat = "mean"
 )
 }
 \arguments{
@@ -45,7 +45,7 @@ tb_long <- tb_long \%>\% add_column(xrand = runif(dim(tb_long)[1])) \%>\% arrang
 tb_long <- tb_long \%>\% arrange(id, x) \%>\% group_by(id) \%>\% mutate(rank_l = row_number())
 df <- tb_long \%>\% select(id, x) \%>\% add_column(y = runif(dim(tb_long)[1])) \%>\% arrange(id,x) \%>\% group_by(id) \%>\% mutate(y = cumsum(y))
 print(df)
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_cumsum', stat='sum')
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingavg_lastestscore', stat='mean')
 }
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html}

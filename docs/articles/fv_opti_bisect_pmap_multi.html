@@ -942,43 +942,69 @@ fl_alpha
 <p>The function is the same as before: <em>fc_withroot</em>, in fact, this function is the solution to the log linear allocation from problem <a href="https://fanwangecon.github.io/PrjOptiAlloc/">PrjOptiAlloc</a>.</p>
 <p>First define the data frame:</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="co"># Load Package and Data</span></a>
-<a class="sourceLine" id="cb98-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(PrjOptiAlloc)</a>
-<a class="sourceLine" id="cb98-3" title="3">ls_opti_alpha_A &lt;-<span class="st"> </span><span class="kw">ffy_opt_dtgch_cbem4</span>()</a>
-<a class="sourceLine" id="cb98-4" title="4">df_esti &lt;-<span class="st"> </span>ls_opti_alpha_A<span class="op">$</span>df_esti</a>
-<a class="sourceLine" id="cb98-5" title="5"></a>
-<a class="sourceLine" id="cb98-6" title="6"><span class="co"># Select only some individuals to speed up test</span></a>
-<a class="sourceLine" id="cb98-7" title="7">df_esti &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(indi.id <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb98-8" title="8"></a>
-<a class="sourceLine" id="cb98-9" title="9"><span class="co"># Select only A and Alpha and Index </span></a>
-<a class="sourceLine" id="cb98-10" title="10"><span class="co"># %&gt;% mutate(A_log =(A_log))</span></a>
-<a class="sourceLine" id="cb98-11" title="11">df_dtgch_cbem4_bisec &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(indi.id, A_log, alpha_log) </a>
-<a class="sourceLine" id="cb98-12" title="12">ar_st_col_names =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)</a>
-<a class="sourceLine" id="cb98-13" title="13">df &lt;-<span class="st"> </span>df_dtgch_cbem4_bisec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename_all</span>(<span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(ar_st_col_names))</a></code></pre></div>
+<a class="sourceLine" id="cb98-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(PrjOptiAlloc)</a></code></pre></div>
+<pre><code>## Warning: replacing previous import 'purrr::list_along' by 'rlang::list_along'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::invoke' by 'rlang::invoke' when
+## loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::flatten_raw' by 'rlang::flatten_raw'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::modify' by 'rlang::modify' when
+## loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::as_function' by 'rlang::as_function'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::flatten_dbl' by 'rlang::flatten_dbl'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::flatten_lgl' by 'rlang::flatten_lgl'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::flatten_int' by 'rlang::flatten_int'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::%@%' by 'rlang::%@%' when loading
+## 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::flatten_chr' by 'rlang::flatten_chr'
+## when loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::splice' by 'rlang::splice' when
+## loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::flatten' by 'rlang::flatten' when
+## loading 'REconTools'</code></pre>
+<pre><code>## Warning: replacing previous import 'purrr::prepend' by 'rlang::prepend' when
+## loading 'REconTools'</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">ls_opti_alpha_A &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PrjOptiAlloc/man/ffy_opt_dtgch_cbem4.html">ffy_opt_dtgch_cbem4</a></span>()</a>
+<a class="sourceLine" id="cb112-2" title="2">df_esti &lt;-<span class="st"> </span>ls_opti_alpha_A<span class="op">$</span>df_esti</a>
+<a class="sourceLine" id="cb112-3" title="3"></a>
+<a class="sourceLine" id="cb112-4" title="4"><span class="co"># Select only some individuals to speed up test</span></a>
+<a class="sourceLine" id="cb112-5" title="5">df_esti &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(indi.id <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb112-6" title="6"></a>
+<a class="sourceLine" id="cb112-7" title="7"><span class="co"># Select only A and Alpha and Index </span></a>
+<a class="sourceLine" id="cb112-8" title="8"><span class="co"># %&gt;% mutate(A_log =(A_log))</span></a>
+<a class="sourceLine" id="cb112-9" title="9">df_dtgch_cbem4_bisec &lt;-<span class="st"> </span>df_esti <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(indi.id, A_log, alpha_log) </a>
+<a class="sourceLine" id="cb112-10" title="10">ar_st_col_names =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)</a>
+<a class="sourceLine" id="cb112-11" title="11">df &lt;-<span class="st"> </span>df_dtgch_cbem4_bisec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename_all</span>(<span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(ar_st_col_names))</a></code></pre></div>
 <p>Crucially, also need to redefine the function, note that the function formula we are using here is the same as before, however, there are Hard-Coded vectors in the formula, that need to reflect the new dataframe.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="co"># hard-coded parameters</span></a>
-<a class="sourceLine" id="cb99-2" title="2">ar_nN_A &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(fl_A)</a>
-<a class="sourceLine" id="cb99-3" title="3">ar_nN_alpha &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(fl_alpha)</a>
-<a class="sourceLine" id="cb99-4" title="4"><span class="co"># Function again updating the hard-coded parameters</span></a>
-<a class="sourceLine" id="cb99-5" title="5">fc_withroot &lt;-<span class="st"> </span><span class="cf">function</span>(fl_A, fl_alpha, x){</a>
-<a class="sourceLine" id="cb99-6" title="6">  <span class="co"># Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg</span></a>
-<a class="sourceLine" id="cb99-7" title="7">  <span class="co"># Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. </span></a>
-<a class="sourceLine" id="cb99-8" title="8">  ar_p1_s1 =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>((fl_A <span class="op">-</span><span class="st"> </span>ar_nN_A)<span class="op">*</span>fl_rho)</a>
-<a class="sourceLine" id="cb99-9" title="9">  ar_p1_s2 =<span class="st"> </span>(fl_alpha<span class="op">/</span>ar_nN_alpha)</a>
-<a class="sourceLine" id="cb99-10" title="10">  ar_p1_s3 =<span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(ar_nN_alpha<span class="op">*</span>fl_rho <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb99-11" title="11">  ar_p1 =<span class="st"> </span>(ar_p1_s1<span class="op">*</span>ar_p1_s2)<span class="op">^</span>ar_p1_s3</a>
-<a class="sourceLine" id="cb99-12" title="12">  ar_p2 =<span class="st"> </span>x<span class="op">^</span>((fl_alpha<span class="op">*</span>fl_rho<span class="dv">-1</span>)<span class="op">/</span>(ar_nN_alpha<span class="op">*</span>fl_rho<span class="dv">-1</span>))</a>
-<a class="sourceLine" id="cb99-13" title="13">  ar_overall =<span class="st"> </span>ar_p1<span class="op">*</span>ar_p2</a>
-<a class="sourceLine" id="cb99-14" title="14">  fl_overall =<span class="st"> </span>fl_N_agg <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(ar_overall)</a>
-<a class="sourceLine" id="cb99-15" title="15">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(fl_overall)</a>
-<a class="sourceLine" id="cb99-16" title="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="co"># hard-coded parameters</span></a>
+<a class="sourceLine" id="cb113-2" title="2">ar_nN_A &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(fl_A)</a>
+<a class="sourceLine" id="cb113-3" title="3">ar_nN_alpha &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(fl_alpha)</a>
+<a class="sourceLine" id="cb113-4" title="4"><span class="co"># Function again updating the hard-coded parameters</span></a>
+<a class="sourceLine" id="cb113-5" title="5">fc_withroot &lt;-<span class="st"> </span><span class="cf">function</span>(fl_A, fl_alpha, x){</a>
+<a class="sourceLine" id="cb113-6" title="6">  <span class="co"># Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg</span></a>
+<a class="sourceLine" id="cb113-7" title="7">  <span class="co"># Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. </span></a>
+<a class="sourceLine" id="cb113-8" title="8">  ar_p1_s1 =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>((fl_A <span class="op">-</span><span class="st"> </span>ar_nN_A)<span class="op">*</span>fl_rho)</a>
+<a class="sourceLine" id="cb113-9" title="9">  ar_p1_s2 =<span class="st"> </span>(fl_alpha<span class="op">/</span>ar_nN_alpha)</a>
+<a class="sourceLine" id="cb113-10" title="10">  ar_p1_s3 =<span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(ar_nN_alpha<span class="op">*</span>fl_rho <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb113-11" title="11">  ar_p1 =<span class="st"> </span>(ar_p1_s1<span class="op">*</span>ar_p1_s2)<span class="op">^</span>ar_p1_s3</a>
+<a class="sourceLine" id="cb113-12" title="12">  ar_p2 =<span class="st"> </span>x<span class="op">^</span>((fl_alpha<span class="op">*</span>fl_rho<span class="dv">-1</span>)<span class="op">/</span>(ar_nN_alpha<span class="op">*</span>fl_rho<span class="dv">-1</span>))</a>
+<a class="sourceLine" id="cb113-13" title="13">  ar_overall =<span class="st"> </span>ar_p1<span class="op">*</span>ar_p2</a>
+<a class="sourceLine" id="cb113-14" title="14">  fl_overall =<span class="st"> </span>fl_N_agg <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(ar_overall)</a>
+<a class="sourceLine" id="cb113-15" title="15">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(fl_overall)</a>
+<a class="sourceLine" id="cb113-16" title="16">}</a></code></pre></div>
 <p>Finally call and solve with the bisection function:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="co"># Bisect and Solve</span></a>
-<a class="sourceLine" id="cb100-2" title="2">ls_svr_df_in_func &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)</a>
-<a class="sourceLine" id="cb100-3" title="3">svr_root_x &lt;-<span class="st"> 'x'</span></a>
-<a class="sourceLine" id="cb100-4" title="4">df_bisec_dtgch_cbem4 &lt;-<span class="st"> </span><span class="kw">fv_opti_bisect_pmap_multi_test</span>(df, fc_withroot,</a>
-<a class="sourceLine" id="cb100-5" title="5">                                                       <span class="dv">0</span>, fl_upper_x,</a>
-<a class="sourceLine" id="cb100-6" title="6">                                                       ls_svr_df_in_func, svr_root_x,</a>
-<a class="sourceLine" id="cb100-7" title="7">                                                       <span class="dt">bl_keep_iter =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="co"># Bisect and Solve</span></a>
+<a class="sourceLine" id="cb114-2" title="2">ls_svr_df_in_func &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)</a>
+<a class="sourceLine" id="cb114-3" title="3">svr_root_x &lt;-<span class="st"> 'x'</span></a>
+<a class="sourceLine" id="cb114-4" title="4">df_bisec_dtgch_cbem4 &lt;-<span class="st"> </span><span class="kw">fv_opti_bisect_pmap_multi_test</span>(df, fc_withroot,</a>
+<a class="sourceLine" id="cb114-5" title="5">                                                       <span class="dv">0</span>, fl_upper_x,</a>
+<a class="sourceLine" id="cb114-6" title="6">                                                       ls_svr_df_in_func, svr_root_x,</a>
+<a class="sourceLine" id="cb114-7" title="7">                                                       <span class="dt">bl_keep_iter =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## it_cur:1, fl_p_dist2zr:899.86958899644</code></pre>
 <pre><code>## it_cur:2, fl_p_dist2zr:399.795325546567</code></pre>
 <pre><code>## it_cur:3, fl_p_dist2zr:149.82803720318</code></pre>
@@ -1006,16 +1032,16 @@ fl_alpha
 <pre><code>## it_cur:25, fl_p_dist2zr:2.60678871689556e-05</code></pre>
 <pre><code>## it_cur:26, fl_p_dist2zr:1.31156909364765e-05</code></pre>
 <pre><code>## it_cur:27, fl_p_dist2zr:9.57136451360283e-06</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="co"># Do individual inputs sum up to total allocations available</span></a>
-<a class="sourceLine" id="cb128-2" title="2">fl_allocated &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(df_bisec_dtgch_cbem4 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(svr_root_x))</a>
-<a class="sourceLine" id="cb128-3" title="3"><span class="cf">if</span> (fl_N_agg <span class="op">==</span><span class="st"> </span>fl_allocated){</a>
-<a class="sourceLine" id="cb128-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)</a>
-<a class="sourceLine" id="cb128-5" title="5">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', and, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
-<a class="sourceLine" id="cb128-6" title="6">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb128-7" title="7">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
-<a class="sourceLine" id="cb128-8" title="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1"><span class="co"># Do individual inputs sum up to total allocations available</span></a>
+<a class="sourceLine" id="cb142-2" title="2">fl_allocated &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(df_bisec_dtgch_cbem4 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(svr_root_x))</a>
+<a class="sourceLine" id="cb142-3" title="3"><span class="cf">if</span> (fl_N_agg <span class="op">==</span><span class="st"> </span>fl_allocated){</a>
+<a class="sourceLine" id="cb142-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)</a>
+<a class="sourceLine" id="cb142-5" title="5">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', and, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
+<a class="sourceLine" id="cb142-6" title="6">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb142-7" title="7">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, fl_N_agg, <span class="st">', but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, fl_allocated)</a>
+<a class="sourceLine" id="cb142-8" title="8">}</a></code></pre></div>
 <pre><code>## fl_N_agg = 100 , but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))= 100</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">df_bisec_dtgch_cbem4</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1">df_bisec_dtgch_cbem4</a></code></pre></div>
 <pre><code>## # A tibble: 9 x 10
 ##   INDI_ID  fl_A fl_alpha     x       fx f_p_t_f_a bisec_a_27 bisec_b_27
 ##     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;

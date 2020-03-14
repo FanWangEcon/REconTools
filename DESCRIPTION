@@ -16,6 +16,7 @@ Imports:
     tidyr,
     tibble,
     purrr,
-    readr
+    readr,
+    rlang
 Suggests: knitr,
     rmarkdown

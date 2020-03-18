@@ -55,16 +55,23 @@ tb_long <- tb_long \%>\% arrange(id, x) \%>\% group_by(id) \%>\% mutate(rank_l =
 df <- tb_long \%>\% select(id, x) \%>\% add_column(y = runif(dim(tb_long)[1])) \%>\% arrange(id,x) \%>\% group_by(id) \%>\% mutate(y = cumsum(y))
 print(df)
 quick <- TRUE
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingavg_lastestscore', stat='mean', quick=quick)
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingmean_lastestscore', stat='mean', quick=quick)
 quick <- FALSE
 verbose <- TRUE
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingavg_lastestscore', stat='mean', quick=quick, verbose=verbose)
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingmean_lastestscore', stat='mean', quick=quick, verbose=verbose)
 verbose <- FALSE
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingavg_lastestscore', stat='mean', quick=quick, verbose=verbose)
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='median')
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='sum')
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='min')
-ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='max')
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingmean_lastestscore', stat='mean', quick=quick, verbose=verbose)
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingmedian_lastestscore', stat='median')
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingsum_lastestscore', stat='sum')
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingmin_lastestscore', stat='min')
+ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y',
+                          svr_cumsumtop = 'y_movingmax_lastestscore', stat='max')
 }
 \references{
 \url{https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html}

@@ -144,24 +144,24 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Load Library</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="dt">list =</span> <span class="kw"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a></code></pre></div>
-<pre><code>## -- Attaching packages ---------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## &lt;U+2713&gt; ggplot2 3.2.1     &lt;U+2713&gt; purrr   0.3.3
-## &lt;U+2713&gt; tibble  2.1.3     &lt;U+2713&gt; dplyr   0.8.3
-## &lt;U+2713&gt; tidyr   1.0.0     &lt;U+2713&gt; stringr 1.4.0
-## &lt;U+2713&gt; readr   1.3.1     &lt;U+2713&gt; forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Attaching packages ----------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.2.1     v purrr   0.3.3
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidymodels)</a></code></pre></div>
 <pre><code>## Registered S3 method overwritten by 'xts':
 ##   method     from
 ##   as.zoo.xts zoo</code></pre>
-<pre><code>## -- Attaching packages --------------------------- tidymodels 0.0.3 --</code></pre>
-<pre><code>## &lt;U+2713&gt; broom     0.5.3     &lt;U+2713&gt; recipes   0.1.8
-## &lt;U+2713&gt; dials     0.0.4     &lt;U+2713&gt; rsample   0.0.5
-## &lt;U+2713&gt; infer     0.5.1     &lt;U+2713&gt; yardstick 0.0.4
-## &lt;U+2713&gt; parsnip   0.0.4</code></pre>
-<pre><code>## -- Conflicts ------------------------------ tidymodels_conflicts() --
+<pre><code>## -- Attaching packages ---------------------------------------------------------------- tidymodels 0.0.3 --</code></pre>
+<pre><code>## v broom     0.5.2     v recipes   0.1.7
+## v dials     0.0.4     v rsample   0.0.5
+## v infer     0.5.1     v yardstick 0.0.4
+## v parsnip   0.0.4</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------------------------------- tidymodels_conflicts() --
 ## x scales::discard()   masks purrr::discard()
 ## x dplyr::filter()     masks stats::filter()
 ## x recipes::fixed()    masks stringr::fixed()
@@ -250,7 +250,7 @@
 ##   S.country vil.id unique_indi indi.id_n svymthRound_n momEdu_n wealthIdx_n
 ##   &lt;chr&gt;      &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt;         &lt;int&gt;    &lt;int&gt;       &lt;int&gt;
 ## 1 Cebu           1          50       600           600      600         600
-## # … with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,
+## # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,
 ## #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,
 ## #   p.A.nProt_n &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">df_uniques_mth &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ff_summ_count_unique_by_groups.html">ff_summ_count_unique_by_groups</a></span>(</a>
@@ -274,7 +274,7 @@
 ## 10 Cebu               20          50       50        50       50          50
 ## 11 Cebu               22          50       50        50       50          50
 ## 12 Cebu               24          50       50        50       50          50
-## # … with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,
+## # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,
 ## #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,
 ## #   p.A.nProt_n &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">df_uniques_mth &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ff_summ_count_unique_by_groups.html">ff_summ_count_unique_by_groups</a></span>(</a>
@@ -287,7 +287,7 @@
 ##   S.country unique_indi vil.id_n indi.id_n svymthRound_n momEdu_n wealthIdx_n
 ##   &lt;chr&gt;           &lt;int&gt;    &lt;int&gt;     &lt;int&gt;         &lt;int&gt;    &lt;int&gt;       &lt;int&gt;
 ## 1 Cebu               50      600       600           600      600         600
-## # … with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,
+## # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,
 ## #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,
 ## #   p.A.nProt_n &lt;int&gt;</code></pre>
 </div>
@@ -461,17 +461,17 @@
 <pre><code>## # A tibble: 74 x 5
 ##    term                                     estimate std.error statistic p.value
 ##    &lt;chr&gt;                                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 vf_months[, 1:12](Intercept):svymthRoun…  -0.0145   0.0145      -1.00  0.318 
-##  2 vf_months[, 1:12]factor(svymthRound)4:s…  -0.0252   0.0144      -1.75  0.0801
-##  3 vf_months[, 1:12]factor(svymthRound)6:s…  -0.0333   0.0196      -1.70  0.0896
-##  4 vf_months[, 1:12]factor(svymthRound)8:s…  -0.0324   0.0212      -1.52  0.129 
-##  5 vf_months[, 1:12]factor(svymthRound)10:…  -0.0351   0.0210      -1.67  0.0950
-##  6 vf_months[, 1:12]factor(svymthRound)12:…  -0.0365   0.0195      -1.88  0.0613
-##  7 vf_months[, 1:12]factor(svymthRound)14:…  -0.0310   0.0171      -1.81  0.0709
-##  8 vf_months[, 1:12]factor(svymthRound)16:…  -0.0242   0.0142      -1.71  0.0890
-##  9 vf_months[, 1:12]factor(svymthRound)18:…  -0.0193   0.0108      -1.78  0.0756
-## 10 vf_months[, 1:12]factor(svymthRound)20:…  -0.0104   0.00731     -1.42  0.157 
-## # … with 64 more rows</code></pre>
+##  1 vf_months[, 1:12](Intercept):svymthRoun~  -0.0145   0.0145     -1.000  0.318 
+##  2 vf_months[, 1:12]factor(svymthRound)4:s~  -0.0252   0.0144     -1.75   0.0801
+##  3 vf_months[, 1:12]factor(svymthRound)6:s~  -0.0333   0.0196     -1.70   0.0896
+##  4 vf_months[, 1:12]factor(svymthRound)8:s~  -0.0324   0.0212     -1.52   0.129 
+##  5 vf_months[, 1:12]factor(svymthRound)10:~  -0.0351   0.0210     -1.67   0.0950
+##  6 vf_months[, 1:12]factor(svymthRound)12:~  -0.0365   0.0195     -1.88   0.0613
+##  7 vf_months[, 1:12]factor(svymthRound)14:~  -0.0310   0.0171     -1.81   0.0709
+##  8 vf_months[, 1:12]factor(svymthRound)16:~  -0.0242   0.0142     -1.71   0.0890
+##  9 vf_months[, 1:12]factor(svymthRound)18:~  -0.0193   0.0108     -1.78   0.0756
+## 10 vf_months[, 1:12]factor(svymthRound)20:~  -0.0104   0.00731    -1.42   0.157 
+## # ... with 64 more rows</code></pre>
 </div>
 <div id="regression-testing-6-months-inputs" class="section level2">
 <h2 class="hasAnchor">
@@ -492,14 +492,14 @@
 ##    term                                     estimate std.error statistic p.value
 ##    &lt;chr&gt;                                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 ##  1 vf_mth6[, 1:4](Intercept):mth6m00t06     -0.00413   0.00217    -1.90  0.0577 
-##  2 vf_mth6[, 1:4]factor(mth6)m08t12:mth6m0… -0.00782   0.00333    -2.35  0.0193 
-##  3 vf_mth6[, 1:4]factor(mth6)m14t18:mth6m0… -0.00747   0.00557    -1.34  0.181  
-##  4 vf_mth6[, 1:4]factor(mth6)m20t24:mth6m0… -0.00641   0.00852    -0.752 0.453  
-##  5 vf_mth6[, 2:4]factor(mth6)m08t12:mth6m0…  0.00539   0.00193     2.80  0.00537
-##  6 vf_mth6[, 2:4]factor(mth6)m14t18:mth6m0…  0.00781   0.00392     1.99  0.0469 
-##  7 vf_mth6[, 2:4]factor(mth6)m20t24:mth6m0…  0.0103    0.00631     1.63  0.105  
-##  8 vf_mth6[, 3:4]factor(mth6)m14t18:mth6m1… -0.00144   0.00118    -1.22  0.225  
-##  9 vf_mth6[, 3:4]factor(mth6)m20t24:mth6m1… -0.00164   0.00235    -0.700 0.484  
+##  2 vf_mth6[, 1:4]factor(mth6)m08t12:mth6m0~ -0.00782   0.00333    -2.35  0.0193 
+##  3 vf_mth6[, 1:4]factor(mth6)m14t18:mth6m0~ -0.00747   0.00557    -1.34  0.181  
+##  4 vf_mth6[, 1:4]factor(mth6)m20t24:mth6m0~ -0.00641   0.00852    -0.752 0.453  
+##  5 vf_mth6[, 2:4]factor(mth6)m08t12:mth6m0~  0.00539   0.00193     2.80  0.00537
+##  6 vf_mth6[, 2:4]factor(mth6)m14t18:mth6m0~  0.00781   0.00392     1.99  0.0469 
+##  7 vf_mth6[, 2:4]factor(mth6)m20t24:mth6m0~  0.0103    0.00631     1.63  0.105  
+##  8 vf_mth6[, 3:4]factor(mth6)m14t18:mth6m1~ -0.00144   0.00118    -1.22  0.225  
+##  9 vf_mth6[, 3:4]factor(mth6)m20t24:mth6m1~ -0.00164   0.00235    -0.700 0.484  
 ## 10 vf_mth6[, 4]:mth6m20t24                  -0.00129   0.00136    -0.945 0.345</code></pre>
 </div>
 </div>

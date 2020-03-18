@@ -114,24 +114,24 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Load Library</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="dt">list =</span> <span class="kw"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a></code></pre></div>
-<pre><code>## -- Attaching packages ---------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## &lt;U+2713&gt; ggplot2 3.2.1     &lt;U+2713&gt; purrr   0.3.3
-## &lt;U+2713&gt; tibble  2.1.3     &lt;U+2713&gt; dplyr   0.8.3
-## &lt;U+2713&gt; tidyr   1.0.0     &lt;U+2713&gt; stringr 1.4.0
-## &lt;U+2713&gt; readr   1.3.1     &lt;U+2713&gt; forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Attaching packages ----------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.2.1     v purrr   0.3.3
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidymodels)</a></code></pre></div>
 <pre><code>## Registered S3 method overwritten by 'xts':
 ##   method     from
 ##   as.zoo.xts zoo</code></pre>
-<pre><code>## -- Attaching packages --------------------------- tidymodels 0.0.3 --</code></pre>
-<pre><code>## &lt;U+2713&gt; broom     0.5.3     &lt;U+2713&gt; recipes   0.1.8
-## &lt;U+2713&gt; dials     0.0.4     &lt;U+2713&gt; rsample   0.0.5
-## &lt;U+2713&gt; infer     0.5.1     &lt;U+2713&gt; yardstick 0.0.4
-## &lt;U+2713&gt; parsnip   0.0.4</code></pre>
-<pre><code>## -- Conflicts ------------------------------ tidymodels_conflicts() --
+<pre><code>## -- Attaching packages ---------------------------------------------------------------- tidymodels 0.0.3 --</code></pre>
+<pre><code>## v broom     0.5.2     v recipes   0.1.7
+## v dials     0.0.4     v rsample   0.0.5
+## v infer     0.5.1     v yardstick 0.0.4
+## v parsnip   0.0.4</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------------------------------- tidymodels_conflicts() --
 ## x scales::discard()   masks purrr::discard()
 ## x dplyr::filter()     masks stats::filter()
 ## x recipes::fixed()    masks stringr::fixed()
@@ -3118,17 +3118,17 @@ cum_median_top
 ## # Groups:   id [5]
 ##       id     x     y y_cumsum
 ##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;
-##  1     3     1 0.600        0
-##  2     5     2 0.826        0
-##  3     5     3 1.33         0
-##  4     4     4 0.961        0
-##  5     4     5 1.62         0
-##  6     1     6 0.499        0
-##  7     3     7 1.55         0
-##  8     5     8 2.13         0
-##  9     2     9 0.436        0
-## 10     4    10 2.13         0
-## # … with 29 more rows</code></pre>
+##  1     3     1 0.600    0.600
+##  2     5     2 0.826    1.43 
+##  3     5     3 1.33     1.93 
+##  4     4     4 0.961    2.89 
+##  5     4     5 1.62     3.54 
+##  6     1     6 0.499    4.04 
+##  7     3     7 1.55     4.99 
+##  8     5     8 2.13     5.79 
+##  9     2     9 0.436    6.23 
+## 10     4    10 2.13     6.74 
+## # ... with 29 more rows</code></pre>
 </div>
 <div id="cumulative-average-last" class="section level2">
 <h2 class="hasAnchor">
@@ -3139,17 +3139,17 @@ cum_median_top
 ## # Groups:   id [5]
 ##       id     x     y y_movingaverage_mean
 ##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                &lt;dbl&gt;
-##  1     3     1 0.600                    0
-##  2     5     2 0.826                    0
-##  3     5     3 1.33                     0
-##  4     4     4 0.961                    0
-##  5     4     5 1.62                     0
-##  6     1     6 0.499                    0
-##  7     3     7 1.55                     0
-##  8     5     8 2.13                     0
-##  9     2     9 0.436                    0
-## 10     4    10 2.13                     0
-## # … with 29 more rows</code></pre>
+##  1     3     1 0.600                0.600
+##  2     5     2 0.826                0.713
+##  3     5     3 1.33                 0.964
+##  4     4     4 0.961                0.963
+##  5     4     5 1.62                 1.18 
+##  6     1     6 0.499                1.01 
+##  7     3     7 1.55                 1.25 
+##  8     5     8 2.13                 1.45 
+##  9     2     9 0.436                1.25 
+## 10     4    10 2.13                 1.35 
+## # ... with 29 more rows</code></pre>
 </div>
 <div id="large-dataframe-cumulative-sum-quick-and-slow" class="section level2">
 <h2 class="hasAnchor">
@@ -3212,34 +3212,34 @@ cum_median_top
 <a class="sourceLine" id="cb42-51" title="51">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took SLOW VERBOSE False:'</span>, end_time_slow_verbose <span class="op">-</span><span class="st"> </span>start_time_slow_verbose))</a>
 <a class="sourceLine" id="cb42-52" title="52">}</a></code></pre></div>
 <pre><code>## it_ctr: 1 , it_N: 5 , it_max_N: 10 
-## [1] "Df Generation Took:0.00698184967041016"
-## [1] "Moving Stat Took QUICK True:0.000998020172119141"
-## [1] "Moving Stat Took SLOW VERBOSE True:0.0203580856323242"
-## [1] "Moving Stat Took SLOW VERBOSE False:0.0118839740753174"
+## [1] "Df Generation Took:0.0070030689239502"
+## [1] "Moving Stat Took QUICK True:0.000998973846435547"
+## [1] "Moving Stat Took SLOW VERBOSE True:0.020988941192627"
+## [1] "Moving Stat Took SLOW VERBOSE False:0.0249741077423096"
 ## it_ctr: 2 , it_N: 17 , it_max_N: 20 
-## [1] "Df Generation Took:0.0181410312652588"
-## [1] "Moving Stat Took QUICK True:0.00199389457702637"
-## [1] "Moving Stat Took SLOW VERBOSE True:0.339951992034912"
-## [1] "Moving Stat Took SLOW VERBOSE False:0.312575101852417"
+## [1] "Df Generation Took:0.00699496269226074"
+## [1] "Moving Stat Took QUICK True:0.00499820709228516"
+## [1] "Moving Stat Took SLOW VERBOSE True:0.330803871154785"
+## [1] "Moving Stat Took SLOW VERBOSE False:0.284836053848267"
 ## it_ctr: 3 , it_N: 30 , it_max_N: 30 
-## [1] "Df Generation Took:0.00598502159118652"
-## [1] "Moving Stat Took QUICK True:0.0029909610748291"
-## [1] "Moving Stat Took SLOW VERBOSE True:1.20510482788086"
-## [1] "Moving Stat Took SLOW VERBOSE False:1.11345314979553"</code></pre>
+## [1] "Df Generation Took:0.00699591636657715"
+## [1] "Moving Stat Took QUICK True:0.0159900188446045"
+## [1] "Moving Stat Took SLOW VERBOSE True:1.22964096069336"
+## [1] "Moving Stat Took SLOW VERBOSE False:1.0703821182251"</code></pre>
 </div>
 <div id="fast-algorithm-large-matrix-testing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fast-algorithm-large-matrix-testing" class="anchor"></a>Fast Algorithm Large Matrix Testing</h3>
-<p>Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 0.72 seconds, not very fast, not too bad.</p>
+<p>Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 33 seconds, not very fast, could be improved later.</p>
 <p>The structure is iterative by construction, difficult to fully vectorize. Perhaps achievable as well and faster with some moving average function, rolling window functions.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># Initialize</span></a>
 <a class="sourceLine" id="cb44-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">67890</span>)</a>
 <a class="sourceLine" id="cb44-3" title="3"></a>
 <a class="sourceLine" id="cb44-4" title="4">it_loop &lt;-<span class="st"> </span><span class="dv">5</span></a>
 <a class="sourceLine" id="cb44-5" title="5">it_N_min &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb44-6" title="6">it_N_max &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb44-6" title="6">it_N_max &lt;-<span class="st"> </span><span class="dv">300</span></a>
 <a class="sourceLine" id="cb44-7" title="7">it_max_M_min &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb44-8" title="8">it_max_M_max &lt;-<span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb44-8" title="8">it_max_M_max &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb44-9" title="9"></a>
 <a class="sourceLine" id="cb44-10" title="10">ar_it_N &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Round.html">floor</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(it_N_min, it_N_max, <span class="dt">length.out=</span>it_loop))</a>
 <a class="sourceLine" id="cb44-11" title="11">ar_it_max_M &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Round.html">floor</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(it_max_M_min, it_max_M_max, <span class="dt">length.out=</span>it_loop))</a>
@@ -3271,20 +3271,20 @@ cum_median_top
 <a class="sourceLine" id="cb44-37" title="37">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took QUICK True:'</span>, end_time_fast <span class="op">-</span><span class="st"> </span>start_time_fast))</a>
 <a class="sourceLine" id="cb44-38" title="38">}</a></code></pre></div>
 <pre><code>## it_ctr: 1 , it_N: 5 , it_max_N: 10 
-## [1] "Df Generation Took:0.00698184967041016"
-## [1] "Moving Stat Took QUICK True:0"
-## it_ctr: 2 , it_N: 253 , it_max_N: 57 
-## [1] "Df Generation Took:0.0149590969085693"
-## [1] "Moving Stat Took QUICK True:0.0471260547637939"
-## it_ctr: 3 , it_N: 502 , it_max_N: 105 
-## [1] "Df Generation Took:0.0274050235748291"
-## [1] "Moving Stat Took QUICK True:0.195563793182373"
-## it_ctr: 4 , it_N: 751 , it_max_N: 152 
-## [1] "Df Generation Took:0.0733442306518555"
-## [1] "Moving Stat Took QUICK True:0.395477771759033"
-## it_ctr: 5 , it_N: 1000 , it_max_N: 200 
-## [1] "Df Generation Took:0.149104118347168"
-## [1] "Moving Stat Took QUICK True:0.817759037017822"</code></pre>
+## [1] "Df Generation Took:0.0059969425201416"
+## [1] "Moving Stat Took QUICK True:0.000998973846435547"
+## it_ctr: 2 , it_N: 78 , it_max_N: 32 
+## [1] "Df Generation Took:0.0079960823059082"
+## [1] "Moving Stat Took QUICK True:0.0449728965759277"
+## it_ctr: 3 , it_N: 152 , it_max_N: 55 
+## [1] "Df Generation Took:0.0119941234588623"
+## [1] "Moving Stat Took QUICK True:0.19088888168335"
+## it_ctr: 4 , it_N: 226 , it_max_N: 77 
+## [1] "Df Generation Took:0.0149919986724854"
+## [1] "Moving Stat Took QUICK True:0.639631032943726"
+## it_ctr: 5 , it_N: 300 , it_max_N: 100 
+## [1] "Df Generation Took:0.0209879875183105"
+## [1] "Moving Stat Took QUICK True:1.02755308151245"</code></pre>
 </div>
 </div>
 </div>

@@ -251,7 +251,7 @@ for (it_ctr in seq(1, it_loop)) {
 
 ### Fast Algorithm Large Matrix Testing
 
-Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 0.72 seconds, not very fast, not too bad. 
+Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 33 seconds, not very fast, could be improved later. 
 
 The structure is iterative by construction, difficult to fully vectorize. Perhaps achievable as well and faster with some moving average function, rolling window functions.
 
@@ -261,9 +261,9 @@ set.seed(67890)
 
 it_loop <- 5
 it_N_min <- 5
-it_N_max <- 1000
+it_N_max <- 300
 it_max_M_min <- 10
-it_max_M_max <- 200
+it_max_M_max <- 100
 
 ar_it_N <- floor(seq(it_N_min, it_N_max, length.out=it_loop))
 ar_it_max_M <- floor(seq(it_max_M_min, it_max_M_max, length.out=it_loop))

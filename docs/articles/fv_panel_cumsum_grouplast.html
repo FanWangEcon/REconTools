@@ -114,24 +114,24 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Load Library</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="dt">list =</span> <span class="kw"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a></code></pre></div>
-<pre><code>## -- Attaching packages ----------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
 <pre><code>## v ggplot2 3.2.1     v purrr   0.3.3
 ## v tibble  2.1.3     v dplyr   0.8.3
 ## v tidyr   1.0.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ---------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidymodels)</a></code></pre></div>
 <pre><code>## Registered S3 method overwritten by 'xts':
 ##   method     from
 ##   as.zoo.xts zoo</code></pre>
-<pre><code>## -- Attaching packages ---------------------------------------------------------------- tidymodels 0.0.3 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------ tidymodels 0.0.3 --</code></pre>
 <pre><code>## v broom     0.5.2     v recipes   0.1.7
 ## v dials     0.0.4     v rsample   0.0.5
 ## v infer     0.5.1     v yardstick 0.0.4
 ## v parsnip   0.0.4</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------------------------------- tidymodels_conflicts() --
+<pre><code>## -- Conflicts --------------------------------------------------------- tidymodels_conflicts() --
 ## x scales::discard()   masks purrr::discard()
 ## x dplyr::filter()     masks stats::filter()
 ## x recipes::fixed()    masks stringr::fixed()
@@ -3212,20 +3212,20 @@ cum_median_top
 <a class="sourceLine" id="cb42-51" title="51">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took SLOW VERBOSE False:'</span>, end_time_slow_verbose <span class="op">-</span><span class="st"> </span>start_time_slow_verbose))</a>
 <a class="sourceLine" id="cb42-52" title="52">}</a></code></pre></div>
 <pre><code>## it_ctr: 1 , it_N: 5 , it_max_N: 10 
-## [1] "Df Generation Took:0.0070030689239502"
+## [1] "Df Generation Took:0.0079960823059082"
 ## [1] "Moving Stat Took QUICK True:0.000998973846435547"
-## [1] "Moving Stat Took SLOW VERBOSE True:0.020988941192627"
-## [1] "Moving Stat Took SLOW VERBOSE False:0.0249741077423096"
+## [1] "Moving Stat Took SLOW VERBOSE True:0.0209879875183105"
+## [1] "Moving Stat Took SLOW VERBOSE False:0.0239861011505127"
 ## it_ctr: 2 , it_N: 17 , it_max_N: 20 
-## [1] "Df Generation Took:0.00699496269226074"
-## [1] "Moving Stat Took QUICK True:0.00499820709228516"
-## [1] "Moving Stat Took SLOW VERBOSE True:0.330803871154785"
-## [1] "Moving Stat Took SLOW VERBOSE False:0.284836053848267"
+## [1] "Df Generation Took:0.0059969425201416"
+## [1] "Moving Stat Took QUICK True:0.0059959888458252"
+## [1] "Moving Stat Took SLOW VERBOSE True:0.331809043884277"
+## [1] "Moving Stat Took SLOW VERBOSE False:0.292840003967285"
 ## it_ctr: 3 , it_N: 30 , it_max_N: 30 
-## [1] "Df Generation Took:0.00699591636657715"
+## [1] "Df Generation Took:0.00699996948242188"
 ## [1] "Moving Stat Took QUICK True:0.0159900188446045"
-## [1] "Moving Stat Took SLOW VERBOSE True:1.22964096069336"
-## [1] "Moving Stat Took SLOW VERBOSE False:1.0703821182251"</code></pre>
+## [1] "Moving Stat Took SLOW VERBOSE True:1.18330693244934"
+## [1] "Moving Stat Took SLOW VERBOSE False:1.07439303398132"</code></pre>
 </div>
 <div id="fast-algorithm-large-matrix-testing" class="section level3">
 <h3 class="hasAnchor">
@@ -3271,20 +3271,20 @@ cum_median_top
 <a class="sourceLine" id="cb44-37" title="37">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took QUICK True:'</span>, end_time_fast <span class="op">-</span><span class="st"> </span>start_time_fast))</a>
 <a class="sourceLine" id="cb44-38" title="38">}</a></code></pre></div>
 <pre><code>## it_ctr: 1 , it_N: 5 , it_max_N: 10 
-## [1] "Df Generation Took:0.0059969425201416"
-## [1] "Moving Stat Took QUICK True:0.000998973846435547"
+## [1] "Df Generation Took:0.00699496269226074"
+## [1] "Moving Stat Took QUICK True:0.000999927520751953"
 ## it_ctr: 2 , it_N: 78 , it_max_N: 32 
-## [1] "Df Generation Took:0.0079960823059082"
-## [1] "Moving Stat Took QUICK True:0.0449728965759277"
+## [1] "Df Generation Took:0.00800895690917969"
+## [1] "Moving Stat Took QUICK True:0.0459640026092529"
 ## it_ctr: 3 , it_N: 152 , it_max_N: 55 
-## [1] "Df Generation Took:0.0119941234588623"
-## [1] "Moving Stat Took QUICK True:0.19088888168335"
+## [1] "Df Generation Took:0.0119891166687012"
+## [1] "Moving Stat Took QUICK True:0.186897993087769"
 ## it_ctr: 4 , it_N: 226 , it_max_N: 77 
-## [1] "Df Generation Took:0.0149919986724854"
-## [1] "Moving Stat Took QUICK True:0.639631032943726"
+## [1] "Df Generation Took:0.0159919261932373"
+## [1] "Moving Stat Took QUICK True:0.614640951156616"
 ## it_ctr: 5 , it_N: 300 , it_max_N: 100 
-## [1] "Df Generation Took:0.0209879875183105"
-## [1] "Moving Stat Took QUICK True:1.02755308151245"</code></pre>
+## [1] "Df Generation Took:0.0199880599975586"
+## [1] "Moving Stat Took QUICK True:0.839521884918213"</code></pre>
 </div>
 </div>
 </div>

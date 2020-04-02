@@ -43,10 +43,19 @@ Click on the reference tab on top to see all functions. Some functions are also 
 
 ## 2. Panel
 
+## 2.1 Wider or Longer
+
 1. [Long Panel Duplicate One Variable to Wide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html)
     + long panel var X, average X by within i t subgroups, expand avgX_{i,tgroup} to wide, merge to long panel
     + **tidy**: *group_by + summarise + spread + left_join*
-2. [Cumulative Stat Last Observation Across Individuals](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_panel_cumsum_grouplast.html)
+2. [Long Panel Duplicate One Variable to Wide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html) | [vignette](https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html)
+    + long panel record date of attendance for each id, expand to wide panel of cumulative attendance by dates
+    + **tidy**: *pivot_wider + rename_at + mutate_at + list(~replace_na) + list(~cumsum)*
+
+
+## 2.2 Statistcs by Dates
+
+1. [Cumulative Stat Last Observation Across Individuals](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_panel_cumsum_grouplast.html)
     + Summing latest at current date SAT score from N individuals where dataframe contains all scores, dataframe by date, moving statistics with date.
     + **tidy**: *for (ctr) + data[1:ctr,] + groupby + slice(n()) + summarize*
 

@@ -32,6 +32,7 @@ There is a panel dataset, where each row is an observation at a date.
 Doing this allows for lagged intereaction that are time specific in an arbitrary way.
 
 # Package and Data Loading and Parameter Setting
+
 ```{r}
 # Load Library
 rm(list = ls(all.names = TRUE))

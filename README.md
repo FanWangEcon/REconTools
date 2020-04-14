@@ -4,7 +4,7 @@
 
 This is a work-in-progress [website](https://fanwangecon.github.io/REconTools/) consisting of files for doing Panel Data Statistics/Econometrics Analysis. Materials gathered from various [projects](https://fanwangecon.github.io/research) in which R code is used. Files are from [**Fan**](https://fanwangecon.github.io/)'s [REconTools](https://github.com/FanWangEcon/REconTools) repository.
 
-From [Fan](https://fanwangecon.github.io/)'s other repositories: For dynamic borrowing and savings problems, see [Dynamic Asset Repository](https://fanwangecon.github.io/CodeDynaAsset/); For code examples, see also [R Example Code](https://fanwangecon.github.io/R4Econ/), [Matlab Example Code](https://fanwangecon.github.io/M4Econ/) and [Stata Example Code](https://fanwangecon.github.io/Stata4Econ/); For intro econ with Matlab, see [Intro Mathematics for Economists](https://fanwangecon.github.io/Math4Econ/), and for intro stat with R, see [Intro Statistics for Undergraduates](https://fanwangecon.github.io/Stat4Econ/). See [here](https://github.com/FanWangEcon) for all of [Fan](https://fanwangecon.github.io/)'s public repositories.
+From [Fan](https://fanwangecon.github.io/)'s other repositories: For dynamic borrowing and savings problems, see [Dynamic Asset Repository](https://fanwangecon.github.io/CodeDynaAsset/); For code examples, see also [R Example Code](https://fanwangecon.github.io/R4Econ/) ([bookdown site](https://fanwangecon.github.io/R4Econ/bookdown)), [Matlab Example Code](https://fanwangecon.github.io/M4Econ/) and [Stata Example Code](https://fanwangecon.github.io/Stata4Econ/); For intro econ with Matlab, see [Intro Mathematics for Economists](https://fanwangecon.github.io/Math4Econ/), and for intro stat with R, see [Intro Statistics for Undergraduates](https://fanwangecon.github.io/Stat4Econ/). See [here](https://github.com/FanWangEcon) for all of [Fan](https://fanwangecon.github.io/)'s public repositories.
 
 Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
 
@@ -48,7 +48,7 @@ Click on the reference tab on top to see all functions. Some functions are also 
 1. [Long Panel Duplicate One Variable to Wide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html)
     + long panel var X, average X by within i t subgroups, expand avgX_{i,tgroup} to wide, merge to long panel
     + **tidy**: *group_by + summarise + spread + left_join*
-2. [Long Panel Duplicate One Variable to Wide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html) | [vignette](https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html)
+2. [Long Roster to Wide Day and ID Roster with Cumsum](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html) | [vignette](https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html)
     + long panel record date of attendance for each id, expand to wide panel of cumulative attendance by dates
     + **tidy**: *pivot_wider + rename_at + mutate_at + list(~replace_na) + list(~cumsum)*
 
@@ -61,7 +61,9 @@ Click on the reference tab on top to see all functions. Some functions are also 
 
 ## 3. Distributions
 
-1. [Compute Gini for a non-negative Vector](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html)
+1. [Discrete Random Normal Variable](https://fanwangecon.github.io/REconTools/reference/ff_dist_integrate_normal.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_integrate.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_dist_integrate_normal.html) | vignette
+    + Discretized normal random variable with Trapezoidal rule.
+2. [Compute Gini for a non-negative Vector](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html): [**r**](https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R) | [ref](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) | [vignette](https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html)
     + Single line gini inequality formula.
 
 ## 4. Optimization

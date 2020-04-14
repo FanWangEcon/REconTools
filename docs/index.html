@@ -95,7 +95,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#r-tools-for-panel-data-and-optimization" class="anchor"></a>R Tools for Panel Data and Optimization</h1></div>
 <p>This is a work-in-progress <a href="https://fanwangecon.github.io/REconTools/">website</a> consisting of files for doing Panel Data Statistics/Econometrics Analysis. Materials gathered from various <a href="https://fanwangecon.github.io/research">projects</a> in which R code is used. Files are from <a href="https://fanwangecon.github.io/"><strong>Fan</strong></a>’s <a href="https://github.com/FanWangEcon/REconTools">REconTools</a> repository.</p>
-<p>From <a href="https://fanwangecon.github.io/">Fan</a>’s other repositories: For dynamic borrowing and savings problems, see <a href="https://fanwangecon.github.io/CodeDynaAsset/">Dynamic Asset Repository</a>; For code examples, see also <a href="https://fanwangecon.github.io/R4Econ/">R Example Code</a>, <a href="https://fanwangecon.github.io/M4Econ/">Matlab Example Code</a> and <a href="https://fanwangecon.github.io/Stata4Econ/">Stata Example Code</a>; For intro econ with Matlab, see <a href="https://fanwangecon.github.io/Math4Econ/">Intro Mathematics for Economists</a>, and for intro stat with R, see <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Statistics for Undergraduates</a>. See <a href="https://github.com/FanWangEcon">here</a> for all of <a href="https://fanwangecon.github.io/">Fan</a>’s public repositories.</p>
+<p>From <a href="https://fanwangecon.github.io/">Fan</a>’s other repositories: For dynamic borrowing and savings problems, see <a href="https://fanwangecon.github.io/CodeDynaAsset/">Dynamic Asset Repository</a>; For code examples, see also <a href="https://fanwangecon.github.io/R4Econ/">R Example Code</a> (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), <a href="https://fanwangecon.github.io/M4Econ/">Matlab Example Code</a> and <a href="https://fanwangecon.github.io/Stata4Econ/">Stata Example Code</a>; For intro econ with Matlab, see <a href="https://fanwangecon.github.io/Math4Econ/">Intro Mathematics for Economists</a>, and for intro stat with R, see <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Statistics for Undergraduates</a>. See <a href="https://github.com/FanWangEcon">here</a> for all of <a href="https://fanwangecon.github.io/">Fan</a>’s public repositories.</p>
 <p>Please contact <a href="https://fanwangecon.github.io/">FanWangEcon</a> for issues or problems.</p>
 <p><a href="https://github.com/FanWangEcon/REconTools/commits/master"><img src="https://img.shields.io/github/last-commit/fanwangecon/REconTools"></a> <a href="https://github.com/FanWangEcon/REconTools/graphs/commit-activity"><img src="https://img.shields.io/github/commit-activity/m/fanwangecon/REconTools"></a> <a href="https://github.com/FanWangEcon/REconTools/issues"><img src="https://img.shields.io/github/issues/fanwangecon/REconTools"></a> <a href="https://github.com/FanWangEcon/REconTools/pulls"><img src="https://img.shields.io/github/issues-pr/fanwangecon/REconTools"></a></p>
 </div>
@@ -172,7 +172,7 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 </ul>
 </li>
 <li>
-<a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html">Long Panel Duplicate One Variable to Wide</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html">ref</a> | <a href="https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html">vignette</a>
+<a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html">Long Roster to Wide Day and ID Roster with Cumsum</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html">ref</a> | <a href="https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html">vignette</a>
 <ul>
 <li>long panel record date of attendance for each id, expand to wide panel of cumulative attendance by dates</li>
 <li>
@@ -201,6 +201,12 @@ devtools::install_github("fanwangecon/REconTools")</a></code></pre>
 <h2 class="hasAnchor">
 <a href="#3-distributions" class="anchor"></a>3. Distributions</h2>
 <ol>
+<li>
+<a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_integrate_normal.html">Discrete Random Normal Variable</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_integrate.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_integrate_normal.html">ref</a> | vignette
+<ul>
+<li>Discretized normal random variable with Trapezoidal rule.</li>
+</ul>
+</li>
 <li>
 <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">Compute Gini for a non-negative Vector</a>: <a href="https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R"><strong>r</strong></a> | <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">ref</a> | <a href="https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html">vignette</a>
 <ul>

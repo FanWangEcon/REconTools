@@ -12,7 +12,7 @@ ff_dist_gini_vector_pos <- function(ar_pos) {
     #' @references
     #' \url{https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html}
     #' \url{https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html}
-    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R}    
+    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R}
     #' @export
     #' @examples
     #' ar_equal_n2 = c(1,1)
@@ -34,7 +34,7 @@ ff_dist_gini_vector_pos <- function(ar_pos) {
     #' ff_dist_gini_vector_pos(ar_beta_mostpoor_n1000)
     #' ff_dist_gini_vector_pos(ar_beta_manyrichmanypoor_nomiddle_n1000)
 
-    message('see REconTools for formula: DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)')
+    # message('see REconTools for formula: DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)')
     # Check length and given warning
     it_n <- length(ar_pos)
     if (it_n <= 100)  warning('Data vector has only n=',it_n,', max-inequality/min-gini=',(it_n - 1)/(it_n + 1))

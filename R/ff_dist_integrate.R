@@ -1,5 +1,5 @@
 ff_dist_integrate_normal <- function(fl_eps_mean=0, fl_eps_sd = 1,
-                                     it_eps = 10, verbose=TRUE) {
+                                     it_eps = 10) {
     #' Trapezoidal rule style discretized normal random variable.
     #'
     #' @description
@@ -10,7 +10,6 @@ ff_dist_integrate_normal <- function(fl_eps_mean=0, fl_eps_sd = 1,
     #' @param fl_eps_mean float mean of the normal distribution
     #' @param fl_eps_sd float sd of the normal distribution
     #' @param it_eps integer number of discretized points to return
-    #' @param verbose boolean return statistics including approximated mean and sd
     #' @return a list of normal draw arrays and checks
     #' \itemize{
     #'   \item ar_eps_val - An array of shock draws as Discrete Random Variable

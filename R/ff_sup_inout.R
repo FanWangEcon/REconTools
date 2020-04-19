@@ -40,7 +40,6 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
   #' \url{https://fanwangecon.github.io/REconTools/reference/ff_sup_clean_rmd.html}
   #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R}
   #' @export
-  #' @import
   #' @examples
   #' ff_sup_clean_rmd()
   #'

@@ -208,54 +208,54 @@ categorized by some discrete variables. Wage by gender for example.</p>
 <span class='no'>df_row_grp_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_row_grp_stats</span>
 <span class='no'>df_overall_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_overall_stats</span>
 <span class='no'>df_row_stats_all</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_row_stats_all</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_table_grp_stats</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 21</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   am [2]</span><span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_table_grp_stats</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 21
+#&gt; # Groups:   am [2]
 #&gt;      am    vs  mean median    sd   IQR   mad  `1%`  `5%` `10%` `25%` `50%` `75%`
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     0     0  15.0   15.2  2.77  2.57  2.30  10.4  10.4  10.7  14.0  15.2  16.6
-#&gt; </span><span style='color: #555555;'>2</span><span>     0     1  20.7   21.4  2.47  3.5   3.26  17.8  17.9  18.0  18.6  21.4  22.2
-#&gt; </span><span style='color: #555555;'>3</span><span>     1     0  19.8   20.4  4.01  4.22  3.85  15.0  15.2  15.4  16.8  20.4  21  
-#&gt; </span><span style='color: #555555;'>4</span><span>     1     1  28.4   30.4  4.76  6.35  4.60  21.5  21.8  22.2  25.0  30.4  31.4
-#&gt; </span><span style='color: #555555;'># ... with 8 more variables: `90%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `95%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `99%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_row_grp_stats</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 76</span><span>
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     0     0  15.0   15.2  2.77  2.57  2.30  10.4  10.4  10.7  14.0  15.2  16.6
+#&gt; 2     0     1  20.7   21.4  2.47  3.5   3.26  17.8  17.9  18.0  18.6  21.4  22.2
+#&gt; 3     1     0  19.8   20.4  4.01  4.22  3.85  15.0  15.2  15.4  16.8  20.4  21  
+#&gt; 4     1     1  28.4   30.4  4.76  6.35  4.60  21.5  21.8  22.2  25.0  30.4  31.4
+#&gt; # ... with 8 more variables: `90%` &lt;dbl&gt;, `95%` &lt;dbl&gt;, `99%` &lt;dbl&gt;, min &lt;dbl&gt;,
+#&gt; #   max &lt;dbl&gt;, first &lt;dbl&gt;, last &lt;dbl&gt;, n.distinct &lt;int&gt;</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_row_grp_stats</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 76
 #&gt;   `mpg.am.vs.0.0.~ `mpg.am.vs.0.0.~ `mpg.am.vs.0.0.~ `mpg.am.vs.0.0.~
-#&gt;              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>             10.4             10.7             14.0             10.4
-#&gt; </span><span style='color: #555555;'># ... with 72 more variables: `mpg.am.vs.0.0.50%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.0.0.75%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.0.90%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.0.0.95%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.0.99%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.0.first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.0.IQR </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.0.last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.0.mad </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.0.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.0.mean </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.0.median </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.0.min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.0.n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.0.sd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.1.1%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.0.1.10%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.1.25%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.0.1.5%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.1.50%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.0.1.75%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.1.90%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.0.1.95%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.0.1.99%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.1.first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.1.IQR </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.1.last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.1.mad </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.1.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.1.mean </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.1.median </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.1.min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.0.1.n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.0.1.sd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.0.1%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.0.10%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.0.25%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.0.5%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.0.50%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.0.75%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.0.90%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.0.95%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.0.99%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.0.first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.0.IQR </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.0.last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.0.mad </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.0.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.0.mean </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.0.median </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.0.min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.0.n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.0.sd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.1.1%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.1.10%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.1.25%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.1.5%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.1.50%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.1.75%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.1.90%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   `mpg.am.vs.1.1.95%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `mpg.am.vs.1.1.99%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.1.first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.IQR </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.1.last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.mad </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.1.mean </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.median </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.1.min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mpg.am.vs.1.1.sd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_overall_stats</span>)</div><div class='output co'>#&gt;   mpg.mean mpg.median   mpg.sd mpg.IQR mpg.mad mpg.1% mpg.5% mpg.10% mpg.25%
+#&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+#&gt; 1             10.4             10.7             14.0             10.4
+#&gt; # ... with 72 more variables: `mpg.am.vs.0.0.50%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.0.0.75%` &lt;dbl&gt;, `mpg.am.vs.0.0.90%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.0.0.95%` &lt;dbl&gt;, `mpg.am.vs.0.0.99%` &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.0.first &lt;dbl&gt;, mpg.am.vs.0.0.IQR &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.0.last &lt;dbl&gt;, mpg.am.vs.0.0.mad &lt;dbl&gt;, mpg.am.vs.0.0.max &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.0.mean &lt;dbl&gt;, mpg.am.vs.0.0.median &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.0.min &lt;dbl&gt;, mpg.am.vs.0.0.n.distinct &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.0.sd &lt;dbl&gt;, `mpg.am.vs.0.1.1%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.0.1.10%` &lt;dbl&gt;, `mpg.am.vs.0.1.25%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.0.1.5%` &lt;dbl&gt;, `mpg.am.vs.0.1.50%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.0.1.75%` &lt;dbl&gt;, `mpg.am.vs.0.1.90%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.0.1.95%` &lt;dbl&gt;, `mpg.am.vs.0.1.99%` &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.1.first &lt;dbl&gt;, mpg.am.vs.0.1.IQR &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.1.last &lt;dbl&gt;, mpg.am.vs.0.1.mad &lt;dbl&gt;, mpg.am.vs.0.1.max &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.1.mean &lt;dbl&gt;, mpg.am.vs.0.1.median &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.1.min &lt;dbl&gt;, mpg.am.vs.0.1.n.distinct &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.0.1.sd &lt;dbl&gt;, `mpg.am.vs.1.0.1%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.0.10%` &lt;dbl&gt;, `mpg.am.vs.1.0.25%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.0.5%` &lt;dbl&gt;, `mpg.am.vs.1.0.50%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.0.75%` &lt;dbl&gt;, `mpg.am.vs.1.0.90%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.0.95%` &lt;dbl&gt;, `mpg.am.vs.1.0.99%` &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.0.first &lt;dbl&gt;, mpg.am.vs.1.0.IQR &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.0.last &lt;dbl&gt;, mpg.am.vs.1.0.mad &lt;dbl&gt;, mpg.am.vs.1.0.max &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.0.mean &lt;dbl&gt;, mpg.am.vs.1.0.median &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.0.min &lt;dbl&gt;, mpg.am.vs.1.0.n.distinct &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.0.sd &lt;dbl&gt;, `mpg.am.vs.1.1.1%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.1.10%` &lt;dbl&gt;, `mpg.am.vs.1.1.25%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.1.5%` &lt;dbl&gt;, `mpg.am.vs.1.1.50%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.1.75%` &lt;dbl&gt;, `mpg.am.vs.1.1.90%` &lt;dbl&gt;,
+#&gt; #   `mpg.am.vs.1.1.95%` &lt;dbl&gt;, `mpg.am.vs.1.1.99%` &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.1.first &lt;dbl&gt;, mpg.am.vs.1.1.IQR &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.1.last &lt;dbl&gt;, mpg.am.vs.1.1.mad &lt;dbl&gt;, mpg.am.vs.1.1.max &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.1.mean &lt;dbl&gt;, mpg.am.vs.1.1.median &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.1.min &lt;dbl&gt;, mpg.am.vs.1.1.n.distinct &lt;dbl&gt;,
+#&gt; #   mpg.am.vs.1.1.sd &lt;dbl&gt;</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_overall_stats</span>)</div><div class='output co'>#&gt;   mpg.mean mpg.median   mpg.sd mpg.IQR mpg.mad mpg.1% mpg.5% mpg.10% mpg.25%
 #&gt; 1 20.09062       19.2 6.026948   7.375 5.41149   10.4 11.995   14.34  15.425
 #&gt;   mpg.50% mpg.75% mpg.90% mpg.95% mpg.99% mpg.min mpg.max mpg.first mpg.last
 #&gt; 1    19.2    22.8   30.09    31.3  33.435    10.4    33.9        21     21.4
@@ -553,7 +553,7 @@ categorized by some discrete variables. Wage by gender for example.</p>
 #&gt; 
 #&gt; $mpg.n_distinct
 #&gt; [1] 25
-#&gt; </div></span></pre>
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

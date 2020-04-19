@@ -4,12 +4,7 @@
 \alias{ff_dist_integrate_normal}
 \title{Trapezoidal rule style discretized normal random variable.}
 \usage{
-ff_dist_integrate_normal(
-  fl_eps_mean = 0,
-  fl_eps_sd = 1,
-  it_eps = 10,
-  verbose = TRUE
-)
+ff_dist_integrate_normal(fl_eps_mean = 0, fl_eps_sd = 1, it_eps = 10)
 }
 \arguments{
 \item{fl_eps_mean}{float mean of the normal distribution}
@@ -17,8 +12,6 @@ ff_dist_integrate_normal(
 \item{fl_eps_sd}{float sd of the normal distribution}
 
 \item{it_eps}{integer number of discretized points to return}
-
-\item{verbose}{boolean return statistics including approximated mean and sd}
 }
 \value{
 a list of normal draw arrays and checks

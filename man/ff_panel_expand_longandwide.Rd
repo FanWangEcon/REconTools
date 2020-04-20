@@ -27,10 +27,10 @@ Doing this allows for lagged intereaction that are time specific in an arbitrary
 library(dplyr)
 df_hw_cebu <- df_hgt_wgt \%>\% filter(S.country == 'Cebu' & svymthRound <= 24 & svymthRound > 0)
 df_hw_cebu <- df_hw_cebu \%>\% mutate(mth6 = recode(svymthRound,
-                               `0`="m00t06", `2`="m00t06", `4`="m00t06", `6`="m00t06",
-                               `8`="m08t12", `10`="m08t12", `12`="m08t12",
-                               `14`="m14t18", `16`="m14t18", `18`="m14t18",
-                               `20`="m20t24", `22`="m20t24", `24`="m20t24"))
+                                    `0`="m00t06", `2`="m00t06", `4`="m00t06", `6`="m00t06",
+                                    `8`="m08t12", `10`="m08t12", `12`="m08t12",
+                                    `14`="m14t18", `16`="m14t18", `18`="m14t18",
+                                    `20`="m20t24", `22`="m20t24", `24`="m20t24"))
 df_longandwide <- ff_panel_expand_longandwide(df_hw_cebu,
                                          svr_id_t = 'mth6',
                                          svr_id_i = 'indi.id',

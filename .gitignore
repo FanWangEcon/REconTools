@@ -8,8 +8,8 @@
 ###################
 
 # History files
-.Rhistory
-.Rapp.history
+*.Rhistory
+*.Rapp.history
 
 # Session Data files
 .RData

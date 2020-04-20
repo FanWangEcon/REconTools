@@ -7,7 +7,7 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
                              bl_gen_if_git_old = FALSE,
                              bl_recursive = TRUE,
                              bl_verbose = TRUE,
-                             bl_test = FALSE) {
+                             bl_test = TRUE) {
   #' This function cleans rmd: creates subfolder with pdf, html and R
   #'
   #' @description
@@ -63,6 +63,13 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
     # 2. main folder keeps only Rmd file
     # 3. delete tex and other files
 
+    # Get Current File Path, Assume to be git, check status after
+    st_fullpath_noname <- dirname(spt_file)
+    st_fullpath_nosufx <- sub('\\.Rmd$', '', spt_file)
+    st_file_wno_suffix <- sub('\\.Rmd$', '', basename(spt_file))
+    # need to do setwd, need to check status within git repo
+    setwd(st_fullpath_noname)
+
     # Check if the RMD file has been modified or is new, if neither, do not generate pdf html
     spg_check_git_status <- paste0('git status -s ', spt_file)
     st_git_status <- toString(system(spg_check_git_status, intern=TRUE))
@@ -70,29 +77,37 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
     bl_anewfile <- grepl('?? ', st_git_status, fixed=TRUE)
     bl_nochange <- (st_git_status == "")
 
+
     if (bl_modified == 1) {
-      message(paste0('MODIFIED: ', spt_file))
+      st_message_prefix <- 'MODIFIED: '
     } else if (bl_anewfile == 1) {
-      message(paste0('A NEW FL: ', spt_file))
+      st_message_prefix <- 'A NEW FL: '
     } else {
-      message(paste0('NO CHNGE: ', spt_file))
+      st_message_prefix <- 'NO CHNGE: '
     }
+
+    st_force <- ''
+    if (bl_gen_if_git_old) {
+      st_force <- ', FORCE UPDATE, '
+    }
+
+    message(paste0(st_message_prefix, st_force, spt_file))
 
     if ((bl_modified + bl_anewfile == 1) |
         (bl_nochange & bl_gen_if_git_old)) {
 
       if (bl_verbose) message(paste0('spt_file:',spt_file))
-      st_fullpath_noname <- dirname(spt_file)
-      st_fullpath_nosufx <- sub('\\.Rmd$', '', spt_file)
-      st_file_wno_suffix <- sub('\\.Rmd$', '', basename(spt_file))
       if (bl_verbose) message(paste0('st_fullpath_noname:', st_fullpath_noname))
       if (bl_verbose) message(paste0('st_fullpath_nosufx:', st_fullpath_nosufx))
       if (bl_verbose) message(paste0('st_file_wno_suffix:', st_file_wno_suffix))
 
       spth_pdf <- paste0(st_fullpath_noname, st_folder_pdf)
+      sname_pdf <- paste0(st_fullpath_noname, st_folder_pdf, st_file_wno_suffix)
       spth_html <- paste0(st_fullpath_noname, st_folder_html)
+      sname_html <- paste0(st_fullpath_noname, st_folder_html, st_file_wno_suffix)
+      if (bl_verbose) message(spth_html)
+
       sfle_R <- paste0(st_fullpath_noname, st_folder_R, st_file_wno_suffix)
-      if (bl_verbose) message(spth_pdf_html)
 
       sfl_nht <- paste0(st_fullpath_nosufx, '.nb.html')
       sfl_tex <- paste0(st_fullpath_nosufx, '.tex')
@@ -101,8 +116,8 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
       sfl_Rla <- paste0(st_fullpath_nosufx, '.R')
       sfl_log <- paste0(st_fullpath_nosufx, '.log')
 
-      sfl_sub_nht <- paste0(sfle_pdf_html, '.nb.html')
-      sfl_sub_tex <- paste0(sfle_pdf_html, '.tex')
+      sfl_sub_tex <- paste0(sname_pdf, '.tex')
+      sfl_sub_nht <- paste0(sname_html, '.nb.html')
 
       if (!bl_test){
         if (grepl('_main', spt_file)) {

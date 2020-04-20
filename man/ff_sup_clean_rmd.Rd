@@ -13,7 +13,7 @@ ff_sup_clean_rmd(
   bl_gen_if_git_old = FALSE,
   bl_recursive = TRUE,
   bl_verbose = TRUE,
-  bl_test = FALSE
+  bl_test = TRUE
 )
 }
 \arguments{

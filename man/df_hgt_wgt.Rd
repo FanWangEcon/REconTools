@@ -4,7 +4,9 @@
 \name{df_hgt_wgt}
 \alias{df_hgt_wgt}
 \title{Test Dataset Panel Height and Weight, Guatemala and Philippines, scrambled data, not actual.}
-\format{csv}
+\format{
+csv
+}
 \source{
 \url{https://www.sciencedirect.com/science/article/pii/S1570677X16300107}
 }

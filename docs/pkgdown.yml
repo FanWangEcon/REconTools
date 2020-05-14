@@ -1,5 +1,5 @@
-pandoc: 2.7.2
-pkgdown: 1.4.1
+pandoc: 2.9.2.1
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   fv_dist_gini_vector_pos: fv_dist_gini_vector_pos.html
@@ -7,4 +7,5 @@ articles:
   fv_panel_cumsum_grouplast: fv_panel_cumsum_grouplast.html
   fv_panel_expand_longandwide: fv_panel_expand_longandwide.html
   fv_summ_bygroup: fv_summ_bygroup.html
+last_built: 2020-05-14T12:08Z
 

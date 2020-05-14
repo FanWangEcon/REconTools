@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
 This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
 Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1)." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -67,7 +70,7 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -122,7 +125,12 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FanWangEcon/REconTools/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -137,7 +145,7 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R'><code>R/ff_dist_gini.R</code></a></small>
     <div class="hidden name"><code>ff_dist_gini_vector_pos.Rd</code></div>
     </div>
 
@@ -180,17 +188,10 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 <span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>)
 <span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_equal_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alittle_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.1111111</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_somewht_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.2592593</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alotine_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.3131313</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_mostmst_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.333252</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostrich_n1000</span>)</div><div class='output co'>#&gt; [1] 0.09135541</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostpoor_n1000</span>)</div><div class='output co'>#&gt; [1] 0.453811</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span>)</div><div class='output co'>#&gt; [1] 0.402409</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -201,7 +202,7 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

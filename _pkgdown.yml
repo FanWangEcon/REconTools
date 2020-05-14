@@ -20,7 +20,7 @@ reference:
   contents:
   - df_hgt_wgt
 - title: Utility Tools
-  desc: Support tools for packaging etc.
+  desc: Support tools for basic variable operations, packaging etc.
   contents:
   - starts_with("ff_sup")
 template:

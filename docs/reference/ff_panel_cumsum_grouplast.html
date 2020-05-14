@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="svr_id are individuals, observed at multiple points; svr_x is date of observation;
 svr_y is some value observed at each time point. Imagine these are SAT scores for individuals.
 we want to calculate the sum/avg etc cumulatively at each date for all individuals, but only using their last score." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -67,7 +70,7 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -122,7 +125,12 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FanWangEcon/REconTools/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -137,7 +145,7 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cumulative stat value from each group from the latest date of availability. Sum or Average</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R'><code>R/ff_panel_cumsum.R</code></a></small>
     <div class="hidden name"><code>ff_panel_cumsum_grouplast.Rd</code></div>
     </div>
 
@@ -205,154 +213,146 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tidyr' was built under R version 3.6.3</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tibble</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>12345</span>)
 <span class='no'>it_N</span> <span class='kw'>&lt;-</span> <span class='fl'>5</span>
 <span class='no'>ar_it_M</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='no'>it_N</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>ar_it_M_ID</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='no'>it_N</span>, <span class='no'>it_N</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>tb_combine</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>ar_it_M</span>, <span class='no'>ar_it_M_ID</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span>(<span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"id"</span>)
+<span class='no'>tb_combine</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>ar_it_M</span>, <span class='no'>ar_it_M_ID</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span>(<span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"id"</span>)
 <span class='no'>tb_long</span> <span class='kw'>&lt;-</span> <span class='no'>tb_combine</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/uncount.html'>uncount</a></span>(<span class='no'>ar_it_M</span>)
 <span class='no'>tb_long</span> <span class='kw'>&lt;-</span> <span class='no'>tb_long</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/add_column.html'>add_column</a></span>(<span class='kw'>xrand</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>tb_long</span>)[<span class='fl'>1</span>])) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span>(<span class='no'>xrand</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span>())
 <span class='no'>tb_long</span> <span class='kw'>&lt;-</span> <span class='no'>tb_long</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span>(<span class='no'>id</span>, <span class='no'>x</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>id</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>rank_l</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span>())
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>tb_long</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>id</span>, <span class='no'>x</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/add_column.html'>add_column</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>tb_long</span>)[<span class='fl'>1</span>])) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span>(<span class='no'>id</span>,<span class='no'>x</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>id</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span>(<span class='no'>y</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 3
-#&gt; # Groups:   id [5]
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 39 x 3</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-#&gt;  1     1     6 0.499
-#&gt;  2     1    16 1.23 
-#&gt;  3     1    18 1.31 
-#&gt;  4     2     9 0.436
-#&gt;  5     2    13 0.672
-#&gt;  6     2    17 1.46 
-#&gt;  7     2    20 1.72 
-#&gt;  8     2    22 2.71 
-#&gt;  9     2    25 3.47 
-#&gt; 10     2    27 4.44 
-#&gt; # ... with 29 more rows</div><div class='input'><span class='no'>quick</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     1     6 0.499
+#&gt; </span><span style='color: #555555;'> 2</span><span>     1    16 1.23 
+#&gt; </span><span style='color: #555555;'> 3</span><span>     1    18 1.31 
+#&gt; </span><span style='color: #555555;'> 4</span><span>     2     9 0.436
+#&gt; </span><span style='color: #555555;'> 5</span><span>     2    13 0.672
+#&gt; </span><span style='color: #555555;'> 6</span><span>     2    17 1.46 
+#&gt; </span><span style='color: #555555;'> 7</span><span>     2    20 1.72 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     2    22 2.71 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2    25 3.47 
+#&gt; </span><span style='color: #555555;'>10</span><span>     2    27 4.44 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='no'>quick</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmean_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>, <span class='kw'>quick</span><span class='kw'>=</span><span class='no'>quick</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmean_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>, <span class='kw'>quick</span><span class='kw'>=</span><span class='no'>quick</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingmean_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                     &lt;dbl&gt;
-#&gt;  1     3     1 0.600                     0.600
-#&gt;  2     5     2 0.826                     0.713
-#&gt;  3     5     3 1.33                      0.964
-#&gt;  4     4     4 0.961                     0.963
-#&gt;  5     4     5 1.62                      1.18 
-#&gt;  6     1     6 0.499                     1.01 
-#&gt;  7     3     7 1.55                      1.25 
-#&gt;  8     5     8 2.13                      1.45 
-#&gt;  9     2     9 0.436                     1.25 
-#&gt; 10     4    10 2.13                      1.35 
-#&gt; # ... with 29 more rows</div><div class='input'><span class='no'>quick</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                     0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                     0.713
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                      0.964
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                     0.963
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                      1.18 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                     1.01 
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                      1.25 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                      1.45 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                     1.25 
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                      1.35 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='no'>quick</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
 <span class='no'>verbose</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmean_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>, <span class='kw'>quick</span><span class='kw'>=</span><span class='no'>quick</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='no'>verbose</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmean_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>, <span class='kw'>quick</span><span class='kw'>=</span><span class='no'>quick</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='no'>verbose</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingmean_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                     &lt;dbl&gt;
-#&gt;  1     3     1 0.600                     0.600
-#&gt;  2     5     2 0.826                     0.713
-#&gt;  3     5     3 1.33                      0.964
-#&gt;  4     4     4 0.961                     0.963
-#&gt;  5     4     5 1.62                      1.18 
-#&gt;  6     1     6 0.499                     1.01 
-#&gt;  7     3     7 1.55                      1.25 
-#&gt;  8     5     8 2.13                      1.45 
-#&gt;  9     2     9 0.436                     1.25 
-#&gt; 10     4    10 2.13                      1.35 
-#&gt; # ... with 29 more rows</div><div class='input'><span class='no'>verbose</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                     0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                     0.713
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                      0.964
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                     0.963
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                      1.18 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                     1.01 
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                      1.25 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                      1.45 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                     1.25 
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                      1.35 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='no'>verbose</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
 <span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmean_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>, <span class='kw'>quick</span><span class='kw'>=</span><span class='no'>quick</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='no'>verbose</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmean_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'mean'</span>, <span class='kw'>quick</span><span class='kw'>=</span><span class='no'>quick</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='no'>verbose</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingmean_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                     &lt;dbl&gt;
-#&gt;  1     3     1 0.600                     0.600
-#&gt;  2     5     2 0.826                     0.713
-#&gt;  3     5     3 1.33                      0.964
-#&gt;  4     4     4 0.961                     0.963
-#&gt;  5     4     5 1.62                      1.18 
-#&gt;  6     1     6 0.499                     1.01 
-#&gt;  7     3     7 1.55                      1.25 
-#&gt;  8     5     8 2.13                      1.45 
-#&gt;  9     2     9 0.436                     1.25 
-#&gt; 10     4    10 2.13                      1.35 
-#&gt; # ... with 29 more rows</div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmedian_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'median'</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                     0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                     0.713
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                      0.964
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                     0.963
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                      1.18 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                     1.01 
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                      1.25 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                      1.45 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                     1.25 
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                      1.35 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmedian_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'median'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingmedian_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                       &lt;dbl&gt;
-#&gt;  1     3     1 0.600                       0.600
-#&gt;  2     5     2 0.826                       0.713
-#&gt;  3     5     3 1.33                        0.964
-#&gt;  4     4     4 0.961                       0.961
-#&gt;  5     4     5 1.62                        1.33 
-#&gt;  6     1     6 0.499                       0.964
-#&gt;  7     3     7 1.55                        1.44 
-#&gt;  8     5     8 2.13                        1.58 
-#&gt;  9     2     9 0.436                       1.55 
-#&gt; 10     4    10 2.13                        1.55 
-#&gt; # ... with 29 more rows</div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingsum_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'sum'</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                       0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                       0.713
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                        0.964
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                       0.961
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                        1.33 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                       0.964
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                        1.44 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                        1.58 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                       1.55 
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                        1.55 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingsum_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'sum'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingsum_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                    &lt;dbl&gt;
-#&gt;  1     3     1 0.600                    0.600
-#&gt;  2     5     2 0.826                    1.43 
-#&gt;  3     5     3 1.33                     1.93 
-#&gt;  4     4     4 0.961                    2.89 
-#&gt;  5     4     5 1.62                     3.54 
-#&gt;  6     1     6 0.499                    4.04 
-#&gt;  7     3     7 1.55                     4.99 
-#&gt;  8     5     8 2.13                     5.79 
-#&gt;  9     2     9 0.436                    6.23 
-#&gt; 10     4    10 2.13                     6.74 
-#&gt; # ... with 29 more rows</div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmin_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'min'</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                    0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                    1.43 
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                     1.93 
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                    2.89 
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                     3.54 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                    4.04 
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                     4.99 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                     5.79 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                    6.23 
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                     6.74 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmin_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'min'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingmin_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                    &lt;dbl&gt;
-#&gt;  1     3     1 0.600                    0.600
-#&gt;  2     5     2 0.826                    0.600
-#&gt;  3     5     3 1.33                     0.600
-#&gt;  4     4     4 0.961                    0.600
-#&gt;  5     4     5 1.62                     0.600
-#&gt;  6     1     6 0.499                    0.499
-#&gt;  7     3     7 1.55                     0.499
-#&gt;  8     5     8 2.13                     0.499
-#&gt;  9     2     9 0.436                    0.436
-#&gt; 10     4    10 2.13                     0.436
-#&gt; # ... with 29 more rows</div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
-                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmax_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'max'</span>)</div><div class='output co'>#&gt; # A tibble: 39 x 4
-#&gt; # Groups:   id [5]
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                    0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                    0.600
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                     0.600
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                    0.600
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                     0.600
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                    0.499
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                     0.499
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                     0.499
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                    0.436
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                     0.436
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div><div class='input'><span class='fu'>ff_panel_cumsum_grouplast</span>(<span class='no'>df</span>, <span class='kw'>svr_id</span><span class='kw'>=</span><span class='st'>'id'</span>, <span class='kw'>svr_x</span><span class='kw'>=</span><span class='st'>'x'</span>, <span class='kw'>svr_y</span><span class='kw'>=</span><span class='st'>'y'</span>,
+                          <span class='kw'>svr_cumsumtop</span> <span class='kw'>=</span> <span class='st'>'y_movingmax_lastestscore'</span>, <span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'max'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 39 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   id [5]</span><span>
 #&gt;       id     x     y y_movingmax_lastestscore
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;                    &lt;dbl&gt;
-#&gt;  1     3     1 0.600                    0.600
-#&gt;  2     5     2 0.826                    0.826
-#&gt;  3     5     3 1.33                     1.33 
-#&gt;  4     4     4 0.961                    1.33 
-#&gt;  5     4     5 1.62                     1.62 
-#&gt;  6     1     6 0.499                    1.62 
-#&gt;  7     3     7 1.55                     1.62 
-#&gt;  8     5     8 2.13                     2.13 
-#&gt;  9     2     9 0.436                    2.13 
-#&gt; 10     4    10 2.13                     2.13 
-#&gt; # ... with 29 more rows</div></pre>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     3     1 0.600                    0.600
+#&gt; </span><span style='color: #555555;'> 2</span><span>     5     2 0.826                    0.826
+#&gt; </span><span style='color: #555555;'> 3</span><span>     5     3 1.33                     1.33 
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 0.961                    1.33 
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     5 1.62                     1.62 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 0.499                    1.62 
+#&gt; </span><span style='color: #555555;'> 7</span><span>     3     7 1.55                     1.62 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     5     8 2.13                     2.13 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     2     9 0.436                    2.13 
+#&gt; </span><span style='color: #555555;'>10</span><span>     4    10 2.13                     2.13 
+#&gt; </span><span style='color: #555555;'># ... with 29 more rows</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -363,7 +363,7 @@ we want to calculate the sum/avg etc cumulatively at each date for all individua
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

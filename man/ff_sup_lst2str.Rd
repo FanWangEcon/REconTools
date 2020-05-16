@@ -4,7 +4,7 @@
 \alias{ff_sup_lst2str}
 \title{This function converts a list of strings to a single string for easier printing}
 \usage{
-ff_sup_lst2str(ls_list, st_desc, bl_print = TRUE)
+ff_sup_lst2str(ls_list, st_desc, bl_print = FALSE)
 }
 \arguments{
 \item{ls_list}{named or unamed list of strings or numerical values}
@@ -12,7 +12,7 @@ ff_sup_lst2str(ls_list, st_desc, bl_print = TRUE)
 \item{st_desc}{if this is provided, will use this as the string description in print, otherwise
 will print out the ls_list code itself}
 
-\item{bl_print}{if to print out results}
+\item{bl_print}{if TRUE, will print twice if output not saved in variable}
 }
 \value{
 a string that collapses a list with description up front

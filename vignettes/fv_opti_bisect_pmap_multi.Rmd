@@ -47,7 +47,8 @@ Invoking the algorithm uses several key tidyverse functions:
 ## Load Packages
 
 ```{r loadlib, echo = T, results = 'hide', message=F, warning=F}
-rm(list = ls(all.names = TRUE))
+# rm(list = ls(all.names = TRUE))
+library(REconTools)
 library(tibble)
 library(tidyr)
 library(purrr)
@@ -508,9 +509,9 @@ First define the data frame:
 
 ```{r}
 # Load Package and Data
-library(PrjOptiAlloc)
-ls_opti_alpha_A <- ffy_opt_dtgch_cbem4()
-df_esti <- ls_opti_alpha_A$df_esti
+# ls_opti_alpha_A <- PrjOptiAlloc::ffy_opt_dtgch_cbem4()
+# df_esti <- ls_opti_alpha_A$df_esti
+df_esti <- df_opt_dtgch_cbem4
 
 # Select only some individuals to speed up test
 df_esti <- df_esti %>% filter(indi.id <= 10)

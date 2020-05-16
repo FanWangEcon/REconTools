@@ -1,5 +1,5 @@
 # Some string helper functions
-ff_sup_lst2str <- function(ls_list, st_desc, bl_print=TRUE) {
+ff_sup_lst2str <- function(ls_list, st_desc, bl_print=FALSE) {
   #' This function converts a list of strings to a single string for easier printing
   #'
   #' @description
@@ -9,7 +9,7 @@ ff_sup_lst2str <- function(ls_list, st_desc, bl_print=TRUE) {
   #' @param ls_list named or unamed list of strings or numerical values
   #' @param st_desc if this is provided, will use this as the string description in print, otherwise
   #' will print out the ls_list code itself
-  #' @param bl_print if to print out results
+  #' @param bl_print if TRUE, will print twice if output not saved in variable
   #' @return a string that collapses a list with description up front
   #' @author Fan Wang, \url{http://fanwangecon.github.io}
   #' @references

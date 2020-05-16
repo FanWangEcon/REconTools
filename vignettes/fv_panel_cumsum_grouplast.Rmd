@@ -23,9 +23,13 @@ Suppose we have data from N years, but each year's data is incomplete, so inform
 ```{r}
 # Load Library
 rm(list = ls(all.names = TRUE))
-library(tidyverse)
-library(tidymodels)
+# library(tidyverse)
+# library(tidymodels)
 library(rlang)
+
+library(tibble)
+library(dplyr)
+library(tidyr)
 
 library(REconTools)
 
@@ -261,9 +265,9 @@ set.seed(67890)
 
 it_loop <- 5
 it_N_min <- 5
-it_N_max <- 300
+it_N_max <- 50
 it_max_M_min <- 10
-it_max_M_max <- 100
+it_max_M_max <- 20
 
 ar_it_N <- floor(seq(it_N_min, it_N_max, length.out=it_loop))
 ar_it_max_M <- floor(seq(it_max_M_min, it_max_M_max, length.out=it_loop))

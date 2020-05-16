@@ -1,6 +1,4 @@
-ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
-                                             'C:/Users/fan/R4Econ/math'),
-                             ar_spn_skip = c('matrix', 'tibble'),
+ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
                              st_folder_pdf = '/htmlpdfr/',
                              st_folder_html = '/htmlpdfr/',
                              st_folder_R = '/htmlpdfr/',
@@ -41,7 +39,9 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
   #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R}
   #' @export
   #' @examples
-  #' ff_sup_clean_rmd()
+  #' ar_spt_root = c('C:/Users/fan/R4Econ/amto', 'C:/Users/fan/R4Econ/math')
+  #' ar_spn_skip <- c('matrix', 'tibble')
+  #' ff_sup_clean_rmd(ar_spt_root, ar_spn_skip)
   #'
 
   # Get Path
@@ -49,7 +49,7 @@ ff_sup_clean_rmd <- function(ar_spt_root = c('C:/Users/fan/R4Econ/amto',
                          recursive=bl_recursive,
                          pattern='.Rmd',
                          full.names=T)
-  if (ar_spn_skip != '') {
+  if(!missing(ar_spn_skip)) {
     ls_sfls <- ls_sfls[!grepl(paste(ar_spn_skip, collapse = "|"), ls_sfls)]
   }
 

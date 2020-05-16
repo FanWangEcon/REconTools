@@ -5,8 +5,8 @@
 \title{This function cleans rmd: creates subfolder with pdf, html and R}
 \usage{
 ff_sup_clean_rmd(
-  ar_spt_root = c("C:/Users/fan/R4Econ/amto", "C:/Users/fan/R4Econ/math"),
-  ar_spn_skip = c("matrix", "tibble"),
+  ar_spt_root,
+  ar_spn_skip,
   st_folder_pdf = "/htmlpdfr/",
   st_folder_html = "/htmlpdfr/",
   st_folder_R = "/htmlpdfr/",
@@ -53,7 +53,9 @@ The RMD files should not clear all at the top. That would lead to deleting the r
 the string paths to be searched over.
 }
 \examples{
-ff_sup_clean_rmd()
+ar_spt_root = c('C:/Users/fan/R4Econ/amto', 'C:/Users/fan/R4Econ/math')
+ar_spn_skip <- c('matrix', 'tibble')
+ff_sup_clean_rmd(ar_spt_root, ar_spn_skip)
 
 }
 \references{

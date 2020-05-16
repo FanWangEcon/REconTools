@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • REconTools</title>
+<title>Modify R4Econ (and others) Rmd files, add Numbered Sections for HTML, and higher Hierarchy — ff_sup_clean_rmd_mod • REconTools</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Modify R4Econ (and others) Rmd files, add Numbered Sections for HTML, and higher Hierarchy — ff_sup_clean_rmd_mod" />
+<meta property="og:description" content="Modify R4Econ Rmd files, add Numbered Sections for HTML, and higher Hierarchy. Was
+not able to, for HTML file, use pandoc arguments to add in TOC. And Need to have two hierarchies
+for RMD's individual specific pdf and html files, and the joint bookdown file combining all." />
 
 
 
@@ -68,7 +71,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -141,26 +144,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Modify R4Econ (and others) Rmd files, add Numbered Sections for HTML, and higher Hierarchy</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'><code>R/ff_sup_inout.R</code></a></small>
+    <div class="hidden name"><code>ff_sup_clean_rmd_mod.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="fv_dist_gini_vector_pos.html">DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)</a></dt>
-        <dd></dt>
-        <dt><a href="fv_opti_bisect_pmap_multi.html">OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing</a></dt>
-        <dd></dt>
-        <dt><a href="fv_panel_cumsum_grouplast.html">PANEL CUMSUM LAST--Cumulative Sum by Index Up to Last in Group</a></dt>
-        <dd></dt>
-        <dt><a href="fv_panel_expand_longandwide.html">PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables</a></dt>
-        <dd></dt>
-        <dt><a href="fv_summ_bygroup.html">SUMM BYGROUP--Summarize Variable by Factor Groups</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Modify R4Econ Rmd files, add Numbered Sections for HTML, and higher Hierarchy. Was
+not able to, for HTML file, use pandoc arguments to add in TOC. And Need to have two hierarchies
+for RMD's individual specific pdf and html files, and the joint bookdown file combining all.</p>
     </div>
+
+    <pre class="usage"><span class='fu'>ff_sup_clean_rmd_mod</span>(<span class='no'>st_file</span>, <span class='kw'>it_hierachy_shift</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>st_file</th>
+      <td><p>string texts contents from a R4Econ RMD file.</p></td>
+    </tr>
+    <tr>
+      <th>it_hierachy_shift</th>
+      <td><p>rmd modification level of promotion from bookdown hierachy
+to own file hierarchy</p></td>
+    </tr>
+    <tr>
+      <th>it_toc_depth</th>
+      <td><p>rmd own file outputs toc levels to show</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>modified texts</p>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

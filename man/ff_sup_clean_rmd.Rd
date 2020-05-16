@@ -13,7 +13,9 @@ ff_sup_clean_rmd(
   bl_gen_if_git_old = FALSE,
   bl_recursive = TRUE,
   bl_verbose = TRUE,
-  bl_test = TRUE
+  bl_test = TRUE,
+  it_hierachy_shift = 2,
+  it_toc_depth = 3
 )
 }
 \arguments{
@@ -31,7 +33,12 @@ still update pdf and html files.}
 
 \item{bl_recursive}{boolean if to search in folders recursively}
 
-\item{bl_test}{boolean if testing, meaning do not generate pdf html, just see which files are been
+\item{bl_test}{boolean if testing, meaning do not generate pdf html, just see which files are been}
+
+\item{it_hierachy_shift}{rmd modification level of promotion from bookdown hierachy
+to own file hierarchy}
+
+\item{it_toc_depth}{rmd own file outputs toc levels to show
 considered included, searched and found}
 
 \item{ls_spt_root}{array a string array of path roots in which to search for Rmd files to knit}
@@ -53,13 +60,16 @@ The RMD files should not clear all at the top. That would lead to deleting the r
 the string paths to be searched over.
 }
 \examples{
-ar_spt_root = c('C:/Users/fan/R4Econ/amto', 'C:/Users/fan/R4Econ/math')
-ar_spn_skip <- c('matrix', 'tibble')
+ar_spt_root = c('C:/Users/fan/R4Econ/amto/array/', 'C:/Users/fan/R4Econ/math/integration')
+ar_spt_root = c('C:/Users/fan/R4Econ/math/integration')
+ar_spt_root = c('C:/Users/fan/R4Econ/development/inout')
+ar_spn_skip <- c('matrix', 'tibble', '_main', '_mod')
 ff_sup_clean_rmd(ar_spt_root, ar_spn_skip)
+# ff_sup_clean_rmd(ar_spt_root, ar_spn_skip, bl_test = FALSE, bl_gen_if_git_old = TRUE)
 
 }
 \references{
-\url{https://fanwangecon.github.io/REconTools/reference/ff_sup_clean_rmd.html}
+\url{https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html}
 \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R}
 }
 \author{

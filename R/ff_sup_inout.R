@@ -5,7 +5,8 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
                              bl_gen_if_git_old = FALSE,
                              bl_recursive = TRUE,
                              bl_verbose = TRUE,
-                             bl_test = TRUE) {
+                             bl_test = TRUE,
+                             it_hierachy_shift=2, it_toc_depth=3) {
   #' This function cleans rmd: creates subfolder with pdf, html and R
   #'
   #' @description
@@ -26,6 +27,9 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
   #' still update pdf and html files.
   #' @param bl_recursive boolean if to search in folders recursively
   #' @param bl_test boolean if testing, meaning do not generate pdf html, just see which files are been
+  #' @param it_hierachy_shift rmd modification level of promotion from bookdown hierachy
+  #' to own file hierarchy
+  #' @param it_toc_depth rmd own file outputs toc levels to show
   #' considered included, searched and found
   #' @return a list of string paths of files generated
   #' \itemize{
@@ -35,13 +39,16 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
   #' }#'
   #' @author Fan Wang, \url{http://fanwangecon.github.io}
   #' @references
-  #' \url{https://fanwangecon.github.io/REconTools/reference/ff_sup_clean_rmd.html}
+  #' \url{https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html}
   #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R}
   #' @export
   #' @examples
-  #' ar_spt_root = c('C:/Users/fan/R4Econ/amto', 'C:/Users/fan/R4Econ/math')
-  #' ar_spn_skip <- c('matrix', 'tibble')
+  #' ar_spt_root = c('C:/Users/fan/R4Econ/amto/array/', 'C:/Users/fan/R4Econ/math/integration')
+  #' ar_spt_root = c('C:/Users/fan/R4Econ/math/integration')
+  #' ar_spt_root = c('C:/Users/fan/R4Econ/development/inout')
+  #' ar_spn_skip <- c('matrix', 'tibble', '_main', '_mod')
   #' ff_sup_clean_rmd(ar_spt_root, ar_spn_skip)
+  #' # ff_sup_clean_rmd(ar_spt_root, ar_spn_skip, bl_test = FALSE, bl_gen_if_git_old = TRUE)
   #'
 
   # Get Path
@@ -58,6 +65,7 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
   ls_spt_R_generated <- c('')
 
   # print
+  message(paste0('Search and Check'))
   for (spt_file in ls_sfls) {
     # 1. store pdf and html files in a subfolder
     # 2. main folder keeps only Rmd file
@@ -96,11 +104,13 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
     if ((bl_modified + bl_anewfile == 1) |
         (bl_nochange & bl_gen_if_git_old)) {
 
+      # Print Path
       if (bl_verbose) message(paste0('spt_file:',spt_file))
       if (bl_verbose) message(paste0('st_fullpath_noname:', st_fullpath_noname))
       if (bl_verbose) message(paste0('st_fullpath_nosufx:', st_fullpath_nosufx))
       if (bl_verbose) message(paste0('st_file_wno_suffix:', st_file_wno_suffix))
 
+      # Generate New Paths and File Names
       spth_pdf <- paste0(st_fullpath_noname, st_folder_pdf)
       sname_pdf <- paste0(st_fullpath_noname, st_folder_pdf, st_file_wno_suffix)
       spth_html <- paste0(st_fullpath_noname, st_folder_html)
@@ -119,7 +129,9 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
       sfl_sub_tex <- paste0(sname_pdf, '.tex')
       sfl_sub_nht <- paste0(sname_html, '.nb.html')
 
+      # Convert to PDF, HTML etc if Not Testing
       if (!bl_test){
+
         if (grepl('_main', spt_file)) {
 
           # try(file.remove(paste0(st_fullpath_nosufx, '.pdf')))
@@ -127,19 +139,38 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
 
         } else {
 
+          # Step 1, Path Names
+          spn_modtex <- paste0(st_fullpath_noname, '/', st_file_wno_suffix, '_mod.Rmd')
+
+          # Step 2, Generate New Tex and Modify RMD for rising Hierachy and TOC
+          # READ
+          fileConn_rd <- file(spt_file, "r")
+          st_file_read <- readLines(fileConn_rd)
+          # Write to new
+          fileConn_sr <- file(spn_modtex)
+          st_file_read_mod <- ff_sup_clean_rmd_mod(st_file_read,
+                                                   it_hierachy_shift=2, it_toc_depth=3)
+          writeLines(st_file_read_mod, fileConn_sr)
+          # Close
+          close(fileConn_rd)
+          close(fileConn_sr)
+
+
+          # Step 4, File Conversions
           # rmarkdown::render(spt_file, output_format='pdf_document(includes = includes(in_header = "C:/Users/fan/R4Econ/preamble.tex"))', output_dir = spth_pdf_html)
           # rmarkdown::render(spt_file, output_format='pdf_document(includes = includes(in_header))', output_dir = spth_pdf_html)
+          if (bl_verbose) message(paste0('spth_pdf:',spth_pdf, ', PDF started'))
+          rmarkdown::render(spn_modtex, output_format='pdf_document',
+                            output_dir = spth_pdf, output_file = st_file_wno_suffix)
+          if (bl_verbose) message(paste0('spth_pdf:',spth_pdf, ', PDF finished'))
 
-          if (bl_verbose) message(paste0('spt_file:',spth_pdf, ', PDF started'))
-          rmarkdown::render(spt_file, output_format='pdf_document', output_dir = spth_pdf)
-          if (bl_verbose) message(paste0('spt_file:',spth_pdf, ', PDF finished'))
-
-          if (bl_verbose) message(paste0('spt_file:',spth_html, ', HTML started.'))
-          rmarkdown::render(spt_file, output_format='html_document', output_dir = spth_html)
-          if (bl_verbose) message(paste0('spt_file:',spth_html, ', HTML finished.'))
+          if (bl_verbose) message(paste0('spth_html:',spth_html, ', HTML started.'))
+          rmarkdown::render(spn_modtex, output_format='html_document',
+                            output_dir = spth_html, output_file = st_file_wno_suffix)
+          if (bl_verbose) message(paste0('spth_html:',spth_html, ', HTML finished.'))
 
           if (bl_verbose) message(paste0('purl_to:', paste0(sfle_R, ".R")))
-          knitr::purl(spt_file, output=paste0(sfle_R, ".R"), documentation = 1)
+          knitr::purl(spn_modtex, output=paste0(sfle_R, ".R"), documentation = 1)
 
           ls_spt_pdf_generated <-
             c(ls_spt_pdf_generated, paste0(spth_pdf, st_file_wno_suffix, '.pdf'))
@@ -148,6 +179,9 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
           ls_spt_R_generated <-
             c(ls_spt_R_generated, paste0(sfle_R, '.R'))
 
+          # Step 5, Delete mod temp file and rename original back to original
+          try(file.remove(spn_modtex))
+          # file.rename(spn_texrename, spt_file)
         }
 
         try(file.remove(sfl_nht))
@@ -159,6 +193,7 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
 
         try(file.remove(sfl_sub_nht))
         try(file.remove(sfl_sub_tex))
+
       }
 
     }
@@ -181,4 +216,57 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
   return(list(ls_spt_pdf_generated=ls_spt_pdf_generated,
               ls_spt_html_generated=ls_spt_html_generated,
               ls_spt_R_generated=ls_spt_R_generated))
+}
+
+
+ff_sup_clean_rmd_mod <- function(st_file, it_hierachy_shift=2, it_toc_depth=3) {
+  #' Modify R4Econ (and others) Rmd files, add Numbered Sections for HTML, and higher Hierarchy
+  #'
+  #' @description
+  #' Modify R4Econ Rmd files, add Numbered Sections for HTML, and higher Hierarchy. Was
+  #' not able to, for HTML file, use pandoc arguments to add in TOC. And Need to have two hierarchies
+  #' for RMD's individual specific pdf and html files, and the joint bookdown file combining all.
+  #'
+  #' @param st_file string texts contents from a R4Econ RMD file.
+  #' @param it_hierachy_shift rmd modification level of promotion from bookdown hierachy
+  #' to own file hierarchy
+  #' @param it_toc_depth rmd own file outputs toc levels to show
+  #' @return modified texts
+  #' @author Fan Wang, \url{http://fanwangecon.github.io}
+  #'
+
+  # Add in (1) TOC (2) Numbering (3) Menu Left Float
+  st_search <- "html_document:"
+  st_replace <- paste0("html_document:\n",
+                       "    toc: true\n",
+                       "    number_sections: true\n",
+                       "    toc_float:\n",
+                       "      collapsed: false\n",
+                       "      smooth_scroll: false\n",
+                       "      toc_depth: ", it_toc_depth)
+  st_file_updated <- gsub(x = st_file,
+                          pattern = st_search,
+                          replacement = st_replace)
+
+  # Update Hierarchy (Each file Own PDF and HTML Hierarchy Higher)
+  # RMD originals start with triple pound as a part of larger bookdown structure
+  if (it_hierachy_shift == 1) {
+    st_file_updated <- gsub(x = st_file_updated, pattern = '## ', replacement = '# ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '### ', replacement = '## ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '#### ', replacement = '### ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '##### ', replacement = '#### ')
+  } else if (it_hierachy_shift == 2) {
+    st_file_updated <- gsub(x = st_file_updated, pattern = '### ', replacement = '# ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '#### ', replacement = '## ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '##### ', replacement = '### ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '###### ', replacement = '#### ')
+  } else if (it_hierachy_shift == 3) {
+    st_file_updated <- gsub(x = st_file_updated, pattern = '#### ', replacement = '# ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '##### ', replacement = '## ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '###### ', replacement = '### ')
+    st_file_updated <- gsub(x = st_file_updated, pattern = '####### ', replacement = '#### ')
+  }
+
+  # Return
+  return(st_file_updated)
 }

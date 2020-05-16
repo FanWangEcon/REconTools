@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REconTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -148,7 +148,8 @@
 <div id="load-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load Packages</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="kw">list</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="kw">all.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># rm(list = ls(all.names = TRUE))</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REconTools</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
@@ -956,39 +957,9 @@ fl_alpha
 <p>The function is the same as before: <em>fc_withroot</em>, in fact, this function is the solution to the log linear allocation from problem <a href="https://fanwangecon.github.io/PrjOptiAlloc/">PrjOptiAlloc</a>.</p>
 <p>First define the data frame:</p>
 <div class="sourceCode" id="cb101"><html><body><pre class="r"><span class="co"># Load Package and Data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">PrjOptiAlloc</span>)</pre></body></html></div>
-<pre><code>## Warning: replacing previous import 'purrr::list_along' by 'rlang::list_along'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::invoke' by 'rlang::invoke' when
-## loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::flatten_raw' by 'rlang::flatten_raw'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::modify' by 'rlang::modify' when
-## loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::as_function' by 'rlang::as_function'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::flatten_dbl' by 'rlang::flatten_dbl'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::flatten_lgl' by 'rlang::flatten_lgl'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::flatten_int' by 'rlang::flatten_int'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::%@%' by 'rlang::%@%' when loading
-## 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::flatten_chr' by 'rlang::flatten_chr'
-## when loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::splice' by 'rlang::splice' when
-## loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::flatten' by 'rlang::flatten' when
-## loading 'REconTools'</code></pre>
-<pre><code>## Warning: replacing previous import 'purrr::prepend' by 'rlang::prepend' when
-## loading 'REconTools'</code></pre>
-<div class="sourceCode" id="cb115"><html><body><pre class="r"><span class="no">ls_opti_alpha_A</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/PrjOptiAlloc/man/ffy_opt_dtgch_cbem4.html">ffy_opt_dtgch_cbem4</a></span>()</pre></body></html></div>
-<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.
-## Using compatibility `.name_repair`.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb117"><html><body><pre class="r"><span class="no">df_esti</span> <span class="kw">&lt;-</span> <span class="no">ls_opti_alpha_A</span>$<span class="no">df_esti</span>
+<span class="co"># ls_opti_alpha_A &lt;- PrjOptiAlloc::ffy_opt_dtgch_cbem4()</span>
+<span class="co"># df_esti &lt;- ls_opti_alpha_A$df_esti</span>
+<span class="no">df_esti</span> <span class="kw">&lt;-</span> <span class="no">df_opt_dtgch_cbem4</span>
 
 <span class="co"># Select only some individuals to speed up test</span>
 <span class="no">df_esti</span> <span class="kw">&lt;-</span> <span class="no">df_esti</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">indi.id</span> <span class="kw">&lt;=</span> <span class="fl">10</span>)
@@ -999,7 +970,7 @@ fl_alpha
 <span class="no">ar_st_col_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)
 <span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df_dtgch_cbem4_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_all</a></span>(~<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">ar_st_col_names</span>))</pre></body></html></div>
 <p>Crucially, also need to redefine the function, note that the function formula we are using here is the same as before, however, there are Hard-Coded vectors in the formula, that need to reflect the new dataframe.</p>
-<div class="sourceCode" id="cb118"><html><body><pre class="r"><span class="co"># hard-coded parameters</span>
+<div class="sourceCode" id="cb102"><html><body><pre class="r"><span class="co"># hard-coded parameters</span>
 <span class="no">ar_nN_A</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">fl_A</span>)
 <span class="no">ar_nN_alpha</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">fl_alpha</span>)
 <span class="co"># Function again updating the hard-coded parameters</span>
@@ -1016,7 +987,7 @@ fl_alpha
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">fl_overall</span>)
 }</pre></body></html></div>
 <p>Finally call and solve with the bisection function:</p>
-<div class="sourceCode" id="cb119"><html><body><pre class="r"><span class="co"># Bisect and Solve</span>
+<div class="sourceCode" id="cb103"><html><body><pre class="r"><span class="co"># Bisect and Solve</span>
 <span class="no">ls_svr_df_in_func</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)
 <span class="no">svr_root_x</span> <span class="kw">&lt;-</span> <span class="st">'x'</span>
 <span class="no">df_bisec_dtgch_cbem4</span> <span class="kw">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>,
@@ -1050,7 +1021,7 @@ fl_alpha
 <pre><code>## it_cur:25, fl_p_dist2zr:2.60678871689556e-05</code></pre>
 <pre><code>## it_cur:26, fl_p_dist2zr:1.31156909364765e-05</code></pre>
 <pre><code>## it_cur:27, fl_p_dist2zr:9.57136451360283e-06</code></pre>
-<div class="sourceCode" id="cb147"><html><body><pre class="r"><span class="co"># Do individual inputs sum up to total allocations available</span>
+<div class="sourceCode" id="cb131"><html><body><pre class="r"><span class="co"># Do individual inputs sum up to total allocations available</span>
 <span class="no">fl_allocated</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">df_bisec_dtgch_cbem4</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">svr_root_x</span>))
 <span class="kw">if</span> (<span class="no">fl_N_agg</span> <span class="kw">==</span> <span class="no">fl_allocated</span>){
   <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)
@@ -1059,7 +1030,7 @@ fl_alpha
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, <span class="no">fl_N_agg</span>, <span class="st">', but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, <span class="no">fl_allocated</span>)
 }</pre></body></html></div>
 <pre><code>## fl_N_agg = 100 , but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))= 100</code></pre>
-<div class="sourceCode" id="cb149"><html><body><pre class="r"><span class="no">df_bisec_dtgch_cbem4</span></pre></body></html></div>
+<div class="sourceCode" id="cb133"><html><body><pre class="r"><span class="no">df_bisec_dtgch_cbem4</span></pre></body></html></div>
 <pre><code>## # A tibble: 9 x 10
 ##   INDI_ID  fl_A fl_alpha     x       fx f_p_t_f_a bisec_a_27 bisec_b_27
 ##     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;

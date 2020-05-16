@@ -86,7 +86,7 @@ the string paths to be searched over." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REconTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -160,15 +160,17 @@ the string paths to be searched over.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ff_sup_clean_rmd</span>(
-  <span class='kw'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C:/Users/fan/R4Econ/amto"</span>, <span class='st'>"C:/Users/fan/R4Econ/math"</span>),
-  <span class='kw'>ar_spn_skip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"matrix"</span>, <span class='st'>"tibble"</span>),
+  <span class='no'>ar_spt_root</span>,
+  <span class='no'>ar_spn_skip</span>,
   <span class='kw'>st_folder_pdf</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
   <span class='kw'>st_folder_html</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
   <span class='kw'>st_folder_R</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
   <span class='kw'>bl_gen_if_git_old</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>bl_recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bl_test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>bl_test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>it_hierachy_shift</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -202,7 +204,16 @@ still update pdf and html files.</p></td>
     </tr>
     <tr>
       <th>bl_test</th>
-      <td><p>boolean if testing, meaning do not generate pdf html, just see which files are been
+      <td><p>boolean if testing, meaning do not generate pdf html, just see which files are been</p></td>
+    </tr>
+    <tr>
+      <th>it_hierachy_shift</th>
+      <td><p>rmd modification level of promotion from bookdown hierachy
+to own file hierarchy</p></td>
+    </tr>
+    <tr>
+      <th>it_toc_depth</th>
+      <td><p>rmd own file outputs toc levels to show
 considered included, searched and found</p></td>
     </tr>
     <tr>
@@ -220,11 +231,15 @@ considered included, searched and found</p></td>
 </ul><p>#'</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_sup_clean_rmd.html'>https://fanwangecon.github.io/REconTools/reference/ff_sup_clean_rmd.html</a>
+    <p><a href='https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html'>https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ff_sup_clean_rmd</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/array/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/array/fs_ary_basics.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/array/fs_ary_generate.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/array/fs_ary_mesh.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/array/fs_ary_string.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/list/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/amto/list/fs_lst_basics.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/combinatorics/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/differentiation/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/func_ineq/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/func_ineq/fs_atkinson_ces.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/func_ineq/fs_gini_disc.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/func_ineq/fs_youden.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/integration/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/integration/fs_integrate_normal.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/solutions/_main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/math/solutions/fs_solu_x_lin.Rmd</span></div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
+    <pre class="examples"><div class='input'><span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/amto/array/'</span>, <span class='st'>'C:/Users/fan/R4Econ/math/integration'</span>)
+<span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/math/integration'</span>)
+<span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/development/inout'</span>)
+<span class='no'>ar_spn_skip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>, <span class='st'>'_mod'</span>)
+<span class='fu'>ff_sup_clean_rmd</span>(<span class='no'>ar_spt_root</span>, <span class='no'>ar_spn_skip</span>)</div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_rmd_pdf_html.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_text_save.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
 #&gt;    
 #&gt; "" </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Generated html files:</span></div><div class='output co'>#&gt; [1] ""
 #&gt;    
@@ -238,7 +253,8 @@ considered included, searched and found</p></td>
 #&gt; 
 #&gt; $ls_spt_R_generated
 #&gt; character(0)
-#&gt; </div><div class='input'>
+#&gt; </div><div class='input'># ff_sup_clean_rmd(ar_spt_root, ar_spn_skip, bl_test = FALSE, bl_gen_if_git_old = TRUE)
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

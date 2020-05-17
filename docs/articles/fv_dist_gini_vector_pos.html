@@ -5,14 +5,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable) • REconTools</title>
+<title>Compute Gini Inequality Coefficient Given Data Vector (One Variable) • REconTools</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)">
-<meta property="og:description" content="REconTools">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Compute Gini Inequality Coefficient Given Data Vector (One Variable)">
+<meta property="og:description" content="View a vector positive vectors as population, calculate discrete GINI inequality measure.
+">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -109,7 +110,7 @@
       </header><script src="fv_dist_gini_vector_pos_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>DIST GINI–Compute Gini Inequality Coefficient Given Data Vector (One Variable)</h1>
+      <h1 data-toc-skip>Compute Gini Inequality Coefficient Given Data Vector (One Variable)</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/FanWangEcon/REconTools/blob/master/vignettes/fv_dist_gini_vector_pos.Rmd"><code>vignettes/fv_dist_gini_vector_pos.Rmd</code></a></small>
@@ -119,18 +120,13 @@
 
     
     
-<p>Back to <strong><a href="https://fanwangecon.github.io/">Fan</a></strong>’s REconTools <strong><a href="https://fanwangecon.github.io/REconTools/">Table of Content</a></strong>. Also see <a href="https://fanwangecon.github.io/R4Econ/">R4Econ</a> for R examples and <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> for R introductions.</p>
-<div id="objective" class="section level1">
-<h1 class="hasAnchor">
-<a href="#objective" class="anchor"></a>Objective</h1>
-<p>This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">ff_dist_gini_vector_pos</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package.</p>
+<p>View a vector positive vectors as population, calculate discrete GINI inequality measure. This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">ff_dist_gini_vector_pos</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package.</p>
 <p>There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the <a href="https://en.wikipedia.org/wiki/Gini_coefficient">GINI</a> coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.</p>
 <p>See the formula below, note that when the sample size is small, there is a limit to inequality using the formula defined below given each <span class="math inline">\(N\)</span>. So for small <span class="math inline">\(N\)</span>, can not really compare inequality across arrays with different <span class="math inline">\(N\)</span>, can only compare arrays with the same <span class="math inline">\(N\)</span>.</p>
-</div>
-<div id="formula" class="section level1">
-<h1 class="hasAnchor">
-<a href="#formula" class="anchor"></a>Formula</h1>
-<p>Not sure if this a standard way of computing GINI, but this is how I decided to compute this, the thought process is as follows, given monotonimcally increasing array <span class="math inline">\(X\)</span>, with <span class="math inline">\(x_1,...,x_N\)</span>:</p>
+<div id="formula" class="section level2">
+<h2 class="hasAnchor">
+<a href="#formula" class="anchor"></a>Formula</h2>
+<p>Given monotonimcally increasing array <span class="math inline">\(X\)</span>, with <span class="math inline">\(x_1,...,x_N\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li>There is a box, width = 1, height = 1</li>
 <li>The width is discretized into <span class="math inline">\(N\)</span> individuals, so each individual’s width is <span class="math inline">\(\frac{1}{N}\)</span>
@@ -149,9 +145,9 @@
   \right)^{-1}
 \]</span></p>
 <p>Derive the formula in the steps below.</p>
-<div id="step-1-area-formula" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-1-area-formula" class="anchor"></a>Step 1 Area Formula</h2>
+<div id="step-1-area-formula" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-1-area-formula" class="anchor"></a>Step 1 Area Formula</h3>
 <p><span class="math display">\[
  \Gamma = \sum_{i=1}^N \frac{1}{N} \cdot \left(
      \sum_{j=1}^{i} \left(
@@ -160,9 +156,9 @@
   \right)
 \]</span></p>
 </div>
-<div id="step-2-total-area-given-perfect-equality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-2-total-area-given-perfect-equality" class="anchor"></a>Step 2 Total Area Given Perfect equality</h2>
+<div id="step-2-total-area-given-perfect-equality" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-2-total-area-given-perfect-equality" class="anchor"></a>Step 2 Total Area Given Perfect equality</h3>
 <p>With perfect equality <span class="math inline">\(x_i=a\)</span> for all <span class="math inline">\(i\)</span>, so need to divide by that.</p>
 <p><span class="math display">\[
  \Gamma^{\text{equal}} = \sum_{i=1}^N \frac{1}{N} \cdot \left(
@@ -178,9 +174,9 @@
   = \frac{1}{2}
 \]</span></p>
 </div>
-<div id="step-3-arriving-at-finite-vector-gini-formula" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-3-arriving-at-finite-vector-gini-formula" class="anchor"></a>Step 3 Arriving at Finite Vector Gini Formula</h2>
+<div id="step-3-arriving-at-finite-vector-gini-formula" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-3-arriving-at-finite-vector-gini-formula" class="anchor"></a>Step 3 Arriving at Finite Vector Gini Formula</h3>
 <p>Given what we have from above, we obtain the gini formula, divide by total area below 45 degree line.</p>
 <p><span class="math display">\[
  GINI =
@@ -202,9 +198,9 @@
   \right)^{-1}
 \]</span></p>
 </div>
-<div id="step-4-maximum-inequality-given-n" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-4-maximum-inequality-given-n" class="anchor"></a>Step 4 Maximum Inequality given N</h2>
+<div id="step-4-maximum-inequality-given-n" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-4-maximum-inequality-given-n" class="anchor"></a>Step 4 Maximum Inequality given N</h3>
 <p>Suppose <span class="math inline">\(x_i=0\)</span> for all <span class="math inline">\(i&lt;N\)</span>, then:</p>
 <p><span class="math display">\[
  GINI^{x_i = 0 \text{ except } i=N}
@@ -233,9 +229,9 @@
 \]</span></p>
 </div>
 </div>
-<div id="implement-gini-formula-in-r" class="section level1">
-<h1 class="hasAnchor">
-<a href="#implement-gini-formula-in-r" class="anchor"></a>Implement GINI Formula in R</h1>
+<div id="implement-gini-formula-in-r" class="section level2">
+<h2 class="hasAnchor">
+<a href="#implement-gini-formula-in-r" class="anchor"></a>Implement GINI Formula in R</h2>
 <p>The <strong>GINI</strong> formula just derived is trivial to compute.</p>
 <ol style="list-style-type: decimal">
 <li>scalar: <span class="math inline">\(\frac{2}{N+1}\)</span>
@@ -261,9 +257,9 @@
   <span class="no">fl_gini</span> <span class="kw">&lt;-</span> <span class="fl">1</span> - ((<span class="fl">2</span>/(<span class="no">it_n</span>+<span class="fl">1</span>)) * <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="no">ar_pos</span>))*(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">ar_pos</span>))^(-<span class="fl">1</span>))
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">fl_gini</span>)
 }</pre></body></html></div>
-<div id="testing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#testing" class="anchor"></a>Testing</h2>
+<div id="testing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#testing" class="anchor"></a>Testing</h3>
 <p>Generate a number of examples Arrays for testing</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Example Arrays of data</span>
 <span class="no">ar_equal_n1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>)
@@ -295,58 +291,58 @@
 <span class="no">ar_beta_mostpoor_n1000</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span>(<span class="fl">1000</span>, <span class="fl">1</span>, <span class="fl">5</span>)
 <span class="no">ar_beta_manyrichmanypoor_nomiddle_n1000</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span>(<span class="fl">1000</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</pre></body></html></div>
 <p>Now test the example arrays above using the function based no our formula:</p>
-<pre><code>## 
-## Small N=1 Hard-Code</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_equal_n1): Data vector has n=1, max-
-## inequality/max-gini=0</code></pre>
-<pre><code>## ar_equal_n1: 0</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_n1): Data vector has n=1, max-
-## inequality/max-gini=0</code></pre>
-<pre><code>## ar_ineql_n1: 0</code></pre>
-<pre><code>## 
-## Small N=2 Hard-Code, converge to 1/3, see formula above</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_alittle_n2): Data vector has
-## n=2, max-inequality/max-gini=0.333333333333333</code></pre>
-<pre><code>## ar_ineql_alittle_n2: 0.1111111</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_somewht_n2): Data vector has
-## n=2, max-inequality/max-gini=0.333333333333333</code></pre>
-<pre><code>## ar_ineql_somewht_n2: 0.2592593</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_alotine_n2): Data vector has
-## n=2, max-inequality/max-gini=0.333333333333333</code></pre>
-<pre><code>## ar_ineql_alotine_n2: 0.3131313</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_veryvry_n2): Data vector has
-## n=2, max-inequality/max-gini=0.333333333333333</code></pre>
-<pre><code>## ar_ineql_veryvry_n2: 0.3307393</code></pre>
-<pre><code>## 
-## Small N=10 Hard-Code, convege to 9/11=0.8181, see formula above</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_equal_n10): Data vector has n=10,
-## max-inequality/max-gini=0.818181818181818</code></pre>
-<pre><code>## ar_equal_n10: 0</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_some_n10): Data vector has
-## n=10, max-inequality/max-gini=0.818181818181818</code></pre>
-<pre><code>## ar_ineql_some_n10: 0.5395514</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_very_n10): Data vector has
-## n=10, max-inequality/max-gini=0.818181818181818</code></pre>
-<pre><code>## ar_ineql_very_n10: 0.7059554</code></pre>
-<pre><code>## Warning in fv_dist_gini_vector_pos_test(ar_ineql_extr_n10): Data vector has
-## n=10, max-inequality/max-gini=0.818181818181818</code></pre>
-<pre><code>## ar_ineql_extr_n10: 0.8181549</code></pre>
-<pre><code>## 
-## UNIFORM Distribution</code></pre>
-<pre><code>## ar_unif_n1000: 0.328396</code></pre>
-<pre><code>## 
-## NORMAL Distribution</code></pre>
-<pre><code>## ar_norm_lowsd_n1000: 0.005612292</code></pre>
-<pre><code>## ar_norm_highsd_n1000: 0.1128393</code></pre>
-<pre><code>## 
-## BETA Distribution</code></pre>
-<pre><code>## ar_beta_mostpoor_n1000: 0.4684137</code></pre>
-<pre><code>## ar_beta_manyrichmanypoor_nomiddle_n1000: 0.4133883</code></pre>
-<pre><code>## ar_beta_mostrich_n1000: 0.09200768</code></pre>
-<pre><code>## 
-## 
-## SHOULD/DOES NOT WORK TEST
-##  ar_unif_n1000_NEGATIVE: -24.92909</code></pre>
+<pre><code>#&gt; 
+#&gt; Small N=1 Hard-Code
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_equal_n1): Data vector has n=1, max-
+#&gt; inequality/max-gini=0
+#&gt; ar_equal_n1: 0
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_n1): Data vector has n=1, max-
+#&gt; inequality/max-gini=0
+#&gt; ar_ineql_n1: 0
+#&gt; 
+#&gt; Small N=2 Hard-Code, converge to 1/3, see formula above
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_alittle_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_alittle_n2: 0.1111111
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_somewht_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_somewht_n2: 0.2592593
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_alotine_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_alotine_n2: 0.3131313
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_veryvry_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_veryvry_n2: 0.3307393
+#&gt; 
+#&gt; Small N=10 Hard-Code, convege to 9/11=0.8181, see formula above
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_equal_n10): Data vector has n=10,
+#&gt; max-inequality/max-gini=0.818181818181818
+#&gt; ar_equal_n10: 0
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_some_n10): Data vector has
+#&gt; n=10, max-inequality/max-gini=0.818181818181818
+#&gt; ar_ineql_some_n10: 0.5395514
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_very_n10): Data vector has
+#&gt; n=10, max-inequality/max-gini=0.818181818181818
+#&gt; ar_ineql_very_n10: 0.7059554
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_extr_n10): Data vector has
+#&gt; n=10, max-inequality/max-gini=0.818181818181818
+#&gt; ar_ineql_extr_n10: 0.8181549
+#&gt; 
+#&gt; UNIFORM Distribution
+#&gt; ar_unif_n1000: 0.320432
+#&gt; 
+#&gt; NORMAL Distribution
+#&gt; ar_norm_lowsd_n1000: 0.005724578
+#&gt; ar_norm_highsd_n1000: 0.1087081
+#&gt; 
+#&gt; BETA Distribution
+#&gt; ar_beta_mostpoor_n1000: 0.4615702
+#&gt; ar_beta_manyrichmanypoor_nomiddle_n1000: 0.4032239
+#&gt; ar_beta_mostrich_n1000: 0.08879028
+#&gt; 
+#&gt; 
+#&gt; SHOULD/DOES NOT WORK TEST
+#&gt;  ar_unif_n1000_NEGATIVE: -9.13103</code></pre>
 </div>
 </div>
   </div>
@@ -362,7 +358,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://fanwangecon.github.io/REconTools/">Fan Wang</a>.</p>
+  <p>Developed by Fan Wang.</p>
 </div>
 
 <div class="pkgdown">

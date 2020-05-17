@@ -2,10 +2,6 @@ url: https://fanwangecon.github.io/REconTools
 
 title: "REconTools"
 
-authors:
-  Fan Wang:
-    href: "https://fanwangecon.github.io"
-
 navbar:
   title: "REconTools"
   left:
@@ -67,23 +63,22 @@ reference:
   - starts_with("ff_sup")
 
 articles:
-- title: Summary Statistics Functions
+- title: Summary Statistics Vignettes
   desc: Vignettes for functions that summarize dataframes
   contents:
   - starts_with("fv_summ")
-- title: Panel Data Function
+- title: Panel Data Vignettes
   desc: Vignettes for functions that process dataframes with panel characteristics
   contents:
   - starts_with("fv_panel")
-- title: Distributional Functions
+- title: Distributional Vignettes
   desc: Vignettes for functions that compute distributional related outcomes
   contents:
   - starts_with("fv_dist")
-- title: Optimization Functions
+- title: Optimization Vignettes
   desc: Vignettes for functions that optimize to minimize, maximize, etc.
   contents:
   - starts_with("fv_opti")
-
 
 template:
   bootswatch: spacelab

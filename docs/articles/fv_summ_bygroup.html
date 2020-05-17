@@ -5,14 +5,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SUMM BYGROUP--Summarize Variable by Factor Groups • REconTools</title>
+<title>Summarize Variable by Factor Groups • REconTools</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="SUMM BYGROUP--Summarize Variable by Factor Groups">
-<meta property="og:description" content="REconTools">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Summarize Variable by Factor Groups">
+<meta property="og:description" content="Show percentiles, mean, sd, min, max, first, last, and unique counts across quantitative variables in a dataset.
+">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -109,7 +110,7 @@
       </header><script src="fv_summ_bygroup_files/header-attrs-2.1/header-attrs.js"></script><script src="fv_summ_bygroup_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>SUMM BYGROUP–Summarize Variable by Factor Groups</h1>
+      <h1 data-toc-skip>Summarize Variable by Factor Groups</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/FanWangEcon/REconTools/blob/master/vignettes/fv_summ_bygroup.Rmd"><code>vignettes/fv_summ_bygroup.Rmd</code></a></small>
@@ -119,11 +120,7 @@
 
     
     
-<p>Back to <strong><a href="https://fanwangecon.github.io/">Fan</a></strong>’s REconTools <strong><a href="https://fanwangecon.github.io/REconTools/">Table of Content</a></strong>. Also see <a href="https://fanwangecon.github.io/R4Econ/">R4Econ</a> for R examples and <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> for R introductions.</p>
-<div id="objective" class="section level1">
-<h1 class="hasAnchor">
-<a href="#objective" class="anchor"></a>Objective</h1>
-<p>This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">ff_summ_bygroup</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package.</p>
+<p>Show percentiles, mean, sd, min, max, first, last, and unique counts across quantitative variables in a dataset. This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html">ff_summ_bygroup</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package.</p>
 <p>There is a quantitative variable, summarize this quantitative variable by multiple categorical groups, show a variety of statistics. including:</p>
 <ol style="list-style-type: decimal">
 <li>percentiles</li>
@@ -154,13 +151,12 @@
 <span class="no">ar.perc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.10</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>)
 <span class="no">boo.overall.stats</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span></pre></body></html></div>
 </div>
-</div>
-<div id="by-group-summarizing" class="section level1">
-<h1 class="hasAnchor">
-<a href="#by-group-summarizing" class="anchor"></a>By Group Summarizing</h1>
-<div id="statistics-to-include" class="section level2">
+<div id="by-group-summarizing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#statistics-to-include" class="anchor"></a>Statistics to Include</h2>
+<a href="#by-group-summarizing" class="anchor"></a>By Group Summarizing</h2>
+<div id="statistics-to-include" class="section level3">
+<h3 class="hasAnchor">
+<a href="#statistics-to-include" class="anchor"></a>Statistics to Include</h3>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># List of statistics</span>
 <span class="co"># https://rdrr.io/cran/dplyr/man/summarise.html</span>
 <span class="no">strs.center</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'mean'</span>, <span class="st">'median'</span>)
@@ -182,10 +178,11 @@
     <span class="no">strs.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">strs.center</span>, <span class="no">strs.spread</span>, <span class="no">funs_percentiles</span>, <span class="no">strs.range</span>, <span class="no">strs.pos</span>, <span class="no">strs.count</span>)
 }</pre></body></html></div>
 </div>
-<div id="overall-statistics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overall-statistics" class="anchor"></a>Overall Statistics</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Start Transform</span>
+<div id="overall-statistics" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overall-statistics" class="anchor"></a>Overall Statistics</h3>
+<div class="sourceCode" id="cb4"><html><body><pre class="r">
+<span class="co"># Start Transform</span>
 <span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">var.numeric</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">var.numeric</span>)))
 
 <span class="co"># Overall Statistics</span>
@@ -196,24 +193,25 @@
         <span class="no">df.overall.stats</span> <span class="kw">&lt;-</span> <span class="no">df.overall.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">var.numeric</span>))
     }
     <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.overall.stats</span>))
-}</pre></body></html></div>
-<pre><code>## Note: Using an external vector in selections is ambiguous.
-## i Use `all_of(var.numeric)` instead of `var.numeric` to silence this message.
-## i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
-## This message is displayed once per session.</code></pre>
-<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
-## Please use a list of either functions or lambdas: 
-## 
-##   # Simple named list: 
-##   list(mean = mean, median = median)
-## 
-##   # Auto named with `tibble::lst()`: 
-##   tibble::lst(mean, median)
-## 
-##   # Using lambdas
-##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-## This warning is displayed once per session.</code></pre>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Display Results</span>
+}
+<span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
+<span class="co">#&gt; i Use `all_of(var.numeric)` instead of `var.numeric` to silence this message.</span>
+<span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
+<span class="co">#&gt; This message is displayed once per session.</span>
+<span class="co">#&gt; Warning: funs() is soft deprecated as of dplyr 0.8.0</span>
+<span class="co">#&gt; Please use a list of either functions or lambdas: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Simple named list: </span>
+<span class="co">#&gt;   list(mean = mean, median = median)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Auto named with `tibble::lst()`: </span>
+<span class="co">#&gt;   tibble::lst(mean, median)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Using lambdas</span>
+<span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
+
+<span class="co"># Display Results</span>
 <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
@@ -313,10 +311,11 @@ mpg.n_distinct
 </tr></tbody>
 </table>
 </div>
-<div id="summarizing-by-groups" class="section level2">
-<h2 class="hasAnchor">
-<a href="#summarizing-by-groups" class="anchor"></a>Summarizing by Groups</h2>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># Group Sort</span>
+<div id="summarizing-by-groups" class="section level3">
+<h3 class="hasAnchor">
+<a href="#summarizing-by-groups" class="anchor"></a>Summarizing by Groups</h3>
+<div class="sourceCode" id="cb5"><html><body><pre class="r">
+<span class="co"># Group Sort</span>
 <span class="no">df.select</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span>
               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">vars.group</span>, <span class="no">var.numeric</span>)))
@@ -598,7 +597,8 @@ n_distinct
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Add Stat Name</span>
+<div class="sourceCode" id="cb6"><html><body><pre class="r">
+<span class="co"># Add Stat Name</span>
 <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">strs.all</span>) <span class="kw">==</span> <span class="fl">1</span>) {
     <span class="co"># give it a name, otherwise if only one stat, name of stat not saved</span>
     <span class="no">df.table.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">var.numeric</span>))
@@ -877,10 +877,11 @@ n_distinct
 </tbody>
 </table>
 </div>
-<div id="statistics-as-row" class="section level2">
-<h2 class="hasAnchor">
-<a href="#statistics-as-row" class="anchor"></a>Statistics as Row</h2>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Row of Statistics</span>
+<div id="statistics-as-row" class="section level3">
+<h3 class="hasAnchor">
+<a href="#statistics-as-row" class="anchor"></a>Statistics as Row</h3>
+<div class="sourceCode" id="cb7"><html><body><pre class="r">
+<span class="co"># Row of Statistics</span>
 <span class="no">str.vars.group.combine</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">vars.group</span>, <span class="kw">collapse</span><span class="kw">=</span><span class="st">'_'</span>)
 <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">vars.group</span>) <span class="kw">==</span> <span class="fl">1</span>) {
     <span class="no">df.row.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span>
@@ -901,12 +902,13 @@ n_distinct
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">variable</span>, <span class="no">value</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">str.vars.group.combine</span>))  <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span>(<span class="no">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">str.vars.group.combine</span>, <span class="st">'variable'</span>)) <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="no">str.vars.group.combine</span>, <span class="no">value</span>)
-}</pre></body></html></div>
-<pre><code>## Note: Using an external vector in selections is ambiguous.
-## i Use `all_of(str.vars.group.combine)` instead of `str.vars.group.combine` to silence this message.
-## i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
-## This message is displayed once per session.</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Display Results</span>
+}
+<span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
+<span class="co">#&gt; i Use `all_of(str.vars.group.combine)` instead of `str.vars.group.combine` to silence this message.</span>
+<span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
+<span class="co">#&gt; This message is displayed once per session.</span>
+
+<span class="co"># Display Results</span>
 <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
@@ -1276,10 +1278,11 @@ mpg.am.vs.1.1_sd
 </tr></tbody>
 </table>
 </div>
-<div id="process-outputs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#process-outputs" class="anchor"></a>Process Outputs</h2>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># Clean up name strings</span>
+<div id="process-outputs" class="section level3">
+<h3 class="hasAnchor">
+<a href="#process-outputs" class="anchor"></a>Process Outputs</h3>
+<div class="sourceCode" id="cb8"><html><body><pre class="r">
+<span class="co"># Clean up name strings</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.table.grp.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.table.grp.stats</span>),<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"_"</span>, <span class="kw">replacement</span> <span class="kw">=</span> <span class="st">"\\."</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.row.grp.stats</span>),<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"_"</span>, <span class="kw">replacement</span> <span class="kw">=</span> <span class="st">"\\."</span>)
 
@@ -1565,7 +1568,7 @@ n.distinct
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
@@ -1933,7 +1936,7 @@ mpg.am.vs.1.1.sd
 </td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
@@ -2046,7 +2049,7 @@ mpg.n_distinct
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://fanwangecon.github.io/REconTools/">Fan Wang</a>.</p>
+  <p>Developed by Fan Wang.</p>
 </div>
 
 <div class="pkgdown">

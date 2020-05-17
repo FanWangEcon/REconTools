@@ -5,14 +5,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing • REconTools</title>
+<title>Solve Roots for N (Rows) Strictly Monotonic Functions • REconTools</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing">
-<meta property="og:description" content="REconTools">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Solve Roots for N (Rows) Strictly Monotonic Functions">
+<meta property="og:description" content="Solve for roots for the same function across N sets of parameter values.
+">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -109,7 +110,7 @@
       </header><script src="fv_opti_bisect_pmap_multi_files/header-attrs-2.1/header-attrs.js"></script><script src="fv_opti_bisect_pmap_multi_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>OPTI BISECT–Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing</h1>
+      <h1 data-toc-skip>Solve Roots for N (Rows) Strictly Monotonic Functions</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/FanWangEcon/REconTools/blob/master/vignettes/fv_opti_bisect_pmap_multi.Rmd"><code>vignettes/fv_opti_bisect_pmap_multi.Rmd</code></a></small>
@@ -119,11 +120,7 @@
 
     
     
-<p>Back to <strong><a href="https://fanwangecon.github.io/">Fan</a></strong>’s REconTools <strong><a href="https://fanwangecon.github.io/REconTools/">Table of Content</a></strong>. Also see <a href="https://fanwangecon.github.io/R4Econ/">R4Econ</a> for R examples and <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> for R introductions.</p>
-<div id="objective" class="section level1">
-<h1 class="hasAnchor">
-<a href="#objective" class="anchor"></a>Objective</h1>
-<p>This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html">ff_opti_bisect_pmap_multi</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package. Also see a closely related file from <a href="https://fanwangecon.github.io/R4Econ/">R4Econ</a>, <a href="https://fanwangecon.github.io/R4Econ/optimization/root_bisect/fs_func_graph_eval.html">DPLYR Bisection</a>, which works out in greater detail the bisection algorithm.</p>
+<p>Solve for roots for the same function across N sets of parameter values. This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html">ff_opti_bisect_pmap_multi</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package. Also see a closely related file from <a href="https://fanwangecon.github.io/R4Econ/">R4Econ</a>, <a href="https://fanwangecon.github.io/R4Econ/optimization/root_bisect/fs_func_graph_eval.html">DPLYR Bisection</a>, which works out in greater detail the bisection algorithm.</p>
 <p>We want solve for function <span class="math inline">\(0=f(z_{ij}, x_i, y_i, \textbf{X}, \textbf{Y}, c, d)\)</span>. There are <span class="math inline">\(i\)</span> functions that have <span class="math inline">\(i\)</span> specific <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. For each <span class="math inline">\(i\)</span> function, we evaluate along a grid of feasible values for <span class="math inline">\(z\)</span>, over <span class="math inline">\(j\in J\)</span> grid points, potentially looking for the <span class="math inline">\(j\)</span> that is closest to the root. <span class="math inline">\(j\)</span> could be interpreted as iterations. <span class="math inline">\(\textbf{X}\)</span> and <span class="math inline">\(\textbf{Y}\)</span> are arrays common across the <span class="math inline">\(i\)</span> equations, and <span class="math inline">\(c\)</span> and <span class="math inline">\(d\)</span> are constants.</p>
 <p>As we iterate over <span class="math inline">\(j\)</span>, find the <span class="math inline">\(z_{ij}\)</span> that is <span class="math inline">\(i\)</span> specific that allows for <span class="math inline">\(f_{i}(z_{ij})=0\)</span>.</p>
 <p>In the code below, we develop the bisection code line by line, then we write it as a function using pmap. At the end, we test the concurrent bisection code over tibble dataframe with a set of straight lines (negative intercepts and positive slopes), and the log-linear solution for optimal allocation function from <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/PrjOptiAlloc/">PrjOptiAlloc</a> Project.</p>
@@ -143,7 +140,6 @@
 <li>variables that change each row and each iteration, the root we are looking for.</li>
 <li>scalar and array values that are applied to every row and persist across iterations.</li>
 </ol>
-</div>
 </div>
 <div id="set-up-for-implementation" class="section level1">
 <h1 class="hasAnchor">
@@ -204,15 +200,15 @@
 <span class="no">tb_states_choices</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_all</a></span>(~<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">ar_st_col_names</span>))
 
 <span class="co"># display</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices</span>)</pre></body></html></div>
-<pre><code>##     INDI_ID       fl_A       fl_alpha  
-##  Min.   :1   Min.   :-2   Min.   :0.1  
-##  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3  
-##  Median :5   Median : 0   Median :0.5  
-##  Mean   :5   Mean   : 0   Mean   :0.5  
-##  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7  
-##  Max.   :9   Max.   : 2   Max.   :0.9</code></pre>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="no">tb_states_choices</span>) <span class="kw">%&gt;%</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices</span>)
+<span class="co">#&gt;     INDI_ID       fl_A       fl_alpha  </span>
+<span class="co">#&gt;  Min.   :1   Min.   :-2   Min.   :0.1  </span>
+<span class="co">#&gt;  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3  </span>
+<span class="co">#&gt;  Median :5   Median : 0   Median :0.5  </span>
+<span class="co">#&gt;  Mean   :5   Mean   : 0   Mean   :0.5  </span>
+<span class="co">#&gt;  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7  </span>
+<span class="co">#&gt;  Max.   :9   Max.   : 2   Max.   :0.9</span>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="no">tb_states_choices</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
@@ -333,7 +329,7 @@ fl_alpha
 <h2 class="hasAnchor">
 <a href="#create-nonlinear-root-function" class="anchor"></a>Create Nonlinear Root Function</h2>
 <p>These is a test functions over which we will searh for roots.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Define Implicit Function</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Define Implicit Function</span>
 <span class="no">ffi_nonlin_dplyrdo</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, <span class="no">fl_N</span>, <span class="no">ar_A</span>, <span class="no">ar_alpha</span>, <span class="no">fl_N_agg</span>, <span class="no">fl_rho</span>){
   <span class="co"># scalar value that are row-specific, in dataframe already: *fl_A*, *fl_alpha*, *fl_N*</span>
   <span class="co"># array and scalars not in dataframe, common all rows: *ar_A*, *ar_alpha*, *fl_N_agg*, *fl_rho*</span>
@@ -366,7 +362,8 @@ fl_alpha
 <h2 class="hasAnchor">
 <a href="#initialize-matrix" class="anchor"></a>Initialize Matrix</h2>
 <p>First, initialize the matrix with <span class="math inline">\(a_0\)</span> and <span class="math inline">\(b_0\)</span>, the initial min and max points:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># common prefix to make reshaping easier</span>
+<div class="sourceCode" id="cb4"><html><body><pre class="r">
+<span class="co"># common prefix to make reshaping easier</span>
 <span class="no">st_bisec_prefix</span> <span class="kw">&lt;-</span> <span class="st">'bisec_'</span>
 <span class="no">svr_a_lst</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">st_bisec_prefix</span>, <span class="st">'a_0'</span>)
 <span class="no">svr_b_lst</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">st_bisec_prefix</span>, <span class="st">'b_0'</span>)
@@ -386,29 +383,30 @@ fl_alpha
                                                                           <span class="no">ar_nN_A</span>, <span class="no">ar_nN_alpha</span>,
                                                                           <span class="no">fl_N_agg</span>, <span class="no">fl_rho</span>))
 <span class="co"># Summarize</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">tb_states_choices_bisec</span>)</pre></body></html></div>
-<pre><code>## [1] 9 7</code></pre>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec</span>)</pre></body></html></div>
-<pre><code>##     INDI_ID       fl_A       fl_alpha     bisec_a_0   bisec_b_0     bisec_fa_0 
-##  Min.   :1   Min.   :-2   Min.   :0.1   Min.   :0   Min.   :100   Min.   :100  
-##  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3   1st Qu.:0   1st Qu.:100   1st Qu.:100  
-##  Median :5   Median : 0   Median :0.5   Median :0   Median :100   Median :100  
-##  Mean   :5   Mean   : 0   Mean   :0.5   Mean   :0   Mean   :100   Mean   :100  
-##  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7   3rd Qu.:0   3rd Qu.:100   3rd Qu.:100  
-##  Max.   :9   Max.   : 2   Max.   :0.9   Max.   :0   Max.   :100   Max.   :100  
-##    bisec_fb_0      
-##  Min.   :-24328.4  
-##  1st Qu.: -4157.8  
-##  Median : -1386.7  
-##  Mean   : -4737.0  
-##  3rd Qu.:  -538.0  
-##  Max.   :  -202.9</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">tb_states_choices_bisec</span>)
+<span class="co">#&gt; [1] 9 7</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec</span>)
+<span class="co">#&gt;     INDI_ID       fl_A       fl_alpha     bisec_a_0   bisec_b_0     bisec_fa_0 </span>
+<span class="co">#&gt;  Min.   :1   Min.   :-2   Min.   :0.1   Min.   :0   Min.   :100   Min.   :100  </span>
+<span class="co">#&gt;  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3   1st Qu.:0   1st Qu.:100   1st Qu.:100  </span>
+<span class="co">#&gt;  Median :5   Median : 0   Median :0.5   Median :0   Median :100   Median :100  </span>
+<span class="co">#&gt;  Mean   :5   Mean   : 0   Mean   :0.5   Mean   :0   Mean   :100   Mean   :100  </span>
+<span class="co">#&gt;  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7   3rd Qu.:0   3rd Qu.:100   3rd Qu.:100  </span>
+<span class="co">#&gt;  Max.   :9   Max.   : 2   Max.   :0.9   Max.   :0   Max.   :100   Max.   :100  </span>
+<span class="co">#&gt;    bisec_fb_0      </span>
+<span class="co">#&gt;  Min.   :-24328.4  </span>
+<span class="co">#&gt;  1st Qu.: -4157.8  </span>
+<span class="co">#&gt;  Median : -1386.7  </span>
+<span class="co">#&gt;  Mean   : -4737.0  </span>
+<span class="co">#&gt;  3rd Qu.:  -538.0  </span>
+<span class="co">#&gt;  Max.   :  -202.9</span></pre></body></html></div>
 </div>
 <div id="iterate-and-solve-for-fp-update-fa-and-fb" class="section level2">
 <h2 class="hasAnchor">
 <a href="#iterate-and-solve-for-fp-update-fa-and-fb" class="anchor"></a>Iterate and Solve for f(p), update f(a) and f(b)</h2>
 <p>Implement the DPLYR based Concurrent bisection algorithm.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># fl_tol = float tolerance criteria</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r">
+<span class="co"># fl_tol = float tolerance criteria</span>
 <span class="co"># it_tol = number of interations to allow at most</span>
 <span class="no">fl_tol</span> <span class="kw">&lt;-</span> <span class="fl">10</span>^-<span class="fl">2</span>
 <span class="no">it_tol</span> <span class="kw">&lt;-</span> <span class="fl">100</span>
@@ -464,32 +462,32 @@ fl_alpha
   <span class="co"># Summar current round</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'it_cur:'</span>, <span class="no">it_cur</span>, <span class="st">', fl_p_dist2zr:'</span>, <span class="no">fl_p_dist2zr</span>))
   <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">svr_a_cur</span>, <span class="no">svr_b_cur</span>, <span class="no">svr_fa_cur</span>, <span class="no">svr_fb_cur</span>)))
-}</pre></body></html></div>
-<pre><code>## [1] "it_cur:1, fl_p_dist2zr:2110.89580734824"
-## [1] "it_cur:2, fl_p_dist2zr:916.745756204857"
-## [1] "it_cur:3, fl_p_dist2zr:387.351245210125"
-## [1] "it_cur:4, fl_p_dist2zr:155.209641366984"
-## [1] "it_cur:5, fl_p_dist2zr:58.1570911334532"
-## [1] "it_cur:6, fl_p_dist2zr:22.2118416173139"
-## [1] "it_cur:7, fl_p_dist2zr:8.74989971240847"
-## [1] "it_cur:8, fl_p_dist2zr:7.15872428611325"
-## [1] "it_cur:9, fl_p_dist2zr:3.58472422897695"
-## [1] "it_cur:10, fl_p_dist2zr:1.50543493747611"
-## [1] "it_cur:11, fl_p_dist2zr:0.527052368572328"
-## [1] "it_cur:12, fl_p_dist2zr:0.360171292121815"
-## [1] "it_cur:13, fl_p_dist2zr:0.0545239655746409"
-## [1] "it_cur:14, fl_p_dist2zr:0.152964071033218"
-## [1] "it_cur:15, fl_p_dist2zr:0.0593547942434943"
-## [1] "it_cur:16, fl_p_dist2zr:0.030716694397913"
-## [1] "it_cur:17, fl_p_dist2zr:0.0177772298500779"
-## [1] "it_cur:18, fl_p_dist2zr:0.00644396015251105"</code></pre>
+}
+<span class="co">#&gt; [1] "it_cur:1, fl_p_dist2zr:2110.89580734824"</span>
+<span class="co">#&gt; [1] "it_cur:2, fl_p_dist2zr:916.745756204857"</span>
+<span class="co">#&gt; [1] "it_cur:3, fl_p_dist2zr:387.351245210125"</span>
+<span class="co">#&gt; [1] "it_cur:4, fl_p_dist2zr:155.209641366984"</span>
+<span class="co">#&gt; [1] "it_cur:5, fl_p_dist2zr:58.1570911334532"</span>
+<span class="co">#&gt; [1] "it_cur:6, fl_p_dist2zr:22.2118416173139"</span>
+<span class="co">#&gt; [1] "it_cur:7, fl_p_dist2zr:8.74989971240847"</span>
+<span class="co">#&gt; [1] "it_cur:8, fl_p_dist2zr:7.15872428611325"</span>
+<span class="co">#&gt; [1] "it_cur:9, fl_p_dist2zr:3.58472422897695"</span>
+<span class="co">#&gt; [1] "it_cur:10, fl_p_dist2zr:1.50543493747611"</span>
+<span class="co">#&gt; [1] "it_cur:11, fl_p_dist2zr:0.527052368572328"</span>
+<span class="co">#&gt; [1] "it_cur:12, fl_p_dist2zr:0.360171292121815"</span>
+<span class="co">#&gt; [1] "it_cur:13, fl_p_dist2zr:0.0545239655746409"</span>
+<span class="co">#&gt; [1] "it_cur:14, fl_p_dist2zr:0.152964071033218"</span>
+<span class="co">#&gt; [1] "it_cur:15, fl_p_dist2zr:0.0593547942434943"</span>
+<span class="co">#&gt; [1] "it_cur:16, fl_p_dist2zr:0.030716694397913"</span>
+<span class="co">#&gt; [1] "it_cur:17, fl_p_dist2zr:0.0177772298500779"</span>
+<span class="co">#&gt; [1] "it_cur:18, fl_p_dist2zr:0.00644396015251105"</span></pre></body></html></div>
 </div>
 <div id="reshape-wide-to-long-to-wide" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reshape-wide-to-long-to-wide" class="anchor"></a>Reshape Wide to long to Wide</h2>
 <p>To view results easily, how iterations improved to help us find the roots, convert table from wide to long. Pivot twice. This allows us to easily graph out how bisection is working out iterationby iteration.</p>
 <p>Here, we will first show what the raw table looks like, the wide only table, and then show the long version, and finally the version that is medium wide.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># New variables</span>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># New variables</span>
 <span class="no">svr_bisect_iter</span> <span class="kw">&lt;-</span> <span class="st">'biseciter'</span>
 <span class="no">svr_abfafb_long_name</span> <span class="kw">&lt;-</span> <span class="st">'varname'</span>
 <span class="no">svr_number_col</span> <span class="kw">&lt;-</span> <span class="st">'value'</span>
@@ -505,127 +503,129 @@ fl_alpha
   )
 
 <span class="co"># Print</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec_long</span>)</pre></body></html></div>
-<pre><code>##     INDI_ID       fl_A       fl_alpha         p                f_p            
-##  Min.   :1   Min.   :-2   Min.   :0.1   Min.   : 0.8427   Min.   :-1.874e-02  
-##  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3   1st Qu.: 3.3298   1st Qu.:-2.887e-03  
-##  Median :5   Median : 0   Median :0.5   Median : 7.7381   Median : 1.987e-05  
-##  Mean   :5   Mean   : 0   Mean   :0.5   Mean   :11.1111   Mean   :-2.921e-04  
-##  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7   3rd Qu.:15.8810   3rd Qu.: 2.626e-03  
-##  Max.   :9   Max.   : 2   Max.   :0.9   Max.   :31.5121   Max.   : 2.000e-02  
-##    f_p_t_f_a            varname           biseciter        
-##  Min.   :-6.210e-04   Length:684         Length:684        
-##  1st Qu.:-6.641e-06   Class :character   Class :character  
-##  Median : 2.350e-08   Mode  :character   Mode  :character  
-##  Mean   : 2.613e-05                                        
-##  3rd Qu.: 2.393e-05                                        
-##  Max.   : 8.464e-04                                        
-##      value           
-##  Min.   :-24328.416  
-##  1st Qu.:     0.000  
-##  Median :     1.917  
-##  Mean   :   -97.563  
-##  3rd Qu.:    15.674  
-##  Max.   :   100.000</code></pre>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 30 x 6
-##    INDI_ID  fl_A fl_alpha varname biseciter   value
-##      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;
-##  1       1    -2      0.1 a       0              0 
-##  2       1    -2      0.1 b       0            100 
-##  3       1    -2      0.1 fa      0            100 
-##  4       1    -2      0.1 fb      0         -24328.
-##  5       1    -2      0.1 a       1              0 
-##  6       1    -2      0.1 b       1             50 
-##  7       1    -2      0.1 fa      1            100 
-##  8       1    -2      0.1 fb      1         -10867.
-##  9       1    -2      0.1 a       2              0 
-## 10       1    -2      0.1 b       2             25 
-## # ... with 20 more rows</code></pre>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 30 x 6
-##    INDI_ID  fl_A fl_alpha varname biseciter   value
-##      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;
-##  1       9     2      0.9 fa      11         0.0546
-##  2       9     2      0.9 fb      11        -0.0940
-##  3       9     2      0.9 a       12        31.5   
-##  4       9     2      0.9 b       12        31.5   
-##  5       9     2      0.9 fa      12         0.0546
-##  6       9     2      0.9 fb      12        -0.0197
-##  7       9     2      0.9 a       13        31.5   
-##  8       9     2      0.9 b       13        31.5   
-##  9       9     2      0.9 fa      13         0.0174
-## 10       9     2      0.9 fb      13        -0.0197
-## # ... with 20 more rows</code></pre>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="co"># Pivot wide to very long to a little wide</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec_long</span>)
+<span class="co">#&gt;     INDI_ID       fl_A       fl_alpha         p                f_p            </span>
+<span class="co">#&gt;  Min.   :1   Min.   :-2   Min.   :0.1   Min.   : 0.8427   Min.   :-1.874e-02  </span>
+<span class="co">#&gt;  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3   1st Qu.: 3.3298   1st Qu.:-2.887e-03  </span>
+<span class="co">#&gt;  Median :5   Median : 0   Median :0.5   Median : 7.7381   Median : 1.987e-05  </span>
+<span class="co">#&gt;  Mean   :5   Mean   : 0   Mean   :0.5   Mean   :11.1111   Mean   :-2.921e-04  </span>
+<span class="co">#&gt;  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7   3rd Qu.:15.8810   3rd Qu.: 2.626e-03  </span>
+<span class="co">#&gt;  Max.   :9   Max.   : 2   Max.   :0.9   Max.   :31.5121   Max.   : 2.000e-02  </span>
+<span class="co">#&gt;    f_p_t_f_a            varname           biseciter        </span>
+<span class="co">#&gt;  Min.   :-6.210e-04   Length:684         Length:684        </span>
+<span class="co">#&gt;  1st Qu.:-6.641e-06   Class :character   Class :character  </span>
+<span class="co">#&gt;  Median : 2.350e-08   Mode  :character   Mode  :character  </span>
+<span class="co">#&gt;  Mean   : 2.613e-05                                        </span>
+<span class="co">#&gt;  3rd Qu.: 2.393e-05                                        </span>
+<span class="co">#&gt;  Max.   : 8.464e-04                                        </span>
+<span class="co">#&gt;      value           </span>
+<span class="co">#&gt;  Min.   :-24328.416  </span>
+<span class="co">#&gt;  1st Qu.:     0.000  </span>
+<span class="co">#&gt;  Median :     1.917  </span>
+<span class="co">#&gt;  Mean   :   -97.563  </span>
+<span class="co">#&gt;  3rd Qu.:    15.674  </span>
+<span class="co">#&gt;  Max.   :   100.000</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)
+<span class="co">#&gt; # A tibble: 30 x 6</span>
+<span class="co">#&gt;    INDI_ID  fl_A fl_alpha varname biseciter   value</span>
+<span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       1    -2      0.1 a       0              0 </span>
+<span class="co">#&gt;  2       1    -2      0.1 b       0            100 </span>
+<span class="co">#&gt;  3       1    -2      0.1 fa      0            100 </span>
+<span class="co">#&gt;  4       1    -2      0.1 fb      0         -24328.</span>
+<span class="co">#&gt;  5       1    -2      0.1 a       1              0 </span>
+<span class="co">#&gt;  6       1    -2      0.1 b       1             50 </span>
+<span class="co">#&gt;  7       1    -2      0.1 fa      1            100 </span>
+<span class="co">#&gt;  8       1    -2      0.1 fb      1         -10867.</span>
+<span class="co">#&gt;  9       1    -2      0.1 a       2              0 </span>
+<span class="co">#&gt; 10       1    -2      0.1 b       2             25 </span>
+<span class="co">#&gt; # ... with 20 more rows</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)
+<span class="co">#&gt; # A tibble: 30 x 6</span>
+<span class="co">#&gt;    INDI_ID  fl_A fl_alpha varname biseciter   value</span>
+<span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       9     2      0.9 fa      11         0.0546</span>
+<span class="co">#&gt;  2       9     2      0.9 fb      11        -0.0940</span>
+<span class="co">#&gt;  3       9     2      0.9 a       12        31.5   </span>
+<span class="co">#&gt;  4       9     2      0.9 b       12        31.5   </span>
+<span class="co">#&gt;  5       9     2      0.9 fa      12         0.0546</span>
+<span class="co">#&gt;  6       9     2      0.9 fb      12        -0.0197</span>
+<span class="co">#&gt;  7       9     2      0.9 a       13        31.5   </span>
+<span class="co">#&gt;  8       9     2      0.9 b       13        31.5   </span>
+<span class="co">#&gt;  9       9     2      0.9 fa      13         0.0174</span>
+<span class="co">#&gt; 10       9     2      0.9 fb      13        -0.0197</span>
+<span class="co">#&gt; # ... with 20 more rows</span>
+
+<span class="co"># Pivot wide to very long to a little wide</span>
 <span class="no">tb_states_choices_bisec_wider</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
     <span class="kw">names_from</span> <span class="kw">=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
     <span class="kw">values_from</span> <span class="kw">=</span> <span class="no">svr_number_col</span>
-  )</pre></body></html></div>
-<pre><code>## Note: Using an external vector in selections is ambiguous.
-## i Use `all_of(svr_number_col)` instead of `svr_number_col` to silence this message.
-## i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
-## This message is displayed once per session.</code></pre>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># Print</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec_wider</span>)</pre></body></html></div>
-<pre><code>##     INDI_ID       fl_A       fl_alpha         p                f_p            
-##  Min.   :1   Min.   :-2   Min.   :0.1   Min.   : 0.8427   Min.   :-1.874e-02  
-##  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3   1st Qu.: 3.3298   1st Qu.:-2.887e-03  
-##  Median :5   Median : 0   Median :0.5   Median : 7.7381   Median : 1.987e-05  
-##  Mean   :5   Mean   : 0   Mean   :0.5   Mean   :11.1111   Mean   :-2.921e-04  
-##  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7   3rd Qu.:15.8810   3rd Qu.: 2.626e-03  
-##  Max.   :9   Max.   : 2   Max.   :0.9   Max.   :31.5121   Max.   : 2.000e-02  
-##    f_p_t_f_a           biseciter               a                 b           
-##  Min.   :-6.210e-04   Length:171         Min.   : 0.0000   Min.   :  0.8427  
-##  1st Qu.:-6.641e-06   Class :character   1st Qu.: 0.8057   1st Qu.:  5.2093  
-##  Median : 2.350e-08   Mode  :character   Median : 5.2002   Median : 11.7188  
-##  Mean   : 2.613e-05                      Mean   : 8.9430   Mean   : 19.4693  
-##  3rd Qu.: 2.393e-05                      3rd Qu.:15.6250   3rd Qu.: 25.0000  
-##  Max.   : 8.464e-04                      Max.   :31.5121   Max.   :100.0000  
-##        fa                  fb            
-##  Min.   :  0.00002   Min.   :-24328.416  
-##  1st Qu.:  0.04899   1st Qu.:   -45.805  
-##  Median :  0.79745   Median :    -1.329  
-##  Mean   : 25.85998   Mean   :  -444.523  
-##  3rd Qu.: 21.38681   3rd Qu.:    -0.064  
-##  Max.   :100.00000   Max.   :     0.000</code></pre>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tb_states_choices_bisec_wider</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 30 x 8
-##    INDI_ID  fl_A fl_alpha biseciter     a       b     fa       fb
-##      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1       1    -2      0.1 0         0     100     100    -24328. 
-##  2       1    -2      0.1 1         0      50     100    -10867. 
-##  3       1    -2      0.1 2         0      25     100     -4828. 
-##  4       1    -2      0.1 3         0      12.5   100     -2117. 
-##  5       1    -2      0.1 4         0       6.25  100      -898. 
-##  6       1    -2      0.1 5         0       3.12  100      -350. 
-##  7       1    -2      0.1 6         0       1.56  100      -103. 
-##  8       1    -2      0.1 7         0.781   1.56    8.29   -103. 
-##  9       1    -2      0.1 8         0.781   1.17    8.29    -46.0
-## 10       1    -2      0.1 9         0.781   0.977   8.29    -18.4
-## # ... with 20 more rows</code></pre>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">tb_states_choices_bisec_wider</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 30 x 8
-##    INDI_ID  fl_A fl_alpha biseciter     a     b      fa         fb
-##      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
-##  1       8   1.5      0.8 8          22.3  22.7 0.579   -1.13     
-##  2       8   1.5      0.8 9          22.3  22.5 0.579   -0.278    
-##  3       8   1.5      0.8 10         22.4  22.5 0.150   -0.278    
-##  4       8   1.5      0.8 11         22.4  22.4 0.150   -0.0636   
-##  5       8   1.5      0.8 12         22.4  22.4 0.0434  -0.0636   
-##  6       8   1.5      0.8 13         22.4  22.4 0.0434  -0.0101   
-##  7       8   1.5      0.8 14         22.4  22.4 0.0167  -0.0101   
-##  8       8   1.5      0.8 15         22.4  22.4 0.00327 -0.0101   
-##  9       8   1.5      0.8 16         22.4  22.4 0.00327 -0.00342  
-## 10       8   1.5      0.8 17         22.4  22.4 0.00327 -0.0000761
-## # ... with 20 more rows</code></pre>
+  )
+<span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
+<span class="co">#&gt; i Use `all_of(svr_number_col)` instead of `svr_number_col` to silence this message.</span>
+<span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
+<span class="co">#&gt; This message is displayed once per session.</span>
+
+<span class="co"># Print</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">tb_states_choices_bisec_wider</span>)
+<span class="co">#&gt;     INDI_ID       fl_A       fl_alpha         p                f_p            </span>
+<span class="co">#&gt;  Min.   :1   Min.   :-2   Min.   :0.1   Min.   : 0.8427   Min.   :-1.874e-02  </span>
+<span class="co">#&gt;  1st Qu.:3   1st Qu.:-1   1st Qu.:0.3   1st Qu.: 3.3298   1st Qu.:-2.887e-03  </span>
+<span class="co">#&gt;  Median :5   Median : 0   Median :0.5   Median : 7.7381   Median : 1.987e-05  </span>
+<span class="co">#&gt;  Mean   :5   Mean   : 0   Mean   :0.5   Mean   :11.1111   Mean   :-2.921e-04  </span>
+<span class="co">#&gt;  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7   3rd Qu.:15.8810   3rd Qu.: 2.626e-03  </span>
+<span class="co">#&gt;  Max.   :9   Max.   : 2   Max.   :0.9   Max.   :31.5121   Max.   : 2.000e-02  </span>
+<span class="co">#&gt;    f_p_t_f_a           biseciter               a                 b           </span>
+<span class="co">#&gt;  Min.   :-6.210e-04   Length:171         Min.   : 0.0000   Min.   :  0.8427  </span>
+<span class="co">#&gt;  1st Qu.:-6.641e-06   Class :character   1st Qu.: 0.8057   1st Qu.:  5.2093  </span>
+<span class="co">#&gt;  Median : 2.350e-08   Mode  :character   Median : 5.2002   Median : 11.7188  </span>
+<span class="co">#&gt;  Mean   : 2.613e-05                      Mean   : 8.9430   Mean   : 19.4693  </span>
+<span class="co">#&gt;  3rd Qu.: 2.393e-05                      3rd Qu.:15.6250   3rd Qu.: 25.0000  </span>
+<span class="co">#&gt;  Max.   : 8.464e-04                      Max.   :31.5121   Max.   :100.0000  </span>
+<span class="co">#&gt;        fa                  fb            </span>
+<span class="co">#&gt;  Min.   :  0.00002   Min.   :-24328.416  </span>
+<span class="co">#&gt;  1st Qu.:  0.04899   1st Qu.:   -45.805  </span>
+<span class="co">#&gt;  Median :  0.79745   Median :    -1.329  </span>
+<span class="co">#&gt;  Mean   : 25.85998   Mean   :  -444.523  </span>
+<span class="co">#&gt;  3rd Qu.: 21.38681   3rd Qu.:    -0.064  </span>
+<span class="co">#&gt;  Max.   :100.00000   Max.   :     0.000</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tb_states_choices_bisec_wider</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)
+<span class="co">#&gt; # A tibble: 30 x 8</span>
+<span class="co">#&gt;    INDI_ID  fl_A fl_alpha biseciter     a       b     fa       fb</span>
+<span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       1    -2      0.1 0         0     100     100    -24328. </span>
+<span class="co">#&gt;  2       1    -2      0.1 1         0      50     100    -10867. </span>
+<span class="co">#&gt;  3       1    -2      0.1 2         0      25     100     -4828. </span>
+<span class="co">#&gt;  4       1    -2      0.1 3         0      12.5   100     -2117. </span>
+<span class="co">#&gt;  5       1    -2      0.1 4         0       6.25  100      -898. </span>
+<span class="co">#&gt;  6       1    -2      0.1 5         0       3.12  100      -350. </span>
+<span class="co">#&gt;  7       1    -2      0.1 6         0       1.56  100      -103. </span>
+<span class="co">#&gt;  8       1    -2      0.1 7         0.781   1.56    8.29   -103. </span>
+<span class="co">#&gt;  9       1    -2      0.1 8         0.781   1.17    8.29    -46.0</span>
+<span class="co">#&gt; 10       1    -2      0.1 9         0.781   0.977   8.29    -18.4</span>
+<span class="co">#&gt; # ... with 20 more rows</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">tb_states_choices_bisec_wider</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'p'</span>,<span class="st">'f_p'</span>,<span class="st">'f_p_t_f_a'</span>)), <span class="fl">30</span>)
+<span class="co">#&gt; # A tibble: 30 x 8</span>
+<span class="co">#&gt;    INDI_ID  fl_A fl_alpha biseciter     a     b      fa         fb</span>
+<span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       8   1.5      0.8 8          22.3  22.7 0.579   -1.13     </span>
+<span class="co">#&gt;  2       8   1.5      0.8 9          22.3  22.5 0.579   -0.278    </span>
+<span class="co">#&gt;  3       8   1.5      0.8 10         22.4  22.5 0.150   -0.278    </span>
+<span class="co">#&gt;  4       8   1.5      0.8 11         22.4  22.4 0.150   -0.0636   </span>
+<span class="co">#&gt;  5       8   1.5      0.8 12         22.4  22.4 0.0434  -0.0636   </span>
+<span class="co">#&gt;  6       8   1.5      0.8 13         22.4  22.4 0.0434  -0.0101   </span>
+<span class="co">#&gt;  7       8   1.5      0.8 14         22.4  22.4 0.0167  -0.0101   </span>
+<span class="co">#&gt;  8       8   1.5      0.8 15         22.4  22.4 0.00327 -0.0101   </span>
+<span class="co">#&gt;  9       8   1.5      0.8 16         22.4  22.4 0.00327 -0.00342  </span>
+<span class="co">#&gt; 10       8   1.5      0.8 17         22.4  22.4 0.00327 -0.0000761</span>
+<span class="co">#&gt; # ... with 20 more rows</span></pre></body></html></div>
 </div>
 <div id="graph-bisection-iteration-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graph-bisection-iteration-results" class="anchor"></a>Graph Bisection Iteration Results</h2>
 <p>Actually we want to graph based on the long results, not the wider. Wider easier to view in table.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="co"># Graph results</span>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Graph results</span>
 <span class="no">lineplot</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_bisect_iter</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_bisect_iter</span>))) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>) <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>, <span class="st">'b'</span>)) <span class="kw">%&gt;%</span>
@@ -659,7 +659,7 @@ fl_alpha
 <li>
 <em>svr_root_x</em>: the x variable name that appears n fc_withroot.</li>
 </ul>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">fv_opti_bisect_pmap_multi_test</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>,
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">fv_opti_bisect_pmap_multi_test</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>,
                                            <span class="no">fl_lower_x</span>, <span class="no">fl_upper_x</span>,
                                            <span class="no">ls_svr_df_in_func</span>,
                                            <span class="no">svr_root_x</span> <span class="kw">=</span> <span class="st">'x'</span>,
@@ -774,11 +774,11 @@ fl_alpha
 <h2 class="hasAnchor">
 <a href="#prepare-inputs-to-invoke-bisection-function" class="anchor"></a>Prepare Inputs to Invoke Bisection Function</h2>
 <p>Here we use the same function as earlier, but modify number of parameters:</p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="co"># Define Inputs</span>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Define Inputs</span>
 <span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices</span>
 <span class="no">fc_withroot</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, <span class="no">x</span>){
   <span class="co"># Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg</span>
-  <span class="co"># Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. </span>
+  <span class="co"># Also renamed fl_N to x, indicating this is the x we are shifting to look for zero.</span>
   <span class="no">ar_p1_s1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>((<span class="no">fl_A</span> - <span class="no">ar_nN_A</span>)*<span class="no">fl_rho</span>)
   <span class="no">ar_p1_s2</span> <span class="kw">=</span> (<span class="no">fl_alpha</span>/<span class="no">ar_nN_alpha</span>)
   <span class="no">ar_p1_s3</span> <span class="kw">=</span> (<span class="fl">1</span>/(<span class="no">ar_nN_alpha</span>*<span class="no">fl_rho</span> - <span class="fl">1</span>))
@@ -794,7 +794,7 @@ fl_alpha
 <span class="no">svr_root_x</span> <span class="kw">&lt;-</span> <span class="st">'x'</span>
 <span class="no">fl_zero_tol</span> <span class="kw">=</span> <span class="fl">10</span>^-<span class="fl">6</span></pre></body></html></div>
 <p>Additionally, let’s prepare a very simple linear test:</p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">ar_intercept</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(-<span class="fl">10</span>, -<span class="fl">1</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">it_N_child_cnt</span>)
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">ar_intercept</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(-<span class="fl">10</span>, -<span class="fl">1</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">it_N_child_cnt</span>)
 <span class="no">ar_slope</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.1</span>, <span class="fl">1</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="no">it_N_child_cnt</span>)
 <span class="no">df_lines</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">ar_intercept</span>, <span class="no">ar_slope</span>)) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span>(<span class="kw">var</span><span class="kw">=</span><span class="st">'ID'</span>)
 <span class="no">ar_st_col_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'ID'</span>,<span class="st">'fl_int'</span>, <span class="st">'fl_slope'</span>)
@@ -812,155 +812,157 @@ fl_alpha
 <h2 class="hasAnchor">
 <a href="#test-function" class="anchor"></a>Test Function</h2>
 <p>Now we call the function to see if it works:</p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>, <span class="no">fl_lower_x</span>,<span class="no">fl_upper_x</span>,
-                                           <span class="no">ls_svr_df_in_func</span>, <span class="no">svr_root_x</span>, <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<pre><code>## Note: Using an external vector in selections is ambiguous.
-## i Use `all_of(ls_pmap_vars)` instead of `ls_pmap_vars` to silence this message.
-## i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
-## This message is displayed once per session.</code></pre>
-<pre><code>## it_cur:1, fl_p_dist2zr:4736.99534218055</code></pre>
-<pre><code>## it_cur:2, fl_p_dist2zr:2110.89580734824</code></pre>
-<pre><code>## it_cur:3, fl_p_dist2zr:916.745756204857</code></pre>
-<pre><code>## it_cur:4, fl_p_dist2zr:387.351245210125</code></pre>
-<pre><code>## it_cur:5, fl_p_dist2zr:155.209641366984</code></pre>
-<pre><code>## it_cur:6, fl_p_dist2zr:58.1570911334532</code></pre>
-<pre><code>## it_cur:7, fl_p_dist2zr:22.2118416173139</code></pre>
-<pre><code>## it_cur:8, fl_p_dist2zr:8.74989971240847</code></pre>
-<pre><code>## it_cur:9, fl_p_dist2zr:7.15872428611325</code></pre>
-<pre><code>## it_cur:10, fl_p_dist2zr:3.58472422897695</code></pre>
-<pre><code>## it_cur:11, fl_p_dist2zr:1.50543493747611</code></pre>
-<pre><code>## it_cur:12, fl_p_dist2zr:0.527052368572328</code></pre>
-<pre><code>## it_cur:13, fl_p_dist2zr:0.360171292121815</code></pre>
-<pre><code>## it_cur:14, fl_p_dist2zr:0.0545239655746409</code></pre>
-<pre><code>## it_cur:15, fl_p_dist2zr:0.152964071033218</code></pre>
-<pre><code>## it_cur:16, fl_p_dist2zr:0.0593547942434943</code></pre>
-<pre><code>## it_cur:17, fl_p_dist2zr:0.030716694397913</code></pre>
-<pre><code>## it_cur:18, fl_p_dist2zr:0.0177772298500779</code></pre>
-<pre><code>## it_cur:19, fl_p_dist2zr:0.00644396015251105</code></pre>
-<pre><code>## it_cur:20, fl_p_dist2zr:0.00242474898992384</code></pre>
-<pre><code>## it_cur:21, fl_p_dist2zr:0.00163155064414077</code></pre>
-<pre><code>## it_cur:22, fl_p_dist2zr:0.000398869003509124</code></pre>
-<pre><code>## it_cur:23, fl_p_dist2zr:0.000450010969980023</code></pre>
-<pre><code>## it_cur:24, fl_p_dist2zr:0.000192696055121486</code></pre>
-<pre><code>## it_cur:25, fl_p_dist2zr:4.77090151996941e-05</code></pre>
-<pre><code>## it_cur:26, fl_p_dist2zr:4.87038981494455e-05</code></pre>
-<pre><code>## it_cur:27, fl_p_dist2zr:2.28095363736555e-05</code></pre>
-<pre><code>## it_cur:28, fl_p_dist2zr:3.72447202165757e-06</code></pre>
-<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="co"># Do individual inputs sum up to total allocations available</span>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>, <span class="no">fl_lower_x</span>,<span class="no">fl_upper_x</span>,
+                                           <span class="no">ls_svr_df_in_func</span>, <span class="no">svr_root_x</span>, <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
+<span class="co">#&gt; i Use `all_of(ls_pmap_vars)` instead of `ls_pmap_vars` to silence this message.</span>
+<span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
+<span class="co">#&gt; This message is displayed once per session.</span>
+<span class="co">#&gt; it_cur:1, fl_p_dist2zr:4736.99534218055</span>
+<span class="co">#&gt; it_cur:2, fl_p_dist2zr:2110.89580734824</span>
+<span class="co">#&gt; it_cur:3, fl_p_dist2zr:916.745756204857</span>
+<span class="co">#&gt; it_cur:4, fl_p_dist2zr:387.351245210125</span>
+<span class="co">#&gt; it_cur:5, fl_p_dist2zr:155.209641366984</span>
+<span class="co">#&gt; it_cur:6, fl_p_dist2zr:58.1570911334532</span>
+<span class="co">#&gt; it_cur:7, fl_p_dist2zr:22.2118416173139</span>
+<span class="co">#&gt; it_cur:8, fl_p_dist2zr:8.74989971240847</span>
+<span class="co">#&gt; it_cur:9, fl_p_dist2zr:7.15872428611325</span>
+<span class="co">#&gt; it_cur:10, fl_p_dist2zr:3.58472422897695</span>
+<span class="co">#&gt; it_cur:11, fl_p_dist2zr:1.50543493747611</span>
+<span class="co">#&gt; it_cur:12, fl_p_dist2zr:0.527052368572328</span>
+<span class="co">#&gt; it_cur:13, fl_p_dist2zr:0.360171292121815</span>
+<span class="co">#&gt; it_cur:14, fl_p_dist2zr:0.0545239655746409</span>
+<span class="co">#&gt; it_cur:15, fl_p_dist2zr:0.152964071033218</span>
+<span class="co">#&gt; it_cur:16, fl_p_dist2zr:0.0593547942434943</span>
+<span class="co">#&gt; it_cur:17, fl_p_dist2zr:0.030716694397913</span>
+<span class="co">#&gt; it_cur:18, fl_p_dist2zr:0.0177772298500779</span>
+<span class="co">#&gt; it_cur:19, fl_p_dist2zr:0.00644396015251105</span>
+<span class="co">#&gt; it_cur:20, fl_p_dist2zr:0.00242474898992384</span>
+<span class="co">#&gt; it_cur:21, fl_p_dist2zr:0.00163155064414077</span>
+<span class="co">#&gt; it_cur:22, fl_p_dist2zr:0.000398869003509124</span>
+<span class="co">#&gt; it_cur:23, fl_p_dist2zr:0.000450010969980023</span>
+<span class="co">#&gt; it_cur:24, fl_p_dist2zr:0.000192696055121486</span>
+<span class="co">#&gt; it_cur:25, fl_p_dist2zr:4.77090151996941e-05</span>
+<span class="co">#&gt; it_cur:26, fl_p_dist2zr:4.87038981494455e-05</span>
+<span class="co">#&gt; it_cur:27, fl_p_dist2zr:2.28095363736555e-05</span>
+<span class="co">#&gt; it_cur:28, fl_p_dist2zr:3.72447202165757e-06</span>
+
+<span class="co"># Do individual inputs sum up to total allocations available</span>
 <span class="no">fl_allocated</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">svr_root_x</span>))
 <span class="kw">if</span> (<span class="no">fl_N_agg</span> <span class="kw">==</span> <span class="no">fl_allocated</span>){
   <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)
 } <span class="kw">else</span> {
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, <span class="no">fl_N_agg</span>, <span class="st">', but, sum(df_bisec %&gt;% pull(svr_root_x))='</span>, <span class="no">fl_allocated</span>)
-}</pre></body></html></div>
-<pre><code>## fl_N_agg = 100 , but, sum(df_bisec %&gt;% pull(svr_root_x))= 100</code></pre>
-<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="co"># Show all </span>
-<span class="no">df_bisec</span></pre></body></html></div>
-<pre><code>## # A tibble: 9 x 122
-##   INDI_ID  fl_A fl_alpha bisec_a_0 bisec_b_0      x bisec_fa_0 bisec_fb_0
-##     &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1       1  -2        0.1         0       200  0.843        100    -54364.
-## 2       2  -1.5      0.2         0       200  1.92         100    -18749.
-## 3       3  -1        0.3         0       200  3.33         100     -9069.
-## 4       4  -0.5      0.4         0       200  5.21         100     -5027.
-## 5       5   0        0.5         0       200  7.74         100     -2995.
-## 6       6   0.5      0.6         0       200 11.2          100     -1861.
-## 7       7   1        0.7         0       200 15.9          100     -1184.
-## 8       8   1.5      0.8         0       200 22.4          100      -762.
-## 9       9   2        0.9         0       200 31.5          100      -490.
-## # ... with 114 more variables: fx &lt;dbl&gt;, f_p_t_f_a &lt;dbl&gt;, bisec_a_1 &lt;dbl&gt;,
-## #   bisec_b_1 &lt;dbl&gt;, bisec_fa_1 &lt;dbl&gt;, bisec_fb_1 &lt;dbl&gt;, bisec_a_2 &lt;dbl&gt;,
-## #   bisec_b_2 &lt;dbl&gt;, bisec_fa_2 &lt;dbl&gt;, bisec_fb_2 &lt;dbl&gt;, bisec_a_3 &lt;dbl&gt;,
-## #   bisec_b_3 &lt;dbl&gt;, bisec_fa_3 &lt;dbl&gt;, bisec_fb_3 &lt;dbl&gt;, bisec_a_4 &lt;dbl&gt;,
-## #   bisec_b_4 &lt;dbl&gt;, bisec_fa_4 &lt;dbl&gt;, bisec_fb_4 &lt;dbl&gt;, bisec_a_5 &lt;dbl&gt;,
-## #   bisec_b_5 &lt;dbl&gt;, bisec_fa_5 &lt;dbl&gt;, bisec_fb_5 &lt;dbl&gt;, bisec_a_6 &lt;dbl&gt;,
-## #   bisec_b_6 &lt;dbl&gt;, bisec_fa_6 &lt;dbl&gt;, bisec_fb_6 &lt;dbl&gt;, bisec_a_7 &lt;dbl&gt;,
-## #   bisec_b_7 &lt;dbl&gt;, bisec_fa_7 &lt;dbl&gt;, bisec_fb_7 &lt;dbl&gt;, bisec_a_8 &lt;dbl&gt;,
-## #   bisec_b_8 &lt;dbl&gt;, bisec_fa_8 &lt;dbl&gt;, bisec_fb_8 &lt;dbl&gt;, bisec_a_9 &lt;dbl&gt;,
-## #   bisec_b_9 &lt;dbl&gt;, bisec_fa_9 &lt;dbl&gt;, bisec_fb_9 &lt;dbl&gt;, bisec_a_10 &lt;dbl&gt;,
-## #   bisec_b_10 &lt;dbl&gt;, bisec_fa_10 &lt;dbl&gt;, bisec_fb_10 &lt;dbl&gt;, bisec_a_11 &lt;dbl&gt;,
-## #   bisec_b_11 &lt;dbl&gt;, bisec_fa_11 &lt;dbl&gt;, bisec_fb_11 &lt;dbl&gt;, bisec_a_12 &lt;dbl&gt;,
-## #   bisec_b_12 &lt;dbl&gt;, bisec_fa_12 &lt;dbl&gt;, bisec_fb_12 &lt;dbl&gt;, bisec_a_13 &lt;dbl&gt;,
-## #   bisec_b_13 &lt;dbl&gt;, bisec_fa_13 &lt;dbl&gt;, bisec_fb_13 &lt;dbl&gt;, bisec_a_14 &lt;dbl&gt;,
-## #   bisec_b_14 &lt;dbl&gt;, bisec_fa_14 &lt;dbl&gt;, bisec_fb_14 &lt;dbl&gt;, bisec_a_15 &lt;dbl&gt;,
-## #   bisec_b_15 &lt;dbl&gt;, bisec_fa_15 &lt;dbl&gt;, bisec_fb_15 &lt;dbl&gt;, bisec_a_16 &lt;dbl&gt;,
-## #   bisec_b_16 &lt;dbl&gt;, bisec_fa_16 &lt;dbl&gt;, bisec_fb_16 &lt;dbl&gt;, bisec_a_17 &lt;dbl&gt;,
-## #   bisec_b_17 &lt;dbl&gt;, bisec_fa_17 &lt;dbl&gt;, bisec_fb_17 &lt;dbl&gt;, bisec_a_18 &lt;dbl&gt;,
-## #   bisec_b_18 &lt;dbl&gt;, bisec_fa_18 &lt;dbl&gt;, bisec_fb_18 &lt;dbl&gt;, bisec_a_19 &lt;dbl&gt;,
-## #   bisec_b_19 &lt;dbl&gt;, bisec_fa_19 &lt;dbl&gt;, bisec_fb_19 &lt;dbl&gt;, bisec_a_20 &lt;dbl&gt;,
-## #   bisec_b_20 &lt;dbl&gt;, bisec_fa_20 &lt;dbl&gt;, bisec_fb_20 &lt;dbl&gt;, bisec_a_21 &lt;dbl&gt;,
-## #   bisec_b_21 &lt;dbl&gt;, bisec_fa_21 &lt;dbl&gt;, bisec_fb_21 &lt;dbl&gt;, bisec_a_22 &lt;dbl&gt;,
-## #   bisec_b_22 &lt;dbl&gt;, bisec_fa_22 &lt;dbl&gt;, bisec_fb_22 &lt;dbl&gt;, bisec_a_23 &lt;dbl&gt;,
-## #   bisec_b_23 &lt;dbl&gt;, bisec_fa_23 &lt;dbl&gt;, bisec_fb_23 &lt;dbl&gt;, bisec_a_24 &lt;dbl&gt;,
-## #   bisec_b_24 &lt;dbl&gt;, bisec_fa_24 &lt;dbl&gt;, bisec_fb_24 &lt;dbl&gt;, bisec_a_25 &lt;dbl&gt;,
-## #   bisec_b_25 &lt;dbl&gt;, ...</code></pre>
+}
+<span class="co">#&gt; fl_N_agg = 100 , but, sum(df_bisec %&gt;% pull(svr_root_x))= 100</span>
+
+<span class="co"># Show all</span>
+<span class="no">df_bisec</span>
+<span class="co">#&gt; # A tibble: 9 x 122</span>
+<span class="co">#&gt;   INDI_ID  fl_A fl_alpha bisec_a_0 bisec_b_0      x bisec_fa_0 bisec_fb_0</span>
+<span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1       1  -2        0.1         0       200  0.843        100    -54364.</span>
+<span class="co">#&gt; 2       2  -1.5      0.2         0       200  1.92         100    -18749.</span>
+<span class="co">#&gt; 3       3  -1        0.3         0       200  3.33         100     -9069.</span>
+<span class="co">#&gt; 4       4  -0.5      0.4         0       200  5.21         100     -5027.</span>
+<span class="co">#&gt; 5       5   0        0.5         0       200  7.74         100     -2995.</span>
+<span class="co">#&gt; 6       6   0.5      0.6         0       200 11.2          100     -1861.</span>
+<span class="co">#&gt; 7       7   1        0.7         0       200 15.9          100     -1184.</span>
+<span class="co">#&gt; 8       8   1.5      0.8         0       200 22.4          100      -762.</span>
+<span class="co">#&gt; 9       9   2        0.9         0       200 31.5          100      -490.</span>
+<span class="co">#&gt; # ... with 114 more variables: fx &lt;dbl&gt;, f_p_t_f_a &lt;dbl&gt;, bisec_a_1 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_1 &lt;dbl&gt;, bisec_fa_1 &lt;dbl&gt;, bisec_fb_1 &lt;dbl&gt;, bisec_a_2 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_2 &lt;dbl&gt;, bisec_fa_2 &lt;dbl&gt;, bisec_fb_2 &lt;dbl&gt;, bisec_a_3 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_3 &lt;dbl&gt;, bisec_fa_3 &lt;dbl&gt;, bisec_fb_3 &lt;dbl&gt;, bisec_a_4 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_4 &lt;dbl&gt;, bisec_fa_4 &lt;dbl&gt;, bisec_fb_4 &lt;dbl&gt;, bisec_a_5 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_5 &lt;dbl&gt;, bisec_fa_5 &lt;dbl&gt;, bisec_fb_5 &lt;dbl&gt;, bisec_a_6 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_6 &lt;dbl&gt;, bisec_fa_6 &lt;dbl&gt;, bisec_fb_6 &lt;dbl&gt;, bisec_a_7 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_7 &lt;dbl&gt;, bisec_fa_7 &lt;dbl&gt;, bisec_fb_7 &lt;dbl&gt;, bisec_a_8 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_8 &lt;dbl&gt;, bisec_fa_8 &lt;dbl&gt;, bisec_fb_8 &lt;dbl&gt;, bisec_a_9 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_9 &lt;dbl&gt;, bisec_fa_9 &lt;dbl&gt;, bisec_fb_9 &lt;dbl&gt;, bisec_a_10 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_10 &lt;dbl&gt;, bisec_fa_10 &lt;dbl&gt;, bisec_fb_10 &lt;dbl&gt;, bisec_a_11 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_11 &lt;dbl&gt;, bisec_fa_11 &lt;dbl&gt;, bisec_fb_11 &lt;dbl&gt;, bisec_a_12 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_12 &lt;dbl&gt;, bisec_fa_12 &lt;dbl&gt;, bisec_fb_12 &lt;dbl&gt;, bisec_a_13 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_13 &lt;dbl&gt;, bisec_fa_13 &lt;dbl&gt;, bisec_fb_13 &lt;dbl&gt;, bisec_a_14 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_14 &lt;dbl&gt;, bisec_fa_14 &lt;dbl&gt;, bisec_fb_14 &lt;dbl&gt;, bisec_a_15 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_15 &lt;dbl&gt;, bisec_fa_15 &lt;dbl&gt;, bisec_fb_15 &lt;dbl&gt;, bisec_a_16 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_16 &lt;dbl&gt;, bisec_fa_16 &lt;dbl&gt;, bisec_fb_16 &lt;dbl&gt;, bisec_a_17 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_17 &lt;dbl&gt;, bisec_fa_17 &lt;dbl&gt;, bisec_fb_17 &lt;dbl&gt;, bisec_a_18 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_18 &lt;dbl&gt;, bisec_fa_18 &lt;dbl&gt;, bisec_fb_18 &lt;dbl&gt;, bisec_a_19 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_19 &lt;dbl&gt;, bisec_fa_19 &lt;dbl&gt;, bisec_fb_19 &lt;dbl&gt;, bisec_a_20 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_20 &lt;dbl&gt;, bisec_fa_20 &lt;dbl&gt;, bisec_fb_20 &lt;dbl&gt;, bisec_a_21 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_21 &lt;dbl&gt;, bisec_fa_21 &lt;dbl&gt;, bisec_fb_21 &lt;dbl&gt;, bisec_a_22 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_22 &lt;dbl&gt;, bisec_fa_22 &lt;dbl&gt;, bisec_fb_22 &lt;dbl&gt;, bisec_a_23 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_23 &lt;dbl&gt;, bisec_fa_23 &lt;dbl&gt;, bisec_fb_23 &lt;dbl&gt;, bisec_a_24 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_24 &lt;dbl&gt;, bisec_fa_24 &lt;dbl&gt;, bisec_fb_24 &lt;dbl&gt;, bisec_a_25 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   bisec_b_25 &lt;dbl&gt;, ...</span></pre></body></html></div>
 <p>Call the same function, but do not save history:</p>
-<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span>(<span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>, <span class="no">fl_lower_x</span>, <span class="no">fl_upper_x</span>,
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span>(<span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>, <span class="no">fl_lower_x</span>, <span class="no">fl_upper_x</span>,
                                                             <span class="no">ls_svr_df_in_func</span>, <span class="no">svr_root_x</span>, <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">FALSE</span>))
-<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'f_p_t_f_a'</span>))</pre></body></html></div>
-<pre><code>## # A tibble: 9 x 9
-##   INDI_ID  fl_A fl_alpha      x       fx bisec_a_28 bisec_b_28 bisec_fa_28
-##     &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1       1  -2        0.1  0.843  1.35e-6      0.843      0.843 0.00000135 
-## 2       2  -1.5      0.2  1.92  -1.23e-5      1.92       1.92  0.0000313  
-## 3       3  -1        0.3  3.33  -9.41e-6      3.33       3.33  0.0000152  
-## 4       4  -0.5      0.4  5.21  -4.38e-6      5.21       5.21  0.0000110  
-## 5       5   0        0.5  7.74   5.55e-7      7.74       7.74  0.000000555
-## 6       6   0.5      0.6 11.2    3.55e-6     11.2       11.2   0.00000355 
-## 7       7   1        0.7 15.9   -5.55e-7     15.9       15.9   0.00000416 
-## 8       8   1.5      0.8 22.4   -9.41e-7     22.4       22.4   0.00000233 
-## 9       9   2        0.9 31.5   -5.27e-7     31.5       31.5   0.00000174 
-## # ... with 1 more variable: bisec_fb_28 &lt;dbl&gt;</code></pre>
+<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'f_p_t_f_a'</span>))
+<span class="co">#&gt; # A tibble: 9 x 9</span>
+<span class="co">#&gt;   INDI_ID  fl_A fl_alpha      x       fx bisec_a_28 bisec_b_28 bisec_fa_28</span>
+<span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt; 1       1  -2        0.1  0.843  1.35e-6      0.843      0.843 0.00000135 </span>
+<span class="co">#&gt; 2       2  -1.5      0.2  1.92  -1.23e-5      1.92       1.92  0.0000313  </span>
+<span class="co">#&gt; 3       3  -1        0.3  3.33  -9.41e-6      3.33       3.33  0.0000152  </span>
+<span class="co">#&gt; 4       4  -0.5      0.4  5.21  -4.38e-6      5.21       5.21  0.0000110  </span>
+<span class="co">#&gt; 5       5   0        0.5  7.74   5.55e-7      7.74       7.74  0.000000555</span>
+<span class="co">#&gt; 6       6   0.5      0.6 11.2    3.55e-6     11.2       11.2   0.00000355 </span>
+<span class="co">#&gt; 7       7   1        0.7 15.9   -5.55e-7     15.9       15.9   0.00000416 </span>
+<span class="co">#&gt; 8       8   1.5      0.8 22.4   -9.41e-7     22.4       22.4   0.00000233 </span>
+<span class="co">#&gt; 9       9   2        0.9 31.5   -5.27e-7     31.5       31.5   0.00000174 </span>
+<span class="co">#&gt; # ... with 1 more variable: bisec_fb_28 &lt;dbl&gt;</span></pre></body></html></div>
 <p>Call the linear root function:</p>
-<div class="sourceCode" id="cb66"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df_lines</span>, <span class="no">fc_withroot_line</span>,
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df_lines</span>, <span class="no">fc_withroot_line</span>,
                                            <span class="no">fl_lower_x_line</span>, <span class="no">fl_upper_x_line</span>,
-                                           <span class="no">ls_svr_df_in_func_line</span>, <span class="no">svr_root_x_line</span>, <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<pre><code>## it_cur:1, fl_p_dist2zr:27494.5</code></pre>
-<pre><code>## it_cur:2, fl_p_dist2zr:13744.5</code></pre>
-<pre><code>## it_cur:3, fl_p_dist2zr:6869.5</code></pre>
-<pre><code>## it_cur:4, fl_p_dist2zr:3432</code></pre>
-<pre><code>## it_cur:5, fl_p_dist2zr:1713.25</code></pre>
-<pre><code>## it_cur:6, fl_p_dist2zr:853.875</code></pre>
-<pre><code>## it_cur:7, fl_p_dist2zr:424.1875</code></pre>
-<pre><code>## it_cur:8, fl_p_dist2zr:209.34375</code></pre>
-<pre><code>## it_cur:9, fl_p_dist2zr:101.921875</code></pre>
-<pre><code>## it_cur:10, fl_p_dist2zr:48.2630208333333</code></pre>
-<pre><code>## it_cur:11, fl_p_dist2zr:22.4405381944444</code></pre>
-<pre><code>## it_cur:12, fl_p_dist2zr:9.83213975694444</code></pre>
-<pre><code>## it_cur:13, fl_p_dist2zr:4.24430338541667</code></pre>
-<pre><code>## it_cur:14, fl_p_dist2zr:1.79055447048611</code></pre>
-<pre><code>## it_cur:15, fl_p_dist2zr:0.783148871527778</code></pre>
-<pre><code>## it_cur:16, fl_p_dist2zr:0.419854058159722</code></pre>
-<pre><code>## it_cur:17, fl_p_dist2zr:0.137461344401042</code></pre>
-<pre><code>## it_cur:18, fl_p_dist2zr:0.0981631808810763</code></pre>
-<pre><code>## it_cur:19, fl_p_dist2zr:0.0471479627821184</code></pre>
-<pre><code>## it_cur:20, fl_p_dist2zr:0.0238359239366318</code></pre>
-<pre><code>## it_cur:21, fl_p_dist2zr:0.0155442555745441</code></pre>
-<pre><code>## it_cur:22, fl_p_dist2zr:0.00779639350043383</code></pre>
-<pre><code>## it_cur:23, fl_p_dist2zr:0.00397608015272343</code></pre>
-<pre><code>## it_cur:24, fl_p_dist2zr:0.00209707683987107</code></pre>
-<pre><code>## it_cur:25, fl_p_dist2zr:0.000747521718342902</code></pre>
-<pre><code>## it_cur:26, fl_p_dist2zr:0.000320964389377071</code></pre>
-<pre><code>## it_cur:27, fl_p_dist2zr:0.000268595086203484</code></pre>
-<pre><code>## it_cur:28, fl_p_dist2zr:7.08483987382399e-05</code></pre>
-<pre><code>## it_cur:29, fl_p_dist2zr:4.65694401001255e-05</code></pre>
-<pre><code>## it_cur:30, fl_p_dist2zr:2.71068678960873e-05</code></pre>
-<pre><code>## it_cur:31, fl_p_dist2zr:1.14395386645841e-05</code></pre>
-<pre><code>## it_cur:32, fl_p_dist2zr:6.38038747870063e-06</code></pre>
-<div class="sourceCode" id="cb99"><html><body><pre class="r"><span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'f_p_t_f_a'</span>))</pre></body></html></div>
-<pre><code>## # A tibble: 9 x 9
-##      ID fl_int fl_slope      x       fx bisec_a_32 bisec_b_32 bisec_fa_32
-##   &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1     1 -10       0.1   100.   -6.89e-7     100.       100.      -6.89e-7
-## 2     2  -8.88    0.213  41.8   2.68e-6      41.8       41.8     -2.27e-6
-## 3     3  -7.75    0.325  23.8   3.72e-6      23.8       23.8     -3.85e-6
-## 4     4  -6.62    0.438  15.1   2.42e-6      15.1       15.1     -7.76e-6
-## 5     5  -5.5     0.55   10.0   3.46e-6      10.0       10.0     -9.34e-6
-## 6     6  -4.38    0.662   6.60 -1.41e-5       6.60       6.60    -1.41e-5
-## 7     7  -3.25    0.775   4.19 -9.60e-6       4.19       4.19    -9.60e-6
-## 8     8  -2.12    0.888   2.39 -5.06e-6       2.39       2.39    -5.06e-6
-## 9     9  -1       1       1.00 -1.57e-5       1.00       1.00    -1.57e-5
-## # ... with 1 more variable: bisec_fb_32 &lt;dbl&gt;</code></pre>
+                                           <span class="no">ls_svr_df_in_func_line</span>, <span class="no">svr_root_x_line</span>, <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; it_cur:1, fl_p_dist2zr:27494.5</span>
+<span class="co">#&gt; it_cur:2, fl_p_dist2zr:13744.5</span>
+<span class="co">#&gt; it_cur:3, fl_p_dist2zr:6869.5</span>
+<span class="co">#&gt; it_cur:4, fl_p_dist2zr:3432</span>
+<span class="co">#&gt; it_cur:5, fl_p_dist2zr:1713.25</span>
+<span class="co">#&gt; it_cur:6, fl_p_dist2zr:853.875</span>
+<span class="co">#&gt; it_cur:7, fl_p_dist2zr:424.1875</span>
+<span class="co">#&gt; it_cur:8, fl_p_dist2zr:209.34375</span>
+<span class="co">#&gt; it_cur:9, fl_p_dist2zr:101.921875</span>
+<span class="co">#&gt; it_cur:10, fl_p_dist2zr:48.2630208333333</span>
+<span class="co">#&gt; it_cur:11, fl_p_dist2zr:22.4405381944444</span>
+<span class="co">#&gt; it_cur:12, fl_p_dist2zr:9.83213975694444</span>
+<span class="co">#&gt; it_cur:13, fl_p_dist2zr:4.24430338541667</span>
+<span class="co">#&gt; it_cur:14, fl_p_dist2zr:1.79055447048611</span>
+<span class="co">#&gt; it_cur:15, fl_p_dist2zr:0.783148871527778</span>
+<span class="co">#&gt; it_cur:16, fl_p_dist2zr:0.419854058159722</span>
+<span class="co">#&gt; it_cur:17, fl_p_dist2zr:0.137461344401042</span>
+<span class="co">#&gt; it_cur:18, fl_p_dist2zr:0.0981631808810763</span>
+<span class="co">#&gt; it_cur:19, fl_p_dist2zr:0.0471479627821184</span>
+<span class="co">#&gt; it_cur:20, fl_p_dist2zr:0.0238359239366318</span>
+<span class="co">#&gt; it_cur:21, fl_p_dist2zr:0.0155442555745441</span>
+<span class="co">#&gt; it_cur:22, fl_p_dist2zr:0.00779639350043383</span>
+<span class="co">#&gt; it_cur:23, fl_p_dist2zr:0.00397608015272343</span>
+<span class="co">#&gt; it_cur:24, fl_p_dist2zr:0.00209707683987107</span>
+<span class="co">#&gt; it_cur:25, fl_p_dist2zr:0.000747521718342902</span>
+<span class="co">#&gt; it_cur:26, fl_p_dist2zr:0.000320964389377071</span>
+<span class="co">#&gt; it_cur:27, fl_p_dist2zr:0.000268595086203484</span>
+<span class="co">#&gt; it_cur:28, fl_p_dist2zr:7.08483987382399e-05</span>
+<span class="co">#&gt; it_cur:29, fl_p_dist2zr:4.65694401001255e-05</span>
+<span class="co">#&gt; it_cur:30, fl_p_dist2zr:2.71068678960873e-05</span>
+<span class="co">#&gt; it_cur:31, fl_p_dist2zr:1.14395386645841e-05</span>
+<span class="co">#&gt; it_cur:32, fl_p_dist2zr:6.38038747870063e-06</span>
+<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="st">'f_p_t_f_a'</span>))
+<span class="co">#&gt; # A tibble: 9 x 9</span>
+<span class="co">#&gt;      ID fl_int fl_slope      x       fx bisec_a_32 bisec_b_32 bisec_fa_32</span>
+<span class="co">#&gt;   &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1 -10       0.1   100.   -6.89e-7     100.       100.      -6.89e-7</span>
+<span class="co">#&gt; 2     2  -8.88    0.213  41.8   2.68e-6      41.8       41.8     -2.27e-6</span>
+<span class="co">#&gt; 3     3  -7.75    0.325  23.8   3.72e-6      23.8       23.8     -3.85e-6</span>
+<span class="co">#&gt; 4     4  -6.62    0.438  15.1   2.42e-6      15.1       15.1     -7.76e-6</span>
+<span class="co">#&gt; 5     5  -5.5     0.55   10.0   3.46e-6      10.0       10.0     -9.34e-6</span>
+<span class="co">#&gt; 6     6  -4.38    0.662   6.60 -1.41e-5       6.60       6.60    -1.41e-5</span>
+<span class="co">#&gt; 7     7  -3.25    0.775   4.19 -9.60e-6       4.19       4.19    -9.60e-6</span>
+<span class="co">#&gt; 8     8  -2.12    0.888   2.39 -5.06e-6       2.39       2.39    -5.06e-6</span>
+<span class="co">#&gt; 9     9  -1       1       1.00 -1.57e-5       1.00       1.00    -1.57e-5</span>
+<span class="co">#&gt; # ... with 1 more variable: bisec_fb_32 &lt;dbl&gt;</span></pre></body></html></div>
 </div>
 <div id="test-with-prjoptialloc-log-results" class="section level2">
 <h2 class="hasAnchor">
@@ -968,7 +970,7 @@ fl_alpha
 <p>Use <em>df_esti</em> from <a href="https://fanwangecon.github.io/PrjOptiAlloc/reference/df_opt_dtgch_cbem4.html"><em>ffy_opt_dtgch_cbem4</em></a> function of project <em>PrjOptiAlloc</em>. Select only the <em>fl_A</em> and <em>fl_alpha</em> variables, should look like <em>tb_states_choices</em>. The difference is that <em>tb_states_choices</em> values were made up, but the <em>alpha</em> and <em>A</em> values from <em>df_esti</em> are estimated.</p>
 <p>The function is the same as before: <em>fc_withroot</em>, in fact, this function is the solution to the log linear allocation from problem <a href="https://fanwangecon.github.io/PrjOptiAlloc/">PrjOptiAlloc</a>.</p>
 <p>First define the data frame:</p>
-<div class="sourceCode" id="cb101"><html><body><pre class="r"><span class="co"># Load Package and Data</span>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># Load Package and Data</span>
 <span class="co"># ls_opti_alpha_A &lt;- PrjOptiAlloc::ffy_opt_dtgch_cbem4()</span>
 <span class="co"># df_esti &lt;- ls_opti_alpha_A$df_esti</span>
 <span class="no">df_esti</span> <span class="kw">&lt;-</span> <span class="no">df_opt_dtgch_cbem4</span>
@@ -976,19 +978,19 @@ fl_alpha
 <span class="co"># Select only some individuals to speed up test</span>
 <span class="no">df_esti</span> <span class="kw">&lt;-</span> <span class="no">df_esti</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">indi.id</span> <span class="kw">&lt;=</span> <span class="fl">10</span>)
 
-<span class="co"># Select only A and Alpha and Index </span>
+<span class="co"># Select only A and Alpha and Index</span>
 <span class="co"># %&gt;% mutate(A_log =(A_log))</span>
 <span class="no">df_dtgch_cbem4_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_esti</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">indi.id</span>, <span class="no">A_log</span>, <span class="no">alpha_log</span>)
 <span class="no">ar_st_col_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)
 <span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df_dtgch_cbem4_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_all</a></span>(~<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">ar_st_col_names</span>))</pre></body></html></div>
 <p>Crucially, also need to redefine the function, note that the function formula we are using here is the same as before, however, there are Hard-Coded vectors in the formula, that need to reflect the new dataframe.</p>
-<div class="sourceCode" id="cb102"><html><body><pre class="r"><span class="co"># hard-coded parameters</span>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co"># hard-coded parameters</span>
 <span class="no">ar_nN_A</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">fl_A</span>)
 <span class="no">ar_nN_alpha</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">fl_alpha</span>)
 <span class="co"># Function again updating the hard-coded parameters</span>
 <span class="no">fc_withroot</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, <span class="no">x</span>){
   <span class="co"># Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg</span>
-  <span class="co"># Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. </span>
+  <span class="co"># Also renamed fl_N to x, indicating this is the x we are shifting to look for zero.</span>
   <span class="no">ar_p1_s1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>((<span class="no">fl_A</span> - <span class="no">ar_nN_A</span>)*<span class="no">fl_rho</span>)
   <span class="no">ar_p1_s2</span> <span class="kw">=</span> (<span class="no">fl_alpha</span>/<span class="no">ar_nN_alpha</span>)
   <span class="no">ar_p1_s3</span> <span class="kw">=</span> (<span class="fl">1</span>/(<span class="no">ar_nN_alpha</span>*<span class="no">fl_rho</span> - <span class="fl">1</span>))
@@ -999,63 +1001,65 @@ fl_alpha
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">fl_overall</span>)
 }</pre></body></html></div>
 <p>Finally call and solve with the bisection function:</p>
-<div class="sourceCode" id="cb103"><html><body><pre class="r"><span class="co"># Bisect and Solve</span>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Bisect and Solve</span>
 <span class="no">ls_svr_df_in_func</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span>)
 <span class="no">svr_root_x</span> <span class="kw">&lt;-</span> <span class="st">'x'</span>
 <span class="no">df_bisec_dtgch_cbem4</span> <span class="kw">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span>(<span class="no">df</span>, <span class="no">fc_withroot</span>,
                                                        <span class="fl">0</span>, <span class="no">fl_upper_x</span>,
                                                        <span class="no">ls_svr_df_in_func</span>, <span class="no">svr_root_x</span>,
-                                                       <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<pre><code>## it_cur:1, fl_p_dist2zr:899.86958899644</code></pre>
-<pre><code>## it_cur:2, fl_p_dist2zr:399.795325546567</code></pre>
-<pre><code>## it_cur:3, fl_p_dist2zr:149.82803720318</code></pre>
-<pre><code>## it_cur:4, fl_p_dist2zr:39.6981877915583</code></pre>
-<pre><code>## it_cur:5, fl_p_dist2zr:22.7544373106979</code></pre>
-<pre><code>## it_cur:6, fl_p_dist2zr:13.6648690730157</code></pre>
-<pre><code>## it_cur:7, fl_p_dist2zr:4.00882580615786</code></pre>
-<pre><code>## it_cur:8, fl_p_dist2zr:5.16853400177715</code></pre>
-<pre><code>## it_cur:9, fl_p_dist2zr:1.51302257271096</code></pre>
-<pre><code>## it_cur:10, fl_p_dist2zr:0.652943611605188</code></pre>
-<pre><code>## it_cur:11, fl_p_dist2zr:0.600480528493414</code></pre>
-<pre><code>## it_cur:12, fl_p_dist2zr:0.250509919781611</code></pre>
-<pre><code>## it_cur:13, fl_p_dist2zr:0.0896781862774658</code></pre>
-<pre><code>## it_cur:14, fl_p_dist2zr:0.0538247482166633</code></pre>
-<pre><code>## it_cur:15, fl_p_dist2zr:0.0239801341471519</code></pre>
-<pre><code>## it_cur:16, fl_p_dist2zr:0.0140266432007429</code></pre>
-<pre><code>## it_cur:17, fl_p_dist2zr:0.00893928482057681</code></pre>
-<pre><code>## it_cur:18, fl_p_dist2zr:0.00357052465549164</code></pre>
-<pre><code>## it_cur:19, fl_p_dist2zr:0.00185480902755507</code></pre>
-<pre><code>## it_cur:20, fl_p_dist2zr:0.0008568164157244</code></pre>
-<pre><code>## it_cur:21, fl_p_dist2zr:0.000597378694812455</code></pre>
-<pre><code>## it_cur:22, fl_p_dist2zr:0.000310870384761112</code></pre>
-<pre><code>## it_cur:23, fl_p_dist2zr:0.000106146686901651</code></pre>
-<pre><code>## it_cur:24, fl_p_dist2zr:7.78112187778864e-05</code></pre>
-<pre><code>## it_cur:25, fl_p_dist2zr:2.60678871689556e-05</code></pre>
-<pre><code>## it_cur:26, fl_p_dist2zr:1.31156909364765e-05</code></pre>
-<pre><code>## it_cur:27, fl_p_dist2zr:9.57136451360283e-06</code></pre>
-<div class="sourceCode" id="cb131"><html><body><pre class="r"><span class="co"># Do individual inputs sum up to total allocations available</span>
+                                                       <span class="kw">bl_keep_iter</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; it_cur:1, fl_p_dist2zr:899.86958899644</span>
+<span class="co">#&gt; it_cur:2, fl_p_dist2zr:399.795325546567</span>
+<span class="co">#&gt; it_cur:3, fl_p_dist2zr:149.82803720318</span>
+<span class="co">#&gt; it_cur:4, fl_p_dist2zr:39.6981877915583</span>
+<span class="co">#&gt; it_cur:5, fl_p_dist2zr:22.7544373106979</span>
+<span class="co">#&gt; it_cur:6, fl_p_dist2zr:13.6648690730157</span>
+<span class="co">#&gt; it_cur:7, fl_p_dist2zr:4.00882580615786</span>
+<span class="co">#&gt; it_cur:8, fl_p_dist2zr:5.16853400177715</span>
+<span class="co">#&gt; it_cur:9, fl_p_dist2zr:1.51302257271096</span>
+<span class="co">#&gt; it_cur:10, fl_p_dist2zr:0.652943611605188</span>
+<span class="co">#&gt; it_cur:11, fl_p_dist2zr:0.600480528493414</span>
+<span class="co">#&gt; it_cur:12, fl_p_dist2zr:0.250509919781611</span>
+<span class="co">#&gt; it_cur:13, fl_p_dist2zr:0.0896781862774658</span>
+<span class="co">#&gt; it_cur:14, fl_p_dist2zr:0.0538247482166633</span>
+<span class="co">#&gt; it_cur:15, fl_p_dist2zr:0.0239801341471519</span>
+<span class="co">#&gt; it_cur:16, fl_p_dist2zr:0.0140266432007429</span>
+<span class="co">#&gt; it_cur:17, fl_p_dist2zr:0.00893928482057681</span>
+<span class="co">#&gt; it_cur:18, fl_p_dist2zr:0.00357052465549164</span>
+<span class="co">#&gt; it_cur:19, fl_p_dist2zr:0.00185480902755507</span>
+<span class="co">#&gt; it_cur:20, fl_p_dist2zr:0.0008568164157244</span>
+<span class="co">#&gt; it_cur:21, fl_p_dist2zr:0.000597378694812455</span>
+<span class="co">#&gt; it_cur:22, fl_p_dist2zr:0.000310870384761112</span>
+<span class="co">#&gt; it_cur:23, fl_p_dist2zr:0.000106146686901651</span>
+<span class="co">#&gt; it_cur:24, fl_p_dist2zr:7.78112187778864e-05</span>
+<span class="co">#&gt; it_cur:25, fl_p_dist2zr:2.60678871689556e-05</span>
+<span class="co">#&gt; it_cur:26, fl_p_dist2zr:1.31156909364765e-05</span>
+<span class="co">#&gt; it_cur:27, fl_p_dist2zr:9.57136451360283e-06</span>
+
+<span class="co"># Do individual inputs sum up to total allocations available</span>
 <span class="no">fl_allocated</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">df_bisec_dtgch_cbem4</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">svr_root_x</span>))
 <span class="kw">if</span> (<span class="no">fl_N_agg</span> <span class="kw">==</span> <span class="no">fl_allocated</span>){
   <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="st">'Total Input Available = Sum of Optimal Individual Allocations'</span>)
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, <span class="no">fl_N_agg</span>, <span class="st">', and, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, <span class="no">fl_allocated</span>)
 } <span class="kw">else</span> {
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'fl_N_agg ='</span>, <span class="no">fl_N_agg</span>, <span class="st">', but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))='</span>, <span class="no">fl_allocated</span>)
-}</pre></body></html></div>
-<pre><code>## fl_N_agg = 100 , but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))= 100</code></pre>
-<div class="sourceCode" id="cb133"><html><body><pre class="r"><span class="no">df_bisec_dtgch_cbem4</span></pre></body></html></div>
-<pre><code>## # A tibble: 9 x 10
-##   INDI_ID  fl_A fl_alpha     x       fx f_p_t_f_a bisec_a_27 bisec_b_27
-##     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1       2  4.34  0.00669  7.64 -1.35e-5 -8.09e-11       7.64       7.64
-## 2       3  4.36  0.00925 10.6   4.08e-6  7.39e-11      10.6       10.6 
-## 3       4  4.35  0.00925 10.6   8.10e-6  1.80e-10      10.6       10.6 
-## 4       5  4.37  0.0139  16.1  -5.42e-7 -4.72e-12      16.1       16.1 
-## 5       6  4.34  0.00669  7.63 -1.78e-5 -3.08e-11       7.63       7.63
-## 6       7  4.36  0.0139  16.1   5.60e-6  8.34e-11      16.1       16.1 
-## 7       8  4.34  0.00669  7.63 -1.17e-5 -9.18e-11       7.63       7.63
-## 8       9  4.34  0.00669  7.63  1.56e-5  5.49e-10       7.63       7.63
-## 9      10  4.36  0.0139  16.1   9.17e-6  1.69e-10      16.1       16.1 
-## # ... with 2 more variables: bisec_fa_27 &lt;dbl&gt;, bisec_fb_27 &lt;dbl&gt;</code></pre>
+}
+<span class="co">#&gt; fl_N_agg = 100 , but, sum(df_bisec_dtgch_cbem4 %&gt;% pull(svr_root_x))= 100</span>
+
+<span class="no">df_bisec_dtgch_cbem4</span>
+<span class="co">#&gt; # A tibble: 9 x 10</span>
+<span class="co">#&gt;   INDI_ID  fl_A fl_alpha     x       fx f_p_t_f_a bisec_a_27 bisec_b_27</span>
+<span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1       2  4.34  0.00669  7.64 -1.35e-5 -8.09e-11       7.64       7.64</span>
+<span class="co">#&gt; 2       3  4.36  0.00925 10.6   4.08e-6  7.39e-11      10.6       10.6 </span>
+<span class="co">#&gt; 3       4  4.35  0.00925 10.6   8.10e-6  1.80e-10      10.6       10.6 </span>
+<span class="co">#&gt; 4       5  4.37  0.0139  16.1  -5.42e-7 -4.72e-12      16.1       16.1 </span>
+<span class="co">#&gt; 5       6  4.34  0.00669  7.63 -1.78e-5 -3.08e-11       7.63       7.63</span>
+<span class="co">#&gt; 6       7  4.36  0.0139  16.1   5.60e-6  8.34e-11      16.1       16.1 </span>
+<span class="co">#&gt; 7       8  4.34  0.00669  7.63 -1.17e-5 -9.18e-11       7.63       7.63</span>
+<span class="co">#&gt; 8       9  4.34  0.00669  7.63  1.56e-5  5.49e-10       7.63       7.63</span>
+<span class="co">#&gt; 9      10  4.36  0.0139  16.1   9.17e-6  1.69e-10      16.1       16.1 </span>
+<span class="co">#&gt; # ... with 2 more variables: bisec_fa_27 &lt;dbl&gt;, bisec_fb_27 &lt;dbl&gt;</span></pre></body></html></div>
 </div>
 </div>
   </div>
@@ -1071,7 +1075,7 @@ fl_alpha
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://fanwangecon.github.io/REconTools/">Fan Wang</a>.</p>
+  <p>Developed by Fan Wang.</p>
 </div>
 
 <div class="pkgdown">

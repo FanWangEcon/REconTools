@@ -1,26 +1,31 @@
 ---
-title: DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)
+title: Compute Gini Inequality Coefficient Given Data Vector (One Variable)
+description: |
+  View a vector positive vectors as population, calculate discrete GINI inequality measure.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{DIST GINI--Compute Gini Inequality Coefficient Given Sample (One Variable)}
+  %\VignetteIndexEntry{Compute Gini Inequality Coefficient Given Sample (One Variable)}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-# Objective
-
-This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package.
+View a vector positive vectors as population, calculate discrete GINI inequality measure. This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package.
 
 There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the [GINI](https://en.wikipedia.org/wiki/Gini_coefficient) coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.
 
 See the formula below, note that when the sample size is small, there is a limit to inequality using the formula defined below given each $N$. So for small $N$, can not really compare inequality across arrays with different $N$, can only compare arrays with the same $N$.
 
-# Formula
+## Formula
 
-Not sure if this a standard way of computing GINI, but this is how I decided to compute this, the thought process is as follows, given monotonimcally increasing array $X$, with $x_1,...,x_N$:
+Given monotonimcally increasing array $X$, with $x_1,...,x_N$:
 
 1. There is a box, width = 1, height = 1
 2. The width is discretized into $N$ individuals, so each individual's width is $\frac{1}{N}$
@@ -40,7 +45,7 @@ $$
 
 Derive the formula in the steps below.
 
-## Step 1 Area Formula
+### Step 1 Area Formula
 
 $$
  \Gamma = \sum_{i=1}^N \frac{1}{N} \cdot \left(
@@ -50,7 +55,7 @@ $$
   \right)
 $$
 
-## Step 2 Total Area Given Perfect equality
+### Step 2 Total Area Given Perfect equality
 
 With perfect equality $x_i=a$ for all $i$, so need to divide by that.
 
@@ -70,7 +75,7 @@ $$
   = \frac{1}{2}
 $$
 
-## Step 3 Arriving at Finite Vector Gini Formula
+### Step 3 Arriving at Finite Vector Gini Formula
 
 Given what we have from above, we obtain the gini formula, divide by total area below 45 degree line.
 
@@ -94,7 +99,7 @@ $$
   \right)^{-1}
 $$
 
-## Step 4 Maximum Inequality given N
+### Step 4 Maximum Inequality given N
 
 Suppose $x_i=0$ for all $i<N$, then:
 
@@ -127,7 +132,7 @@ $$
  MostUnequalGINI\left(N\right) = 1 - \frac{2}{N+1} = \frac{N-1}{N+1}
 $$
 
-# Implement GINI Formula in R
+## Implement GINI Formula in R
 
 The **GINI** formula just derived is trivial to compute.
 
@@ -154,7 +159,7 @@ fv_dist_gini_vector_pos_test <- function(ar_pos) {
 }
 ```
 
-## Testing
+### Testing
 
 Generate a number of examples Arrays for testing
 

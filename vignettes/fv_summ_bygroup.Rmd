@@ -1,20 +1,25 @@
 ---
-title: SUMM BYGROUP--Summarize Variable by Factor Groups
+title: Summarize Variable by Factor Groups
+description: |
+  Show percentiles, mean, sd, min, max, first, last, and unique counts across quantitative variables in a dataset.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SUMM BYGROUP--Summarize Variable by Factor Groups}
+  %\VignetteIndexEntry{Summarize Variable by Factor Groups}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-# Objective
+Show percentiles, mean, sd, min, max, first, last, and unique counts across quantitative variables in a dataset. This file works out how the [ff_summ_bygroup](https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package.
 
-This file works out how the [ff_summ_bygroup](https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package.
-
-There is a quantitative variable, summarize this quantitative variable by multiple categorical groups, show a variety of statistics. including: 
+There is a quantitative variable, summarize this quantitative variable by multiple categorical groups, show a variety of statistics. including:
 
 1. percentiles
 2. mean, sd, etc
@@ -47,9 +52,9 @@ ar.perc <- c(0.10, 0.25, 0.5, 0.75, 0.9)
 boo.overall.stats <- TRUE
 ```
 
-# By Group Summarizing
+## By Group Summarizing
 
-## Statistics to Include
+### Statistics to Include
 ```{r}
 # List of statistics
 # https://rdrr.io/cran/dplyr/man/summarise.html
@@ -74,7 +79,7 @@ if (str.stats.group == 'allperc') {
 ```
 
 
-## Overall Statistics
+### Overall Statistics
 
 ```{r}
 
@@ -97,7 +102,7 @@ kable(df.overall.stats) %>%
 ```
 
 
-## Summarizing by Groups
+### Summarizing by Groups
 
 ```{r}
 
@@ -126,7 +131,7 @@ kable(df.table.grp.stats) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-## Statistics as Row
+### Statistics as Row
 
 ```{r}
 
@@ -158,7 +163,7 @@ kable(df.row.grp.stats) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-## Process Outputs
+### Process Outputs
 
 ```{r}
 

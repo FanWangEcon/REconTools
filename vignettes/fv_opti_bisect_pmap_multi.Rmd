@@ -1,19 +1,23 @@
 ---
-title: OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single
-  Zero-Crossing
-urlcolor: blue
+title: Solve Roots for N (Rows) Strictly Monotonic Functions
+description: |
+  Solve for roots for the same function across N sets of parameter values.
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single
-  Zero-Crossing}
+  %\VignetteIndexEntry{Solve Roots for N (Rows) Strictly Monotonic Functions}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-# Objective
-
-This file works out how the [ff_opti_bisect_pmap_multi](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package. Also see a closely related file from [R4Econ](https://fanwangecon.github.io/R4Econ/), [DPLYR Bisection](https://fanwangecon.github.io/R4Econ/optimization/root_bisect/fs_func_graph_eval.html), which works out in greater detail the bisection algorithm.
+Solve for roots for the same function across N sets of parameter values. This file works out how the [ff_opti_bisect_pmap_multi](https://fanwangecon.github.io/REconTools/reference/ff_opti_bisect_pmap_multi.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package. Also see a closely related file from [R4Econ](https://fanwangecon.github.io/R4Econ/), [DPLYR Bisection](https://fanwangecon.github.io/R4Econ/optimization/root_bisect/fs_func_graph_eval.html), which works out in greater detail the bisection algorithm.
 
 We want solve for function $0=f(z_{ij}, x_i, y_i, \textbf{X}, \textbf{Y}, c, d)$. There are $i$ functions that have $i$ specific $x$ and $y$. For each $i$ function, we evaluate along a grid of feasible values for $z$, over $j\in J$ grid points, potentially looking for the $j$ that is closest to the root. $j$ could be interpreted as iterations. $\textbf{X}$ and $\textbf{Y}$ are arrays common across the $i$ equations, and $c$ and $d$ are constants.
 
@@ -101,9 +105,9 @@ kable(tb_states_choices) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-## Create Nonlinear Root Function 
+## Create Nonlinear Root Function
 
-These is a test functions over which we will searh for roots. 
+These is a test functions over which we will searh for roots.
 
 ```{r}
 # Define Implicit Function
@@ -284,7 +288,7 @@ lineplot <- tb_states_choices_bisec_long %>%
                shape=!!sym(svr_abfafb_long_name))) +
         facet_wrap( ~ INDI_ID) +
         geom_line() +
-        geom_point() +    
+        geom_point() +
         labs(title = 'Bisection Iteration over individuals Until Convergence',
              x = 'Bisection Iteration',
              y = 'a (left side point) and b (right side point) values',
@@ -295,7 +299,7 @@ print(lineplot)
 
 # Implement Bisection as A Function over Dataframe
 
-## Define Bisection Algorithm Function 
+## Define Bisection Algorithm Function
 
 Note the *df* input must have the not hard-coded input variables in *fc_withroot*, identical names. In particular, *svr_bisect_solu* should specify the name of the root variable: the x variable, which we are changing to solve for zero, whatever it is called in the *df* dataframe.
 
@@ -303,7 +307,7 @@ Note the *df* input must have the not hard-coded input variables in *fc_withroot
 Inputs:
 
 - *ls_svr_df_in_func*: string list of variables in df that are inputs for fc_withroot.
-- *svr_root_x*: the x variable name that appears n fc_withroot. 
+- *svr_root_x*: the x variable name that appears n fc_withroot.
 
 ```{r define function}
 fv_opti_bisect_pmap_multi_test <- function(df, fc_withroot,
@@ -316,7 +320,7 @@ fv_opti_bisect_pmap_multi_test <- function(df, fc_withroot,
                                            st_lower_x = 'a', st_lower_fx = 'fa',
                                            st_upper_x = 'b', st_upper_fx = 'fb') {
 
-  
+
 # A. common prefix to make reshaping easier
 svr_a_lst <- paste0(st_bisec_prefix, st_lower_x, '_0')
 svr_b_lst <- paste0(st_bisec_prefix, st_upper_x, '_0')
@@ -374,7 +378,7 @@ while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
                       )
                   ) %>%
                   mutate(f_p_t_f_a = !!sym(svr_fxvr_name)*!!sym(svr_fa_lst))
-  
+
   # fl_p_dist2zr = sum(abs(p))
   fl_p_dist2zr <- mean(abs(df_bisec %>% pull(!!sym(svr_fxvr_name))))
 
@@ -386,7 +390,7 @@ while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
                   mutate(!!sym(svr_b_cur) :=
                            case_when(f_p_t_f_a < 0 ~ !!sym(svr_root_x),
                                      TRUE ~ !!sym(svr_b_lst)))
-  
+
   # Update f(a) and f(b)
   df_bisec <- df_bisec %>%
                   mutate(!!sym(svr_fa_cur) :=
@@ -395,12 +399,12 @@ while (it_cur <= it_iter_tol && fl_p_dist2zr >= fl_zero_tol ) {
                   mutate(!!sym(svr_fb_cur) :=
                            case_when(f_p_t_f_a < 0 ~ !!sym(svr_fxvr_name),
                                      TRUE ~ !!sym(svr_fb_lst)))
-  
+
   # Drop past record possibly
   if(!bl_keep_iter) {
     df_bisec <- df_bisec %>% select(-one_of(c(svr_a_lst, svr_b_lst, svr_fa_lst, svr_fb_lst)))
   }
-  
+
   # Save from last
   svr_a_lst <- svr_a_cur
   svr_b_lst <- svr_b_cur
@@ -427,7 +431,7 @@ Here we use the same function as earlier, but modify number of parameters:
 df <- tb_states_choices
 fc_withroot <- function(fl_A, fl_alpha, x){
   # Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg
-  # Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. 
+  # Also renamed fl_N to x, indicating this is the x we are shifting to look for zero.
   ar_p1_s1 = exp((fl_A - ar_nN_A)*fl_rho)
   ar_p1_s2 = (fl_alpha/ar_nN_alpha)
   ar_p1_s3 = (1/(ar_nN_alpha*fl_rho - 1))
@@ -462,7 +466,7 @@ svr_root_x_line <- 'x'
 fl_zero_tol = 10^-6
 ```
 
-## Test Function 
+## Test Function
 
 Now we call the function to see if it works:
 
@@ -478,7 +482,7 @@ if (fl_N_agg == fl_allocated){
   cat('fl_N_agg =', fl_N_agg, ', but, sum(df_bisec %>% pull(svr_root_x))=', fl_allocated)
 }
 
-# Show all 
+# Show all
 df_bisec
 ```
 
@@ -501,7 +505,7 @@ df_bisec %>% select(-one_of('f_p_t_f_a'))
 
 ## Test with PrjOptiAlloc log results
 
-Use *df_esti* from [*ffy_opt_dtgch_cbem4*](https://fanwangecon.github.io/PrjOptiAlloc/reference/df_opt_dtgch_cbem4.html) function of project *PrjOptiAlloc*. Select only the *fl_A* and *fl_alpha* variables, should look like *tb_states_choices*. The difference is that *tb_states_choices* values were made up, but the *alpha* and *A* values from *df_esti* are estimated. 
+Use *df_esti* from [*ffy_opt_dtgch_cbem4*](https://fanwangecon.github.io/PrjOptiAlloc/reference/df_opt_dtgch_cbem4.html) function of project *PrjOptiAlloc*. Select only the *fl_A* and *fl_alpha* variables, should look like *tb_states_choices*. The difference is that *tb_states_choices* values were made up, but the *alpha* and *A* values from *df_esti* are estimated.
 
 The function is the same as before: *fc_withroot*, in fact, this function is the solution to the log linear allocation from problem [PrjOptiAlloc](https://fanwangecon.github.io/PrjOptiAlloc/).
 
@@ -516,9 +520,9 @@ df_esti <- df_opt_dtgch_cbem4
 # Select only some individuals to speed up test
 df_esti <- df_esti %>% filter(indi.id <= 10)
 
-# Select only A and Alpha and Index 
+# Select only A and Alpha and Index
 # %>% mutate(A_log =(A_log))
-df_dtgch_cbem4_bisec <- df_esti %>% select(indi.id, A_log, alpha_log) 
+df_dtgch_cbem4_bisec <- df_esti %>% select(indi.id, A_log, alpha_log)
 ar_st_col_names = c('INDI_ID', 'fl_A', 'fl_alpha')
 df <- df_dtgch_cbem4_bisec %>% rename_all(~c(ar_st_col_names))
 ```
@@ -532,7 +536,7 @@ ar_nN_alpha <- df %>% pull(fl_alpha)
 # Function again updating the hard-coded parameters
 fc_withroot <- function(fl_A, fl_alpha, x){
   # Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg
-  # Also renamed fl_N to x, indicating this is the x we are shifting to look for zero. 
+  # Also renamed fl_N to x, indicating this is the x we are shifting to look for zero.
   ar_p1_s1 = exp((fl_A - ar_nN_A)*fl_rho)
   ar_p1_s2 = (fl_alpha/ar_nN_alpha)
   ar_p1_s3 = (1/(ar_nN_alpha*fl_rho - 1))
@@ -563,6 +567,6 @@ if (fl_N_agg == fl_allocated){
 } else {
   cat('fl_N_agg =', fl_N_agg, ', but, sum(df_bisec_dtgch_cbem4 %>% pull(svr_root_x))=', fl_allocated)
 }
-  
+
 df_bisec_dtgch_cbem4
 ```

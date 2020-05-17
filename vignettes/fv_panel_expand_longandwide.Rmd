@@ -1,18 +1,23 @@
 ---
-title: PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables
+title: Append Group Mean Lagged Values as Additional Panel Variables
+description: |
+  Compute averages over sub-groups of dates for each variable. Merge so that each date observation has as variables all lagged and forward information as additional variables.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables}
+  %\VignetteIndexEntry{Append Group Mean Lagged Values as Additional Panel Variables}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-# Outline
-
-This file works out how the [ff_panel_expand_longandwide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html) function works.
+Compute averages over sub-groups of dates for each variable. Merge so that each date observation has as variables all lagged and forward information as additional variables. This file works out how the [ff_panel_expand_longandwide](https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html) function works.
 
 There is a panel dataset, where each row is an observation at a date.
 
@@ -31,7 +36,7 @@ There is a panel dataset, where each row is an observation at a date.
 
 Doing this allows for lagged intereaction that are time specific in an arbitrary way.
 
-# Package and Data Loading and Parameter Setting
+## Package and Data Loading and Parameter Setting
 
 ```{r}
 # Load Library
@@ -62,7 +67,7 @@ df_uniques_mth <- ff_summ_count_unique_by_groups(
 print(df_uniques_mth, n=20)
 ```
 
-# Generate Additional Group Variables
+## Generate Additional Group Variables
 
 ```{r}
 # Create Additional Categorical Variables, ever 6 months for averaging
@@ -89,11 +94,11 @@ df_hw_cebu = df_hw_cebu %>% select(indi.id, svymthRound, mth6, mth8, mth10, ever
 
 ```
 
-# Averaging over Group Variables
+## Averaging over Group Variables
 
 Data per month, can still average if grouping is by months. If grouping not by per month, clearly need to average over the *svr_data* variable. Below, first try no averaging, directly reshape and merge. Then do averaging for subgroup.
 
-## Expand columns by Info for Each Month of Age
+### Expand columns by Info for Each Month of Age
 
 ```{r}
 
@@ -117,7 +122,7 @@ str(df_hw_cebu_mth_wide)
 df_hw_cebu_mth_widelong <- df_hw_cebu %>% left_join(df_hw_cebu_mth_wide)
 ```
 
-## Aggregate by Subgroup first columns by Info for Each Month of Age
+### Aggregate by Subgroup first columns by Info for Each Month of Age
 
 First, do not create additional dates based subgroups, just use raw dates variables, with unique indi/date, and generate the wide + long version of data.
 
@@ -153,10 +158,9 @@ df_hw_cebu_widelong <- df_hw_cebu %>%
 
 ```
 
+## Regression Testings
 
-# Regression Testings
-
-## Regression Testings Small Subsets
+### Regression Testings Small Subsets
 
 ```{r}
 attach(df_hw_cebu_widelong)
@@ -164,7 +168,7 @@ vf_months <- model.matrix(~factor(svymthRound))
 vf_mth6 <- model.matrix(~factor(mth6))
 ```
 
-## Regression Testings Small Subsets Single Months
+### Regression Testings Small Subsets Single Months
 
 ```{r}
 # Regression Model:
@@ -199,7 +203,8 @@ rs_test = lm(hgt ~
 rsm_test = summary(rs_test)
 #rsm_test
 ```
-## Regression Testing Every Single Month
+
+### Regression Testing Every Single Month
 
 ```{r}
 rs_test = lm(hgt ~
@@ -225,7 +230,7 @@ rsm_coef_inputs = rsm_coef %>% filter(grepl('vf_months', term))
 rsm_coef_inputs
 ```
 
-## Regression Testing 6 months Inputs
+### Regression Testing 6 months Inputs
 
 ```{r}
 rs_test_mth4 = lm(hgt ~

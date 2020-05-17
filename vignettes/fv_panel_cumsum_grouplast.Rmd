@@ -1,24 +1,29 @@
 ---
-title: PANEL CUMSUM LAST--Cumulative Sum by Index Up to Last in Group
+title: Cumulative Sum by Index Up to Last in Group
+description: |
+  Dataset tracks individuals over time. At each date, calculate the cumulative sum across all individuals based on each individual's final date of observation.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{PANEL CUMSUM LAST--Cumulative Sum by Index Up to Last in Group}
+  %\VignetteIndexEntry{Cumulative Sum by Index Up to Last in Group}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 urlcolor: blue
 ---
 
-Back to **[Fan](https://fanwangecon.github.io/)**'s REconTools **[Table of Content](https://fanwangecon.github.io/REconTools/)**. Also see [R4Econ](https://fanwangecon.github.io/R4Econ/) for R examples and [Intro Stats with R](https://fanwangecon.github.io/Stat4Econ/) for R introductions.
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-# Outline
+Dataset tracks individuals over time. At each date, calculate the cumulative sum across all individuals based on each individual's final date of observation. This file works out how the [ff_panel_cumsum_grouplast](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html) function works.
 
-This file works out how the [ff_panel_cumsum_grouplast](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html) function works.
+There are $N$ groups indexed by $j$, each group has $\left\{M_{i}\right\}_{i=1}^{N}$ individuals. Variable $x_{ji}$ is some variable measured at the group/individual level. There is a scheme that selects only individuals whose $x_{ji} < W$. But we will only take one individual from each group, could be the individual from the group with the highest $x_{ji}$ value. One could construct a variable $G$, where each row corresponds to a $x_{ji}$ value. What is the sum of all $y_{ji}$ conditional on $x_{ji} \le W$, only counting the largest individual within group.
 
-There are $N$ groups indexed by $j$, each group has $\left\{M_{i}\right\}_{i=1}^{N}$ individuals. Variable $x_{ji}$ is some variable measured at the group/individual level. There is a scheme that selects only individuals whose $x_{ji} < W$. But we will only take one individual from each group, could be the individual from the group with the highest $x_{ji}$ value. One could construct a variable $G$, where each row corresponds to a $x_{ji}$ value. What is the sum of all $y_{ji}$ conditional on $x_{ji} \le W$, only counting the largest individual within group. 
+Suppose we have data from N years, but each year's data is incomplete, so information from some months is unavailable. Generate a cumulative sum up to any calendar month, where we only sum up the value observed on the last available date of each year, and on the last available month of the current year up to the month of accounting.
 
-Suppose we have data from N years, but each year's data is incomplete, so information from some months is unavailable. Generate a cumulative sum up to any calendar month, where we only sum up the value observed on the last available date of each year, and on the last available month of the current year up to the month of accounting. 
-
-# Package and Data Loading and Parameter Setting
+## Package and Data Loading and Parameter Setting
 
 ```{r}
 # Load Library
@@ -52,14 +57,14 @@ ar_it_M_ID <- sample(1:it_N, it_N, replace = FALSE)
 tb_combine <- as_tibble(cbind(ar_it_M, ar_it_M_ID)) %>% rowid_to_column(var = "id")
 
 # Generate X Vector
-tb_long <- tb_combine %>% uncount(ar_it_M) 
+tb_long <- tb_combine %>% uncount(ar_it_M)
 tb_long <- tb_long %>% add_column(xrand = runif(dim(tb_long)[1])) %>% arrange(xrand) %>% mutate(x = row_number())
 
 # Generate within Group Rank
 tb_long <- tb_long %>% arrange(id, x) %>% group_by(id) %>% mutate(rank_l = row_number())
 
 # Select Core
-tb_data <- tb_long %>% select(id, x) %>% add_column(y = runif(dim(tb_long)[1])) %>%   
+tb_data <- tb_long %>% select(id, x) %>% add_column(y = runif(dim(tb_long)[1])) %>%
               arrange(id,x) %>% group_by(id) %>% mutate(y = cumsum(y))
 
 # Display
@@ -69,13 +74,13 @@ kable(tb_data ) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-# Cumulative Sum Within Group Max
+## Cumulative Sum Within Group Max
 
-The dataframe we constructed has three columns, *id*, *x* and *y*. 
+The dataframe we constructed has three columns, *id*, *x* and *y*.
 
-## Algorithm 1: Iterative Compute Row by Row redo All
+### Algorithm 1: Iterative Compute Row by Row redo All
 
-This is a slow algorithm, redo all computations with the addition of each row, this works, but is very slow. Recompute row by row fully. 
+This is a slow algorithm, redo all computations with the addition of each row, this works, but is very slow. Recompute row by row fully.
 
 1. sort by x
 2. select frame up to current row
@@ -86,31 +91,31 @@ This is a slow algorithm, redo all computations with the addition of each row, t
 ```{r}
 
 tb_data <- tb_data %>% arrange(x)
-tb_data_cum_sum_top <- tb_data %>% mutate(cum_sum_top = 0, 
-                                          cum_mean_top = 0, 
+tb_data_cum_sum_top <- tb_data %>% mutate(cum_sum_top = 0,
+                                          cum_mean_top = 0,
                                           cum_median_top = 0)
 
 for (row_ctr in seq(1, dim(tb_data)[1])) {
-  
+
     # select up to current row sort and group
-    tb_data_up2row <- tb_data[1:row_ctr,] %>% arrange(id, x) %>% group_by(id) 
-    
-    # Obtain last element sorted by x for each group, and resort by x    
+    tb_data_up2row <- tb_data[1:row_ctr,] %>% arrange(id, x) %>% group_by(id)
+
+    # Obtain last element sorted by x for each group, and resort by x
     tb_data_up2row <- tb_data_up2row %>% slice(n()) %>% arrange(x)
-    
+
     # cumulative sum of the highest element of each group below row_ctr
-    fl_cum_sum_top_cur <- tb_data_up2row %>% ungroup() %>% 
+    fl_cum_sum_top_cur <- tb_data_up2row %>% ungroup() %>%
         summarize(y_sum_top_up2row = sum(y)) %>% pull(y_sum_top_up2row)
-    fl_cum_mean_top_cur <- tb_data_up2row %>% ungroup() %>% 
+    fl_cum_mean_top_cur <- tb_data_up2row %>% ungroup() %>%
         summarize(y_mean_top_up2row = mean(y)) %>% pull(y_mean_top_up2row)
-    fl_cum_median_top_cur <- tb_data_up2row %>% ungroup() %>% 
+    fl_cum_median_top_cur <- tb_data_up2row %>% ungroup() %>%
         summarize(y_median_top_up2row = median(y)) %>% pull(y_median_top_up2row)
-    
+
     # Store results
     tb_data_cum_sum_top[row_ctr, 'cum_sum_top'] <- fl_cum_sum_top_cur
     tb_data_cum_sum_top[row_ctr, 'cum_mean_top'] <- fl_cum_mean_top_cur
     tb_data_cum_sum_top[row_ctr, 'cum_median_top'] <- fl_cum_median_top_cur
-    
+
     # Display
     if (row_ctr %% 10 == 0) {
       cat('row_ctr:', row_ctr, '\n')
@@ -123,39 +128,39 @@ kable(tb_data_cum_sum_top) %>%
     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-## Algorithm 2: Faster Algorithm, Less Repeatitive Calculations
+### Algorithm 2: Faster Algorithm, Less Repeatitive Calculations
 
 1. Initialize a *df_indi*, each row is a different individual, N by 1, benefit is that this is small
 2. Loop over queue file, row by row, rank by rank
-3. With the addition of each row, update *df_indi*'s row corresponding to the individual, always update to the latest piece of data. 
+3. With the addition of each row, update *df_indi*'s row corresponding to the individual, always update to the latest piece of data.
 4. Compute statistics of interest with df_indi
 
 ```{r}
 
 tb_data <- tb_data %>% arrange(x)
-tb_data_cum_sum_top <- tb_data %>% mutate(cum_sum_top = 0, 
-                                          cum_mean_top = 0, 
+tb_data_cum_sum_top <- tb_data %>% mutate(cum_sum_top = 0,
+                                          cum_mean_top = 0,
                                           cum_median_top = 0)
 ar_latest_indi <- rep(NA, 1, it_N)
 
 for (row_ctr in seq(1, dim(tb_data)[1])) {
-  
+
     # current rank, what is the ID of the person at this rank
     it_id_row <- tb_data[['id']][row_ctr]
-    
+
     # update the overall individual array with highest, latest value
     ar_latest_indi[it_id_row] <- tb_data[['y']][row_ctr]
-    
-    # Compute sum. 
+
+    # Compute sum.
     fl_cum_sum_top_cur <- sum(ar_latest_indi, na.rm = TRUE)
     fl_cum_mean_top_cur <- mean(ar_latest_indi, na.rm = TRUE)
     fl_cum_median_top_cur <- median(ar_latest_indi, na.rm = TRUE)
-    
+
     # Store results
     tb_data_cum_sum_top[row_ctr, 'cum_sum_top'] <- fl_cum_sum_top_cur
     tb_data_cum_sum_top[row_ctr, 'cum_mean_top'] <- fl_cum_mean_top_cur
     tb_data_cum_sum_top[row_ctr, 'cum_median_top'] <- fl_cum_median_top_cur
-    
+
     # Display
     if (row_ctr %% 10 == 0) {
       cat('row_ctr:', row_ctr, '\n')
@@ -168,11 +173,11 @@ kable(tb_data_cum_sum_top) %>%
     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-# Test Function
+## Test Function
 
 Testing [ff_panel_cumsum_grouplast](https://fanwangecon.github.io/REconTools/reference/ff_panel_cumsum_grouplast.html).
 
-## Cumulative Sum the Last
+### Cumulative Sum the Last
 
 Within group last occurance, cumulative sum of last occurance of individual by date. Think of date as x, y as individual outcomes, and id as individual ID. Each individual is observed at multiple x points. In the example here, at each x, only one id observed.
 
@@ -181,19 +186,19 @@ Within group last occurance, cumulative sum of last occurance of individual by d
 ff_panel_cumsum_grouplast(tb_data, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_cumsum', stat='sum')
 ```
 
-## Cumulative Average Last
+### Cumulative Average Last
 
-Thinking of taking Average SAT scores but, only of the last score people have. Calculate a moving average, where the moving window is all past information, and the average is across individuals, and for each individual, we only take the most recent score. 
+Thinking of taking Average SAT scores but, only of the last score people have. Calculate a moving average, where the moving window is all past information, and the average is across individuals, and for each individual, we only take the most recent score.
 
 ```{r}
 ff_panel_cumsum_grouplast(tb_data, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingaverage_mean', stat='mean')
 ```
 
-## Large Dataframe Cumulative Sum, Quick and Slow
+### Large Dataframe Cumulative Sum, Quick and Slow
 
-Suppose I have 100,000 records each at a unique sequencial date, records for over 500 individuals, each individual multiple times. Cumulative sum at each date, only summing the latest value for each individual. What is the speed of the algorithm here. 
+Suppose I have 100,000 records each at a unique sequencial date, records for over 500 individuals, each individual multiple times. Cumulative sum at each date, only summing the latest value for each individual. What is the speed of the algorithm here.
 
-### Slow and Fast Algorithm Comparison 
+#### Slow and Fast Algorithm Comparison
 
 First Explore algorithms, initial algorithm very slow, improved algorithm dramtically faster. Using option quick to control
 
@@ -213,11 +218,11 @@ ar_it_N <- floor(seq(it_N_min, it_N_max, length.out=it_loop))
 ar_it_max_M <- floor(seq(it_max_M_min, it_max_M_max, length.out=it_loop))
 
 for (it_ctr in seq(1, it_loop)) {
-  
+
   # Set df size
   it_N <- ar_it_N[it_ctr]
   it_max_M <- ar_it_max_M[it_ctr]
-  
+
   # Generate Panel Frame
   df_start_time <- Sys.time()
   ar_it_M <- sample(1:it_max_M, it_N, replace = TRUE)
@@ -233,7 +238,7 @@ for (it_ctr in seq(1, it_loop)) {
   start_time_fast <- Sys.time()
   tb_data_cum_sum_top <- ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='sum', quick=TRUE)
   end_time_fast <- Sys.time()
-    
+
   # Timing Test SLOW VERBOSE TRUE
   start_time_slow <- Sys.time()
   tb_data_cum_sum_top <- ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='sum', quick=FALSE, verbose = TRUE)
@@ -243,7 +248,7 @@ for (it_ctr in seq(1, it_loop)) {
   start_time_slow_verbose <- Sys.time()
   tb_data_cum_sum_top <- ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='sum', quick=FALSE, verbose = FALSE)
   end_time_slow_verbose <- Sys.time()
-  
+
   cat('it_ctr:', it_ctr, ', it_N:', it_N, ', it_max_N:', it_max_M, '\n')
   print(paste0('Df Generation Took:', df_end_time - df_start_time))
   print(paste0('Moving Stat Took QUICK True:', end_time_fast - start_time_fast))
@@ -253,9 +258,9 @@ for (it_ctr in seq(1, it_loop)) {
 
 ```
 
-### Fast Algorithm Large Matrix Testing
+#### Fast Algorithm Large Matrix Testing
 
-Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 33 seconds, not very fast, could be improved later. 
+Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 33 seconds, not very fast, could be improved later.
 
 The structure is iterative by construction, difficult to fully vectorize. Perhaps achievable as well and faster with some moving average function, rolling window functions.
 
@@ -273,11 +278,11 @@ ar_it_N <- floor(seq(it_N_min, it_N_max, length.out=it_loop))
 ar_it_max_M <- floor(seq(it_max_M_min, it_max_M_max, length.out=it_loop))
 
 for (it_ctr in seq(1, it_loop)) {
-  
+
   # Set df size
   it_N <- ar_it_N[it_ctr]
   it_max_M <- ar_it_max_M[it_ctr]
-  
+
   # Generate Panel Frame
   df_start_time <- Sys.time()
   ar_it_M <- sample(1:it_max_M, it_N, replace = TRUE)
@@ -293,7 +298,7 @@ for (it_ctr in seq(1, it_loop)) {
   start_time_fast <- Sys.time()
   tb_data_cum_sum_top <- ff_panel_cumsum_grouplast(df, svr_id='id', svr_x='x', svr_y='y', svr_cumsumtop = 'y_movingsum_lastestscore', stat='sum', quick=TRUE)
   end_time_fast <- Sys.time()
-    
+
   cat('it_ctr:', it_ctr, ', it_N:', it_N, ', it_max_N:', it_max_M, '\n')
   print(paste0('Df Generation Took:', df_end_time - df_start_time))
   print(paste0('Moving Stat Took QUICK True:', end_time_fast - start_time_fast))

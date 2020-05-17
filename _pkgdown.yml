@@ -1,10 +1,52 @@
+url: https://fanwangecon.github.io/REconTools
+
+title: "REconTools"
+
+authors:
+  Fan Wang:
+    href: "https://fanwangecon.github.io"
+
+navbar:
+  title: "REconTools"
+  left:
+    - text: "Functions"
+      href: reference/index.html
+    - text: "Guide Articles"
+      href: articles/index.html
+    - text: "News"
+      href: news/index.html
+    - text: "Other Sites"
+      menu:
+        - text: "Project Optimal Allocation (R)"
+          href: https://fanwangecon.github.io/PrjOptiAlloc/
+        - text: "R Examples Data and Optimization"
+          href: https://fanwangecon.github.io/R4Econ/
+        - text: "R Examples Introductory Statistics"
+          href: https://fanwangecon.github.io/Stat4Econ/
+        - text: "Stata Examples Regressions and Tables"
+          href: https://fanwangecon.github.io/Stata4Econ/
+        - text: "Matlab Examples Matrix and Graphs"
+          href: https://fanwangecon.github.io/M4Econ/
+        - text: "Matlab Introductory Math for Econ"
+          href: https://fanwangecon.github.io/Math4Econ/
+        - text: "Latex and Paper Generation Examples"
+          href: https://fanwangecon.github.io/Tex4Econ/
+        - text: "Python Examples"
+          href: https://fanwangecon.github.io/pyfan/
+    - text: "Fan"
+      href: http://fanwangecon.github.io/
+  right:
+   - icon: fa-github
+     href: https://github.com/fanwangecon/REconTools
+
+
 reference:
 - title: Summary Statistics Functions
   desc: Functions that summarize dataframes
   contents:
   - starts_with("ff_summ")
 - title: Distributional Functions
-  desc: Functions that compute distributional related outcomes that do not have default functions
+  desc: Functions that compute distributional related outcomes
   contents:
   - starts_with("ff_dist")
 - title: Panel Data Function
@@ -23,6 +65,27 @@ reference:
   desc: Support tools for basic variable operations, packaging etc.
   contents:
   - starts_with("ff_sup")
+
+articles:
+- title: Summary Statistics Functions
+  desc: Vignettes for functions that summarize dataframes
+  contents:
+  - starts_with("fv_summ")
+- title: Panel Data Function
+  desc: Vignettes for functions that process dataframes with panel characteristics
+  contents:
+  - starts_with("fv_panel")
+- title: Distributional Functions
+  desc: Vignettes for functions that compute distributional related outcomes
+  contents:
+  - starts_with("fv_dist")
+- title: Optimization Functions
+  desc: Vignettes for functions that optimize to minimize, maximize, etc.
+  contents:
+  - starts_with("fv_opti")
+
+
 template:
+  bootswatch: spacelab
   params:
     ganalytics: UA-92953468-5

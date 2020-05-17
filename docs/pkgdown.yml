@@ -7,5 +7,8 @@ articles:
   fv_panel_cumsum_grouplast: fv_panel_cumsum_grouplast.html
   fv_panel_expand_longandwide: fv_panel_expand_longandwide.html
   fv_summ_bygroup: fv_summ_bygroup.html
-last_built: 2020-05-16T21:34Z
+last_built: 2020-05-17T11:37Z
+urls:
+  reference: https://fanwangecon.github.io/REconTools/reference
+  article: https://fanwangecon.github.io/REconTools/articles
 

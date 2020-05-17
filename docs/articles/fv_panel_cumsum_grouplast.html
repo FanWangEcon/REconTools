@@ -44,43 +44,55 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../reference/index.html">Functions</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/index.html">Guide Articles</a>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Other Sites
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/fv_dist_gini_vector_pos.html">DIST GINI--Compute Gini Inequality Coefficient Given Data Vector (One Variable)</a>
+      <a href="https://fanwangecon.github.io/PrjOptiAlloc/">Project Optimal Allocation (R)</a>
     </li>
     <li>
-      <a href="../articles/fv_opti_bisect_pmap_multi.html">OPTI BISECT--Solve Roots for N (Rows) Strictly Monotonic Functions with Single Zero-Crossing</a>
+      <a href="https://fanwangecon.github.io/R4Econ/">R Examples Data and Optimization</a>
     </li>
     <li>
-      <a href="../articles/fv_panel_cumsum_grouplast.html">PANEL CUMSUM LAST--Cumulative Sum by Index Up to Last in Group</a>
+      <a href="https://fanwangecon.github.io/Stat4Econ/">R Examples Introductory Statistics</a>
     </li>
     <li>
-      <a href="../articles/fv_panel_expand_longandwide.html">PANEL EXPAND--Append Group Mean Lagged Values as Additional Panel Variables</a>
+      <a href="https://fanwangecon.github.io/Stata4Econ/">Stata Examples Regressions and Tables</a>
     </li>
     <li>
-      <a href="../articles/fv_summ_bygroup.html">SUMM BYGROUP--Summarize Variable by Factor Groups</a>
+      <a href="https://fanwangecon.github.io/M4Econ/">Matlab Examples Matrix and Graphs</a>
+    </li>
+    <li>
+      <a href="https://fanwangecon.github.io/Math4Econ/">Matlab Introductory Math for Econ</a>
+    </li>
+    <li>
+      <a href="https://fanwangecon.github.io/Tex4Econ/">Latex and Paper Generation Examples</a>
+    </li>
+    <li>
+      <a href="https://fanwangecon.github.io/pyfan/">Python Examples</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="http://fanwangecon.github.io/">Fan</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/FanWangEcon/REconTools/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/fanwangecon/REconTools">
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -3201,19 +3213,19 @@ cum_median_top
 }</pre></body></html></div>
 <pre><code>## it_ctr: 1 , it_N: 5 , it_max_N: 10 
 ## [1] "Df Generation Took:0.0109930038452148"
-## [1] "Moving Stat Took QUICK True:0.0079958438873291"
-## [1] "Moving Stat Took SLOW VERBOSE True:0.0269839763641357"
-## [1] "Moving Stat Took SLOW VERBOSE False:0.0459740161895752"
+## [1] "Moving Stat Took QUICK True:0.00899600982666016"
+## [1] "Moving Stat Took SLOW VERBOSE True:0.0259850025177002"
+## [1] "Moving Stat Took SLOW VERBOSE False:0.0429749488830566"
 ## it_ctr: 2 , it_N: 17 , it_max_N: 20 
-## [1] "Df Generation Took:0.0109941959381104"
-## [1] "Moving Stat Took QUICK True:0.113933801651001"
-## [1] "Moving Stat Took SLOW VERBOSE True:0.436750173568726"
-## [1] "Moving Stat Took SLOW VERBOSE False:0.404752969741821"
+## [1] "Df Generation Took:0.0099940299987793"
+## [1] "Moving Stat Took QUICK True:0.129944086074829"
+## [1] "Moving Stat Took SLOW VERBOSE True:0.467700958251953"
+## [1] "Moving Stat Took SLOW VERBOSE False:0.408765077590942"
 ## it_ctr: 3 , it_N: 30 , it_max_N: 30 
-## [1] "Df Generation Took:0.0130059719085693"
-## [1] "Moving Stat Took QUICK True:0.376782894134521"
-## [1] "Moving Stat Took SLOW VERBOSE True:1.57809209823608"
-## [1] "Moving Stat Took SLOW VERBOSE False:1.45516896247864"</code></pre>
+## [1] "Df Generation Took:0.0119938850402832"
+## [1] "Moving Stat Took QUICK True:0.383790016174316"
+## [1] "Moving Stat Took SLOW VERBOSE True:1.5111300945282"
+## [1] "Moving Stat Took SLOW VERBOSE False:1.37821292877197"</code></pre>
 </div>
 <div id="fast-algorithm-large-matrix-testing" class="section level3">
 <h3 class="hasAnchor">
@@ -3259,20 +3271,20 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took QUICK True:'</span>, <span class="no">end_time_fast</span> - <span class="no">start_time_fast</span>))
 }</pre></body></html></div>
 <pre><code>## it_ctr: 1 , it_N: 5 , it_max_N: 10 
-## [1] "Df Generation Took:0.0140049457550049"
-## [1] "Moving Stat Took QUICK True:0.00898289680480957"
+## [1] "Df Generation Took:0.0099949836730957"
+## [1] "Moving Stat Took QUICK True:0.0079948902130127"
 ## it_ctr: 2 , it_N: 16 , it_max_N: 12 
-## [1] "Df Generation Took:0.0109930038452148"
-## [1] "Moving Stat Took QUICK True:0.100941181182861"
+## [1] "Df Generation Took:0.0109879970550537"
+## [1] "Moving Stat Took QUICK True:0.0929470062255859"
 ## it_ctr: 3 , it_N: 27 , it_max_N: 15 
-## [1] "Df Generation Took:0.0109939575195312"
-## [1] "Moving Stat Took QUICK True:0.198896884918213"
+## [1] "Df Generation Took:0.0109808444976807"
+## [1] "Moving Stat Took QUICK True:0.200896978378296"
 ## it_ctr: 4 , it_N: 38 , it_max_N: 17 
-## [1] "Df Generation Took:0.0109951496124268"
-## [1] "Moving Stat Took QUICK True:0.284836053848267"
+## [1] "Df Generation Took:0.0109930038452148"
+## [1] "Moving Stat Took QUICK True:0.296830177307129"
 ## it_ctr: 5 , it_N: 50 , it_max_N: 20 
-## [1] "Df Generation Took:0.0129969120025635"
-## [1] "Moving Stat Took QUICK True:0.368783950805664"</code></pre>
+## [1] "Df Generation Took:0.0109939575195312"
+## [1] "Moving Stat Took QUICK True:0.361790895462036"</code></pre>
 </div>
 </div>
 </div>
@@ -3289,7 +3301,7 @@ cum_median_top
 
 
       <footer><div class="copyright">
-  <p>Developed by Fan Wang.</p>
+  <p>Developed by <a href="https://fanwangecon.github.io/REconTools/">Fan Wang</a>.</p>
 </div>
 
 <div class="pkgdown">

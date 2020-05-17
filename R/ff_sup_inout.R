@@ -149,7 +149,8 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
           # Write to new
           fileConn_sr <- file(spn_modtex)
           st_file_read_mod <- ff_sup_clean_rmd_mod(st_file_read,
-                                                   it_hierachy_shift=2, it_toc_depth=3)
+                                                   it_hierachy_shift=it_hierachy_shift,
+                                                   it_toc_depth=it_toc_depth)
           writeLines(st_file_read_mod, fileConn_sr)
           # Close
           close(fileConn_rd)

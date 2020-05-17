@@ -29,7 +29,7 @@ and the student ID. So if the student has been in class 10 times, the teacher ha
 ten rows of recorded data for the student with two columns: column one is the student
 ID, and column two is the date on which the student was in class. Suppose there were
 50 students, who on average attended exactly 10 classes each during the semester,
-this means we have $10 \cdot 50$ rows of data, with differing numbers of
+this means we have \eqn{10 \cdot 50} rows of data, with differing numbers of
 rows for each student. This is the input matrix for this function here.
 
 OUTPUT MATRIX: Now we want to generate a new dataframe, where each row is a date, and each column

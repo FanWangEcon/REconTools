@@ -97,6 +97,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://twitter.com/fanwangecon">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -107,7 +113,7 @@
 
       
 
-      </header><script src="fv_summ_bygroup_files/header-attrs-2.1/header-attrs.js"></script><script src="fv_summ_bygroup_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="fv_summ_bygroup_files/header-attrs-2.2/header-attrs.js"></script><script src="fv_summ_bygroup_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Summarize Variable by Factor Groups</h1>
@@ -183,14 +189,14 @@
 <a href="#overall-statistics" class="anchor"></a>Overall Statistics</h3>
 <div class="sourceCode" id="cb4"><html><body><pre class="r">
 <span class="co"># Start Transform</span>
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">var.numeric</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">var.numeric</span>)))
+<span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">var.numeric</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">var.numeric</span>)))
 
 <span class="co"># Overall Statistics</span>
 <span class="kw">if</span> (<span class="no">boo.overall.stats</span>) {
     <span class="no">df.overall.stats</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="no">var.numeric</span>), <span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(!!!<span class="no">strs.all</span>))
     <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">strs.all</span>) <span class="kw">==</span> <span class="fl">1</span>) {
         <span class="co"># give it a name, otherwise if only one stat, name of stat not saved</span>
-        <span class="no">df.overall.stats</span> <span class="kw">&lt;-</span> <span class="no">df.overall.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">var.numeric</span>))
+        <span class="no">df.overall.stats</span> <span class="kw">&lt;-</span> <span class="no">df.overall.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">var.numeric</span>))
     }
     <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.overall.stats</span>))
 }
@@ -198,7 +204,7 @@
 <span class="co">#&gt; i Use `all_of(var.numeric)` instead of `var.numeric` to silence this message.</span>
 <span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
 <span class="co">#&gt; This message is displayed once per session.</span>
-<span class="co">#&gt; Warning: funs() is soft deprecated as of dplyr 0.8.0</span>
+<span class="co">#&gt; Warning: `funs()` is deprecated as of dplyr 0.8.0.</span>
 <span class="co">#&gt; Please use a list of either functions or lambdas: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   # Simple named list: </span>
@@ -209,7 +215,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   # Using lambdas</span>
 <span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
+<span class="co">#&gt; This warning is displayed once every 8 hours.</span>
+<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
 
 <span class="co"># Display Results</span>
 <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">%&gt;%</span>
@@ -317,8 +324,8 @@ mpg.n_distinct
 <div class="sourceCode" id="cb5"><html><body><pre class="r">
 <span class="co"># Group Sort</span>
 <span class="no">df.select</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span>
-              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
-              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">vars.group</span>, <span class="no">var.numeric</span>)))
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">vars.group</span>, <span class="no">var.numeric</span>)))
 
 
 
@@ -601,7 +608,7 @@ n_distinct
 <span class="co"># Add Stat Name</span>
 <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">strs.all</span>) <span class="kw">==</span> <span class="fl">1</span>) {
     <span class="co"># give it a name, otherwise if only one stat, name of stat not saved</span>
-    <span class="no">df.table.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">var.numeric</span>))
+    <span class="no">df.table.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">var.numeric</span>))
 }
 
 <span class="co"># Display Results</span>
@@ -887,22 +894,24 @@ n_distinct
     <span class="no">df.row.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>,
                                            <span class="no">vars.group</span>, <span class="st">'.g'</span>,
-                                           (!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="no">vars.group</span>)))) <span class="kw">%&gt;%</span>
+                                           (!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">vars.group</span>)))) <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">variable</span>, <span class="no">value</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span>(<span class="no">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">str.vars.group.combine</span>, <span class="st">'variable'</span>)) <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="no">str.vars.group.combine</span>, <span class="no">value</span>)
 } <span class="kw">else</span> {
     <span class="no">df.row.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span>
                             <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="no">vars.groups.combine</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">vars.group</span>, <span class="kw">collapse</span><span class="kw">=</span><span class="st">'.'</span>)),
-                                   !!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span>(!!!(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="no">vars.group</span>))))) <span class="kw">%&gt;%</span>
+                                   !!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span>(!!!(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">vars.group</span>))))) <span class="kw">%&gt;%</span>
                             <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>, <span class="no">vars.groups.combine</span>, <span class="st">'.'</span>,
-                                                                       (!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">str.vars.group.combine</span>)))) <span class="kw">%&gt;%</span>
+                                                                       (!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">str.vars.group.combine</span>)))) <span class="kw">%&gt;%</span>
                             <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>() <span class="kw">%&gt;%</span>
                             <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">vars.groups.combine</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">variable</span>, <span class="no">value</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">str.vars.group.combine</span>))  <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span>(<span class="no">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">str.vars.group.combine</span>, <span class="st">'variable'</span>)) <span class="kw">%&gt;%</span>
             <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="no">str.vars.group.combine</span>, <span class="no">value</span>)
 }
+<span class="co">#&gt; Warning: attributes are not identical across measure variables;</span>
+<span class="co">#&gt; they will be dropped</span>
 <span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
 <span class="co">#&gt; i Use `all_of(str.vars.group.combine)` instead of `str.vars.group.combine` to silence this message.</span>
 <span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
@@ -2049,7 +2058,7 @@ mpg.n_distinct
 
 
       <footer><div class="copyright">
-  <p>Developed by Fan Wang.</p>
+  <p>Developed by <a href="https://fanwangecon.github.io">Fan Wang</a>.</p>
 </div>
 
 <div class="pkgdown">

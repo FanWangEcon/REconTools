@@ -145,6 +145,12 @@ the string paths to be searched over." />
      
   </a>
 </li>
+<li>
+  <a href="https://twitter.com/fanwangecon">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -174,6 +180,8 @@ the string paths to be searched over.</p>
     <pre class="usage"><span class='fu'>ff_sup_clean_rmd</span>(
   <span class='no'>ar_spt_root</span>,
   <span class='no'>ar_spn_skip</span>,
+  <span class='kw'>st_file_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
+  <span class='kw'>st_git_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
   <span class='kw'>st_folder_pdf</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
   <span class='kw'>st_folder_html</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
   <span class='kw'>st_folder_R</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
@@ -181,8 +189,11 @@ the string paths to be searched over.</p>
   <span class='kw'>bl_recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>bl_test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>it_hierachy_lower_rmd</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>it_hierachy_shift</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>
+  <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>ls_bool_convert</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_pdf</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_R</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+  <span class='kw'>ls_bool_remove</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_remove_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -192,6 +203,16 @@ the string paths to be searched over.</p>
       <th>ar_spn_skip</th>
       <td><p>array a string array of names, if path found contains any of the string
 in the array, will skip.</p></td>
+    </tr>
+    <tr>
+      <th>st_file_pattern</th>
+      <td><p>string name of file suffix to search over</p></td>
+    </tr>
+    <tr>
+      <th>st_git_pattern</th>
+      <td><p>string name of file suffix based on which to consider if updating. If this is
+difference from st_file_pattern, use the file base with this suffix to detect if file has been changed. This
+is needed to detect if mlx files have changed for rmd files, where rmd files are not git tracked.</p></td>
     </tr>
     <tr>
       <th>st_folder_pdf</th>
@@ -219,14 +240,26 @@ still update pdf and html files.</p></td>
       <td><p>boolean if testing, meaning do not generate pdf html, just see which files are been</p></td>
     </tr>
     <tr>
+      <th>it_hierachy_lower_rmd</th>
+      <td><p>integer promote saved hierrachy for rmd files and resave.</p></td>
+    </tr>
+    <tr>
       <th>it_hierachy_shift</th>
-      <td><p>rmd modification level of promotion from bookdown hierachy
-to own file hierarchy</p></td>
+      <td><p>int modification level of promotion from bookdown hierachy
+to own file hierarchy for individual files</p></td>
     </tr>
     <tr>
       <th>it_toc_depth</th>
-      <td><p>rmd own file outputs toc levels to show
+      <td><p>rmd own file outputs toc levels to show</p></td>
+    </tr>
+    <tr>
+      <th>ls_bool_convert</th>
+      <td><p>list of booleans to generate pdf, html and or R file. Generate only HTML for example.
 considered included, searched and found</p></td>
+    </tr>
+    <tr>
+      <th>ls_bool_remove</th>
+      <td><p>list of booleans contorling if removing certain files in the same directory where the rmd file is</p></td>
     </tr>
     <tr>
       <th>ls_spt_root</th>
@@ -279,7 +312,7 @@ considered included, searched and found</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Fan Wang.</p>
+  <p>Developed by <a href='https://fanwangecon.github.io'>Fan Wang</a>.</p>
 </div>
 
 <div class="pkgdown">

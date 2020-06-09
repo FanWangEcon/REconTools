@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length. — ff_dist_gini_vector_pos • REconTools</title>
+<title>Increase the RMD Hierarchy of Existing Files — ff_sup_lower_hierarchy • REconTools</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,10 @@
 
 
 
-<meta property="og:title" content="Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length. — ff_dist_gini_vector_pos" />
-<meta property="og:description" content="See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
-This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
-Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1)." />
+<meta property="og:title" content="Increase the RMD Hierarchy of Existing Files — ff_sup_lower_hierarchy" />
+<meta property="og:description" content="Modify Rmd files by increasing pound sign counts. This is needed for the RMD files
+converted from mlx, where I can only set file top hierachy to 2 pounds, but should be
+three for M4Econ" />
 
 
 
@@ -162,49 +162,36 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R'><code>R/ff_dist_gini.R</code></a></small>
-    <div class="hidden name"><code>ff_dist_gini_vector_pos.Rd</code></div>
+    <h1>Increase the RMD Hierarchy of Existing Files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'><code>R/ff_sup_inout.R</code></a></small>
+    <div class="hidden name"><code>ff_sup_lower_hierarchy.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
-This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
-Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1).</p>
+    <p>Modify Rmd files by increasing pound sign counts. This is needed for the RMD files
+converted from mlx, where I can only set file top hierachy to 2 pounds, but should be
+three for M4Econ</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_pos</span>)</pre>
+    <pre class="usage"><span class='fu'>ff_sup_lower_hierarchy</span>(<span class='no'>st_file</span>, <span class='kw'>it_hierachy_lower_rmd</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ar_pos</th>
-      <td><p>array of numeric values that are all non-negative</p></td>
+      <th>st_file</th>
+      <td><p>string texts contents from a R4Econ RMD file.</p></td>
+    </tr>
+    <tr>
+      <th>it_hierachy_lower_rmd</th>
+      <td><p>integer how many pound tiers to promote hierarchy by</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a scalar value of the gini coefficient</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <p>modified texts</p>
 
-    <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html'>https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html</a>
-<a href='https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html'>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html</a>
-<a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R</a></p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ar_equal_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>)
-<span class='no'>ar_ineql_alittle_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)
-<span class='no'>ar_ineql_somewht_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>3</span>)
-<span class='no'>ar_ineql_alotine_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>5</span>)
-<span class='no'>ar_ineql_veryvry_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>8</span>)
-<span class='no'>ar_ineql_mostmst_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>13</span>)
-<span class='co'># Beta draw testing</span>
-<span class='no'>ar_beta_mostrich_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>5</span>, <span class='fl'>1</span>)
-<span class='no'>ar_beta_mostpoor_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>5</span>)
-<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>)
-<span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_equal_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alittle_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.1111111</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_somewht_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.2592593</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alotine_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.3131313</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_mostmst_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.333252</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostrich_n1000</span>)</div><div class='output co'>#&gt; [1] 0.09135541</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostpoor_n1000</span>)</div><div class='output co'>#&gt; [1] 0.453811</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span>)</div><div class='output co'>#&gt; [1] 0.402409</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

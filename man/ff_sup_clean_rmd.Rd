@@ -7,6 +7,8 @@
 ff_sup_clean_rmd(
   ar_spt_root,
   ar_spn_skip,
+  st_file_pattern = ".Rmd",
+  st_git_pattern = ".Rmd",
   st_folder_pdf = "/htmlpdfr/",
   st_folder_html = "/htmlpdfr/",
   st_folder_R = "/htmlpdfr/",
@@ -14,13 +16,22 @@ ff_sup_clean_rmd(
   bl_recursive = TRUE,
   bl_verbose = TRUE,
   bl_test = TRUE,
+  it_hierachy_lower_rmd = 0,
   it_hierachy_shift = 2,
-  it_toc_depth = 3
+  it_toc_depth = 3,
+  ls_bool_convert = list(bl_pdf = TRUE, bl_html = TRUE, bl_R = TRUE),
+  ls_bool_remove = list(bl_remove_html = TRUE)
 )
 }
 \arguments{
 \item{ar_spn_skip}{array a string array of names, if path found contains any of the string
 in the array, will skip.}
+
+\item{st_file_pattern}{string name of file suffix to search over}
+
+\item{st_git_pattern}{string name of file suffix based on which to consider if updating. If this is
+difference from st_file_pattern, use the file base with this suffix to detect if file has been changed. This
+is needed to detect if mlx files have changed for rmd files, where rmd files are not git tracked.}
 
 \item{st_folder_pdf}{string subfolder where to store the pdf file, if just empty, store in rmd folder}
 
@@ -35,11 +46,17 @@ still update pdf and html files.}
 
 \item{bl_test}{boolean if testing, meaning do not generate pdf html, just see which files are been}
 
-\item{it_hierachy_shift}{rmd modification level of promotion from bookdown hierachy
-to own file hierarchy}
+\item{it_hierachy_lower_rmd}{integer promote saved hierrachy for rmd files and resave.}
 
-\item{it_toc_depth}{rmd own file outputs toc levels to show
+\item{it_hierachy_shift}{int modification level of promotion from bookdown hierachy
+to own file hierarchy for individual files}
+
+\item{it_toc_depth}{rmd own file outputs toc levels to show}
+
+\item{ls_bool_convert}{list of booleans to generate pdf, html and or R file. Generate only HTML for example.
 considered included, searched and found}
+
+\item{ls_bool_remove}{list of booleans contorling if removing certain files in the same directory where the rmd file is}
 
 \item{ls_spt_root}{array a string array of path roots in which to search for Rmd files to knit}
 }

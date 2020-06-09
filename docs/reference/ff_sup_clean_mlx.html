@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length. — ff_dist_gini_vector_pos • REconTools</title>
+<title>Convert mlx files to tex and pdf — ff_sup_clean_mlx • REconTools</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length. — ff_dist_gini_vector_pos" />
-<meta property="og:description" content="See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
-This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
-Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1)." />
+<meta property="og:title" content="Convert mlx files to tex and pdf — ff_sup_clean_mlx" />
+<meta property="og:description" content="If a mlx file has been edited, in math4econ for example, check it against git and
+convert to tex and pdf using command line matlab. Then the function wraps ff_sup_clean_rmd" />
 
 
 
@@ -162,49 +161,113 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute gini coefficient between 0 (equality) and (n-1)/(n+1) (inequality) where n is vector length.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R'><code>R/ff_dist_gini.R</code></a></small>
-    <div class="hidden name"><code>ff_dist_gini_vector_pos.Rd</code></div>
+    <h1>Convert mlx files to tex and pdf</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'><code>R/ff_sup_inout.R</code></a></small>
+    <div class="hidden name"><code>ff_sup_clean_mlx.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See vignette for details, but very simple one line algorithm that computes gini for a pos or zero data vector.
-This does not work with negative values. Additionally, this is not for a sample, the vector is the population.
-Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1).</p>
+    <p>If a mlx file has been edited, in math4econ for example, check it against git and
+convert to tex and pdf using command line matlab. Then the function wraps <strong>ff_sup_clean_rmd</strong></p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_pos</span>)</pre>
+    <pre class="usage"><span class='fu'>ff_sup_clean_mlx</span>(
+  <span class='no'>st_prj_root</span>,
+  <span class='no'>ar_spt_root</span>,
+  <span class='no'>ar_spn_skip</span>,
+  <span class='kw'>st_pattern</span> <span class='kw'>=</span> <span class='st'>".mlx"</span>,
+  <span class='kw'>st_folder_pdf</span> <span class='kw'>=</span> <span class='st'>"htmlpdfm/"</span>,
+  <span class='kw'>st_folder_html</span> <span class='kw'>=</span> <span class='st'>"htmlpdfm/"</span>,
+  <span class='kw'>st_folder_m</span> <span class='kw'>=</span> <span class='st'>"htmlpdfm/"</span>,
+  <span class='kw'>st_folder_html_m</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>st_folder_rmd</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>bl_gen_if_git_old</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bl_recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>bl_test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>it_hierachy_shift</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ar_pos</th>
-      <td><p>array of numeric values that are all non-negative</p></td>
+      <th>st_prj_root</th>
+      <td><p>string project root for image folder movement</p></td>
+    </tr>
+    <tr>
+      <th>ar_spn_skip</th>
+      <td><p>array a string array of names, if path found contains any of the string</p></td>
+    </tr>
+    <tr>
+      <th>st_pattern</th>
+      <td><p>string search pattern suffix
+in the array, will skip.</p></td>
+    </tr>
+    <tr>
+      <th>st_folder_pdf</th>
+      <td><p>string subfolder where to store the pdf file, if just empty, store in rmd folder</p></td>
+    </tr>
+    <tr>
+      <th>st_folder_html</th>
+      <td><p>string subfolder where to store the html file, if just empty, store in rmd folder</p></td>
+    </tr>
+    <tr>
+      <th>bl_gen_if_git_old</th>
+      <td><p>boolean if true then even if RMD files do not have git status change,
+still update pdf and html files.</p></td>
+    </tr>
+    <tr>
+      <th>bl_recursive</th>
+      <td><p>boolean if to search in folders recursively</p></td>
+    </tr>
+    <tr>
+      <th>bl_test</th>
+      <td><p>boolean if testing, meaning do not generate pdf html, just see which files are been</p></td>
+    </tr>
+    <tr>
+      <th>it_hierachy_shift</th>
+      <td><p>rmd modification level of promotion from bookdown hierachy
+to own file hierarchy</p></td>
+    </tr>
+    <tr>
+      <th>it_toc_depth</th>
+      <td><p>rmd own file outputs toc levels to show
+considered included, searched and found</p></td>
+    </tr>
+    <tr>
+      <th>ls_spt_root</th>
+      <td><p>array a string array of path roots in which to search for Rmd files to knit</p></td>
+    </tr>
+    <tr>
+      <th>st_folder_R</th>
+      <td><p>string subfolder where to store the R file, if just empty, store in rmd folder</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a scalar value of the gini coefficient</p>
+    <p>a list of string paths of files generated</p><ul>
+<li><p>ls_spt_pdf_generated - a list of pdf file names</p></li>
+<li><p>ls_spt_html_generated - a list of html file names</p></li>
+<li><p>ls_spt_R_generated - a list of R file names generated</p></li>
+</ul><p>#'</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html'>https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html</a>
-<a href='https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html'>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html</a>
-<a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R</a></p>
+    <p><a href='https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html'>https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html</a>
+<a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ar_equal_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>)
-<span class='no'>ar_ineql_alittle_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)
-<span class='no'>ar_ineql_somewht_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>3</span>)
-<span class='no'>ar_ineql_alotine_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>5</span>)
-<span class='no'>ar_ineql_veryvry_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>8</span>)
-<span class='no'>ar_ineql_mostmst_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>13</span>)
-<span class='co'># Beta draw testing</span>
-<span class='no'>ar_beta_mostrich_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>5</span>, <span class='fl'>1</span>)
-<span class='no'>ar_beta_mostpoor_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>5</span>)
-<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>)
-<span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_equal_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alittle_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.1111111</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_somewht_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.2592593</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alotine_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.3131313</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_mostmst_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.333252</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostrich_n1000</span>)</div><div class='output co'>#&gt; [1] 0.09135541</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostpoor_n1000</span>)</div><div class='output co'>#&gt; [1] 0.453811</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span>)</div><div class='output co'>#&gt; [1] 0.402409</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/Math4Econ/math/matrix_application'</span>)
+<span class='no'>ar_spn_skip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>, <span class='st'>'_mod'</span>)
+<span class='fu'>ff_sup_clean_mlx</span>(<span class='no'>ar_spt_root</span>, <span class='no'>ar_spn_skip</span>)</div><div class='output co'>#&gt; <span class='message'>Search and Check</span></div><div class='output co'>#&gt; $ls_spt_html_m_generated
+#&gt; [1] ""
+#&gt; 
+#&gt; $ls_spt_m_generated
+#&gt; [1] ""
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

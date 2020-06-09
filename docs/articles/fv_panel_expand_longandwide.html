@@ -97,6 +97,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://twitter.com/fanwangecon">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -107,7 +113,7 @@
 
       
 
-      </header><script src="fv_panel_expand_longandwide_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="fv_panel_expand_longandwide_files/header-attrs-2.2/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Append Group Mean Lagged Values as Additional Panel Variables</h1>
@@ -263,6 +269,19 @@
   <span class="no">df_hw_cebu</span>, <span class="kw">ar_svr_group</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'S.country'</span>, <span class="st">'vil.id'</span>), <span class="no">svr_unique_identifier</span>)
 <span class="co">#&gt; `mutate_if()` ignored the following grouping variables:</span>
 <span class="co">#&gt; Columns `S.country`, `vil.id`</span>
+<span class="co">#&gt; Warning: `funs()` is deprecated as of dplyr 0.8.0.</span>
+<span class="co">#&gt; Please use a list of either functions or lambdas: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Simple named list: </span>
+<span class="co">#&gt;   list(mean = mean, median = median)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Auto named with `tibble::lst()`: </span>
+<span class="co">#&gt;   tibble::lst(mean, median)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Using lambdas</span>
+<span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
+<span class="co">#&gt; This warning is displayed once every 8 hours.</span>
+<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
 <span class="co">#&gt; Adding missing grouping variables: `S.country`, `vil.id`</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">df_uniques_vil</span>, <span class="kw">n</span><span class="kw">=</span><span class="fl">20</span>)
 <span class="co">#&gt; # A tibble: 1 x 15</span>
@@ -356,10 +375,10 @@
 
 <span class="co"># Select vars to keep for spreading</span>
 <span class="no">ls_svr_mth_keep</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">svr_id_i</span>, <span class="no">svr_id_t</span>, <span class="no">svr_data</span>)
-<span class="no">df_hw_cebu_mth_2spread</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="no">ls_svr_mth_keep</span>))
+<span class="no">df_hw_cebu_mth_2spread</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">ls_svr_mth_keep</span>))
 
 <span class="co"># Spread</span>
-<span class="no">df_hw_cebu_mth_wide</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu_mth_2spread</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_id_t</span>), !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_data</span>), <span class="kw">sep</span> <span class="kw">=</span> <span class="st">""</span>)
+<span class="no">df_hw_cebu_mth_wide</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu_mth_2spread</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_id_t</span>), !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_data</span>), <span class="kw">sep</span> <span class="kw">=</span> <span class="st">""</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">df_hw_cebu_mth_wide</span>)
 <span class="co">#&gt; tibble [50 x 13] (S3: tbl_df/tbl/data.frame)</span>
 <span class="co">#&gt;  $ indi.id      : num [1:50] 1 2 3 4 5 6 7 8 9 10 ...</span>
@@ -377,7 +396,7 @@
 <span class="co">#&gt;  $ svymthRound24: num [1:50] NA 363 555 466 943 ...</span>
 
 <span class="co"># Merge Back, now dataframe is both wide and long</span>
-<span class="no">df_hw_cebu_mth_widelong</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(<span class="no">df_hw_cebu_mth_wide</span>)
+<span class="no">df_hw_cebu_mth_widelong</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">df_hw_cebu_mth_wide</span>)
 <span class="co">#&gt; Joining, by = "indi.id"</span></pre></body></html></div>
 </div>
 <div id="aggregate-by-subgroup-first-columns-by-info-for-each-month-of-age" class="section level3">
@@ -395,21 +414,22 @@
 
 <span class="co"># Select vars to keep for spreading</span>
 <span class="no">ls_svr_6mth_keep</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">svr_id_i</span>, <span class="no">svr_id_t</span>, <span class="no">svr_data</span>)
-<span class="no">df_hw_cebu_6mth_2spread</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">syms</a></span>(<span class="no">ls_svr_6mth_keep</span>))
+<span class="no">df_hw_cebu_6mth_2spread</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">ls_svr_6mth_keep</span>))
 
 <span class="co"># Aggregate</span>
 <span class="no">svr_data_mean</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">svr_data</span>,<span class="no">svr_id_t</span>,<span class="st">'mean'</span>,<span class="kw">sep</span><span class="kw">=</span><span class="st">'_'</span>)
 <span class="no">df_hw_cebu_6mth_2spread</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu_6mth_2spread</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_id_i</span>), !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_id_t</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_data_mean</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_data</span>)))
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_id_i</span>), !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_id_t</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_data_mean</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_data</span>)))
+<span class="co">#&gt; `summarise()` regrouping output by 'indi.id' (override with `.groups` argument)</span>
 
 <span class="co"># Spread</span>
-<span class="no">df_hw_cebu_6mth_wide</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu_6mth_2spread</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_id_t</span>), !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_data_mean</span>), <span class="kw">sep</span> <span class="kw">=</span> <span class="st">""</span>)
+<span class="no">df_hw_cebu_6mth_wide</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu_6mth_2spread</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_id_t</span>), !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_data_mean</span>), <span class="kw">sep</span> <span class="kw">=</span> <span class="st">""</span>)
 
 <span class="co"># Merge Back, now dataframe is both wide and long</span>
 <span class="no">df_hw_cebu_widelong</span> <span class="kw">&lt;-</span> <span class="no">df_hw_cebu</span> <span class="kw">%&gt;%</span>
-                          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(<span class="no">df_hw_cebu_mth_wide</span>) <span class="kw">%&gt;%</span>
-                          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(<span class="no">df_hw_cebu_6mth_wide</span>)
+                          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">df_hw_cebu_mth_wide</span>) <span class="kw">%&gt;%</span>
+                          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">df_hw_cebu_6mth_wide</span>)
 <span class="co">#&gt; Joining, by = "indi.id"</span>
 <span class="co">#&gt; Joining, by = "indi.id"</span>
 
@@ -543,7 +563,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Fan Wang.</p>
+  <p>Developed by <a href="https://fanwangecon.github.io">Fan Wang</a>.</p>
 </div>
 
 <div class="pkgdown">

@@ -97,6 +97,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://twitter.com/fanwangecon">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -107,7 +113,7 @@
 
       
 
-      </header><script src="fv_opti_bisect_pmap_multi_files/header-attrs-2.1/header-attrs.js"></script><script src="fv_opti_bisect_pmap_multi_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="fv_opti_bisect_pmap_multi_files/header-attrs-2.2/header-attrs.js"></script><script src="fv_opti_bisect_pmap_multi_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Solve Roots for N (Rows) Strictly Monotonic Functions</h1>
@@ -372,14 +378,14 @@ fl_alpha
 
 <span class="co"># Add initial a and b</span>
 <span class="no">tb_states_choices_bisec</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices</span> <span class="kw">%&gt;%</span>
-                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>) <span class="kw">:=</span> <span class="no">fl_N_min</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>) <span class="kw">:=</span> <span class="no">fl_N_agg</span>)
+                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>) <span class="kw">:=</span> <span class="no">fl_N_min</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>) <span class="kw">:=</span> <span class="no">fl_N_agg</span>)
 
 <span class="co"># Evaluate function f(a_0) and f(b_0)</span>
 <span class="no">tb_states_choices_bisec</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span>() <span class="kw">%&gt;%</span>
-                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_lst</span>) <span class="kw">:=</span> <span class="fu">ffi_nonlin_dplyrdo</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>),
+                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_lst</span>) <span class="kw">:=</span> <span class="fu">ffi_nonlin_dplyrdo</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>),
                                                                           <span class="no">ar_nN_A</span>, <span class="no">ar_nN_alpha</span>,
                                                                           <span class="no">fl_N_agg</span>, <span class="no">fl_rho</span>),
-                                   !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fb_lst</span>) <span class="kw">:=</span> <span class="fu">ffi_nonlin_dplyrdo</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>),
+                                   !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fb_lst</span>) <span class="kw">:=</span> <span class="fu">ffi_nonlin_dplyrdo</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>),
                                                                           <span class="no">ar_nN_A</span>, <span class="no">ar_nN_alpha</span>,
                                                                           <span class="no">fl_N_agg</span>, <span class="no">fl_rho</span>))
 <span class="co"># Summarize</span>
@@ -429,30 +435,30 @@ fl_alpha
   <span class="co"># 2. generate f_p</span>
   <span class="co"># 3. generate f_p*f_a</span>
   <span class="no">tb_states_choices_bisec</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span>() <span class="kw">%&gt;%</span>
-                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">p</span> <span class="kw">=</span> ((!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>) + !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>))/<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
+                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">p</span> <span class="kw">=</span> ((!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>) + !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>))/<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
                               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">f_p</span> <span class="kw">=</span> <span class="fu">ffi_nonlin_dplyrdo</span>(<span class="no">fl_A</span>, <span class="no">fl_alpha</span>, <span class="no">p</span>,
                                                               <span class="no">ar_nN_A</span>, <span class="no">ar_nN_alpha</span>,
                                                               <span class="no">fl_N_agg</span>, <span class="no">fl_rho</span>)) <span class="kw">%&gt;%</span>
-                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">f_p_t_f_a</span> <span class="kw">=</span> <span class="no">f_p</span>*!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_lst</span>))
+                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">f_p_t_f_a</span> <span class="kw">=</span> <span class="no">f_p</span>*!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_lst</span>))
   <span class="co"># fl_p_dist2zr = sum(abs(p))</span>
   <span class="no">fl_p_dist2zr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">tb_states_choices_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">f_p</span>)))
 
   <span class="co"># Update a and b</span>
   <span class="no">tb_states_choices_bisec</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec</span> <span class="kw">%&gt;%</span>
-                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_cur</span>) <span class="kw">:=</span>
-                                       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>),
+                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_cur</span>) <span class="kw">:=</span>
+                                       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>),
                                                  <span class="fl">TRUE</span> ~ <span class="no">p</span>)) <span class="kw">%&gt;%</span>
-                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_cur</span>) <span class="kw">:=</span>
+                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_cur</span>) <span class="kw">:=</span>
                                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ <span class="no">p</span>,
-                                                 <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>)))
+                                                 <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>)))
   <span class="co"># Update f(a) and f(b)</span>
   <span class="no">tb_states_choices_bisec</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec</span> <span class="kw">%&gt;%</span>
-                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_cur</span>) <span class="kw">:=</span>
-                                       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_lst</span>),
+                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_cur</span>) <span class="kw">:=</span>
+                                       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_lst</span>),
                                                  <span class="fl">TRUE</span> ~ <span class="no">f_p</span>)) <span class="kw">%&gt;%</span>
-                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fb_cur</span>) <span class="kw">:=</span>
+                              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fb_cur</span>) <span class="kw">:=</span>
                                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ <span class="no">f_p</span>,
-                                                 <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fb_lst</span>)))
+                                                 <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fb_lst</span>)))
   <span class="co"># Save from last</span>
   <span class="no">svr_a_lst</span> <span class="kw">&lt;-</span> <span class="no">svr_a_cur</span>
   <span class="no">svr_b_lst</span> <span class="kw">&lt;-</span> <span class="no">svr_b_cur</span>
@@ -559,7 +565,7 @@ fl_alpha
 <span class="co"># Pivot wide to very long to a little wide</span>
 <span class="no">tb_states_choices_bisec_wider</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
-    <span class="kw">names_from</span> <span class="kw">=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
+    <span class="kw">names_from</span> <span class="kw">=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
     <span class="kw">values_from</span> <span class="kw">=</span> <span class="no">svr_number_col</span>
   )
 <span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
@@ -627,12 +633,12 @@ fl_alpha
 <p>Actually we want to graph based on the long results, not the wider. Wider easier to view in table.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Graph results</span>
 <span class="no">lineplot</span> <span class="kw">&lt;-</span> <span class="no">tb_states_choices_bisec_long</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_bisect_iter</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_bisect_iter</span>))) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>) <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>, <span class="st">'b'</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_bisect_iter</span>), <span class="kw">y</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_number_col</span>),
-               <span class="kw">colour</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
-               <span class="kw">linetype</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
-               <span class="kw">shape</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>))) +
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_bisect_iter</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_bisect_iter</span>))) <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>) <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>, <span class="st">'b'</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_bisect_iter</span>), <span class="kw">y</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_number_col</span>),
+               <span class="kw">colour</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
+               <span class="kw">linetype</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>),
+               <span class="kw">shape</span><span class="kw">=</span>!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_abfafb_long_name</span>))) +
         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>( ~ <span class="no">INDI_ID</span>) +
         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() +
         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
@@ -679,23 +685,23 @@ fl_alpha
 <span class="no">ls_pmap_vars</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">ls_svr_df_in_func</span>, <span class="no">svr_root_x</span>))
 
 <span class="co"># B. Add initial a and b</span>
-<span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>) <span class="kw">:=</span> <span class="no">fl_lower_x</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>) <span class="kw">:=</span> <span class="no">fl_upper_x</span>)
+<span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>) <span class="kw">:=</span> <span class="no">fl_lower_x</span>, !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>) <span class="kw">:=</span> <span class="no">fl_upper_x</span>)
 
 <span class="co"># C. Evaluate function f(a_0) and f(b_0)</span>
 <span class="co"># 1. set x = a_0</span>
 <span class="co"># 2. evaluate f(a_0)</span>
 <span class="co"># 3. set x = b_0</span>
 <span class="co"># 4. evaluate f(b_0)</span>
-<span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_root_x</span>) <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>))
+<span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_root_x</span>) <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>))
 <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-                !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_lst</span>) <span class="kw">:=</span>
+                !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_lst</span>) <span class="kw">:=</span>
                   <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(
                     <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap</a></span>(<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">ls_pmap_vars</span>), <span class="no">fc_withroot</span>)
                     )
                 )
-<span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_root_x</span>) <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>))
+<span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_root_x</span>) <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>))
 <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-                !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fb_lst</span>) <span class="kw">:=</span>
+                !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fb_lst</span>) <span class="kw">:=</span>
                   <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(
                     <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap</a></span>(<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">ls_pmap_vars</span>), <span class="no">fc_withroot</span>)
                     )
@@ -719,35 +725,35 @@ fl_alpha
   <span class="co"># 1. generate p</span>
   <span class="co"># 2. generate f_p</span>
   <span class="co"># 3. generate f_p*f_a</span>
-  <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_root_x</span>) <span class="kw">:=</span> ((!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>) + !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>))/<span class="fl">2</span>))
+  <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_root_x</span>) <span class="kw">:=</span> ((!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>) + !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>))/<span class="fl">2</span>))
   <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-                  !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fxvr_name</span>) <span class="kw">:=</span>
+                  !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fxvr_name</span>) <span class="kw">:=</span>
                     <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(
                       <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap</a></span>(<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">ls_pmap_vars</span>), <span class="no">fc_withroot</span>)
                       )
                   ) <span class="kw">%&gt;%</span>
-                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">f_p_t_f_a</span> <span class="kw">=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fxvr_name</span>)*!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_lst</span>))
+                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">f_p_t_f_a</span> <span class="kw">=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fxvr_name</span>)*!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_lst</span>))
 
   <span class="co"># fl_p_dist2zr = sum(abs(p))</span>
-  <span class="no">fl_p_dist2zr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fxvr_name</span>))))
+  <span class="no">fl_p_dist2zr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">df_bisec</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fxvr_name</span>))))
 
   <span class="co"># Update a and b</span>
   <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span>
-                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_cur</span>) <span class="kw">:=</span>
-                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_a_lst</span>),
-                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_root_x</span>))) <span class="kw">%&gt;%</span>
-                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_cur</span>) <span class="kw">:=</span>
-                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_root_x</span>),
-                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_b_lst</span>)))
+                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_cur</span>) <span class="kw">:=</span>
+                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_a_lst</span>),
+                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_root_x</span>))) <span class="kw">%&gt;%</span>
+                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_cur</span>) <span class="kw">:=</span>
+                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_root_x</span>),
+                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_b_lst</span>)))
 
   <span class="co"># Update f(a) and f(b)</span>
   <span class="no">df_bisec</span> <span class="kw">&lt;-</span> <span class="no">df_bisec</span> <span class="kw">%&gt;%</span>
-                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_cur</span>) <span class="kw">:=</span>
-                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fa_lst</span>),
-                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fxvr_name</span>))) <span class="kw">%&gt;%</span>
-                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fb_cur</span>) <span class="kw">:=</span>
-                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fxvr_name</span>),
-                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval.html">sym</a></span>(<span class="no">svr_fb_lst</span>)))
+                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_cur</span>) <span class="kw">:=</span>
+                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fa_lst</span>),
+                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fxvr_name</span>))) <span class="kw">%&gt;%</span>
+                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fb_cur</span>) <span class="kw">:=</span>
+                           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="no">f_p_t_f_a</span> <span class="kw">&lt;</span> <span class="fl">0</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fxvr_name</span>),
+                                     <span class="fl">TRUE</span> ~ !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">svr_fb_lst</span>)))
 
   <span class="co"># Drop past record possibly</span>
   <span class="kw">if</span>(!<span class="no">bl_keep_iter</span>) {
@@ -1075,7 +1081,7 @@ fl_alpha
 
 
       <footer><div class="copyright">
-  <p>Developed by Fan Wang.</p>
+  <p>Developed by <a href="https://fanwangecon.github.io">Fan Wang</a>.</p>
 </div>
 
 <div class="pkgdown">

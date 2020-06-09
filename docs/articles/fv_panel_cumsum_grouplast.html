@@ -97,6 +97,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://twitter.com/fanwangecon">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -107,7 +113,7 @@
 
       
 
-      </header><script src="fv_panel_cumsum_grouplast_files/header-attrs-2.1/header-attrs.js"></script><script src="fv_panel_cumsum_grouplast_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="fv_panel_cumsum_grouplast_files/header-attrs-2.2/header-attrs.js"></script><script src="fv_panel_cumsum_grouplast_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Cumulative Sum by Index Up to Last in Group</h1>
@@ -189,8 +195,8 @@
 <span class="co"># Number of N</span>
 <span class="no">it_N</span> <span class="kw">&lt;-</span> <span class="fl">5</span>
 <span class="co"># M values for each i</span>
-<span class="no">ar_it_M</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fl">10</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="no">ar_it_M_ID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_N</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="no">ar_it_M</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fl">10</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">ar_it_M_ID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_N</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co"># Generate dataframe</span>
 <span class="no">tb_combine</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">ar_it_M</span>, <span class="no">ar_it_M_ID</span>)) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span>(<span class="kw">var</span> <span class="kw">=</span> <span class="st">"id"</span>)
 
@@ -1366,7 +1372,7 @@ y
     <span class="no">tb_data_up2row</span> <span class="kw">&lt;-</span> <span class="no">tb_data</span>[<span class="fl">1</span>:<span class="no">row_ctr</span>,] <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">id</span>, <span class="no">x</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">id</span>)
 
     <span class="co"># Obtain last element sorted by x for each group, and resort by x</span>
-    <span class="no">tb_data_up2row</span> <span class="kw">&lt;-</span> <span class="no">tb_data_up2row</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>()) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">x</span>)
+    <span class="no">tb_data_up2row</span> <span class="kw">&lt;-</span> <span class="no">tb_data_up2row</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>()) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">x</span>)
 
     <span class="co"># cumulative sum of the highest element of each group below row_ctr</span>
     <span class="no">fl_cum_sum_top_cur</span> <span class="kw">&lt;-</span> <span class="no">tb_data_up2row</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>() <span class="kw">%&gt;%</span>
@@ -3182,8 +3188,8 @@ cum_median_top
 
   <span class="co"># Generate Panel Frame</span>
   <span class="no">df_start_time</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
-  <span class="no">ar_it_M</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_max_M</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  <span class="no">ar_it_M_ID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_N</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+  <span class="no">ar_it_M</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_max_M</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="no">ar_it_M_ID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_N</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
   <span class="no">tb_combine</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">ar_it_M</span>, <span class="no">ar_it_M_ID</span>)) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span>(<span class="kw">var</span> <span class="kw">=</span> <span class="st">"id"</span>)
   <span class="no">tb_long</span> <span class="kw">&lt;-</span> <span class="no">tb_combine</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/uncount.html">uncount</a></span>(<span class="no">ar_it_M</span>)
   <span class="no">tb_long</span> <span class="kw">&lt;-</span> <span class="no">tb_long</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span>(<span class="kw">xrand</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">tb_long</span>)[<span class="fl">1</span>])) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">xrand</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>())
@@ -3213,20 +3219,20 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took SLOW VERBOSE False:'</span>, <span class="no">end_time_slow_verbose</span> - <span class="no">start_time_slow_verbose</span>))
 }
 <span class="co">#&gt; it_ctr: 1 , it_N: 5 , it_max_N: 10 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0119979381561279"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.00898504257202148"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.0599539279937744"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.0309951305389404"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.036978006362915"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0339670181274414"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.200898170471191"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.158907890319824"</span>
 <span class="co">#&gt; it_ctr: 2 , it_N: 17 , it_max_N: 20 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0119800567626953"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.265844821929932"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.50770902633667"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.443757057189941"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0329811573028564"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.368788003921509"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:2.79239082336426"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:2.30366897583008"</span>
 <span class="co">#&gt; it_ctr: 3 , it_N: 30 , it_max_N: 30 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0129930973052979"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.418758869171143"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:1.92488193511963"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:2.09079504013062"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "Df Generation Took:0.0349788665771484"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:1.13834404945374"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:9.23715114593506"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:7.3127429485321"</span></pre></body></html></div>
 </div>
 <div id="fast-algorithm-large-matrix-testing" class="section level4">
 <h4 class="hasAnchor">
@@ -3253,8 +3259,8 @@ cum_median_top
 
   <span class="co"># Generate Panel Frame</span>
   <span class="no">df_start_time</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
-  <span class="no">ar_it_M</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_max_M</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  <span class="no">ar_it_M_ID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_N</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+  <span class="no">ar_it_M</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_max_M</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="no">ar_it_M_ID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="no">it_N</span>, <span class="no">it_N</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
   <span class="no">tb_combine</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">ar_it_M</span>, <span class="no">ar_it_M_ID</span>)) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span>(<span class="kw">var</span> <span class="kw">=</span> <span class="st">"id"</span>)
   <span class="no">tb_long</span> <span class="kw">&lt;-</span> <span class="no">tb_combine</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/uncount.html">uncount</a></span>(<span class="no">ar_it_M</span>)
   <span class="no">tb_long</span> <span class="kw">&lt;-</span> <span class="no">tb_long</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span>(<span class="kw">xrand</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">tb_long</span>)[<span class="fl">1</span>])) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">xrand</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>())
@@ -3272,20 +3278,20 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took QUICK True:'</span>, <span class="no">end_time_fast</span> - <span class="no">start_time_fast</span>))
 }
 <span class="co">#&gt; it_ctr: 1 , it_N: 5 , it_max_N: 10 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0129940509796143"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0109901428222656"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0385119915008545"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0293271541595459"</span>
 <span class="co">#&gt; it_ctr: 2 , it_N: 16 , it_max_N: 12 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0149908065795898"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.106958150863647"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0331759452819824"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.281534910202026"</span>
 <span class="co">#&gt; it_ctr: 3 , it_N: 27 , it_max_N: 15 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0109908580780029"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.214861154556274"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0320019721984863"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.577306032180786"</span>
 <span class="co">#&gt; it_ctr: 4 , it_N: 38 , it_max_N: 17 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0119929313659668"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.30483603477478"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0241680145263672"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.834676027297974"</span>
 <span class="co">#&gt; it_ctr: 5 , it_N: 50 , it_max_N: 20 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0119979381561279"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.405750036239624"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "Df Generation Took:0.0353419780731201"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:1.08950400352478"</span></pre></body></html></div>
 </div>
 </div>
 </div>
@@ -3302,7 +3308,7 @@ cum_median_top
 
 
       <footer><div class="copyright">
-  <p>Developed by Fan Wang.</p>
+  <p>Developed by <a href="https://fanwangecon.github.io">Fan Wang</a>.</p>
 </div>
 
 <div class="pkgdown">

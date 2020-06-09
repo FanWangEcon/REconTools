@@ -2,6 +2,10 @@ url: https://fanwangecon.github.io/REconTools
 
 title: "REconTools"
 
+authors:
+  Fan Wang:
+    href: "https://fanwangecon.github.io"
+
 navbar:
   title: "REconTools"
   left:
@@ -34,6 +38,8 @@ navbar:
   right:
    - icon: fa-github
      href: https://github.com/fanwangecon/REconTools
+   - icon: fa-twitter
+     href: https://twitter.com/fanwangecon
 
 
 reference:

@@ -26,19 +26,29 @@ ff_summ_percentiles <- function(df = iris, bl_statsasrows = TRUE, col2varname = 
     names(df) <- gsub("_", ".", names(df))
 
     # compute relevant statistics
-    tb_summ_stats <- df %>% ungroup() %>% summarise_if(is.numeric, funs(n = n(), NAobs = sum(is.na(.) == 1),
-        ZEROobs = sum(. == 0), mean = mean(., na.rm = TRUE), min = min(., na.rm = TRUE), max = max(., na.rm = TRUE),
-        sd = sd(., na.rm = TRUE), cv = sd(., na.rm = TRUE)/mean(., na.rm = TRUE), p01 = quantile(., probs = c(0.01),
-            na.rm = TRUE), p05 = quantile(., probs = c(0.05), na.rm = TRUE), p10 = quantile(., probs = c(0.1),
-            na.rm = TRUE), p25 = quantile(., probs = c(0.25), na.rm = TRUE), p50 = quantile(., probs = c(0.5),
-            na.rm = TRUE), p75 = quantile(., probs = c(0.75), na.rm = TRUE), p90 = quantile(., probs = c(0.9),
-            na.rm = TRUE), p95 = quantile(., probs = c(0.95), na.rm = TRUE), p99 = quantile(., probs = c(0.99),
-            na.rm = TRUE)))
+    tb_summ_stats <- df %>% ungroup() %>%
+        summarise_if(
+            is.numeric, funs(
+                n = n(), unique = length(unique(.)),
+                NAobs = sum(is.na(.) == 1), ZEROobs = sum(. == 0),
+                mean = mean(., na.rm = TRUE), min = min(., na.rm = TRUE), max = max(., na.rm = TRUE),
+                sd = sd(., na.rm = TRUE), cv = sd(., na.rm = TRUE)/mean(., na.rm = TRUE),
+                p01 = quantile(., probs = c(0.01), na.rm = TRUE),
+                p05 = quantile(., probs = c(0.05), na.rm = TRUE),
+                p10 = quantile(., probs = c(0.1), na.rm = TRUE),
+                p25 = quantile(., probs = c(0.25), na.rm = TRUE),
+                p50 = quantile(., probs = c(0.5), na.rm = TRUE),
+                p75 = quantile(., probs = c(0.75), na.rm = TRUE),
+                p90 = quantile(., probs = c(0.9), na.rm = TRUE),
+                p95 = quantile(., probs = c(0.95), na.rm = TRUE),
+                p99 = quantile(., probs = c(0.99), na.rm = TRUE)))
 
     # Summ stats to tibble and reshape
-    tb_summ_stats <- as.tibble(tb_summ_stats) %>% gather(variable, value) %>% separate(variable, c("var", "stats"),
-        sep = "_") %>% spread(stats, value) %>% select(var, n, NAobs, ZEROobs, mean, sd, cv, min, p01, p05,
-        p10, p25, p50, p75, p90, p95, p99, max)
+    tb_summ_stats <- as.tibble(tb_summ_stats) %>%
+        gather(variable, value) %>%
+        separate(variable, c("var", "stats"), sep = "_") %>%
+        spread(stats, value) %>%
+        select(var, n, unique, NAobs, ZEROobs, mean, sd, cv, min, p01, p05, p10, p25, p50, p75, p90, p95, p99, max)
 
     # first column to row names, not encouraged in tibble
     if (col2varname) {

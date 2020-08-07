@@ -1,3 +1,142 @@
+ff_sup_rmd2htmlpdfr <-
+  function(ar_spt_root=c('C:/Users/fan/R4Econ/amto/array/',
+                         'C:/Users/fan/R4Econ/math/integration'),
+           ar_spn_skip=c('basics', 'integrate'),
+           st_rmd_suffix_pattern='.Rmd',
+           st_save_add_suffix='',
+           spt_out_directory = 'C:/Users/fan/downloads',
+           bl_recursive = TRUE,
+           ls_bool_convert=list(bl_pdf=TRUE, bl_html=TRUE, bl_R=TRUE),
+           bl_verbose = TRUE) {
+    #' Searchs for Rmd Files in several folders, render to HTML or PDF in another folder
+    #'
+    #' @description
+    #' searches in several directories for files with Rmd suffix. Skip some file names that contain
+    #' strings in ar_spn_skip. Save output rendered HTML and PDF files to a directory. And control
+    #' if to render Rmd to PDF, HTML as well as R.
+    #'
+    #' @param ar_spt_root array of string paths of folders to search in
+    #' @param ar_spn_skip array a string array of names, if path found contains any of the string
+    #' in the array, will skip.
+    #' @param st_rmd_suffix_pattern string name of file suffix to search over
+    #' @param st_save_add_suffix string suffix to add to rendered html, pdf files
+    #' @param spt_out_directory string full path of where to store the rendered html, pdf, r files
+    #' @param bl_recursive boolean if to search in folders recursively
+    #' @param ls_bool_convert list of booleans to generate pdf, html and or R file. Generate only HTML for example.
+    #' considered included, searched and found
+    #' @param bl_verbose verbose printing more
+    #' @return a list of string paths of files generated
+    #' \itemize{
+    #'   \item ls_spt_pdf_generated - a list of pdf file names
+    #'   \item ls_spt_html_generated - a list of html file names
+    #'   \item ls_spt_R_generated - a list of R file names generated
+    #' }#'
+    #' @author Fan Wang, \url{http://fanwangecon.github.io}
+    #' @references
+    #' \url{https://fanwangecon.github.io/R4Econ/development/inout/htmlpdfr/fs_rmd_pdf_html.html}
+    #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R}
+    #' @export
+    #' @examples
+    #' ar_spt_root <- c('C:/Users/fan/R4Econ/support/rmd')
+    #' ar_spn_skip <- c('matrix', 'tibble', '_main')
+    #' spt_out_directory <- 'C:/Users/fan/downloads'
+    #' st_save_add_suffix <- '_newsave'
+    #' ls_bool_convert <- list(bl_pdf=TRUE, bl_html=TRUE, bl_R=TRUE)
+    #' bl_verbose <- TRUE
+    #' ff_sup_rmd2htmlpdfr(ar_spt_root=ar_spt_root, ar_spn_skip=ar_spn_skip,
+    #'                     spt_out_directory=spt_out_directory, st_save_add_suffix=st_save_add_suffix,
+    #'                     ls_bool_convert=ls_bool_convert,
+    #'                     bl_verbose=bl_verbose)
+    #'
+
+    # # Specify Parameters
+    # ar_spt_root = c('C:/Users/fan/R4Econ/amto/array/', 'C:/Users/fan/R4Econ/math/integration')
+    # ar_spn_skip <- c('basics', 'integrate')
+    # st_rmd_suffix_pattern = "*.Rmd"
+    # bl_recursive = TRUE
+    # ls_bool_convert <- list(bl_pdf=TRUE, bl_html=TRUE, bl_R=TRUE)
+    # spt_out_directory <- 'C:/Users/fan/Downloads/_data'
+    # bl_verbose <- TRUE
+
+    # Get Path
+    ls_sfls  <- list.files(path=ar_spt_root,
+                           recursive=bl_recursive,
+                           pattern=st_rmd_suffix_pattern,
+                           full.names=T)
+
+    # Exclude Some Files given ar_spn_skip
+    if(!missing(ar_spn_skip)) {
+      ls_sfls <- ls_sfls[!grepl(paste(ar_spn_skip, collapse = "|"), ls_sfls)]
+    }
+
+    # list of output files
+    ls_spt_pdf_generated <- c('')
+    ls_spt_html_generated <- c('')
+    ls_spt_R_generated <- c('')
+
+    # Loop over files
+    for (spn_file in ls_sfls) {
+
+      # Parse File Name
+      spt_file <- dirname(spn_file)
+      sna_file <- tools::file_path_sans_ext(basename(spn_file))
+
+      # File Name to render
+      sna_file <- paste0(sna_file, st_save_add_suffix)
+
+      # Output FIles
+      spn_file_pdf <- paste0(spt_file, '/', sna_file, '.pdf')
+      spn_file_html <- paste0(spt_file, '/', sna_file, '.html')
+      spn_file_R <- paste0(spt_file, '/', sna_file, '.R')
+
+      # render to PDF
+      if (ls_bool_convert$bl_pdf) {
+        if (bl_verbose) message(paste0('spn_file_pdf:',spn_file_pdf, ', PDF started'))
+        rmarkdown::render(spn_file, output_format='pdf_document',
+                          output_dir = spt_out_directory, output_file = sna_file)
+        if (bl_verbose) message(paste0('spn_file_pdf:',spn_file_pdf, ', PDF finished'))
+        spn_pdf_generated <- paste0(spt_out_directory, '/', spn_file_pdf)
+        ls_spt_pdf_generated <- c(ls_spt_pdf_generated, spn_pdf_generated)
+      }
+
+      # render to HTML
+      if (ls_bool_convert$bl_html) {
+        if (bl_verbose) message(paste0('spth_html:',spn_file_html, ', HTML started.'))
+        rmarkdown::render(spn_file, output_format='html_document',
+                          output_dir = spt_out_directory, output_file = sna_file)
+        if (bl_verbose) message(paste0('spth_html:',spn_file_html, ', HTML finished.'))
+        spn_html_generated <- paste0(spt_out_directory, '/', spn_file_html)
+        ls_spt_html_generated <- c(ls_spt_html_generated, spn_html_generated)
+      }
+
+      # purl to R
+      if (ls_bool_convert$bl_R) {
+        if (bl_verbose) message(paste0('purl_to:', paste0(spn_file_R, ".R")))
+        knitr::purl(spn_file, output=paste0(spt_out_directory, '/', sna_file, '.R'), documentation = 1)
+        spn_R_generated <- paste0(spt_out_directory, '/', sna_file, '.R')
+        ls_spt_R_generated <- c(ls_spt_R_generated, spn_R_generated)
+      }
+
+    }
+
+    if (bl_verbose) {
+      message('Generated pdf files:')
+      message(print(sapply(ls_spt_pdf_generated, print)))
+      message('Generated html files:')
+      message(print(sapply(ls_spt_html_generated, print)))
+      message('Generated R files:')
+      message(print(sapply(ls_spt_R_generated, print)))
+    }
+
+    ls_spt_pdf_generated <- tail(ls_spt_pdf_generated, -1)
+    ls_spt_html_generated <- tail(ls_spt_html_generated, -1)
+    ls_spt_R_generated <- tail(ls_spt_R_generated, -1)
+
+    return(list(ls_spt_pdf_generated=ls_spt_pdf_generated,
+                ls_spt_html_generated=ls_spt_html_generated,
+                ls_spt_R_generated=ls_spt_R_generated))
+  }
+
 ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
                              st_file_pattern='.Rmd',
                              st_git_pattern='.Rmd',
@@ -23,13 +162,13 @@ ff_sup_clean_rmd <- function(ar_spt_root, ar_spn_skip,
   #' The RMD files should not clear all at the top. That would lead to deleting the rest of
   #' the string paths to be searched over.
   #'
+  #' @param ar_spt_root array of string paths of folders to search in
+  #' @param ar_spn_skip array a string array of names, if path found contains any of the string
+  #' in the array, will skip.
   #' @param st_file_pattern string name of file suffix to search over
   #' @param st_git_pattern string name of file suffix based on which to consider if updating. If this is
   #' difference from st_file_pattern, use the file base with this suffix to detect if file has been changed. This
   #' is needed to detect if mlx files have changed for rmd files, where rmd files are not git tracked.
-  #' @param ls_spt_root array a string array of path roots in which to search for Rmd files to knit
-  #' @param ar_spn_skip array a string array of names, if path found contains any of the string
-  #' in the array, will skip.
   #' @param st_folder_pdf string subfolder where to store the pdf file, if just empty, store in rmd folder
   #' @param st_folder_html string subfolder where to store the html file, if just empty, store in rmd folder
   #' @param st_folder_R string subfolder where to store the R file, if just empty, store in rmd folder
@@ -267,7 +406,7 @@ ff_sup_clean_mlx <- function(st_prj_root,
   #' convert to tex and pdf using command line matlab. Then the function wraps \strong{ff_sup_clean_rmd}
   #'
   #' @param st_prj_root string project root for image folder movement
-  #' @param ls_spt_root array a string array of path roots in which to search for Rmd files to knit
+  #' @param ar_spt_root array a string array of path roots in which to search for Rmd files to knit
   #' @param ar_spn_skip array a string array of names, if path found contains any of the string
   #' @param st_pattern string search pattern suffix
   #' in the array, will skip.

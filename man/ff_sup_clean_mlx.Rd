@@ -25,6 +25,8 @@ ff_sup_clean_mlx(
 \arguments{
 \item{st_prj_root}{string project root for image folder movement}
 
+\item{ar_spt_root}{array a string array of path roots in which to search for Rmd files to knit}
+
 \item{ar_spn_skip}{array a string array of names, if path found contains any of the string}
 
 \item{st_pattern}{string search pattern suffix
@@ -46,8 +48,6 @@ to own file hierarchy}
 
 \item{it_toc_depth}{rmd own file outputs toc levels to show
 considered included, searched and found}
-
-\item{ls_spt_root}{array a string array of path roots in which to search for Rmd files to knit}
 
 \item{st_folder_R}{string subfolder where to store the R file, if just empty, store in rmd folder}
 }

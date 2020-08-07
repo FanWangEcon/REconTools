@@ -24,6 +24,8 @@ ff_sup_clean_rmd(
 )
 }
 \arguments{
+\item{ar_spt_root}{array of string paths of folders to search in}
+
 \item{ar_spn_skip}{array a string array of names, if path found contains any of the string
 in the array, will skip.}
 
@@ -57,8 +59,6 @@ to own file hierarchy for individual files}
 considered included, searched and found}
 
 \item{ls_bool_remove}{list of booleans contorling if removing certain files in the same directory where the rmd file is}
-
-\item{ls_spt_root}{array a string array of path roots in which to search for Rmd files to knit}
 }
 \value{
 a list of string paths of files generated

@@ -113,7 +113,7 @@
 
       
 
-      </header><script src="fv_panel_cumsum_grouplast_files/header-attrs-2.2/header-attrs.js"></script><script src="fv_panel_cumsum_grouplast_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="fv_panel_cumsum_grouplast_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="fv_panel_cumsum_grouplast_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Cumulative Sum by Index Up to Last in Group</h1>
@@ -3219,20 +3219,20 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took SLOW VERBOSE False:'</span>, <span class="no">end_time_slow_verbose</span> - <span class="no">start_time_slow_verbose</span>))
 }
 <span class="co">#&gt; it_ctr: 1 , it_N: 5 , it_max_N: 10 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.036978006362915"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0339670181274414"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.200898170471191"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.158907890319824"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.132863998413086"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0659599304199219"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.334964990615845"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.270278215408325"</span>
 <span class="co">#&gt; it_ctr: 2 , it_N: 17 , it_max_N: 20 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0329811573028564"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.368788003921509"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:2.79239082336426"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:2.30366897583008"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0867698192596436"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.502651214599609"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:4.82281494140625"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:3.21587085723877"</span>
 <span class="co">#&gt; it_ctr: 3 , it_N: 30 , it_max_N: 30 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0349788665771484"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:1.13834404945374"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:9.23715114593506"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:7.3127429485321"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "Df Generation Took:0.0598452091217041"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:1.38319897651672"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:13.9786469936371"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:10.757120847702"</span></pre></body></html></div>
 </div>
 <div id="fast-algorithm-large-matrix-testing" class="section level4">
 <h4 class="hasAnchor">
@@ -3278,20 +3278,20 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Moving Stat Took QUICK True:'</span>, <span class="no">end_time_fast</span> - <span class="no">start_time_fast</span>))
 }
 <span class="co">#&gt; it_ctr: 1 , it_N: 5 , it_max_N: 10 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0385119915008545"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0293271541595459"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0408899784088135"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0388960838317871"</span>
 <span class="co">#&gt; it_ctr: 2 , it_N: 16 , it_max_N: 12 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0331759452819824"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.281534910202026"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.041888952255249"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.270278930664062"</span>
 <span class="co">#&gt; it_ctr: 3 , it_N: 27 , it_max_N: 15 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0320019721984863"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.577306032180786"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.045875072479248"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.645273923873901"</span>
 <span class="co">#&gt; it_ctr: 4 , it_N: 38 , it_max_N: 17 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0241680145263672"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.834676027297974"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0398960113525391"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.882148027420044"</span>
 <span class="co">#&gt; it_ctr: 5 , it_N: 50 , it_max_N: 20 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0353419780731201"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:1.08950400352478"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "Df Generation Took:0.0528597831726074"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:1.18436908721924"</span></pre></body></html></div>
 </div>
 </div>
 </div>

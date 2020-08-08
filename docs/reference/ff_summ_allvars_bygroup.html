@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summarize one variable in a dataset, by another categorical variable — ff_summ_bygroup • REconTools</title>
+<title>Summarize one variable in a dataset, by another categorical variable — ff_summ_allvars_bygroup • REconTools</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Summarize one variable in a dataset, by another categorical variable — ff_summ_bygroup" />
+<meta property="og:title" content="Summarize one variable in a dataset, by another categorical variable — ff_summ_allvars_bygroup" />
 <meta property="og:description" content="Generate distributional and other statistics for a particular continuous variable,
 categorized by some discrete variables. Wage by gender for example." />
 
@@ -163,7 +163,7 @@ categorized by some discrete variables. Wage by gender for example." />
     <div class="page-header">
     <h1>Summarize one variable in a dataset, by another categorical variable</h1>
     <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R'><code>R/ff_summ_bygroup.R</code></a></small>
-    <div class="hidden name"><code>ff_summ_bygroup.Rd</code></div>
+    <div class="hidden name"><code>ff_summ_allvars_bygroup.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -171,7 +171,7 @@ categorized by some discrete variables. Wage by gender for example." />
 categorized by some discrete variables. Wage by gender for example.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_summ_bygroup</span>(
+    <pre class="usage"><span class='fu'>ff_summ_allvars_bygroup</span>(
   <span class='no'>df</span>,
   <span class='no'>vars.group</span>,
   <span class='no'>var.numeric</span>,
@@ -229,12 +229,24 @@ categorized by some discrete variables. Wage by gender for example.</p>
 <span class='no'>var.numeric</span> <span class='kw'>&lt;-</span> <span class='st'>'mpg'</span>
 <span class='no'>str.stats.group</span> <span class='kw'>&lt;-</span> <span class='st'>'allperc'</span>
 <span class='no'>ar.perc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>0.05</span>, <span class='fl'>0.10</span>, <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>)
-<span class='no'>ls_summ_by_group</span> <span class='kw'>&lt;-</span> <span class='fu'>ff_summ_bygroup</span>(<span class='no'>df</span>, <span class='no'>vars.group</span>, <span class='no'>var.numeric</span>, <span class='no'>str.stats.group</span>, <span class='no'>ar.perc</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: attributes are not identical across measure variables;</span>
+<span class='no'>ls_summ_by_group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ff_summ_bygroup.html'>ff_summ_bygroup</a></span>(<span class='no'>df</span>, <span class='no'>vars.group</span>, <span class='no'>var.numeric</span>, <span class='no'>str.stats.group</span>, <span class='no'>ar.perc</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `funs()` is deprecated as of dplyr 0.8.0.</span>
+#&gt; <span class='warning'>Please use a list of either functions or lambdas: </span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Simple named list: </span>
+#&gt; <span class='warning'>  list(mean = mean, median = median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Auto named with `tibble::lst()`: </span>
+#&gt; <span class='warning'>  tibble::lst(mean, median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Using lambdas</span>
+#&gt; <span class='warning'>  list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: attributes are not identical across measure variables;</span>
 #&gt; <span class='warning'>they will be dropped</span></div><div class='input'><span class='no'>df_table_grp_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_table_grp_stats</span>
 <span class='no'>df_row_grp_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_row_grp_stats</span>
 <span class='no'>df_overall_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_overall_stats</span>
 <span class='no'>df_row_stats_all</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_row_stats_all</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_table_grp_stats</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 21</span><span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_table_grp_stats</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 21</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   am [2]</span><span>
 #&gt;      am    vs  mean median    sd   IQR   mad  `1%`  `5%` `10%` `25%` `50%` `75%`
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

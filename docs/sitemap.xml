@@ -28,6 +28,9 @@
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html</loc>
   </url>
   <url>
+    <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_allvars_bygroup.html</loc>
+  </url>
+  <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html</loc>
   </url>
   <url>
@@ -53,6 +56,9 @@
   </url>
   <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_sup_lst2str.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/reference/ff_sup_rmd2htmlpdfr.html</loc>
   </url>
   <url>
     <loc>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html</loc>

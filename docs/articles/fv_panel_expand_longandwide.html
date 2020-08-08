@@ -113,7 +113,7 @@
 
       
 
-      </header><script src="fv_panel_expand_longandwide_files/header-attrs-2.2/header-attrs.js"></script><div class="row">
+      </header><script src="fv_panel_expand_longandwide_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Append Group Mean Lagged Values as Additional Panel Variables</h1>
@@ -501,11 +501,11 @@
              <span class="no">vf_months</span>[,<span class="fl">11</span>:<span class="fl">12</span>]:<span class="no">svymthRound22</span> +
              <span class="no">vf_months</span>[,<span class="fl">12</span>]:<span class="no">svymthRound24</span> ,
            <span class="kw">data</span><span class="kw">=</span><span class="no">df_hw_cebu_widelong</span>)
-<span class="no">rsm_coef</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">rs_test</span>)
+<span class="no">rsm_coef</span> <span class="kw">=</span> <span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">rs_test</span>)
 <span class="co"># vf_months[, 11:12]factor(svymthRound)24:svymthRound22</span>
 <span class="no">rsm_coef_inputs</span> <span class="kw">=</span> <span class="no">rsm_coef</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">'vf_months'</span>, <span class="no">term</span>))
 <span class="no">rsm_coef_inputs</span>
-<span class="co">#&gt; # A tibble: 74 x 5</span>
+<span class="co">#&gt; # A tibble: 78 x 5</span>
 <span class="co">#&gt;    term                                     estimate std.error statistic p.value</span>
 <span class="co">#&gt;    &lt;chr&gt;                                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 vf_months[, 1:12](Intercept):svymthRoun~  -0.0145   0.0145      -1.00  0.318 </span>
@@ -518,7 +518,7 @@
 <span class="co">#&gt;  8 vf_months[, 1:12]factor(svymthRound)16:~  -0.0242   0.0142      -1.71  0.0890</span>
 <span class="co">#&gt;  9 vf_months[, 1:12]factor(svymthRound)18:~  -0.0193   0.0108      -1.78  0.0756</span>
 <span class="co">#&gt; 10 vf_months[, 1:12]factor(svymthRound)20:~  -0.0104   0.00731     -1.42  0.157 </span>
-<span class="co">#&gt; # ... with 64 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # ... with 68 more rows</span></pre></body></html></div>
 </div>
 <div id="regression-testing-6-months-inputs" class="section level3">
 <h3 class="hasAnchor">
@@ -532,7 +532,7 @@
              <span class="no">vf_mth6</span>[,<span class="fl">3</span>:<span class="fl">4</span>]:<span class="no">mth6m14t18</span> +
                <span class="no">vf_mth6</span>[,<span class="fl">4</span>]:<span class="no">mth6m20t24</span> ,
            <span class="kw">data</span><span class="kw">=</span><span class="no">df_hw_cebu_widelong</span>)
-<span class="no">rsm_coef_mth4</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">rs_test_mth4</span>)
+<span class="no">rsm_coef_mth4</span> <span class="kw">=</span> <span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">rs_test_mth4</span>)
 <span class="no">rsm_coef_inputs</span> <span class="kw">=</span> <span class="no">rsm_coef_mth4</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">'vf_mth6'</span>, <span class="no">term</span>))
 <span class="no">rsm_coef_inputs</span>
 <span class="co">#&gt; # A tibble: 10 x 5</span>

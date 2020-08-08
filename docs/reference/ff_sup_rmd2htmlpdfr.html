@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>This function cleans rmd: creates subfolder with pdf, html and R — ff_sup_clean_rmd • REconTools</title>
+<title>Searchs for Rmd Files in several folders, render to HTML or PDF in another folder — ff_sup_rmd2htmlpdfr • REconTools</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,10 @@
 
 
 
-<meta property="og:title" content="This function cleans rmd: creates subfolder with pdf, html and R — ff_sup_clean_rmd" />
-<meta property="og:description" content="knit rmd normally generates pdf and html in the same folder. This deletes those files.
-The file generates a new subfolder by default called htmlpdfr that stores the knit
-pdf and html files, along with curled R file.
-The RMD files should not clear all at the top. That would lead to deleting the rest of
-the string paths to be searched over." />
+<meta property="og:title" content="Searchs for Rmd Files in several folders, render to HTML or PDF in another folder — ff_sup_rmd2htmlpdfr" />
+<meta property="og:description" content="searches in several directories for files with Rmd suffix. Skip some file names that contain
+strings in ar_spn_skip. Save output rendered HTML and PDF files to a directory. And control
+if to render Rmd to PDF, HTML as well as R." />
 
 
 
@@ -164,36 +162,27 @@ the string paths to be searched over." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>This function cleans rmd: creates subfolder with pdf, html and R</h1>
+    <h1>Searchs for Rmd Files in several folders, render to HTML or PDF in another folder</h1>
     <small class="dont-index">Source: <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'><code>R/ff_sup_inout.R</code></a></small>
-    <div class="hidden name"><code>ff_sup_clean_rmd.Rd</code></div>
+    <div class="hidden name"><code>ff_sup_rmd2htmlpdfr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>knit rmd normally generates pdf and html in the same folder. This deletes those files.
-The file generates a new subfolder by default called htmlpdfr that stores the knit
-pdf and html files, along with curled R file.</p>
-<p>The RMD files should not clear all at the top. That would lead to deleting the rest of
-the string paths to be searched over.</p>
+    <p>searches in several directories for files with Rmd suffix. Skip some file names that contain
+strings in ar_spn_skip. Save output rendered HTML and PDF files to a directory. And control
+if to render Rmd to PDF, HTML as well as R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_sup_clean_rmd</span>(
-  <span class='no'>ar_spt_root</span>,
-  <span class='no'>ar_spn_skip</span>,
-  <span class='kw'>st_file_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
-  <span class='kw'>st_git_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
-  <span class='kw'>st_folder_pdf</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
-  <span class='kw'>st_folder_html</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
-  <span class='kw'>st_folder_R</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
-  <span class='kw'>bl_gen_if_git_old</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>ff_sup_rmd2htmlpdfr</span>(
+  <span class='kw'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C:/Users/fan/R4Econ/amto/array/"</span>,
+    <span class='st'>"C:/Users/fan/R4Econ/math/integration"</span>),
+  <span class='kw'>ar_spn_skip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"basics"</span>, <span class='st'>"integrate"</span>),
+  <span class='kw'>st_rmd_suffix_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
+  <span class='kw'>st_save_add_suffix</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>spt_out_directory</span> <span class='kw'>=</span> <span class='st'>"C:/Users/fan/downloads"</span>,
   <span class='kw'>bl_recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bl_test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>it_hierachy_lower_rmd</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>it_hierachy_shift</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>ls_bool_convert</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_pdf</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_R</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>ls_bool_remove</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_remove_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -209,52 +198,20 @@ the string paths to be searched over.</p>
 in the array, will skip.</p></td>
     </tr>
     <tr>
-      <th>st_file_pattern</th>
+      <th>st_rmd_suffix_pattern</th>
       <td><p>string name of file suffix to search over</p></td>
     </tr>
     <tr>
-      <th>st_git_pattern</th>
-      <td><p>string name of file suffix based on which to consider if updating. If this is
-difference from st_file_pattern, use the file base with this suffix to detect if file has been changed. This
-is needed to detect if mlx files have changed for rmd files, where rmd files are not git tracked.</p></td>
+      <th>st_save_add_suffix</th>
+      <td><p>string suffix to add to rendered html, pdf files</p></td>
     </tr>
     <tr>
-      <th>st_folder_pdf</th>
-      <td><p>string subfolder where to store the pdf file, if just empty, store in rmd folder</p></td>
-    </tr>
-    <tr>
-      <th>st_folder_html</th>
-      <td><p>string subfolder where to store the html file, if just empty, store in rmd folder</p></td>
-    </tr>
-    <tr>
-      <th>st_folder_R</th>
-      <td><p>string subfolder where to store the R file, if just empty, store in rmd folder</p></td>
-    </tr>
-    <tr>
-      <th>bl_gen_if_git_old</th>
-      <td><p>boolean if true then even if RMD files do not have git status change,
-still update pdf and html files.</p></td>
+      <th>spt_out_directory</th>
+      <td><p>string full path of where to store the rendered html, pdf, r files</p></td>
     </tr>
     <tr>
       <th>bl_recursive</th>
       <td><p>boolean if to search in folders recursively</p></td>
-    </tr>
-    <tr>
-      <th>bl_test</th>
-      <td><p>boolean if testing, meaning do not generate pdf html, just see which files are been</p></td>
-    </tr>
-    <tr>
-      <th>it_hierachy_lower_rmd</th>
-      <td><p>integer promote saved hierrachy for rmd files and resave.</p></td>
-    </tr>
-    <tr>
-      <th>it_hierachy_shift</th>
-      <td><p>int modification level of promotion from bookdown hierachy
-to own file hierarchy for individual files</p></td>
-    </tr>
-    <tr>
-      <th>it_toc_depth</th>
-      <td><p>rmd own file outputs toc levels to show</p></td>
     </tr>
     <tr>
       <th>ls_bool_convert</th>
@@ -262,8 +219,8 @@ to own file hierarchy for individual files</p></td>
 considered included, searched and found</p></td>
     </tr>
     <tr>
-      <th>ls_bool_remove</th>
-      <td><p>list of booleans contorling if removing certain files in the same directory where the rmd file is</p></td>
+      <th>bl_verbose</th>
+      <td><p>verbose printing more</p></td>
     </tr>
     </table>
 
@@ -276,15 +233,20 @@ considered included, searched and found</p></td>
 </ul><p>#'</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html'>https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html</a>
+    <p><a href='https://fanwangecon.github.io/R4Econ/development/inout/htmlpdfr/fs_rmd_pdf_html.html'>https://fanwangecon.github.io/R4Econ/development/inout/htmlpdfr/fs_rmd_pdf_html.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/amto/array/'</span>, <span class='st'>'C:/Users/fan/R4Econ/math/integration'</span>)
-<span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/math/integration'</span>)
-<span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/development/inout'</span>)
-<span class='no'>ar_spn_skip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>, <span class='st'>'_mod'</span>)
-<span class='fu'>ff_sup_clean_rmd</span>(<span class='no'>ar_spt_root</span>, <span class='no'>ar_spn_skip</span>)</div><div class='output co'>#&gt; <span class='message'>Search and Check</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_rmd_pdf_html.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_text_save.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
+    <pre class="examples"><div class='input'><span class='no'>ar_spt_root</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/support/rmd'</span>)
+<span class='no'>ar_spn_skip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>)
+<span class='no'>spt_out_directory</span> <span class='kw'>&lt;-</span> <span class='st'>'C:/Users/fan/downloads'</span>
+<span class='no'>st_save_add_suffix</span> <span class='kw'>&lt;-</span> <span class='st'>'_newsave'</span>
+<span class='no'>ls_bool_convert</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_pdf</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>bl_html</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>bl_R</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>bl_verbose</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='fu'>ff_sup_rmd2htmlpdfr</span>(<span class='kw'>ar_spt_root</span><span class='kw'>=</span><span class='no'>ar_spt_root</span>, <span class='kw'>ar_spn_skip</span><span class='kw'>=</span><span class='no'>ar_spn_skip</span>,
+                    <span class='kw'>spt_out_directory</span><span class='kw'>=</span><span class='no'>spt_out_directory</span>, <span class='kw'>st_save_add_suffix</span><span class='kw'>=</span><span class='no'>st_save_add_suffix</span>,
+                    <span class='kw'>ls_bool_convert</span><span class='kw'>=</span><span class='no'>ls_bool_convert</span>,
+                    <span class='kw'>bl_verbose</span><span class='kw'>=</span><span class='no'>bl_verbose</span>)</div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
 #&gt;    
 #&gt; "" </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Generated html files:</span></div><div class='output co'>#&gt; [1] ""
 #&gt;    
@@ -298,8 +260,7 @@ considered included, searched and found</p></td>
 #&gt; 
 #&gt; $ls_spt_R_generated
 #&gt; character(0)
-#&gt; </div><div class='input'># ff_sup_clean_rmd(ar_spt_root, ar_spn_skip, bl_test = FALSE, bl_gen_if_git_old = TRUE)
-
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

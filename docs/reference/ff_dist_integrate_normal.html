@@ -173,7 +173,7 @@ normal shocks that best approximates the normal distribution.
 Outputs a number of statistics to check to quality of approximation</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>it_eps</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean <span class='op'>=</span> <span class='fl'>0</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>1</span>, it_eps <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,9 +206,13 @@ Outputs a number of statistics to check to quality of approximation</p>
 
     <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_dist_integrate_normal.html'>https://fanwangecon.github.io/REconTools/reference/ff_dist_integrate_normal.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_integrate.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_integrate.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='output co'>#&gt; $ar_eps_val
+    <pre class="examples"><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt; [1]  10.41311  60.00000 109.58689
 #&gt; 
 #&gt; $ar_eps_prb
@@ -222,7 +226,8 @@ Outputs a number of statistics to check to quality of approximation</p>
 #&gt; 
 #&gt; $fl_sd_approx
 #&gt; [1] 15.82025
-#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; $ar_eps_val
+#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt; [1]   0.4957362  30.2478681  60.0000000  89.7521319 119.5042638
 #&gt; 
 #&gt; $ar_eps_prb
@@ -236,7 +241,8 @@ Outputs a number of statistics to check to quality of approximation</p>
 #&gt; 
 #&gt; $fl_sd_approx
 #&gt; [1] 19.94369
-#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>7</span>)</div><div class='output co'>#&gt; $ar_eps_val
+#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>7</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt; [1]  -3.754568  17.496954  38.748477  60.000000  81.251523 102.503046 123.754568
 #&gt; 
 #&gt; $ar_eps_prb
@@ -251,7 +257,8 @@ Outputs a number of statistics to check to quality of approximation</p>
 #&gt; 
 #&gt; $fl_sd_approx
 #&gt; [1] 19.9815
-#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>9</span>)</div><div class='output co'>#&gt; $ar_eps_val
+#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>9</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt; [1]  -6.115849  10.413114  26.942076  43.471038  60.000000  76.528962  93.057924
 #&gt; [8] 109.586886 126.115849
 #&gt; 
@@ -267,7 +274,8 @@ Outputs a number of statistics to check to quality of approximation</p>
 #&gt; 
 #&gt; $fl_sd_approx
 #&gt; [1] 19.97717
-#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>11</span>)</div><div class='output co'>#&gt; $ar_eps_val
+#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>11</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt;  [1]  -7.618482   5.905215  19.428911  32.952607  46.476304  60.000000
 #&gt;  [7]  73.523696  87.047393 100.571089 114.094785 127.618482
 #&gt; 
@@ -284,7 +292,8 @@ Outputs a number of statistics to check to quality of approximation</p>
 #&gt; 
 #&gt; $fl_sd_approx
 #&gt; [1] 19.9746
-#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>13</span>)</div><div class='output co'>#&gt; $ar_eps_val
+#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>13</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt;  [1]  -8.658766   2.784362  14.227489  25.670617  37.113745  48.556872
 #&gt;  [7]  60.000000  71.443128  82.886255  94.329383 105.772511 117.215638
 #&gt; [13] 128.658766
@@ -302,7 +311,8 @@ Outputs a number of statistics to check to quality of approximation</p>
 #&gt; 
 #&gt; $fl_sd_approx
 #&gt; [1] 19.97299
-#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span>(<span class='kw'>fl_eps_mean</span><span class='kw'>=</span><span class='fl'>60</span>, <span class='kw'>fl_eps_sd</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>it_eps</span><span class='kw'>=</span><span class='fl'>15</span>)</div><div class='output co'>#&gt; $ar_eps_val
+#&gt; </div><div class='input'><span class='fu'>ff_dist_integrate_normal</span><span class='op'>(</span>fl_eps_mean<span class='op'>=</span><span class='fl'>60</span>, fl_eps_sd <span class='op'>=</span> <span class='fl'>20</span>, it_eps<span class='op'>=</span><span class='fl'>15</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ar_eps_val
 #&gt;  [1]  -9.4216411   0.4957362  10.4131135  20.3304908  30.2478681  40.1652454
 #&gt;  [7]  50.0826227  60.0000000  69.9173773  79.8347546  89.7521319  99.6695092
 #&gt; [13] 109.5868865 119.5042638 129.4216411
@@ -336,7 +346,7 @@ Outputs a number of statistics to check to quality of approximation</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

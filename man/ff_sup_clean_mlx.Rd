@@ -19,7 +19,8 @@ ff_sup_clean_mlx(
   bl_verbose = TRUE,
   bl_test = TRUE,
   it_hierachy_shift = 2,
-  it_toc_depth = 3
+  it_toc_depth = 3,
+  st_conda_env = "wk_pyfan"
 )
 }
 \arguments{
@@ -48,6 +49,8 @@ to own file hierarchy}
 
 \item{it_toc_depth}{rmd own file outputs toc levels to show
 considered included, searched and found}
+
+\item{st_conda_env}{string variable of conda env name}
 
 \item{st_folder_R}{string subfolder where to store the R file, if just empty, store in rmd folder}
 }

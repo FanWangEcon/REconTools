@@ -48,6 +48,7 @@ ID, and column two is the date on which the student was in class. Suppose there 
 50 students, who on average attended exactly 10 classes each during the semester,
 this means we have \(10 \cdot 50\) rows of data, with differing numbers of
 rows for each student. This is the input matrix for this function here.
+Assume that each row of the input matrix has unique id/time combinations. Will only keep unique rows.
 OUTPUT MATRIX: Now we want to generate a new dataframe, where each row is a date, and each column
 is a student. The values in the new dataframe shows, at the $Q^th$ day, how many
 classes student $i$ has attended so far. The following results is also in a REconTools
@@ -193,6 +194,7 @@ ID, and column two is the date on which the student was in class. Suppose there 
 50 students, who on average attended exactly 10 classes each during the semester,
 this means we have \(10 \cdot 50\) rows of data, with differing numbers of
 rows for each student. This is the input matrix for this function here.</p>
+<p>Assume that each row of the input matrix has unique id/time combinations. Will only keep unique rows.</p>
 <p>OUTPUT MATRIX: Now we want to generate a new dataframe, where each row is a date, and each column
 is a student. The values in the new dataframe shows, at the $Q^th$ day, how many
 classes student $i$ has attended so far. The following results is also in a REconTools
@@ -207,7 +209,7 @@ column is a different individual. The values says at the current level of overal
 how many units of resources go to each of the individual.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_panel_expand_longrosterwide</span>(<span class='no'>df</span>, <span class='no'>svr_id_t</span>, <span class='no'>svr_id_i</span>, <span class='kw'>st_idcol_prefix</span> <span class='kw'>=</span> <span class='st'>"id_"</span>)</pre>
+    <pre class="usage"><span class='fu'>ff_panel_expand_longrosterwide</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>svr_id_t</span>, <span class='va'>svr_id_i</span>, st_idcol_prefix <span class='op'>=</span> <span class='st'>"id_"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,30 +242,35 @@ how many units of resources go to each of the individual.</p>
     <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html'>https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html</a>
 <a href='https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html'>https://fanwangecon.github.io/R4Econ/panel/widelong/fs_pivotwider.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_expand.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tibble</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyr.tidyverse.org'>tidyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tibble.tidyverse.org/'>tibble</a></span><span class='op'>)</span>
 <span class='co'># Generate Input Data Structure</span>
 <span class='co'># Define</span>
-<span class='no'>it_N</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>
-<span class='no'>it_M</span> <span class='kw'>&lt;-</span> <span class='fl'>5</span>
-<span class='no'>svr_id</span> <span class='kw'>&lt;-</span> <span class='st'>'student_id'</span>
+<span class='va'>it_N</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
+<span class='va'>it_M</span> <span class='op'>&lt;-</span> <span class='fl'>5</span>
+<span class='va'>svr_id</span> <span class='op'>&lt;-</span> <span class='st'>'student_id'</span>
 
 <span class='co'># from : support/rand/fs_rand_draws.Rmd</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>222</span>)
-<span class='no'>df_panel_attend_date</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>it_M</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>it_N</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span>(<span class='kw'>var</span> <span class='kw'>=</span> <span class='no'>svr_id</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/uncount.html'>uncount</a></span>(<span class='no'>V1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(!!<span class='fu'><a href='https://dplyr.tidyverse.org/reference/tidyeval-compat.html'>sym</a></span>(<span class='no'>svr_id</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span>()) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>in_class</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>(),<span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>&lt;</span> <span class='fl'>0</span> ~ <span class='fl'>1</span>, <span class='fl'>TRUE</span> ~ <span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>in_class</span> <span class='kw'>==</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(!!<span class='fu'><a href='https://dplyr.tidyverse.org/reference/tidyeval-compat.html'>sym</a></span>(<span class='no'>svr_id</span>), <span class='no'>date</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span>(<span class='kw'>date_in_class</span> <span class='kw'>=</span> <span class='no'>date</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>222</span><span class='op'>)</span>
+<span class='va'>df_panel_attend_date</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>it_M</span>, nrow<span class='op'>=</span><span class='va'>it_N</span>, ncol<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='va'>svr_id</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/uncount.html'>uncount</a></span><span class='op'>(</span><span class='va'>V1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/tidyeval-compat.html'>sym</a></span><span class='op'>(</span><span class='va'>svr_id</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>date <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>in_class <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>,mean<span class='op'>=</span><span class='fl'>0</span>,sd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>0</span> <span class='op'>~</span> <span class='fl'>1</span>, <span class='cn'>TRUE</span> <span class='op'>~</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>in_class</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/tidyeval-compat.html'>sym</a></span><span class='op'>(</span><span class='va'>svr_id</span><span class='op'>)</span>, <span class='va'>date</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>date_in_class <span class='op'>=</span> <span class='va'>date</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
 #&gt; <span class='warning'>Using compatibility `.name_repair`.</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
 #&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_panel_attend_date</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 2</span><span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_panel_attend_date</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 2</span><span>
 #&gt;   student_id date_in_class
 #&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>          1             2
@@ -275,25 +282,27 @@ how many units of resources go to each of the individual.</p>
 #&gt; </span><span style='color: #555555;'>7</span><span>          3             3
 #&gt; </span><span style='color: #555555;'>8</span><span>          3             5</div><div class='input'>
 <span class='co'># Parameters</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>df_panel_attend_date</span>
-<span class='no'>svr_id_i</span> <span class='kw'>&lt;-</span> <span class='st'>'student_id'</span>
-<span class='no'>svr_id_t</span> <span class='kw'>&lt;-</span> <span class='st'>'date_in_class'</span>
-<span class='no'>st_idcol_prefix</span> <span class='kw'>&lt;-</span> <span class='st'>'sid_'</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>df_panel_attend_date</span>
+<span class='va'>svr_id_i</span> <span class='op'>&lt;-</span> <span class='st'>'student_id'</span>
+<span class='va'>svr_id_t</span> <span class='op'>&lt;-</span> <span class='st'>'date_in_class'</span>
+<span class='va'>st_idcol_prefix</span> <span class='op'>&lt;-</span> <span class='st'>'sid_'</span>
 
 <span class='co'># Invoke Function</span>
-<span class='no'>ls_df_rosterwide</span> <span class='kw'>&lt;-</span> <span class='fu'>ff_panel_expand_longrosterwide</span>(<span class='no'>df</span>, <span class='no'>svr_id_t</span>, <span class='no'>svr_id_i</span>, <span class='no'>st_idcol_prefix</span>)
-<span class='no'>df_roster_wide_func</span> <span class='kw'>&lt;-</span> <span class='no'>ls_df_rosterwide</span>$<span class='no'>df_roster_wide</span>
-<span class='no'>df_roster_wide_cumu_func</span> <span class='kw'>&lt;-</span> <span class='no'>ls_df_rosterwide</span>$<span class='no'>df_roster_wide_cumu</span>
+<span class='va'>ls_df_rosterwide</span> <span class='op'>&lt;-</span> <span class='fu'>ff_panel_expand_longrosterwide</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>svr_id_t</span>, <span class='va'>svr_id_i</span>, <span class='va'>st_idcol_prefix</span><span class='op'>)</span>
+<span class='va'>df_roster_wide_func</span> <span class='op'>&lt;-</span> <span class='va'>ls_df_rosterwide</span><span class='op'>$</span><span class='va'>df_roster_wide</span>
+<span class='va'>df_roster_wide_cumu_func</span> <span class='op'>&lt;-</span> <span class='va'>ls_df_rosterwide</span><span class='op'>$</span><span class='va'>df_roster_wide_cumu</span>
 
 <span class='co'># Print</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_roster_wide_func</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 4</span><span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_roster_wide_func</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 4</span><span>
 #&gt;   date_in_class sid_1 sid_2 sid_3
 #&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>             1    </span><span style='color: #BB0000;'>NA</span><span>     1    </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'>2</span><span>             2     1     1     1
 #&gt; </span><span style='color: #555555;'>3</span><span>             3    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     1
 #&gt; </span><span style='color: #555555;'>4</span><span>             4     1    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span>             5    </span><span style='color: #BB0000;'>NA</span><span>     1     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_roster_wide_cumu_func</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 4</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span>             5    </span><span style='color: #BB0000;'>NA</span><span>     1     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_roster_wide_cumu_func</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 4</span><span>
 #&gt;   date_in_class sid_1 sid_2 sid_3
 #&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>             1     0     1     0
@@ -316,7 +325,7 @@ how many units of resources go to each of the individual.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

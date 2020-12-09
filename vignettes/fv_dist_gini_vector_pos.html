@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Compute Gini Inequality Coefficient Given Data Vector (One Variable)</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Compute Gini Inequality Coefficient Given Data Vector (One Variable)</h1>
+
+
+
+<p>View a vector positive vectors as population, calculate discrete GINI inequality measure. This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html">ff_dist_gini_vector_pos</a> function works from <a href="https://fanwangecon.github.io/">Fan</a>’s <em><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></em> Package.</p>
+<p>There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the <a href="https://en.wikipedia.org/wiki/Gini_coefficient">GINI</a> coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.</p>
+<p>See the formula below, note that when the sample size is small, there is a limit to inequality using the formula defined below given each <span class="math inline">\(N\)</span>. So for small <span class="math inline">\(N\)</span>, can not really compare inequality across arrays with different <span class="math inline">\(N\)</span>, can only compare arrays with the same <span class="math inline">\(N\)</span>.</p>
+<div id="formula" class="section level2">
+<h2>Formula</h2>
+<p>Given monotonimcally increasing array <span class="math inline">\(X\)</span>, with <span class="math inline">\(x_1,...,x_N\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>There is a box, width = 1, height = 1</li>
+<li>The width is discretized into <span class="math inline">\(N\)</span> individuals, so each individual’s width is <span class="math inline">\(\frac{1}{N}\)</span></li>
+<li>The height is normalized to 1, for the nth individual, total height is the sum of all <span class="math inline">\(x\)</span>, so need to rescale all bars by <span class="math inline">\(\sum_i^{N} x_i\)</span></li>
+</ol>
+<p>The GINI formula used here is: <span class="math display">\[
+ GINI =
+  1 - \frac{2}{N+1}
+  \cdot
+  \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
+  \cdot
+  \left(
+    \sum_{i=1}^N x_i
+  \right)^{-1}
+\]</span></p>
+<p>Derive the formula in the steps below.</p>
+<div id="step-1-area-formula" class="section level3">
+<h3>Step 1 Area Formula</h3>
+<p><span class="math display">\[
+ \Gamma = \sum_{i=1}^N \frac{1}{N} \cdot \left(
+     \sum_{j=1}^{i} \left(
+      \frac{x_j}{\sum_{\widehat{j}=1}^N x_{\widehat{j}} }
+      \right)
+  \right)
+\]</span></p>
+</div>
+<div id="step-2-total-area-given-perfect-equality" class="section level3">
+<h3>Step 2 Total Area Given Perfect equality</h3>
+<p>With perfect equality <span class="math inline">\(x_i=a\)</span> for all <span class="math inline">\(i\)</span>, so need to divide by that.</p>
+<p><span class="math display">\[
+ \Gamma^{\text{equal}} = \sum_{i=1}^N \frac{1}{N} \cdot \left(
+     \sum_{j=1}^{i} \left(
+      \frac{a}{\sum_{\widehat{j}=1}^N a }
+      \right)
+  \right)
+  = \frac{N+1}{N}\cdot\frac{1}{2}
+\]</span></p>
+<p>As the number of elements of the vecotr increases: <span class="math display">\[
+ \lim_{N \rightarrow \infty}\Gamma^{\text{equal}}
+  = \lim_{N \rightarrow \infty} \frac{N+1}{N}\cdot\frac{1}{2}
+  = \frac{1}{2}
+\]</span></p>
+</div>
+<div id="step-3-arriving-at-finite-vector-gini-formula" class="section level3">
+<h3>Step 3 Arriving at Finite Vector Gini Formula</h3>
+<p>Given what we have from above, we obtain the gini formula, divide by total area below 45 degree line.</p>
+<p><span class="math display">\[
+ GINI =
+  1 -
+  \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
+  \cdot
+  \left(
+    N \cdot \sum_{i=1}^N x_i
+  \right)^{-1}
+  \cdot
+  \left( \frac{N+1}{N}\cdot\frac{1}{2} \right)^{-1}
+  =
+  1 - \frac{2}{N+1}
+  \cdot
+  \left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)
+  \cdot
+  \left(
+    \sum_{i=1}^N x_i
+  \right)^{-1}
+\]</span></p>
+</div>
+<div id="step-4-maximum-inequality-given-n" class="section level3">
+<h3>Step 4 Maximum Inequality given N</h3>
+<p>Suppose <span class="math inline">\(x_i=0\)</span> for all <span class="math inline">\(i&lt;N\)</span>, then:</p>
+<p><span class="math display">\[
+ GINI^{x_i = 0 \text{ except } i=N}
+ =
+  1 - \frac{2}{N+1}
+  \cdot
+  X_N
+  \cdot
+  \left(
+    X_N
+  \right)^{-1}
+ =
+ 1 - \frac{2}{N+1}
+\]</span></p>
+<p><span class="math display">\[
+ \lim_{N \rightarrow \infty} GINI^{x_i = 0 \text{ except } i=N}
+ =
+ 1 -
+ \lim_{N \rightarrow \infty}
+ \frac{2}{N+1}
+ = 1
+\]</span></p>
+<p>Note that for small N, for example if <span class="math inline">\(N=10\)</span>, even when one person holds all income, all others have 0 income, the formula will not produce gini is zero, but that gini is equal to <span class="math inline">\(\frac{2}{11}\approx 0.1818\)</span>. If <span class="math inline">\(N=2\)</span>, inequality is at most, <span class="math inline">\(\frac{2}{3}\approx 0.667\)</span>.</p>
+<p><span class="math display">\[
+ MostUnequalGINI\left(N\right) = 1 - \frac{2}{N+1} = \frac{N-1}{N+1}
+\]</span></p>
+</div>
+</div>
+<div id="implement-gini-formula-in-r" class="section level2">
+<h2>Implement GINI Formula in R</h2>
+<p>The <strong>GINI</strong> formula just derived is trivial to compute.</p>
+<ol style="list-style-type: decimal">
+<li>scalar: <span class="math inline">\(\frac{2}{N+1}\)</span></li>
+<li>cumsum: <span class="math inline">\(\sum_{j=1}^{i} x_j\)</span></li>
+<li>sum of cumsum: <span class="math inline">\(\left(\sum_{i=1}^N \sum_{j=1}^{i} x_j\right)\)</span></li>
+<li>sum: <span class="math inline">\(\sum_{i=1}^N X_i\)</span></li>
+</ol>
+<p>There are no package dependencies. Define the formula here:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Library</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Formula, directly implement the GINI formula Following Step 4 above</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fv_dist_gini_vector_pos_test <span class="ot">&lt;-</span> <span class="cf">function</span>(ar_pos) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check length and given warning</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  it_n <span class="ot">&lt;-</span> <span class="fu">length</span>(ar_pos)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (it_n <span class="sc">&lt;=</span> <span class="dv">100</span>)  <span class="fu">warning</span>(<span class="st">&#39;Data vector has n=&#39;</span>,it_n,<span class="st">&#39;, max-inequality/max-gini=&#39;</span>,(it_n<span class="dv">-1</span>)<span class="sc">/</span>(it_n <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ar_pos <span class="ot">&lt;-</span> <span class="fu">sort</span>(ar_pos)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># formula implement</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  fl_gini <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> ((<span class="dv">2</span><span class="sc">/</span>(it_n<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">cumsum</span>(ar_pos))<span class="sc">*</span>(<span class="fu">sum</span>(ar_pos))<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fl_gini)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="testing" class="section level3">
+<h3>Testing</h3>
+<p>Generate a number of examples Arrays for testing</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Arrays of data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ar_equal_n1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ar_ineql_n1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">100</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ar_equal_n2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ar_ineql_alittle_n2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ar_ineql_somewht_n2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ar_ineql_alotine_n2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">^</span><span class="dv">5</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ar_ineql_veryvry_n2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">^</span><span class="dv">8</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ar_ineql_mostmst_n2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">^</span><span class="dv">13</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ar_equal_n10 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ar_ineql_some_n10 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">13</span>,<span class="dv">21</span>,<span class="dv">34</span>,<span class="dv">55</span>,<span class="dv">89</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ar_ineql_very_n10 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">3</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">5</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">8</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">13</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">21</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">34</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">55</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">89</span><span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ar_ineql_extr_n10 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">3</span><span class="sc">^</span><span class="dv">3</span>,<span class="dv">5</span><span class="sc">^</span><span class="dv">4</span>,<span class="dv">8</span><span class="sc">^</span><span class="dv">5</span>,<span class="dv">13</span><span class="sc">^</span><span class="dv">6</span>,<span class="dv">21</span><span class="sc">^</span><span class="dv">7</span>,<span class="dv">34</span><span class="sc">^</span><span class="dv">8</span>,<span class="dv">55</span><span class="sc">^</span><span class="dv">9</span>,<span class="dv">89</span><span class="sc">^</span><span class="dv">10</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Uniform draw testing</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ar_unif_n1000 <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">1</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal draw testing</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>ar_norm_lowsd_n1000 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd =</span><span class="dv">1</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ar_norm_lowsd_n1000[ar_norm_lowsd_n1000<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>ar_norm_highsd_n1000 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd =</span><span class="dv">20</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ar_norm_highsd_n1000[ar_norm_highsd_n1000<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Beta draw testing</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ar_beta_mostrich_n1000 <span class="ot">=</span> <span class="fu">rbeta</span>(<span class="dv">1000</span>, <span class="dv">5</span>, <span class="dv">1</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>ar_beta_mostpoor_n1000 <span class="ot">=</span> <span class="fu">rbeta</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ar_beta_manyrichmanypoor_nomiddle_n1000 <span class="ot">=</span> <span class="fu">rbeta</span>(<span class="dv">1000</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<p>Now test the example arrays above using the function based no our formula:</p>
+<pre><code>#&gt; 
+#&gt; Small N=1 Hard-Code
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_equal_n1): Data vector has n=1, max-
+#&gt; inequality/max-gini=0
+#&gt; ar_equal_n1: 0
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_n1): Data vector has n=1, max-
+#&gt; inequality/max-gini=0
+#&gt; ar_ineql_n1: 0
+#&gt; 
+#&gt; Small N=2 Hard-Code, converge to 1/3, see formula above
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_alittle_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_alittle_n2: 0.1111111
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_somewht_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_somewht_n2: 0.2592593
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_alotine_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_alotine_n2: 0.3131313
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_veryvry_n2): Data vector has
+#&gt; n=2, max-inequality/max-gini=0.333333333333333
+#&gt; ar_ineql_veryvry_n2: 0.3307393
+#&gt; 
+#&gt; Small N=10 Hard-Code, convege to 9/11=0.8181, see formula above
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_equal_n10): Data vector has n=10,
+#&gt; max-inequality/max-gini=0.818181818181818
+#&gt; ar_equal_n10: 0
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_some_n10): Data vector has
+#&gt; n=10, max-inequality/max-gini=0.818181818181818
+#&gt; ar_ineql_some_n10: 0.5395514
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_very_n10): Data vector has
+#&gt; n=10, max-inequality/max-gini=0.818181818181818
+#&gt; ar_ineql_very_n10: 0.7059554
+#&gt; Warning in fv_dist_gini_vector_pos_test(ar_ineql_extr_n10): Data vector has
+#&gt; n=10, max-inequality/max-gini=0.818181818181818
+#&gt; ar_ineql_extr_n10: 0.8181549
+#&gt; 
+#&gt; UNIFORM Distribution
+#&gt; ar_unif_n1000: 0.3362994
+#&gt; 
+#&gt; NORMAL Distribution
+#&gt; ar_norm_lowsd_n1000: 0.005697335
+#&gt; ar_norm_highsd_n1000: 0.117818
+#&gt; 
+#&gt; BETA Distribution
+#&gt; ar_beta_mostpoor_n1000: 0.4560572
+#&gt; ar_beta_manyrichmanypoor_nomiddle_n1000: 0.3902195
+#&gt; ar_beta_mostrich_n1000: 0.09224907
+#&gt; 
+#&gt; 
+#&gt; SHOULD/DOES NOT WORK TEST
+#&gt;  ar_unif_n1000_NEGATIVE: 31.97591</code></pre>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

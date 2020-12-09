@@ -171,15 +171,15 @@ categorized by some discrete variables. Wage by gender for example." />
 categorized by some discrete variables. Wage by gender for example.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_summ_bygroup</span>(
-  <span class='no'>df</span>,
-  <span class='no'>vars.group</span>,
-  <span class='no'>var.numeric</span>,
-  <span class='kw'>str.stats.group</span> <span class='kw'>=</span> <span class='st'>"main"</span>,
-  <span class='kw'>ar.perc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>0.05</span>, <span class='fl'>0.1</span>, <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>),
-  <span class='kw'>str.stats.specify</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>boo.overall.stats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ff_summ_bygroup</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  <span class='va'>vars.group</span>,
+  <span class='va'>var.numeric</span>,
+  str.stats.group <span class='op'>=</span> <span class='st'>"main"</span>,
+  ar.perc <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.01</span>, <span class='fl'>0.05</span>, <span class='fl'>0.1</span>, <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span><span class='op'>)</span>,
+  str.stats.specify <span class='op'>=</span> <span class='cn'>NULL</span>,
+  boo.overall.stats <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,21 +220,26 @@ categorized by some discrete variables. Wage by gender for example.</p>
     <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html'>https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html</a>
 <a href='https://fanwangecon.github.io/REconTools/articles/fv_summ_bygroup.html'>https://fanwangecon.github.io/REconTools/articles/fv_summ_bygroup.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_bygroup.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>mtcars</span>)
-<span class='no'>df_mtcars</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>df_mtcars</span>
-<span class='no'>vars.group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'am'</span>, <span class='st'>'vs'</span>)
-<span class='no'>var.numeric</span> <span class='kw'>&lt;-</span> <span class='st'>'mpg'</span>
-<span class='no'>str.stats.group</span> <span class='kw'>&lt;-</span> <span class='st'>'allperc'</span>
-<span class='no'>ar.perc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>0.05</span>, <span class='fl'>0.10</span>, <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>)
-<span class='no'>ls_summ_by_group</span> <span class='kw'>&lt;-</span> <span class='fu'>ff_summ_bygroup</span>(<span class='no'>df</span>, <span class='no'>vars.group</span>, <span class='no'>var.numeric</span>, <span class='no'>str.stats.group</span>, <span class='no'>ar.perc</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: attributes are not identical across measure variables;</span>
-#&gt; <span class='warning'>they will be dropped</span></div><div class='input'><span class='no'>df_table_grp_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_table_grp_stats</span>
-<span class='no'>df_row_grp_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_row_grp_stats</span>
-<span class='no'>df_overall_stats</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_overall_stats</span>
-<span class='no'>df_row_stats_all</span> <span class='kw'>&lt;-</span> <span class='no'>ls_summ_by_group</span>$<span class='no'>df_row_stats_all</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_table_grp_stats</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 21</span><span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='va'>df_mtcars</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>df_mtcars</span>
+<span class='va'>vars.group</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'am'</span>, <span class='st'>'vs'</span><span class='op'>)</span>
+<span class='va'>var.numeric</span> <span class='op'>&lt;-</span> <span class='st'>'mpg'</span>
+<span class='va'>str.stats.group</span> <span class='op'>&lt;-</span> <span class='st'>'allperc'</span>
+<span class='va'>ar.perc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.01</span>, <span class='fl'>0.05</span>, <span class='fl'>0.10</span>, <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span><span class='op'>)</span>
+<span class='va'>ls_summ_by_group</span> <span class='op'>&lt;-</span> <span class='fu'>ff_summ_bygroup</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>vars.group</span>, <span class='va'>var.numeric</span>, <span class='va'>str.stats.group</span>, <span class='va'>ar.perc</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: attributes are not identical across measure variables;</span>
+#&gt; <span class='warning'>they will be dropped</span></div><div class='input'><span class='va'>df_table_grp_stats</span> <span class='op'>&lt;-</span> <span class='va'>ls_summ_by_group</span><span class='op'>$</span><span class='va'>df_table_grp_stats</span>
+<span class='va'>df_row_grp_stats</span> <span class='op'>&lt;-</span> <span class='va'>ls_summ_by_group</span><span class='op'>$</span><span class='va'>df_row_grp_stats</span>
+<span class='va'>df_overall_stats</span> <span class='op'>&lt;-</span> <span class='va'>ls_summ_by_group</span><span class='op'>$</span><span class='va'>df_overall_stats</span>
+<span class='va'>df_row_stats_all</span> <span class='op'>&lt;-</span> <span class='va'>ls_summ_by_group</span><span class='op'>$</span><span class='va'>df_row_stats_all</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_table_grp_stats</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 21</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   am [2]</span><span>
 #&gt;      am    vs  mean median    sd   IQR   mad  `1%`  `5%` `10%` `25%` `50%` `75%`
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -243,7 +248,8 @@ categorized by some discrete variables. Wage by gender for example.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span>     1     0  19.8   20.4  4.01  4.22  3.85  15.0  15.2  15.4  16.8  20.4  21  
 #&gt; </span><span style='color: #555555;'>4</span><span>     1     1  28.4   30.4  4.76  6.35  4.60  21.5  21.8  22.2  25.0  30.4  31.4
 #&gt; </span><span style='color: #555555;'># ... with 8 more variables: `90%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `95%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `99%` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_row_grp_stats</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 76</span><span>
+#&gt; </span><span style='color: #555555;'>#   max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, first </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_row_grp_stats</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 76</span><span>
 #&gt;   `mpg.am.vs.0.0.~ `mpg.am.vs.0.0.~ `mpg.am.vs.0.0.~ `mpg.am.vs.0.0.~
 #&gt;              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>             10.4             10.7             14.0             10.4
@@ -281,12 +287,14 @@ categorized by some discrete variables. Wage by gender for example.</p>
 #&gt; </span><span style='color: #555555;'>#   mpg.am.vs.1.1.last </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.mad </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   mpg.am.vs.1.1.mean </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.median </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   mpg.am.vs.1.1.min </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mpg.am.vs.1.1.n.distinct </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   mpg.am.vs.1.1.sd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_overall_stats</span>)</div><div class='output co'>#&gt;   mpg.mean mpg.median   mpg.sd mpg.IQR mpg.mad mpg.1% mpg.5% mpg.10% mpg.25%
+#&gt; </span><span style='color: #555555;'>#   mpg.am.vs.1.1.sd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_overall_stats</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   mpg.mean mpg.median   mpg.sd mpg.IQR mpg.mad mpg.1% mpg.5% mpg.10% mpg.25%
 #&gt; 1 20.09062       19.2 6.026948   7.375 5.41149   10.4 11.995   14.34  15.425
 #&gt;   mpg.50% mpg.75% mpg.90% mpg.95% mpg.99% mpg.min mpg.max mpg.first mpg.last
 #&gt; 1    19.2    22.8   30.09    31.3  33.435    10.4    33.9        21     21.4
 #&gt;   mpg.n_distinct
-#&gt; 1             25</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_row_stats_all</span>)</div><div class='output co'>#&gt; $`mpg.am.vs.0.0.1%`
+#&gt; 1             25</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_row_stats_all</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $`mpg.am.vs.0.0.1%`
 #&gt; [1] 10.4
 #&gt; 
 #&gt; $`mpg.am.vs.0.0.10%`
@@ -595,7 +603,7 @@ categorized by some discrete variables. Wage by gender for example.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

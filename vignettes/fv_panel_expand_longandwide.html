@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Append Group Mean Lagged Values as Additional Panel Variables</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Append Group Mean Lagged Values as Additional Panel Variables</h1>
+
+
+
+<p>Compute averages over sub-groups of dates for each variable. Merge so that each date observation has as variables all lagged and forward information as additional variables. This file works out how the <a href="https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longandwide.html">ff_panel_expand_longandwide</a> function works.</p>
+<p>There is a panel dataset, where each row is an observation at a date.</p>
+<ol style="list-style-type: decimal">
+<li>There is a variable recorded for a panel, and a variable with date info, and another with obs info</li>
+</ol>
+<ul>
+<li><span class="citation">@param</span> svr_id_t string time variable name</li>
+<li><span class="citation">@param</span> svr_id_i string individual ID name</li>
+<li><span class="citation">@param</span> svr_data string variable name</li>
+<li>related to new variable for t to be generated:
+<ul>
+<li><span class="citation">@param</span> bl_gen_newgrp boolean if to generate new group or use svr_id_t levels directly</li>
+<li><span class="citation">@param</span> svr_tgrp string new of new group variable to be generated</li>
+</ul></li>
+<li>ar_it_ct: array indicating new variable generated by svr_id_t</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Compute averages over sub-groups of dates for each variable, with different ways of specifying date subgroups.</li>
+</ol>
+<ul>
+<li>average(svr_data) over svr</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Reshape data so each date is a variable for selected subset of key variables</li>
+<li>Merge results from 2 back to main, so that each indi/date observation has as variables all lagged and forward information as additional variables. Append not n lag m forward, but full history as additional variables</li>
+</ol>
+<p>Doing this allows for lagged intereaction that are time specific in an arbitrary way.</p>
+<div id="package-and-data-loading-and-parameter-setting" class="section level2">
+<h2>Package and Data Loading and Parameter Setting</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Library</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">all.names =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidymodels)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REconTools)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Select Cebu Only</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df_hw_cebu <span class="ot">&lt;-</span> df_hgt_wgt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(S.country <span class="sc">==</span> <span class="st">&#39;Cebu&#39;</span> <span class="sc">&amp;</span> svymthRound <span class="sc">&lt;=</span> <span class="dv">24</span> <span class="sc">&amp;</span> svymthRound <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_hw_cebu)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tibble [16,188 x 15] (S3: spec_tbl_df/tbl_df/tbl/data.frame)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ S.country  : chr [1:16188] &quot;Cebu&quot; &quot;Cebu&quot; &quot;Cebu&quot; &quot;Cebu&quot; ...</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ vil.id     : num [1:16188] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ indi.id    : num [1:16188] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ sex        : chr [1:16188] &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; ...</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound: num [1:16188] 2 4 6 8 10 12 14 16 18 20 ...</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ momEdu     : num [1:16188] 5.3 5.3 5.3 5.3 5.3 5.3 5.3 5.3 5.3 5.3 ...</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ wealthIdx  : num [1:16188] 6.3 6.3 6.3 6.3 6.3 6.3 6.3 6.3 6.3 6.3 ...</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ hgt        : num [1:16188] 54.6 58.8 65.6 67.4 70.4 70.8 NA NA NA NA ...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ wgt        : num [1:16188] 3679 7954 6386 6039 8892 ...</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ hgt0       : num [1:16188] 44.2 44.2 44.2 44.2 44.2 44.2 44.2 44.2 44.2 44.2 ...</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ wgt0       : num [1:16188] 2044 2044 2044 2044 2044 ...</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ prot       : num [1:16188] 0.5 1.7 5.6 2.6 15 11.3 NA NA NA NA ...</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ cal        : num [1:16188] 4.7 10.3 180.7 85.3 288 ...</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ p.A.prot   : num [1:16188] 2042 1480 1908 2808 2526 ...</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ p.A.nProt  : num [1:16188] 231 232 213 155 149 ...</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;spec&quot;)=</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   .. cols(</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   S.country = col_character(),</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   vil.id = col_double(),</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   indi.id = col_double(),</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   sex = col_character(),</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   svymthRound = col_double(),</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   momEdu = col_double(),</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   wealthIdx = col_double(),</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   hgt = col_double(),</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   wgt = col_double(),</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   hgt0 = col_double(),</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   wgt0 = col_double(),</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   prot = col_double(),</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   cal = col_double(),</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   p.A.prot = col_double(),</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..   p.A.nProt = col_double()</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   .. )</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># To Save Processing Time, only Expand Panel for Individuals with low ID numbers</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>df_hw_cebu <span class="ot">&lt;-</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">filter</span>(indi.id <span class="sc">&lt;=</span> <span class="dv">50</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Count Unique</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>svr_unique_identifier <span class="ot">=</span> <span class="st">&#39;indi.id&#39;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>df_uniques_vil <span class="ot">&lt;-</span> <span class="fu">ff_summ_count_unique_by_groups</span>(</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  df_hw_cebu, <span class="at">ar_svr_group=</span><span class="fu">c</span>(<span class="st">&#39;S.country&#39;</span>, <span class="st">&#39;vil.id&#39;</span>), svr_unique_identifier)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `mutate_if()` ignored the following grouping variables:</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns `S.country`, `vil.id`</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: `funs()` is deprecated as of dplyr 0.8.0.</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Please use a list of either functions or lambdas: </span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   # Simple named list: </span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   list(mean = mean, median = median)</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   # Auto named with `tibble::lst()`: </span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tibble::lst(mean, median)</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   # Using lambdas</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding missing grouping variables: `S.country`, `vil.id`</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_uniques_vil, <span class="at">n=</span><span class="dv">20</span>)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 15</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   S.country, vil.id [1]</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   S.country vil.id unique_indi indi.id_n svymthRound_n momEdu_n wealthIdx_n</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt;         &lt;int&gt;    &lt;int&gt;       &lt;int&gt;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Cebu           1          50       600           600      600         600</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   p.A.nProt_n &lt;int&gt;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>df_uniques_mth <span class="ot">&lt;-</span> <span class="fu">ff_summ_count_unique_by_groups</span>(</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  df_hw_cebu, <span class="at">ar_svr_group=</span><span class="fu">c</span>(<span class="st">&#39;S.country&#39;</span>, <span class="st">&#39;svymthRound&#39;</span>),svr_unique_identifier)</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `mutate_if()` ignored the following grouping variables:</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns `S.country`, `svymthRound`</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding missing grouping variables: `S.country`, `svymthRound`</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_uniques_mth, <span class="at">n=</span><span class="dv">20</span>)</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 12 x 15</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   S.country, svymthRound [12]</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    S.country svymthRound unique_indi vil.id_n indi.id_n momEdu_n wealthIdx_n</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;int&gt;    &lt;int&gt;     &lt;int&gt;    &lt;int&gt;       &lt;int&gt;</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Cebu                2          50       50        50       50          50</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Cebu                4          50       50        50       50          50</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Cebu                6          50       50        50       50          50</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Cebu                8          50       50        50       50          50</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Cebu               10          50       50        50       50          50</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Cebu               12          50       50        50       50          50</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Cebu               14          50       50        50       50          50</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Cebu               16          50       50        50       50          50</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Cebu               18          50       50        50       50          50</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Cebu               20          50       50        50       50          50</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Cebu               22          50       50        50       50          50</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 Cebu               24          50       50        50       50          50</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   p.A.nProt_n &lt;int&gt;</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>df_uniques_mth <span class="ot">&lt;-</span> <span class="fu">ff_summ_count_unique_by_groups</span>(</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>  df_hw_cebu, <span class="at">ar_svr_group=</span><span class="fu">c</span>(<span class="st">&#39;S.country&#39;</span>),svr_unique_identifier)</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `mutate_if()` ignored the following grouping variables:</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Column `S.country`</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding missing grouping variables: `S.country`</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_uniques_mth, <span class="at">n=</span><span class="dv">20</span>)</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 15</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   S.country [1]</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   S.country unique_indi vil.id_n indi.id_n svymthRound_n momEdu_n wealthIdx_n</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;int&gt;    &lt;int&gt;     &lt;int&gt;         &lt;int&gt;    &lt;int&gt;       &lt;int&gt;</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Cebu               50      600       600           600      600         600</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   p.A.nProt_n &lt;int&gt;</span></span></code></pre></div>
+</div>
+<div id="generate-additional-group-variables" class="section level2">
+<h2>Generate Additional Group Variables</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Additional Categorical Variables, ever 6 months for averaging</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_hw_cebu <span class="ot">=</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">mth6 =</span> <span class="fu">recode</span>(svymthRound,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">0</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t06&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t06&quot;</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t06&quot;</span>, <span class="st">`</span><span class="at">6</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t06&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">8</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m08t12&quot;</span>, <span class="st">`</span><span class="at">10</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m08t12&quot;</span>, <span class="st">`</span><span class="at">12</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m08t12&quot;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">14</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m14t18&quot;</span>, <span class="st">`</span><span class="at">16</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m14t18&quot;</span>, <span class="st">`</span><span class="at">18</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m14t18&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">20</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m20t24&quot;</span>, <span class="st">`</span><span class="at">22</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m20t24&quot;</span>, <span class="st">`</span><span class="at">24</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m20t24&quot;</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Additional Categorical Variables, ever 8 months for averaging</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df_hw_cebu <span class="ot">=</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">mth8 =</span> <span class="fu">recode</span>(svymthRound,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">0</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">6</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">8</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">10</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>, <span class="st">`</span><span class="at">12</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>, <span class="st">`</span><span class="at">14</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>, <span class="st">`</span><span class="at">16</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">18</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>, <span class="st">`</span><span class="at">20</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>, <span class="st">`</span><span class="at">22</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>, <span class="st">`</span><span class="at">24</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Additional Categorical Variables, ever 10 months for averaging</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>df_hw_cebu <span class="ot">=</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">mth10 =</span> <span class="fu">recode</span>(svymthRound,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">0</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">`</span><span class="at">6</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>,  <span class="st">`</span><span class="at">8</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m00t08&quot;</span>, <span class="st">`</span><span class="at">10</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>, <span class="st">`</span><span class="at">12</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>, <span class="st">`</span><span class="at">14</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">16</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m10t16&quot;</span>, <span class="st">`</span><span class="at">18</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>, <span class="st">`</span><span class="at">20</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>, <span class="st">`</span><span class="at">22</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>, <span class="st">`</span><span class="at">24</span><span class="st">`</span><span class="ot">=</span><span class="st">&quot;m18t24&quot;</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-order variables so that months come earlier</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>df_hw_cebu <span class="ot">=</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">select</span>(indi.id, svymthRound, mth6, mth8, mth10, <span class="fu">everything</span>())</span></code></pre></div>
+</div>
+<div id="averaging-over-group-variables" class="section level2">
+<h2>Averaging over Group Variables</h2>
+<p>Data per month, can still average if grouping is by months. If grouping not by per month, clearly need to average over the <em>svr_data</em> variable. Below, first try no averaging, directly reshape and merge. Then do averaging for subgroup.</p>
+<div id="expand-columns-by-info-for-each-month-of-age" class="section level3">
+<h3>Expand columns by Info for Each Month of Age</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate New Variable</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables to do groupings by</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>svr_id_t <span class="ot">&lt;-</span> <span class="st">&#39;svymthRound&#39;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>svr_id_i <span class="ot">&lt;-</span> <span class="st">&#39;indi.id&#39;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>svr_data <span class="ot">&lt;-</span> <span class="st">&#39;cal&#39;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>bl_gen_newgrp <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select vars to keep for spreading</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ls_svr_mth_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(svr_id_i, svr_id_t, svr_data)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_mth_2spread <span class="ot">&lt;-</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!!!</span><span class="fu">syms</span>(ls_svr_mth_keep))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Spread</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_mth_wide <span class="ot">&lt;-</span> df_hw_cebu_mth_2spread <span class="sc">%&gt;%</span> <span class="fu">spread</span>(<span class="sc">!!</span><span class="fu">sym</span>(svr_id_t), <span class="sc">!!</span><span class="fu">sym</span>(svr_data), <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_hw_cebu_mth_wide)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tibble [50 x 13] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ indi.id      : num [1:50] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound2 : num [1:50] 4.7 166.2 0.5 0.5 12.1 ...</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound4 : num [1:50] 10.3 0.5 12.9 0.5 25.3 ...</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound6 : num [1:50] 180.7 24.1 44.8 51.4 262.3 ...</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound8 : num [1:50] 85.3 155.1 57 39.4 71.3 ...</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound10: num [1:50] 288 142.4 73.7 47 87.8 ...</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound12: num [1:50] 342.6 146.3 488.2 44.9 234.5 ...</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound14: num [1:50] NA 228 459 221 453 ...</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound16: num [1:50] NA 194 408 242 1484 ...</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound18: num [1:50] NA 111 692 300 1206 ...</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound20: num [1:50] NA 305 612 581 1178 ...</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound22: num [1:50] NA 332 1226 420 1221 ...</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ svymthRound24: num [1:50] NA 363 555 466 943 ...</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge Back, now dataframe is both wide and long</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_mth_widelong <span class="ot">&lt;-</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df_hw_cebu_mth_wide)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Joining, by = &quot;indi.id&quot;</span></span></code></pre></div>
+</div>
+<div id="aggregate-by-subgroup-first-columns-by-info-for-each-month-of-age" class="section level3">
+<h3>Aggregate by Subgroup first columns by Info for Each Month of Age</h3>
+<p>First, do not create additional dates based subgroups, just use raw dates variables, with unique indi/date, and generate the wide + long version of data.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate New Variable</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables to do groupings by</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>svr_id_t <span class="ot">&lt;-</span> <span class="st">&#39;mth6&#39;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>svr_id_i <span class="ot">&lt;-</span> <span class="st">&#39;indi.id&#39;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>svr_data <span class="ot">&lt;-</span> <span class="st">&#39;cal&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>bl_gen_newgrp <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select vars to keep for spreading</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>ls_svr_6mth_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(svr_id_i, svr_id_t, svr_data)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_6mth_2spread <span class="ot">&lt;-</span> df_hw_cebu <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!!!</span><span class="fu">syms</span>(ls_svr_6mth_keep))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>svr_data_mean <span class="ot">&lt;-</span> <span class="fu">paste</span>(svr_data,svr_id_t,<span class="st">&#39;mean&#39;</span>,<span class="at">sep=</span><span class="st">&#39;_&#39;</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_6mth_2spread <span class="ot">&lt;-</span> df_hw_cebu_6mth_2spread <span class="sc">%&gt;%</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(svr_id_i), <span class="sc">!!</span><span class="fu">sym</span>(svr_id_t)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="sc">!!</span><span class="fu">sym</span>(svr_data_mean) <span class="sc">:</span><span class="er">=</span> <span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(svr_data)))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `summarise()` regrouping output by &#39;indi.id&#39; (override with `.groups` argument)</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Spread</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_6mth_wide <span class="ot">&lt;-</span> df_hw_cebu_6mth_2spread <span class="sc">%&gt;%</span> <span class="fu">spread</span>(<span class="sc">!!</span><span class="fu">sym</span>(svr_id_t), <span class="sc">!!</span><span class="fu">sym</span>(svr_data_mean), <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge Back, now dataframe is both wide and long</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>df_hw_cebu_widelong <span class="ot">&lt;-</span> df_hw_cebu <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">left_join</span>(df_hw_cebu_mth_wide) <span class="sc">%&gt;%</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">left_join</span>(df_hw_cebu_6mth_wide)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Joining, by = &quot;indi.id&quot;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Joining, by = &quot;indi.id&quot;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Testing Regression Linear Including RHS Lag Input interaction with time</span></span></code></pre></div>
+</div>
+</div>
+<div id="regression-testings" class="section level2">
+<h2>Regression Testings</h2>
+<div id="regression-testings-small-subsets" class="section level3">
+<h3>Regression Testings Small Subsets</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(df_hw_cebu_widelong)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>vf_months <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="fu">factor</span>(svymthRound))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vf_mth6 <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="fu">factor</span>(mth6))</span></code></pre></div>
+</div>
+<div id="regression-testings-small-subsets-single-months" class="section level3">
+<h3>Regression Testings Small Subsets Single Months</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression Model:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># h_t = a_0*t + a_1*1{t}*N_t + a_2*1{t}*N_{t-1}</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>rs_test <span class="ot">=</span> <span class="fu">lm</span>(hgt <span class="sc">~</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               svymthRound <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">9</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound18 <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">10</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound20 <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound22 <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">12</span>]<span class="sc">:</span>svymthRound24 ,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>df_hw_cebu_widelong)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>rsm_test <span class="ot">=</span> <span class="fu">summary</span>(rs_test)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>rsm_test <span class="ot">=</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>rs_test <span class="ot">=</span> <span class="fu">lm</span>(hgt <span class="sc">~</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>               svymthRound <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>               <span class="fu">log</span>(svymthRound) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>               <span class="dv">1</span><span class="sc">/</span>(svymthRound) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound2 <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound4 <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound6 <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">4</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound8 <span class="sc">+</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound10 <span class="sc">+</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound12 <span class="sc">+</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">7</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound14 <span class="sc">+</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">8</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound16 <span class="sc">+</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">9</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound18 <span class="sc">+</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">10</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound20 <span class="sc">+</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound22 <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>               vf_months[,<span class="dv">12</span>]<span class="sc">:</span>svymthRound24 ,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>df_hw_cebu_widelong)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>rsm_test <span class="ot">=</span> <span class="fu">summary</span>(rs_test)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#rsm_test</span></span></code></pre></div>
+</div>
+<div id="regression-testing-every-single-month" class="section level3">
+<h3>Regression Testing Every Single Month</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rs_test <span class="ot">=</span> <span class="fu">lm</span>(hgt <span class="sc">~</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">factor</span>(indi.id)<span class="sc">:</span>svymthRound <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">factor</span>(indi.id)<span class="sc">:</span><span class="fu">log</span>(svymthRound) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>             <span class="fu">factor</span>(indi.id)<span class="sc">:</span><span class="dv">1</span><span class="sc">/</span>(svymthRound) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound2 <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound4 <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">3</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound6 <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">4</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound8 <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound10 <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound12 <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">7</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound14 <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">8</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound16 <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">9</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound18 <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">10</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound20 <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>]<span class="sc">:</span>svymthRound22 <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>             vf_months[,<span class="dv">12</span>]<span class="sc">:</span>svymthRound24 ,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>df_hw_cebu_widelong)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>rsm_coef <span class="ot">=</span> <span class="fu">tidy</span>(rs_test)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># vf_months[, 11:12]factor(svymthRound)24:svymthRound22</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>rsm_coef_inputs <span class="ot">=</span> rsm_coef <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&#39;vf_months&#39;</span>, term))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>rsm_coef_inputs</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 78 x 5</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    term                                     estimate std.error statistic p.value</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vf_months[, 1:12](Intercept):svymthRoun~  -0.0145   0.0145      -1.00  0.318 </span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vf_months[, 1:12]factor(svymthRound)4:s~  -0.0252   0.0144      -1.75  0.0801</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vf_months[, 1:12]factor(svymthRound)6:s~  -0.0333   0.0196      -1.70  0.0896</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vf_months[, 1:12]factor(svymthRound)8:s~  -0.0324   0.0212      -1.52  0.129 </span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vf_months[, 1:12]factor(svymthRound)10:~  -0.0351   0.0210      -1.67  0.0950</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vf_months[, 1:12]factor(svymthRound)12:~  -0.0365   0.0195      -1.88  0.0613</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vf_months[, 1:12]factor(svymthRound)14:~  -0.0310   0.0171      -1.81  0.0709</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vf_months[, 1:12]factor(svymthRound)16:~  -0.0242   0.0142      -1.71  0.0890</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vf_months[, 1:12]factor(svymthRound)18:~  -0.0193   0.0108      -1.78  0.0756</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vf_months[, 1:12]factor(svymthRound)20:~  -0.0104   0.00731     -1.42  0.157 </span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ... with 68 more rows</span></span></code></pre></div>
+</div>
+<div id="regression-testing-6-months-inputs" class="section level3">
+<h3>Regression Testing 6 months Inputs</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rs_test_mth4 <span class="ot">=</span> <span class="fu">lm</span>(hgt <span class="sc">~</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">factor</span>(indi.id)<span class="sc">:</span>svymthRound <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">factor</span>(indi.id)<span class="sc">:</span><span class="fu">log</span>(svymthRound) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>             <span class="fu">factor</span>(indi.id)<span class="sc">:</span><span class="dv">1</span><span class="sc">/</span>(svymthRound) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>             vf_mth6[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]<span class="sc">:</span>mth6m00t06 <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>             vf_mth6[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]<span class="sc">:</span>mth6m08t12 <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>             vf_mth6[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]<span class="sc">:</span>mth6m14t18 <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>               vf_mth6[,<span class="dv">4</span>]<span class="sc">:</span>mth6m20t24 ,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>df_hw_cebu_widelong)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>rsm_coef_mth4 <span class="ot">=</span> <span class="fu">tidy</span>(rs_test_mth4)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>rsm_coef_inputs <span class="ot">=</span> rsm_coef_mth4 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&#39;vf_mth6&#39;</span>, term))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>rsm_coef_inputs</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 x 5</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    term                                     estimate std.error statistic p.value</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vf_mth6[, 1:4](Intercept):mth6m00t06     -0.00413   0.00217    -1.90  0.0577 </span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vf_mth6[, 1:4]factor(mth6)m08t12:mth6m0~ -0.00782   0.00333    -2.35  0.0193 </span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vf_mth6[, 1:4]factor(mth6)m14t18:mth6m0~ -0.00747   0.00557    -1.34  0.181  </span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vf_mth6[, 1:4]factor(mth6)m20t24:mth6m0~ -0.00641   0.00852    -0.752 0.453  </span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vf_mth6[, 2:4]factor(mth6)m08t12:mth6m0~  0.00539   0.00193     2.80  0.00537</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vf_mth6[, 2:4]factor(mth6)m14t18:mth6m0~  0.00781   0.00392     1.99  0.0469 </span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vf_mth6[, 2:4]factor(mth6)m20t24:mth6m0~  0.0103    0.00631     1.63  0.105  </span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vf_mth6[, 3:4]factor(mth6)m14t18:mth6m1~ -0.00144   0.00118    -1.22  0.225  </span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vf_mth6[, 3:4]factor(mth6)m20t24:mth6m1~ -0.00164   0.00235    -0.700 0.484  </span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vf_mth6[, 4]:mth6m20t24                  -0.00129   0.00136    -0.945 0.345</span></span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

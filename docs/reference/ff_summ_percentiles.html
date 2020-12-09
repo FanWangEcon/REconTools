@@ -171,7 +171,7 @@ calculator from dynamic asset webpage's distributional codes: https://fanwangeco
 calculator from dynamic asset webpage's distributional codes: <a href='https://fanwangecon.github.io/CodeDynaAsset/'>https://fanwangecon.github.io/CodeDynaAsset/</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_summ_percentiles</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>bl_statsasrows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col2varname</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>ff_summ_percentiles</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>iris</span>, bl_statsasrows <span class='op'>=</span> <span class='cn'>TRUE</span>, col2varname <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,9 +197,13 @@ calculator from dynamic asset webpage's distributional codes: <a href='https://f
 
     <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html'>https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_percentiles.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_percentiles.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ff_summ_percentiles</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `as.tibble()` is deprecated as of tibble 2.0.0.</span>
+    <pre class="examples"><div class='input'><span class='fu'>ff_summ_percentiles</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `as.tibble()` is deprecated as of tibble 2.0.0.</span>
 #&gt; <span class='warning'>Please use `as_tibble()` instead.</span>
 #&gt; <span class='warning'>The signature and semantics have changed, see `?as_tibble`.</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
@@ -224,7 +228,8 @@ calculator from dynamic asset webpage's distributional codes: <a href='https://f
 #&gt; </span><span style='color: #555555;'>15</span><span> p90     5.80         2.20        6.90         3.61       
 #&gt; </span><span style='color: #555555;'>16</span><span> p95     6.100        2.300       7.255        3.800      
 #&gt; </span><span style='color: #555555;'>17</span><span> p99     6.700        2.500       7.700        4.151      
-#&gt; </span><span style='color: #555555;'>18</span><span> max     6.9          2.5         7.9          4.4        </div><div class='input'><span class='fu'>ff_summ_percentiles</span>(<span class='no'>iris</span>, <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: attributes are not identical across measure variables;</span>
+#&gt; </span><span style='color: #555555;'>18</span><span> max     6.9          2.5         7.9          4.4        </div><div class='input'><span class='fu'>ff_summ_percentiles</span><span class='op'>(</span><span class='va'>iris</span>, <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: attributes are not identical across measure variables;</span>
 #&gt; <span class='warning'>they will be dropped</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 19</span><span>
 #&gt;   var       n unique NAobs ZEROobs  mean    sd    cv   min   p01   p05   p10
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -249,7 +254,7 @@ calculator from dynamic asset webpage's distributional codes: <a href='https://f
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

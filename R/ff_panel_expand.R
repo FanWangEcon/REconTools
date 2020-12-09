@@ -67,6 +67,8 @@ ff_panel_expand_longrosterwide <- function(df, svr_id_t, svr_id_i, st_idcol_pref
     #' this means we have \eqn{10 \cdot 50} rows of data, with differing numbers of
     #' rows for each student. This is the input matrix for this function here.
     #'
+    #' Assume that each row of the input matrix has unique id/time combinations. Will only keep unique rows.
+    #'
     #' OUTPUT MATRIX: Now we want to generate a new dataframe, where each row is a date, and each column
     #' is a student. The values in the new dataframe shows, at the $Q^{th}$ day, how many
     #' classes student $i$ has attended so far. The following results is also in a REconTools
@@ -139,11 +141,10 @@ ff_panel_expand_longrosterwide <- function(df, svr_id_t, svr_id_i, st_idcol_pref
     # Unique IDs
     ar_unique_ids <- sort(unique(df %>% pull(!!sym(svr_id_i))))
 
-
     # Generate cumulative enrollment counts by date
     # Sort and rename
     # rename see: https://fanwangecon.github.io/R4Econ/support/tibble/fs_tib_basics.html
-    df_roster_wide <- df %>% mutate(attended = 1) %>%
+    df_roster_wide <- df %>% mutate(attended = 1) %>% distinct() %>%
       pivot_wider(names_from = svr_id_i,
                   values_from = attended)  %>%
       arrange(!!sym(svr_id_t)) %>%

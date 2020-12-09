@@ -177,24 +177,24 @@ pdf and html files, along with curled R file.</p>
 the string paths to be searched over.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_sup_clean_rmd</span>(
-  <span class='no'>ar_spt_root</span>,
-  <span class='no'>ar_spn_skip</span>,
-  <span class='kw'>st_file_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
-  <span class='kw'>st_git_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
-  <span class='kw'>st_folder_pdf</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
-  <span class='kw'>st_folder_html</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
-  <span class='kw'>st_folder_R</span> <span class='kw'>=</span> <span class='st'>"/htmlpdfr/"</span>,
-  <span class='kw'>bl_gen_if_git_old</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>bl_recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bl_test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>it_hierachy_lower_rmd</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>it_hierachy_shift</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>it_toc_depth</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>ls_bool_convert</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_pdf</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_R</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>ls_bool_remove</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_remove_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>ff_sup_clean_rmd</span><span class='op'>(</span>
+  <span class='va'>ar_spt_root</span>,
+  <span class='va'>ar_spn_skip</span>,
+  st_file_pattern <span class='op'>=</span> <span class='st'>".Rmd"</span>,
+  st_git_pattern <span class='op'>=</span> <span class='st'>".Rmd"</span>,
+  st_folder_pdf <span class='op'>=</span> <span class='st'>"/htmlpdfr/"</span>,
+  st_folder_html <span class='op'>=</span> <span class='st'>"/htmlpdfr/"</span>,
+  st_folder_R <span class='op'>=</span> <span class='st'>"/htmlpdfr/"</span>,
+  bl_gen_if_git_old <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  bl_recursive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  bl_verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  bl_test <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  it_hierachy_lower_rmd <span class='op'>=</span> <span class='fl'>0</span>,
+  it_hierachy_shift <span class='op'>=</span> <span class='fl'>2</span>,
+  it_toc_depth <span class='op'>=</span> <span class='fl'>3</span>,
+  ls_bool_convert <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>bl_pdf <span class='op'>=</span> <span class='cn'>TRUE</span>, bl_html <span class='op'>=</span> <span class='cn'>TRUE</span>, bl_R <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+  ls_bool_remove <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>bl_remove_html <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -278,13 +278,17 @@ considered included, searched and found</p></td>
 
     <p><a href='https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html'>https://fanwangecon.github.io/R4Econ/development/inout/fs_rmd_pdf_html.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/amto/array/'</span>, <span class='st'>'C:/Users/fan/R4Econ/math/integration'</span>)
-<span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/math/integration'</span>)
-<span class='no'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/development/inout'</span>)
-<span class='no'>ar_spn_skip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>, <span class='st'>'_mod'</span>)
-<span class='fu'>ff_sup_clean_rmd</span>(<span class='no'>ar_spt_root</span>, <span class='no'>ar_spn_skip</span>)</div><div class='output co'>#&gt; <span class='message'>Search and Check</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_rmd_pdf_html.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_text_save.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
+    <pre class="examples"><div class='input'><span class='va'>ar_spt_root</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C:/Users/fan/R4Econ/amto/array/'</span>, <span class='st'>'C:/Users/fan/R4Econ/math/integration'</span><span class='op'>)</span>
+<span class='va'>ar_spt_root</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C:/Users/fan/R4Econ/math/integration'</span><span class='op'>)</span>
+<span class='va'>ar_spt_root</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C:/Users/fan/R4Econ/development/inout'</span><span class='op'>)</span>
+<span class='va'>ar_spn_skip</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>, <span class='st'>'_mod'</span><span class='op'>)</span>
+<span class='fu'>ff_sup_clean_rmd</span><span class='op'>(</span><span class='va'>ar_spt_root</span>, <span class='va'>ar_spn_skip</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Search and Check</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_rmd_pdf_html.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/fs_text_save.Rmd</span></div><div class='output co'>#&gt; <span class='message'>NO CHNGE: C:/Users/fan/R4Econ/development/inout/main.Rmd</span></div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
 #&gt;    
 #&gt; "" </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Generated html files:</span></div><div class='output co'>#&gt; [1] ""
 #&gt;    
@@ -298,7 +302,7 @@ considered included, searched and found</p></td>
 #&gt; 
 #&gt; $ls_spt_R_generated
 #&gt; character(0)
-#&gt; </div><div class='input'># ff_sup_clean_rmd(ar_spt_root, ar_spn_skip, bl_test = FALSE, bl_gen_if_git_old = TRUE)
+#&gt; </div><div class='input'><span class='co'># ff_sup_clean_rmd(ar_spt_root, ar_spn_skip, bl_test = FALSE, bl_gen_if_git_old = TRUE)</span>
 
 </div></pre>
   </div>
@@ -316,7 +320,7 @@ considered included, searched and found</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

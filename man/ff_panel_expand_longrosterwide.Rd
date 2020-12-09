@@ -32,6 +32,8 @@ ID, and column two is the date on which the student was in class. Suppose there 
 this means we have \eqn{10 \cdot 50} rows of data, with differing numbers of
 rows for each student. This is the input matrix for this function here.
 
+Assume that each row of the input matrix has unique id/time combinations. Will only keep unique rows.
+
 OUTPUT MATRIX: Now we want to generate a new dataframe, where each row is a date, and each column
 is a student. The values in the new dataframe shows, at the $Q^{th}$ day, how many
 classes student $i$ has attended so far. The following results is also in a REconTools

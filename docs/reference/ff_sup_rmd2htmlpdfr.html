@@ -173,17 +173,17 @@ strings in ar_spn_skip. Save output rendered HTML and PDF files to a directory. 
 if to render Rmd to PDF, HTML as well as R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_sup_rmd2htmlpdfr</span>(
-  <span class='kw'>ar_spt_root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C:/Users/fan/R4Econ/amto/array/"</span>,
-    <span class='st'>"C:/Users/fan/R4Econ/math/integration"</span>),
-  <span class='kw'>ar_spn_skip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"basics"</span>, <span class='st'>"integrate"</span>),
-  <span class='kw'>st_rmd_suffix_pattern</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>,
-  <span class='kw'>st_save_add_suffix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>spt_out_directory</span> <span class='kw'>=</span> <span class='st'>"C:/Users/fan/downloads"</span>,
-  <span class='kw'>bl_recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ls_bool_convert</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_pdf</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bl_R</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>bl_verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ff_sup_rmd2htmlpdfr</span><span class='op'>(</span>
+  ar_spt_root <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"C:/Users/fan/R4Econ/amto/array/"</span>,
+    <span class='st'>"C:/Users/fan/R4Econ/math/integration"</span><span class='op'>)</span>,
+  ar_spn_skip <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"basics"</span>, <span class='st'>"integrate"</span><span class='op'>)</span>,
+  st_rmd_suffix_pattern <span class='op'>=</span> <span class='st'>".Rmd"</span>,
+  st_save_add_suffix <span class='op'>=</span> <span class='st'>""</span>,
+  spt_out_directory <span class='op'>=</span> <span class='st'>"C:/Users/fan/downloads"</span>,
+  bl_recursive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ls_bool_convert <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>bl_pdf <span class='op'>=</span> <span class='cn'>TRUE</span>, bl_html <span class='op'>=</span> <span class='cn'>TRUE</span>, bl_R <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+  bl_verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,31 +235,92 @@ considered included, searched and found</p></td>
 
     <p><a href='https://fanwangecon.github.io/R4Econ/development/inout/htmlpdfr/fs_rmd_pdf_html.html'>https://fanwangecon.github.io/R4Econ/development/inout/htmlpdfr/fs_rmd_pdf_html.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_sup_inout.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ar_spt_root</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'C:/Users/fan/R4Econ/support/rmd'</span>)
-<span class='no'>ar_spn_skip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span>)
-<span class='no'>spt_out_directory</span> <span class='kw'>&lt;-</span> <span class='st'>'C:/Users/fan/downloads'</span>
-<span class='no'>st_save_add_suffix</span> <span class='kw'>&lt;-</span> <span class='st'>'_newsave'</span>
-<span class='no'>ls_bool_convert</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>bl_pdf</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>bl_html</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>bl_R</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>bl_verbose</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='fu'>ff_sup_rmd2htmlpdfr</span>(<span class='kw'>ar_spt_root</span><span class='kw'>=</span><span class='no'>ar_spt_root</span>, <span class='kw'>ar_spn_skip</span><span class='kw'>=</span><span class='no'>ar_spn_skip</span>,
-                    <span class='kw'>spt_out_directory</span><span class='kw'>=</span><span class='no'>spt_out_directory</span>, <span class='kw'>st_save_add_suffix</span><span class='kw'>=</span><span class='no'>st_save_add_suffix</span>,
-                    <span class='kw'>ls_bool_convert</span><span class='kw'>=</span><span class='no'>ls_bool_convert</span>,
-                    <span class='kw'>bl_verbose</span><span class='kw'>=</span><span class='no'>bl_verbose</span>)</div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
-#&gt;    
-#&gt; "" </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Generated html files:</span></div><div class='output co'>#&gt; [1] ""
-#&gt;    
-#&gt; "" </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Generated R files:</span></div><div class='output co'>#&gt; [1] ""
-#&gt;    
-#&gt; "" </div><div class='output co'>#&gt; </div><div class='output co'>#&gt; $ls_spt_pdf_generated
-#&gt; character(0)
+    <pre class="examples"><div class='input'><span class='va'>ar_spt_root</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'C:/Users/fan/R4Econ/support/rmd'</span><span class='op'>)</span>
+<span class='va'>ar_spn_skip</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'matrix'</span>, <span class='st'>'tibble'</span>, <span class='st'>'_main'</span><span class='op'>)</span>
+<span class='va'>spt_out_directory</span> <span class='op'>&lt;-</span> <span class='st'>'C:/Users/fan/downloads'</span>
+<span class='va'>st_save_add_suffix</span> <span class='op'>&lt;-</span> <span class='st'>'_newsave'</span>
+<span class='va'>ls_bool_convert</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>bl_pdf<span class='op'>=</span><span class='cn'>TRUE</span>, bl_html<span class='op'>=</span><span class='cn'>TRUE</span>, bl_R<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>bl_verbose</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='fu'>ff_sup_rmd2htmlpdfr</span><span class='op'>(</span>ar_spt_root<span class='op'>=</span><span class='va'>ar_spt_root</span>, ar_spn_skip<span class='op'>=</span><span class='va'>ar_spn_skip</span>,
+                    spt_out_directory<span class='op'>=</span><span class='va'>spt_out_directory</span>, st_save_add_suffix<span class='op'>=</span><span class='va'>st_save_add_suffix</span>,
+                    ls_bool_convert<span class='op'>=</span><span class='va'>ls_bool_convert</span>,
+                    bl_verbose<span class='op'>=</span><span class='va'>bl_verbose</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>spn_file_pdf:C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdf, PDF started</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: fs_test_a.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...................................                                   |  50%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |......................................................................| 100%
+#&gt; label: unnamed-chunk-1
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: fs_test_a.knit.md</span></div><div class='output co'>#&gt; "C:/PROGRA~1/Pandoc/pandoc" +RTS -K512m -RTS fs_test_a.utf8.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output pandoc5e8442276103.tex --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\pagebreak.lua" --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\latex-div.lua" --self-contained --highlight-style tango --pdf-engine pdflatex --variable graphics --variable "geometry:margin=1in" </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: C:/Users/fan/Downloads/fs_test_a_newsave.pdf</span></div><div class='output co'>#&gt; <span class='message'>spn_file_pdf:C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdf, PDF finished</span></div><div class='output co'>#&gt; <span class='message'>spth_html:C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.html, HTML started.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: fs_test_a.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...................................                                   |  50%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |......................................................................| 100%
+#&gt; label: unnamed-chunk-1
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: fs_test_a.knit.md</span></div><div class='output co'>#&gt; "C:/PROGRA~1/Pandoc/pandoc" +RTS -K512m -RTS fs_test_a.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output pandoc5e8423078e4.html --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\pagebreak.lua" --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\latex-div.lua" --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmd\h\default.html" --no-highlight --variable highlightjs=1 --variable "theme:bootstrap" --include-in-header "C:\Users\fan\AppData\Local\Temp\RtmpaKlii1\rmarkdown-str5e847ac7713a.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: C:/Users/fan/Downloads/fs_test_a_newsave.html</span></div><div class='output co'>#&gt; <span class='message'>spth_html:C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.html, HTML finished.</span></div><div class='output co'>#&gt; <span class='message'>purl_to:C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.R.R</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: C:/Users/fan/R4Econ/support/rmd/fs_test_a.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...................................                                   |  50%  |                                                                              |......................................................................| 100%</div><div class='output co'>#&gt; <span class='message'>output file: C:/Users/fan/downloads/fs_test_a_newsave.R</span></div><div class='output co'>#&gt; <span class='message'>spn_file_pdf:C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf, PDF started</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: fs_test_b.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...................................                                   |  50%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |......................................................................| 100%
+#&gt; label: unnamed-chunk-1
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: fs_test_b.knit.md</span></div><div class='output co'>#&gt; "C:/PROGRA~1/Pandoc/pandoc" +RTS -K512m -RTS fs_test_b.utf8.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output pandoc5e845857c8b.tex --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\pagebreak.lua" --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\latex-div.lua" --self-contained --highlight-style tango --pdf-engine pdflatex --variable graphics --variable "geometry:margin=1in" </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: C:/Users/fan/Downloads/fs_test_b_newsave.pdf</span></div><div class='output co'>#&gt; <span class='message'>spn_file_pdf:C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf, PDF finished</span></div><div class='output co'>#&gt; <span class='message'>spth_html:C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html, HTML started.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: fs_test_b.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...................................                                   |  50%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |......................................................................| 100%
+#&gt; label: unnamed-chunk-1
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: fs_test_b.knit.md</span></div><div class='output co'>#&gt; "C:/PROGRA~1/Pandoc/pandoc" +RTS -K512m -RTS fs_test_b.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output pandoc5e841bee7fc6.html --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\pagebreak.lua" --lua-filter "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmarkdown\lua\latex-div.lua" --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\fan\Documents\R\win-library\4.0\rmarkdown\rmd\h\default.html" --no-highlight --variable highlightjs=1 --variable "theme:bootstrap" --include-in-header "C:\Users\fan\AppData\Local\Temp\RtmpaKlii1\rmarkdown-str5e8439465568.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: C:/Users/fan/Downloads/fs_test_b_newsave.html</span></div><div class='output co'>#&gt; <span class='message'>spth_html:C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html, HTML finished.</span></div><div class='output co'>#&gt; <span class='message'>purl_to:C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.R.R</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: C:/Users/fan/R4Econ/support/rmd/fs_test_b.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...................................                                   |  50%  |                                                                              |......................................................................| 100%</div><div class='output co'>#&gt; <span class='message'>output file: C:/Users/fan/downloads/fs_test_b_newsave.R</span></div><div class='output co'>#&gt; <span class='message'>Generated pdf files:</span></div><div class='output co'>#&gt; [1] ""
+#&gt; [1] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdf"
+#&gt; [1] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf"
+#&gt;                                                                                
+#&gt;                                                                             "" 
+#&gt;   C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdf 
+#&gt; "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdf" 
+#&gt;   C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf 
+#&gt; "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf" </div><div class='output co'>#&gt; <span class='message'>C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdfC:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf</span></div><div class='output co'>#&gt; <span class='message'>Generated html files:</span></div><div class='output co'>#&gt; [1] ""
+#&gt; [1] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.html"
+#&gt; [1] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html"
+#&gt;                                                                                 
+#&gt;                                                                              "" 
+#&gt;   C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.html 
+#&gt; "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.html" 
+#&gt;   C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html 
+#&gt; "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html" </div><div class='output co'>#&gt; <span class='message'>C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.htmlC:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html</span></div><div class='output co'>#&gt; <span class='message'>Generated R files:</span></div><div class='output co'>#&gt; [1] ""
+#&gt; [1] "C:/Users/fan/downloads/fs_test_a_newsave.R"
+#&gt; [1] "C:/Users/fan/downloads/fs_test_b_newsave.R"
+#&gt;                                              
+#&gt;                                           "" 
+#&gt;   C:/Users/fan/downloads/fs_test_a_newsave.R 
+#&gt; "C:/Users/fan/downloads/fs_test_a_newsave.R" 
+#&gt;   C:/Users/fan/downloads/fs_test_b_newsave.R 
+#&gt; "C:/Users/fan/downloads/fs_test_b_newsave.R" </div><div class='output co'>#&gt; <span class='message'>C:/Users/fan/downloads/fs_test_a_newsave.RC:/Users/fan/downloads/fs_test_b_newsave.R</span></div><div class='output co'>#&gt; $ls_spt_pdf_generated
+#&gt; [1] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.pdf"
+#&gt; [2] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.pdf"
 #&gt; 
 #&gt; $ls_spt_html_generated
-#&gt; character(0)
+#&gt; [1] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_a_newsave.html"
+#&gt; [2] "C:/Users/fan/downloads/C:/Users/fan/R4Econ/support/rmd/fs_test_b_newsave.html"
 #&gt; 
 #&gt; $ls_spt_R_generated
-#&gt; character(0)
+#&gt; [1] "C:/Users/fan/downloads/fs_test_a_newsave.R"
+#&gt; [2] "C:/Users/fan/downloads/fs_test_b_newsave.R"
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
@@ -277,7 +338,7 @@ considered included, searched and found</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

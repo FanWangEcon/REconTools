@@ -173,11 +173,11 @@ In addition, we also want to generate the total number of observations for each 
 country/village groups, these total observations includes multiple values for each unique individual.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_summ_count_unique_by_groups</span>(
-  <span class='no'>df</span>,
-  <span class='kw'>ar_svr_group</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"S.country"</span>, <span class='st'>"vil.id"</span>),
-  <span class='kw'>svr_unique_identifier</span> <span class='kw'>=</span> <span class='st'>"indi.id"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ff_summ_count_unique_by_groups</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  ar_svr_group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"S.country"</span>, <span class='st'>"vil.id"</span><span class='op'>)</span>,
+  svr_unique_identifier <span class='op'>=</span> <span class='st'>"indi.id"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,12 +203,17 @@ country/village groups, these total observations includes multiple values for ea
 
     <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_summ_count_unique_by_groups.html'>https://fanwangecon.github.io/REconTools/reference/ff_summ_count_unique_by_groups.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_count.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_summ_count.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df_uniques_count_by_vil</span> <span class='kw'>&lt;-</span> <span class='fu'>ff_summ_count_unique_by_groups</span>(<span class='no'>df_hgt_wgt</span>,
-                         <span class='kw'>ar_svr_group</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'S.country'</span>, <span class='st'>'vil.id'</span>),
-                         <span class='kw'>svr_unique_identifier</span> <span class='kw'>=</span> <span class='st'>'indi.id'</span>)</div><div class='output co'>#&gt; <span class='message'>`mutate_if()` ignored the following grouping variables:</span>
-#&gt; <span class='message'>Columns `S.country`, `vil.id`</span></div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `S.country`, `vil.id`</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_uniques_count_by_vil</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>50</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 37 x 15</span><span>
+    <pre class="examples"><div class='input'><span class='va'>df_uniques_count_by_vil</span> <span class='op'>&lt;-</span> <span class='fu'>ff_summ_count_unique_by_groups</span><span class='op'>(</span><span class='va'>df_hgt_wgt</span>,
+                         ar_svr_group<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'S.country'</span>, <span class='st'>'vil.id'</span><span class='op'>)</span>,
+                         svr_unique_identifier <span class='op'>=</span> <span class='st'>'indi.id'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`mutate_if()` ignored the following grouping variables:</span>
+#&gt; <span class='message'>Columns `S.country`, `vil.id`</span></div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `S.country`, `vil.id`</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_uniques_count_by_vil</span>, n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 37 x 15</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   S.country, vil.id [37]</span><span>
 #&gt;    S.country vil.id unique_indi indi.id_n svymthRound_n momEdu_n wealthIdx_n
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
@@ -251,10 +256,12 @@ country/village groups, these total observations includes multiple values for ea
 #&gt; </span><span style='color: #555555;'>37</span><span> Guatemala     14         141      </span><span style='text-decoration: underline;'>2</span><span>256          </span><span style='text-decoration: underline;'>2</span><span>256        0        </span><span style='text-decoration: underline;'>2</span><span>256
 #&gt; </span><span style='color: #555555;'># ... with 8 more variables: hgt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, wgt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, hgt0_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   wgt0_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, prot_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, cal_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, p.A.prot_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   p.A.nProt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='no'>df_uniques_count_by_mth</span> <span class='kw'>&lt;-</span> <span class='fu'>ff_summ_count_unique_by_groups</span>(<span class='no'>df_hgt_wgt</span>,
-                         <span class='kw'>ar_svr_group</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'S.country'</span>, <span class='st'>'svymthRound'</span>),
-                         <span class='kw'>svr_unique_identifier</span> <span class='kw'>=</span> <span class='st'>'indi.id'</span>)</div><div class='output co'>#&gt; <span class='message'>`mutate_if()` ignored the following grouping variables:</span>
-#&gt; <span class='message'>Columns `S.country`, `svymthRound`</span></div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `S.country`, `svymthRound`</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_uniques_count_by_mth</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>50</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 34 x 15</span><span>
+#&gt; </span><span style='color: #555555;'>#   p.A.nProt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='va'>df_uniques_count_by_mth</span> <span class='op'>&lt;-</span> <span class='fu'>ff_summ_count_unique_by_groups</span><span class='op'>(</span><span class='va'>df_hgt_wgt</span>,
+                         ar_svr_group<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'S.country'</span>, <span class='st'>'svymthRound'</span><span class='op'>)</span>,
+                         svr_unique_identifier <span class='op'>=</span> <span class='st'>'indi.id'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`mutate_if()` ignored the following grouping variables:</span>
+#&gt; <span class='message'>Columns `S.country`, `svymthRound`</span></div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `S.country`, `svymthRound`</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_uniques_count_by_mth</span>, n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 34 x 15</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   S.country, svymthRound [34]</span><span>
 #&gt;    S.country svymthRound unique_indi vil.id_n indi.id_n momEdu_n wealthIdx_n
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
@@ -294,10 +301,12 @@ country/village groups, these total observations includes multiple values for ea
 #&gt; </span><span style='color: #555555;'>34</span><span> Guatemala          84         674      674       674        0         674
 #&gt; </span><span style='color: #555555;'># ... with 8 more variables: hgt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, wgt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, hgt0_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   wgt0_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, prot_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, cal_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, p.A.prot_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   p.A.nProt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='no'>df_uniques_count_by_country</span> <span class='kw'>&lt;-</span> <span class='fu'>ff_summ_count_unique_by_groups</span>(<span class='no'>df_hgt_wgt</span>,
-                         <span class='kw'>ar_svr_group</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'S.country'</span>),
-                         <span class='kw'>svr_unique_identifier</span> <span class='kw'>=</span> <span class='st'>'indi.id'</span>)</div><div class='output co'>#&gt; <span class='message'>`mutate_if()` ignored the following grouping variables:</span>
-#&gt; <span class='message'>Column `S.country`</span></div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `S.country`</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>df_uniques_count_by_country</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 15</span><span>
+#&gt; </span><span style='color: #555555;'>#   p.A.nProt_n </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='va'>df_uniques_count_by_country</span> <span class='op'>&lt;-</span> <span class='fu'>ff_summ_count_unique_by_groups</span><span class='op'>(</span><span class='va'>df_hgt_wgt</span>,
+                         ar_svr_group<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'S.country'</span><span class='op'>)</span>,
+                         svr_unique_identifier <span class='op'>=</span> <span class='st'>'indi.id'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`mutate_if()` ignored the following grouping variables:</span>
+#&gt; <span class='message'>Column `S.country`</span></div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `S.country`</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df_uniques_count_by_country</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 15</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   S.country [2]</span><span>
 #&gt;   S.country unique_indi vil.id_n indi.id_n svymthRound_n momEdu_n wealthIdx_n
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
@@ -321,7 +330,7 @@ country/village groups, these total observations includes multiple values for ea
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -113,7 +113,9 @@
 
       
 
-      </header><script src="fv_summ_bygroup_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="fv_summ_bygroup_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="fv_summ_bygroup_files/header-attrs-2.5/header-attrs.js"></script><link href="fv_summ_bygroup_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="fv_summ_bygroup_files/anchor-sections-1.0/anchor-sections.js"></script><script src="fv_summ_bygroup_files/kePrint-0.0.1/kePrint.js"></script><link href="fv_summ_bygroup_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Summarize Variable by Factor Groups</h1>
@@ -136,26 +138,28 @@
 <div id="load-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load Packages</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="kw">list</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="kw">all.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
 
 <span class="co"># library(ggplot2)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">kableExtra</span>)</pre></body></html></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="load-data-and-parameers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-data-and-parameers" class="anchor"></a>Load Data and Parameers</h2>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
-<span class="no">df_mtcars</span> <span class="kw">&lt;-</span> <span class="no">mtcars</span>
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df_mtcars</span>
-<span class="no">vars.group</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'am'</span>, <span class="st">'vs'</span>)
-<span class="no">var.numeric</span> <span class="kw">&lt;-</span> <span class="st">'mpg'</span>
-<span class="no">str.stats.group</span> <span class="kw">&lt;-</span> <span class="st">'allperc'</span>
-<span class="no">ar.perc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.10</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>)
-<span class="no">boo.overall.stats</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
+<span class="va">df_mtcars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df_mtcars</span>
+<span class="va">vars.group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'am'</span>, <span class="st">'vs'</span><span class="op">)</span>
+<span class="va">var.numeric</span> <span class="op">&lt;-</span> <span class="st">'mpg'</span>
+<span class="va">str.stats.group</span> <span class="op">&lt;-</span> <span class="st">'allperc'</span>
+<span class="va">ar.perc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.10</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span><span class="op">)</span>
+<span class="va">boo.overall.stats</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></pre></div>
 </div>
 <div id="by-group-summarizing" class="section level2">
 <h2 class="hasAnchor">
@@ -163,43 +167,45 @@
 <div id="statistics-to-include" class="section level3">
 <h3 class="hasAnchor">
 <a href="#statistics-to-include" class="anchor"></a>Statistics to Include</h3>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># List of statistics</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># List of statistics</span>
 <span class="co"># https://rdrr.io/cran/dplyr/man/summarise.html</span>
-<span class="no">strs.center</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'mean'</span>, <span class="st">'median'</span>)
-<span class="no">strs.spread</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'sd'</span>, <span class="st">'IQR'</span>, <span class="st">'mad'</span>)
-<span class="no">strs.range</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'min'</span>, <span class="st">'max'</span>)
-<span class="no">strs.pos</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'first'</span>, <span class="st">'last'</span>)
-<span class="no">strs.count</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'n_distinct'</span>)
+<span class="va">strs.center</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'mean'</span>, <span class="st">'median'</span><span class="op">)</span>
+<span class="va">strs.spread</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'sd'</span>, <span class="st">'IQR'</span>, <span class="st">'mad'</span><span class="op">)</span>
+<span class="va">strs.range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'min'</span>, <span class="st">'max'</span><span class="op">)</span>
+<span class="va">strs.pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'first'</span>, <span class="st">'last'</span><span class="op">)</span>
+<span class="va">strs.count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'n_distinct'</span><span class="op">)</span>
 
 <span class="co"># Grouping of Statistics</span>
-<span class="kw">if</span> (<span class="no">str.stats.group</span> <span class="kw">==</span> <span class="st">'main'</span>) {
-    <span class="no">strs.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>, <span class="st">'sd'</span>)
-}
-<span class="kw">if</span> (<span class="no">str.stats.group</span> <span class="kw">==</span> <span class="st">'all'</span>) {
-    <span class="no">strs.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">strs.center</span>, <span class="no">strs.spread</span>, <span class="no">strs.range</span>, <span class="no">strs.pos</span>, <span class="no">strs.count</span>)
-}
-<span class="kw">if</span> (<span class="no">str.stats.group</span> <span class="kw">==</span> <span class="st">'allperc'</span>) {
-    <span class="no">ar_st_percentile_func_names</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">ar.perc</span>*<span class="fl">100</span>, <span class="st">"%"</span>)
-    <span class="no">funs_percentiles</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">ar.perc</span>, ~<span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span>(<span class="no">quantile</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="no">.x</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span>(<span class="kw">nm</span> <span class="kw">=</span> <span class="no">ar_st_percentile_func_names</span>)
-    <span class="no">strs.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">strs.center</span>, <span class="no">strs.spread</span>, <span class="no">funs_percentiles</span>, <span class="no">strs.range</span>, <span class="no">strs.pos</span>, <span class="no">strs.count</span>)
-}</pre></body></html></div>
+<span class="kw">if</span> <span class="op">(</span><span class="va">str.stats.group</span> <span class="op">==</span> <span class="st">'main'</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">strs.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>, <span class="st">'sd'</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="kw">if</span> <span class="op">(</span><span class="va">str.stats.group</span> <span class="op">==</span> <span class="st">'all'</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">strs.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">strs.center</span>, <span class="va">strs.spread</span>, <span class="va">strs.range</span>, <span class="va">strs.pos</span>, <span class="va">strs.count</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="kw">if</span> <span class="op">(</span><span class="va">str.stats.group</span> <span class="op">==</span> <span class="st">'allperc'</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">ar_st_percentile_func_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">ar.perc</span><span class="op">*</span><span class="fl">100</span>, <span class="st">"%"</span><span class="op">)</span>
+    <span class="va">funs_percentiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">ar.perc</span>, <span class="op">~</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span><span class="op">(</span><span class="va">quantile</span>, probs <span class="op">=</span> <span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span>nm <span class="op">=</span> <span class="va">ar_st_percentile_func_names</span><span class="op">)</span>
+    <span class="va">strs.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">strs.center</span>, <span class="va">strs.spread</span>, <span class="va">funs_percentiles</span>, <span class="va">strs.range</span>, <span class="va">strs.pos</span>, <span class="va">strs.count</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 </div>
 <div id="overall-statistics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overall-statistics" class="anchor"></a>Overall Statistics</h3>
-<div class="sourceCode" id="cb4"><html><body><pre class="r">
+<div class="sourceCode" id="cb4"><pre class="downlit">
+
 <span class="co"># Start Transform</span>
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">var.numeric</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">var.numeric</span>)))
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">(</span><span class="va">var.numeric</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">var.numeric</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Overall Statistics</span>
-<span class="kw">if</span> (<span class="no">boo.overall.stats</span>) {
-    <span class="no">df.overall.stats</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="no">var.numeric</span>), <span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(!!!<span class="no">strs.all</span>))
-    <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">strs.all</span>) <span class="kw">==</span> <span class="fl">1</span>) {
+<span class="kw">if</span> <span class="op">(</span><span class="va">boo.overall.stats</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">df.overall.stats</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">var.numeric</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">strs.all</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">strs.all</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
         <span class="co"># give it a name, otherwise if only one stat, name of stat not saved</span>
-        <span class="no">df.overall.stats</span> <span class="kw">&lt;-</span> <span class="no">df.overall.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">var.numeric</span>))
-    }
-    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.overall.stats</span>))
-}
+        <span class="va">df.overall.stats</span> <span class="op">&lt;-</span> <span class="va">df.overall.stats</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">strs.all</span> <span class="op">:=</span> <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">var.numeric</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df.overall.stats</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">var.numeric</span>, <span class="st">'.'</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df.overall.stats</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 <span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
 <span class="co">#&gt; i Use `all_of(var.numeric)` instead of `var.numeric` to silence this message.</span>
 <span class="co">#&gt; i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
@@ -219,8 +225,8 @@
 <span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
 
 <span class="co"># Display Results</span>
-<span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.overall.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -321,20 +327,21 @@ mpg.n_distinct
 <div id="summarizing-by-groups" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summarizing-by-groups" class="anchor"></a>Summarizing by Groups</h3>
-<div class="sourceCode" id="cb5"><html><body><pre class="r">
+<div class="sourceCode" id="cb5"><pre class="downlit">
+
 <span class="co"># Group Sort</span>
-<span class="no">df.select</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span>
-              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
-              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">vars.group</span>, <span class="no">var.numeric</span>)))
+<span class="va">df.select</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span>
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span><span class="op">(</span><span class="va">vars.group</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">vars.group</span>, <span class="va">var.numeric</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 
 
 <span class="co"># Table of Statistics</span>
-<span class="no">df.table.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.select</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="no">var.numeric</span>), <span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(!!!<span class="no">strs.all</span>))
+<span class="va">df.table.grp.stats</span> <span class="op">&lt;-</span> <span class="va">df.select</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">var.numeric</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">strs.all</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Display Results</span>
-<span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.table.grp.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.table.grp.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -604,16 +611,17 @@ n_distinct
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb6"><html><body><pre class="r">
+<div class="sourceCode" id="cb6"><pre class="downlit">
+
 <span class="co"># Add Stat Name</span>
-<span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">strs.all</span>) <span class="kw">==</span> <span class="fl">1</span>) {
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">strs.all</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># give it a name, otherwise if only one stat, name of stat not saved</span>
-    <span class="no">df.table.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(!!<span class="no">strs.all</span> <span class="kw">:=</span> !!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">var.numeric</span>))
-}
+    <span class="va">df.table.grp.stats</span> <span class="op">&lt;-</span> <span class="va">df.table.grp.stats</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">strs.all</span> <span class="op">:=</span> <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">var.numeric</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Display Results</span>
-<span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.table.grp.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.table.grp.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -887,29 +895,30 @@ n_distinct
 <div id="statistics-as-row" class="section level3">
 <h3 class="hasAnchor">
 <a href="#statistics-as-row" class="anchor"></a>Statistics as Row</h3>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">
+<div class="sourceCode" id="cb7"><pre class="downlit">
+
 <span class="co"># Row of Statistics</span>
-<span class="no">str.vars.group.combine</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">vars.group</span>, <span class="kw">collapse</span><span class="kw">=</span><span class="st">'_'</span>)
-<span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">vars.group</span>) <span class="kw">==</span> <span class="fl">1</span>) {
-    <span class="no">df.row.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>,
-                                           <span class="no">vars.group</span>, <span class="st">'.g'</span>,
-                                           (!!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">vars.group</span>)))) <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">variable</span>, <span class="no">value</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span>(<span class="no">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">str.vars.group.combine</span>, <span class="st">'variable'</span>)) <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="no">str.vars.group.combine</span>, <span class="no">value</span>)
-} <span class="kw">else</span> {
-    <span class="no">df.row.grp.stats</span> <span class="kw">&lt;-</span> <span class="no">df.table.grp.stats</span> <span class="kw">%&gt;%</span>
-                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="no">vars.groups.combine</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">vars.group</span>, <span class="kw">collapse</span><span class="kw">=</span><span class="st">'.'</span>)),
-                                   !!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span>(!!!(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span>(<span class="no">vars.group</span>))))) <span class="kw">%&gt;%</span>
-                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(!!(<span class="no">str.vars.group.combine</span>) <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">var.numeric</span>, <span class="st">'.'</span>, <span class="no">vars.groups.combine</span>, <span class="st">'.'</span>,
-                                                                       (!!<span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span>(<span class="no">str.vars.group.combine</span>)))) <span class="kw">%&gt;%</span>
-                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>() <span class="kw">%&gt;%</span>
-                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">vars.groups.combine</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">vars.group</span>)) <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">variable</span>, <span class="no">value</span>, -<span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">one_of</a></span>(<span class="no">str.vars.group.combine</span>))  <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span>(<span class="no">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">str.vars.group.combine</span>, <span class="st">'variable'</span>)) <span class="kw">%&gt;%</span>
-            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="no">str.vars.group.combine</span>, <span class="no">value</span>)
-}
+<span class="va">str.vars.group.combine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">vars.group</span>, collapse<span class="op">=</span><span class="st">'_'</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">vars.group</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">df.row.grp.stats</span> <span class="op">&lt;-</span> <span class="va">df.table.grp.stats</span> <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">(</span><span class="va">str.vars.group.combine</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">var.numeric</span>, <span class="st">'.'</span>,
+                                           <span class="va">vars.group</span>, <span class="st">'.g'</span>,
+                                           <span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span><span class="op">(</span><span class="va">vars.group</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">value</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/one_of.html">one_of</a></span><span class="op">(</span><span class="va">vars.group</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span>, <span class="st">'variable'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span>, <span class="va">value</span><span class="op">)</span>
+<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+    <span class="va">df.row.grp.stats</span> <span class="op">&lt;-</span> <span class="va">df.table.grp.stats</span> <span class="op">%&gt;%</span>
+                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">vars.groups.combine</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">vars.group</span>, collapse<span class="op">=</span><span class="st">'.'</span><span class="op">)</span><span class="op">)</span>,
+                                   <span class="op">!</span><span class="op">!</span><span class="op">(</span><span class="va">str.vars.group.combine</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">syms</a></span><span class="op">(</span><span class="va">vars.group</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">(</span><span class="va">str.vars.group.combine</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">var.numeric</span>, <span class="st">'.'</span>, <span class="va">vars.groups.combine</span>, <span class="st">'.'</span>,
+                                                                       <span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">vars.groups.combine</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/one_of.html">one_of</a></span><span class="op">(</span><span class="va">vars.group</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">value</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/one_of.html">one_of</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span><span class="op">)</span><span class="op">)</span>  <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span>, <span class="st">'variable'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+            <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span><span class="op">(</span><span class="va">str.vars.group.combine</span>, <span class="va">value</span><span class="op">)</span>
+<span class="op">}</span>
 <span class="co">#&gt; Warning: attributes are not identical across measure variables;</span>
 <span class="co">#&gt; they will be dropped</span>
 <span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
@@ -918,8 +927,8 @@ n_distinct
 <span class="co">#&gt; This message is displayed once per session.</span>
 
 <span class="co"># Display Results</span>
-<span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.row.grp.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -1290,24 +1299,25 @@ mpg.am.vs.1.1_sd
 <div id="process-outputs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#process-outputs" class="anchor"></a>Process Outputs</h3>
-<div class="sourceCode" id="cb8"><html><body><pre class="r">
+<div class="sourceCode" id="cb8"><pre class="downlit">
+
 <span class="co"># Clean up name strings</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.table.grp.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.table.grp.stats</span>),<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"_"</span>, <span class="kw">replacement</span> <span class="kw">=</span> <span class="st">"\\."</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">df.row.grp.stats</span>),<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"_"</span>, <span class="kw">replacement</span> <span class="kw">=</span> <span class="st">"\\."</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df.table.grp.stats</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df.table.grp.stats</span><span class="op">)</span>,pattern <span class="op">=</span> <span class="st">"_"</span>, replacement <span class="op">=</span> <span class="st">"\\."</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df.row.grp.stats</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df.row.grp.stats</span><span class="op">)</span>,pattern <span class="op">=</span> <span class="st">"_"</span>, replacement <span class="op">=</span> <span class="st">"\\."</span><span class="op">)</span>
 
 <span class="co"># Return</span>
-<span class="no">list.return</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">df_table_grp_stats</span> <span class="kw">=</span> <span class="no">df.table.grp.stats</span>, <span class="kw">df_row_grp_stats</span> <span class="kw">=</span> <span class="no">df.row.grp.stats</span>)
+<span class="va">list.return</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>df_table_grp_stats <span class="op">=</span> <span class="va">df.table.grp.stats</span>, df_row_grp_stats <span class="op">=</span> <span class="va">df.row.grp.stats</span><span class="op">)</span>
 
 <span class="co"># Overall Statistics, without grouping</span>
-<span class="kw">if</span> (<span class="no">boo.overall.stats</span>) {
-    <span class="no">df.row.stats.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">df.row.grp.stats</span>, <span class="no">df.overall.stats</span>)
-    <span class="no">list.return</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html">append</a></span>(<span class="no">list.return</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">df_overall_stats</span> <span class="kw">=</span> <span class="no">df.overall.stats</span>,
-                                            <span class="kw">df_row_stats_all</span> <span class="kw">=</span> <span class="no">df.row.stats.all</span>))
-}
+<span class="kw">if</span> <span class="op">(</span><span class="va">boo.overall.stats</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">df.row.stats.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df.row.grp.stats</span>, <span class="va">df.overall.stats</span><span class="op">)</span>
+    <span class="va">list.return</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html">append</a></span><span class="op">(</span><span class="va">list.return</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>df_overall_stats <span class="op">=</span> <span class="va">df.overall.stats</span>,
+                                            df_row_stats_all <span class="op">=</span> <span class="va">df.row.stats.all</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Display Results</span>
-<span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.table.grp.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.table.grp.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -1577,8 +1587,9 @@ n.distinct
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.row.grp.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.row.grp.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -1945,8 +1956,9 @@ mpg.am.vs.1.1.sd
 </td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/reexports.html">kable</a></span>(<span class="no">df.overall.stats</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="kw">bootstrap_options</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df.overall.stats</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -2062,7 +2074,7 @@ mpg.n_distinct
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

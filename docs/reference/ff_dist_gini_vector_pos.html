@@ -173,7 +173,7 @@ This does not work with negative values. Additionally, this is not for a sample,
 Also note while the highest equality is 0, the greatest inequality only asymptotes to 1, but equals to (n-1)/(n+1).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_pos</span>)</pre>
+    <pre class="usage"><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_pos</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,19 +192,30 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
     <p><a href='https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html'>https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html</a>
 <a href='https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html'>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html</a>
 <a href='https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R'>https://github.com/FanWangEcon/REconTools/blob/master/R/ff_dist_gini.R</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Fan Wang, <a href='http://fanwangecon.github.io'>http://fanwangecon.github.io</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ar_equal_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>)
-<span class='no'>ar_ineql_alittle_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)
-<span class='no'>ar_ineql_somewht_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>3</span>)
-<span class='no'>ar_ineql_alotine_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>5</span>)
-<span class='no'>ar_ineql_veryvry_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>8</span>)
-<span class='no'>ar_ineql_mostmst_n2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>^<span class='fl'>13</span>)
+    <pre class="examples"><div class='input'><span class='va'>ar_equal_n2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>ar_ineql_alittle_n2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>ar_ineql_somewht_n2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>^</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>ar_ineql_alotine_n2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>^</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>ar_ineql_veryvry_n2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>^</span><span class='fl'>8</span><span class='op'>)</span>
+<span class='va'>ar_ineql_mostmst_n2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>^</span><span class='fl'>13</span><span class='op'>)</span>
 <span class='co'># Beta draw testing</span>
-<span class='no'>ar_beta_mostrich_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>5</span>, <span class='fl'>1</span>)
-<span class='no'>ar_beta_mostpoor_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>5</span>)
-<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='fl'>1000</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>)
-<span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_equal_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alittle_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.1111111</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_somewht_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.2592593</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_alotine_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.3131313</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_ineql_mostmst_n2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.333252</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostrich_n1000</span>)</div><div class='output co'>#&gt; [1] 0.09135541</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_mostpoor_n1000</span>)</div><div class='output co'>#&gt; [1] 0.453811</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span>(<span class='no'>ar_beta_manyrichmanypoor_nomiddle_n1000</span>)</div><div class='output co'>#&gt; [1] 0.402409</div></pre>
+<span class='va'>ar_beta_mostrich_n1000</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>5</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>ar_beta_mostpoor_n1000</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>ar_beta_manyrichmanypoor_nomiddle_n1000</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span>
+<span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_equal_n2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_ineql_alittle_n2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.1111111</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_ineql_somewht_n2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.2592593</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_ineql_alotine_n2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.3131313</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_ineql_mostmst_n2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Data vector has only n=2, max-inequality/min-gini=0.333333333333333</span></div><div class='output co'>#&gt; [1] 0.333252</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_beta_mostrich_n1000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.09135541</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_beta_mostpoor_n1000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.453811</div><div class='input'><span class='fu'>ff_dist_gini_vector_pos</span><span class='op'>(</span><span class='va'>ar_beta_manyrichmanypoor_nomiddle_n1000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.402409</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -220,7 +231,7 @@ Also note while the highest equality is 0, the greatest inequality only asymptot
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

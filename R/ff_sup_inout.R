@@ -398,7 +398,8 @@ ff_sup_clean_mlx <- function(st_prj_root,
                              bl_recursive = TRUE,
                              bl_verbose = TRUE,
                              bl_test = TRUE,
-                             it_hierachy_shift=2, it_toc_depth=3) {
+                             it_hierachy_shift=2, it_toc_depth=3,
+                             st_conda_env = 'wk_pyfan') {
   #' Convert mlx files to tex and pdf
   #'
   #' @description
@@ -421,6 +422,7 @@ ff_sup_clean_mlx <- function(st_prj_root,
   #' to own file hierarchy
   #' @param it_toc_depth rmd own file outputs toc levels to show
   #' considered included, searched and found
+  #' @param st_conda_env string variable of conda env name
   #' @return a list of string paths of files generated
   #' \itemize{
   #'   \item ls_spt_pdf_generated - a list of pdf file names
@@ -526,6 +528,17 @@ ff_sup_clean_mlx <- function(st_prj_root,
           try(file.remove(paste0(st_folder_m, st_file_wno_suffix, '.m')))
           try(file.remove(paste0(st_folder_rmd, st_file_wno_suffix, '.Rmd')))
 
+          # Steps:
+          message(toString(system(paste0("ls -F"), intern=TRUE)))
+          message(toString(shell(paste0("echo %cd%"), intern=TRUE)))
+          message(toString(shell(paste0("ls -F"), intern=TRUE)))
+          message(toString(system(paste0("echo %cd%"), intern=TRUE)))
+
+          # cd "C:/Users/fan/M4Econ/amto/array"
+          # matlab -batch "matlab.internal.liveeditor.openAndConvert('fs_accumarray.mlx','fs_accumarray.tex');exit"
+          # python -c "from pyfan.util.rmd.mattexmd import fp_mlxtex2md;fp_mlxtex2md(spt_root='C:/Users/fan/M4Econ/amto/array',ls_srt_subfolders=None,st_rglob_tex='fs_accumarray.tex');"
+          # python -c "from pyfan.util.rmd.mattexmd import fp_md2rmd;fp_md2rmd(spt_root='C:/Users/fan/M4Econ/amto/array',ls_srt_subfolders=None,snm_folder_yml='preamble.yml',st_rglob_md='fs_accumarray.md');"
+
           # 1. Convert MLX to M PDF
           dir.create(file.path(st_fullpath_noname, st_folder_pdf))
           spg_pdf_convert <- paste0("matlab -batch ",
@@ -576,9 +589,12 @@ ff_sup_clean_mlx <- function(st_prj_root,
           message(paste0('\n',spg_m_convert))
           st_system_spg_m_convert <- toString(system(spg_m_convert, intern=TRUE))
           message(st_system_spg_m_convert)
+          message('sleep 1 second')
+          Sys.sleep(1)
+
           # 4b. Convert python tex to md (in html folder)
           # python -c "from pyfan.util.rmd.mattexmd import fp_mlxtex2md; fp_mlxtex2md(spt_root='C:/Users/fan/Math4Econ/matrix_application/', ls_srt_subfolders=None, st_rglob_tex='twogoods.tex', verbose=True)"
-          spg_tex2md <- paste0("python -c ",
+          spg_tex2md <- paste0("activate ", st_conda_env, " & python -c ",
                                "\"from pyfan.util.rmd.mattexmd import fp_mlxtex2md;",
                                "fp_mlxtex2md(",
                                "spt_root='", st_fullpath_noname, st_folder_rmd, "',",
@@ -588,9 +604,12 @@ ff_sup_clean_mlx <- function(st_prj_root,
           message(paste0('\n',spg_tex2md))
           st_system_spg_tex2md_convert <- toString(system(spg_tex2md, intern=TRUE))
           message(st_system_spg_tex2md_convert)
+          message('sleep 1 second')
+          Sys.sleep(1)
+
           # 4c. Convert python md to rmd (in html folder)
           # python -c "from pyfan.util.rmd.mattexmd import fp_md2rmd; fp_md2rmd(spt_root='C:/Users/fan/Math4Econ/matrix_application/', ls_srt_subfolders=None, snm_folder_yml='preamble.yml', st_rglob_md='twogoods.md', verbose=True)"
-          spg_md2rmd <- paste0("python -c ",
+          spg_md2rmd <- paste0("activate ", st_conda_env, " & python -c ",
                                "\"from pyfan.util.rmd.mattexmd import fp_md2rmd;",
                                "fp_md2rmd(",
                                "spt_root='", st_fullpath_noname, st_folder_rmd, "',",
@@ -605,7 +624,7 @@ ff_sup_clean_mlx <- function(st_prj_root,
           # 7. Move Image Folders
           dir.create(file.path(st_fullpath_noname, 'img'))
           dir.create(file.path(st_prj_root, 'img'))
-          spg_imgmove <- paste0("python -c ",
+          spg_imgmove <- paste0("activate ", st_conda_env, " & python -c ",
                                "\"from pyfan.util.path.movefiles import fp_agg_move_subfiles;",
                                "fp_agg_move_subfiles(",
                                "spt_root_src='", st_fullpath_noname, "/',",

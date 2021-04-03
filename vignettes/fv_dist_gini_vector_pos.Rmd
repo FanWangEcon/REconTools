@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-View a vector positive vectors as population, calculate discrete GINI inequality measure. This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package.
+View a vector positive vectors as population, calculate discrete GINI inequality measure. This file works out how the [ff_dist_gini_vector_pos](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_vector_pos.html) function works from [Fan](https://fanwangecon.github.io/)'s *[REconTools](https://fanwangecon.github.io/REconTools/)* Package. See also the [fs_gini_disc](https://fanwangecon.github.io/R4Econ/math/func_ineq/htmlpdfr/fs_gini_disc.html) from *[R4Econ](https://fanwangecon.github.io/R4Econ/)*. See also the [ff_dist_gini_random_var](https://fanwangecon.github.io/REconTools/reference/ff_dist_gini_random_var.html) function for GINI for discrete random variables.
 
 There is an vector values (all positive). This could be height information for N individuals. It could also be income information for N individuals. Calculate the [GINI](https://en.wikipedia.org/wiki/Gini_coefficient) coefficient treating the given vector as population. This is not an estimation exercise where we want to estimate population gini based on a sample. The given array is the population. The population is discrete, and only has these N individuals in the length n vector.
 

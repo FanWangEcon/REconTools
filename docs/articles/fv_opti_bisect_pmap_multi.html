@@ -73,6 +73,9 @@
       <a href="https://fanwangecon.github.io/Stata4Econ/">Stata Examples Regressions and Tables</a>
     </li>
     <li>
+      <a href="https://fanwangecon.github.io/MEconTools/">Matlab Dynamic Savings Problem Package</a>
+    </li>
+    <li>
       <a href="https://fanwangecon.github.io/M4Econ/">Matlab Examples Matrix and Graphs</a>
     </li>
     <li>
@@ -82,7 +85,7 @@
       <a href="https://fanwangecon.github.io/Tex4Econ/">Latex and Paper Generation Examples</a>
     </li>
     <li>
-      <a href="https://fanwangecon.github.io/pyfan/">Python Examples</a>
+      <a href="https://fanwangecon.github.io/Py4Econ/">Python Examples</a>
     </li>
   </ul>
 </li>
@@ -164,8 +167,8 @@
 <div id="load-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load Packages</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># rm(list = ls(all.names = TRUE))</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># rm(list = ls(all.names = TRUE))</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
@@ -173,7 +176,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="set-up-input-arrays" class="section level2">
 <h2 class="hasAnchor">
@@ -182,8 +185,8 @@
 <p><span class="math display">\[M = Q+P = Q + Q*N\]</span></p>
 <p>Now we need to expand this by the number of choice grid. Each row, representing one equation, is expanded by the number of choice grids. We are graphically searching, or rather brute force searching, which means if we have 100 individuals, we want to plot out the nonlinear equation for each of these lines, and show graphically where each line crosses zero. We achieve this, by evaluating the equation for each of the 100 individuals along a grid of feasible choices.</p>
 <p>In this problem here, the feasible choices are shared across individuals.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># Parameters</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Parameters</span>
 <span class="va">fl_rho</span> <span class="op">=</span> <span class="fl">0.20</span>
 <span class="va">svr_id_var</span> <span class="op">=</span> <span class="st">'INDI_ID'</span>
 
@@ -219,7 +222,7 @@
 <span class="co">#&gt;  3rd Qu.:7   3rd Qu.: 1   3rd Qu.:0.7  </span>
 <span class="co">#&gt;  Max.   :9   Max.   : 2   Max.   :0.9</span>
 <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tb_states_choices</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -339,8 +342,8 @@ fl_alpha
 <h2 class="hasAnchor">
 <a href="#create-nonlinear-root-function" class="anchor"></a>Create Nonlinear Root Function</h2>
 <p>These is a test functions over which we will searh for roots.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># Define Implicit Function</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Define Implicit Function</span>
 <span class="va">ffi_nonlin_dplyrdo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fl_A</span>, <span class="va">fl_alpha</span>, <span class="va">fl_N</span>, <span class="va">ar_A</span>, <span class="va">ar_alpha</span>, <span class="va">fl_N_agg</span>, <span class="va">fl_rho</span><span class="op">)</span><span class="op">{</span>
   <span class="co"># scalar value that are row-specific, in dataframe already: *fl_A*, *fl_alpha*, *fl_N*</span>
   <span class="co"># array and scalars not in dataframe, common all rows: *ar_A*, *ar_alpha*, *fl_N_agg*, *fl_rho*</span>
@@ -362,7 +365,7 @@ fl_alpha
   <span class="va">fl_overall</span> <span class="op">=</span> <span class="va">fl_N_agg</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ar_overall</span><span class="op">)</span>
 
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">fl_overall</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 </div>
 </div>
 <div id="step-by-step-implmentation-of-algorithm" class="section level1">
@@ -373,8 +376,8 @@ fl_alpha
 <h2 class="hasAnchor">
 <a href="#initialize-matrix" class="anchor"></a>Initialize Matrix</h2>
 <p>First, initialize the matrix with <span class="math inline">\(a_0\)</span> and <span class="math inline">\(b_0\)</span>, the initial min and max points:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># common prefix to make reshaping easier</span>
 <span class="va">st_bisec_prefix</span> <span class="op">&lt;-</span> <span class="st">'bisec_'</span>
 <span class="va">svr_a_lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">st_bisec_prefix</span>, <span class="st">'a_0'</span><span class="op">)</span>
@@ -411,14 +414,14 @@ fl_alpha
 <span class="co">#&gt;  Median : -1386.7  </span>
 <span class="co">#&gt;  Mean   : -4737.0  </span>
 <span class="co">#&gt;  3rd Qu.:  -538.0  </span>
-<span class="co">#&gt;  Max.   :  -202.9</span></pre></div>
+<span class="co">#&gt;  Max.   :  -202.9</span></code></pre></div>
 </div>
 <div id="iterate-and-solve-for-fp-update-fa-and-fb" class="section level2">
 <h2 class="hasAnchor">
 <a href="#iterate-and-solve-for-fp-update-fa-and-fb" class="anchor"></a>Iterate and Solve for f(p), update f(a) and f(b)</h2>
 <p>Implement the DPLYR based Concurrent bisection algorithm.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># fl_tol = float tolerance criteria</span>
 <span class="co"># it_tol = number of interations to allow at most</span>
 <span class="va">fl_tol</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">2</span>
@@ -493,15 +496,15 @@ fl_alpha
 <span class="co">#&gt; [1] "it_cur:15, fl_p_dist2zr:0.0593547942434943"</span>
 <span class="co">#&gt; [1] "it_cur:16, fl_p_dist2zr:0.030716694397913"</span>
 <span class="co">#&gt; [1] "it_cur:17, fl_p_dist2zr:0.0177772298500779"</span>
-<span class="co">#&gt; [1] "it_cur:18, fl_p_dist2zr:0.00644396015251105"</span></pre></div>
+<span class="co">#&gt; [1] "it_cur:18, fl_p_dist2zr:0.00644396015251105"</span></code></pre></div>
 </div>
 <div id="reshape-wide-to-long-to-wide" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reshape-wide-to-long-to-wide" class="anchor"></a>Reshape Wide to long to Wide</h2>
 <p>To view results easily, how iterations improved to help us find the roots, convert table from wide to long. Pivot twice. This allows us to easily graph out how bisection is working out iterationby iteration.</p>
 <p>Here, we will first show what the raw table looks like, the wide only table, and then show the long version, and finally the version that is medium wide.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># New variables</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># New variables</span>
 <span class="va">svr_bisect_iter</span> <span class="op">&lt;-</span> <span class="st">'biseciter'</span>
 <span class="va">svr_abfafb_long_name</span> <span class="op">&lt;-</span> <span class="st">'varname'</span>
 <span class="va">svr_number_col</span> <span class="op">&lt;-</span> <span class="st">'value'</span>
@@ -633,14 +636,14 @@ fl_alpha
 <span class="co">#&gt;  8       8   1.5      0.8 15         22.4  22.4 0.00327 -0.0101   </span>
 <span class="co">#&gt;  9       8   1.5      0.8 16         22.4  22.4 0.00327 -0.00342  </span>
 <span class="co">#&gt; 10       8   1.5      0.8 17         22.4  22.4 0.00327 -0.0000761</span>
-<span class="co">#&gt; # ... with 20 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 20 more rows</span></code></pre></div>
 </div>
 <div id="graph-bisection-iteration-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graph-bisection-iteration-results" class="anchor"></a>Graph Bisection Iteration Results</h2>
 <p>Actually we want to graph based on the long results, not the wider. Wider easier to view in table.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co"># Graph results</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Graph results</span>
 <span class="va">lineplot</span> <span class="op">&lt;-</span> <span class="va">tb_states_choices_bisec_long</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">svr_bisect_iter</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">svr_bisect_iter</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">sym</a></span><span class="op">(</span><span class="va">svr_abfafb_long_name</span><span class="op">)</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'a'</span>, <span class="st">'b'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -656,7 +659,7 @@ fl_alpha
              y <span class="op">=</span> <span class="st">'a (left side point) and b (right side point) values'</span>,
              caption <span class="op">=</span> <span class="st">'DPLYR concurrent bisection nonlinear multple individuals'</span><span class="op">)</span> <span class="op">+</span>
       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">lineplot</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">lineplot</span><span class="op">)</span></code></pre></div>
 <p><img src="fv_opti_bisect_pmap_multi_files/figure-html/reshape%20solution%20for%20graphing-1.png" width="700"></p>
 </div>
 </div>
@@ -674,8 +677,8 @@ fl_alpha
 <li>
 <em>svr_root_x</em>: the x variable name that appears n fc_withroot.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">fv_opti_bisect_pmap_multi_test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>,
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fv_opti_bisect_pmap_multi_test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>,
                                            <span class="va">fl_lower_x</span>, <span class="va">fl_upper_x</span>,
                                            <span class="va">ls_svr_df_in_func</span>,
                                            <span class="va">svr_root_x</span> <span class="op">=</span> <span class="st">'x'</span>,
@@ -784,14 +787,14 @@ fl_alpha
 <span class="co"># return</span>
 <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df_bisec</span><span class="op">)</span>
 
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 </div>
 <div id="prepare-inputs-to-invoke-bisection-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prepare-inputs-to-invoke-bisection-function" class="anchor"></a>Prepare Inputs to Invoke Bisection Function</h2>
 <p>Here we use the same function as earlier, but modify number of parameters:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># Define Inputs</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Define Inputs</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">tb_states_choices</span>
 <span class="va">fc_withroot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fl_A</span>, <span class="va">fl_alpha</span>, <span class="va">x</span><span class="op">)</span><span class="op">{</span>
   <span class="co"># Function has four inputs hardcoded in: ar_nN_A, ar_nN_alpha, fl_rho, fl_N_agg</span>
@@ -809,10 +812,10 @@ fl_alpha
 <span class="va">fl_upper_x</span> <span class="op">&lt;-</span> <span class="fl">200</span>
 <span class="va">ls_svr_df_in_func</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span><span class="op">)</span>
 <span class="va">svr_root_x</span> <span class="op">&lt;-</span> <span class="st">'x'</span>
-<span class="va">fl_zero_tol</span> <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">6</span></pre></div>
+<span class="va">fl_zero_tol</span> <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">6</span></code></pre></div>
 <p>Additionally, let’s prepare a very simple linear test:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">ar_intercept</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="op">-</span><span class="fl">1</span>, length.out <span class="op">=</span> <span class="va">it_N_child_cnt</span><span class="op">)</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ar_intercept</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="op">-</span><span class="fl">1</span>, length.out <span class="op">=</span> <span class="va">it_N_child_cnt</span><span class="op">)</span>
 <span class="va">ar_slope</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="va">it_N_child_cnt</span><span class="op">)</span>
 <span class="va">df_lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">ar_intercept</span>, <span class="va">ar_slope</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span>var<span class="op">=</span><span class="st">'ID'</span><span class="op">)</span>
 <span class="va">ar_st_col_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'ID'</span>,<span class="st">'fl_int'</span>, <span class="st">'fl_slope'</span><span class="op">)</span>
@@ -824,14 +827,14 @@ fl_alpha
 <span class="va">fl_upper_x_line</span> <span class="op">&lt;-</span> <span class="fl">100000</span>
 <span class="va">ls_svr_df_in_func_line</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'fl_int'</span>, <span class="st">'fl_slope'</span><span class="op">)</span>
 <span class="va">svr_root_x_line</span> <span class="op">&lt;-</span> <span class="st">'x'</span>
-<span class="va">fl_zero_tol</span> <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">6</span></pre></div>
+<span class="va">fl_zero_tol</span> <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">6</span></code></pre></div>
 </div>
 <div id="test-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-function" class="anchor"></a>Test Function</h2>
 <p>Now we call the function to see if it works:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">df_bisec</span> <span class="op">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>, <span class="va">fl_lower_x</span>,<span class="va">fl_upper_x</span>,
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_bisec</span> <span class="op">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>, <span class="va">fl_lower_x</span>,<span class="va">fl_upper_x</span>,
                                            <span class="va">ls_svr_df_in_func</span>, <span class="va">svr_root_x</span>, bl_keep_iter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span>
 <span class="co">#&gt; i Use `all_of(ls_pmap_vars)` instead of `ls_pmap_vars` to silence this message.</span>
@@ -914,10 +917,10 @@ fl_alpha
 <span class="co">#&gt; #   bisec_b_22 &lt;dbl&gt;, bisec_fa_22 &lt;dbl&gt;, bisec_fb_22 &lt;dbl&gt;, bisec_a_23 &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   bisec_b_23 &lt;dbl&gt;, bisec_fa_23 &lt;dbl&gt;, bisec_fb_23 &lt;dbl&gt;, bisec_a_24 &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   bisec_b_24 &lt;dbl&gt;, bisec_fa_24 &lt;dbl&gt;, bisec_fb_24 &lt;dbl&gt;, bisec_a_25 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   bisec_b_25 &lt;dbl&gt;, ...</span></pre></div>
+<span class="co">#&gt; #   bisec_b_25 &lt;dbl&gt;, ...</span></code></pre></div>
 <p>Call the same function, but do not save history:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="va">df_bisec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>, <span class="va">fl_lower_x</span>, <span class="va">fl_upper_x</span>,
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_bisec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>, <span class="va">fl_lower_x</span>, <span class="va">fl_upper_x</span>,
                                                             <span class="va">ls_svr_df_in_func</span>, <span class="va">svr_root_x</span>, bl_keep_iter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
 <span class="va">df_bisec</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/one_of.html">one_of</a></span><span class="op">(</span><span class="st">'f_p_t_f_a'</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 9 x 9</span>
@@ -932,10 +935,10 @@ fl_alpha
 <span class="co">#&gt; 7       7   1        0.7 15.9   -5.55e-7     15.9       15.9   0.00000416 </span>
 <span class="co">#&gt; 8       8   1.5      0.8 22.4   -9.41e-7     22.4       22.4   0.00000233 </span>
 <span class="co">#&gt; 9       9   2        0.9 31.5   -5.27e-7     31.5       31.5   0.00000174 </span>
-<span class="co">#&gt; # ... with 1 more variable: bisec_fb_28 &lt;dbl&gt;</span></pre></div>
+<span class="co">#&gt; # ... with 1 more variable: bisec_fb_28 &lt;dbl&gt;</span></code></pre></div>
 <p>Call the linear root function:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="va">df_bisec</span> <span class="op">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df_lines</span>, <span class="va">fc_withroot_line</span>,
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_bisec</span> <span class="op">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df_lines</span>, <span class="va">fc_withroot_line</span>,
                                            <span class="va">fl_lower_x_line</span>, <span class="va">fl_upper_x_line</span>,
                                            <span class="va">ls_svr_df_in_func_line</span>, <span class="va">svr_root_x_line</span>, bl_keep_iter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; it_cur:1, fl_p_dist2zr:27494.5</span>
@@ -983,7 +986,7 @@ fl_alpha
 <span class="co">#&gt; 7     7  -3.25    0.775   4.19 -9.60e-6       4.19       4.19    -9.60e-6</span>
 <span class="co">#&gt; 8     8  -2.12    0.888   2.39 -5.06e-6       2.39       2.39    -5.06e-6</span>
 <span class="co">#&gt; 9     9  -1       1       1.00 -1.57e-5       1.00       1.00    -1.57e-5</span>
-<span class="co">#&gt; # ... with 1 more variable: bisec_fb_32 &lt;dbl&gt;</span></pre></div>
+<span class="co">#&gt; # ... with 1 more variable: bisec_fb_32 &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="test-with-prjoptialloc-log-results" class="section level2">
 <h2 class="hasAnchor">
@@ -991,8 +994,8 @@ fl_alpha
 <p>Use <em>df_esti</em> from <a href="https://fanwangecon.github.io/PrjOptiAlloc/reference/df_opt_dtgch_cbem4.html"><em>ffy_opt_dtgch_cbem4</em></a> function of project <em>PrjOptiAlloc</em>. Select only the <em>fl_A</em> and <em>fl_alpha</em> variables, should look like <em>tb_states_choices</em>. The difference is that <em>tb_states_choices</em> values were made up, but the <em>alpha</em> and <em>A</em> values from <em>df_esti</em> are estimated.</p>
 <p>The function is the same as before: <em>fc_withroot</em>, in fact, this function is the solution to the log linear allocation from problem <a href="https://fanwangecon.github.io/PrjOptiAlloc/">PrjOptiAlloc</a>.</p>
 <p>First define the data frame:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="co"># Load Package and Data</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load Package and Data</span>
 <span class="co"># ls_opti_alpha_A &lt;- PrjOptiAlloc::ffy_opt_dtgch_cbem4()</span>
 <span class="co"># df_esti &lt;- ls_opti_alpha_A$df_esti</span>
 <span class="va">df_esti</span> <span class="op">&lt;-</span> <span class="va">df_opt_dtgch_cbem4</span>
@@ -1004,10 +1007,10 @@ fl_alpha
 <span class="co"># %&gt;% mutate(A_log =(A_log))</span>
 <span class="va">df_dtgch_cbem4_bisec</span> <span class="op">&lt;-</span> <span class="va">df_esti</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">indi.id</span>, <span class="va">A_log</span>, <span class="va">alpha_log</span><span class="op">)</span>
 <span class="va">ar_st_col_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'INDI_ID'</span>, <span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span><span class="op">)</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df_dtgch_cbem4_bisec</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_all</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ar_st_col_names</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df_dtgch_cbem4_bisec</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_all</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ar_st_col_names</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Crucially, also need to redefine the function, note that the function formula we are using here is the same as before, however, there are Hard-Coded vectors in the formula, that need to reflect the new dataframe.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="co"># hard-coded parameters</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># hard-coded parameters</span>
 <span class="va">ar_nN_A</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">fl_A</span><span class="op">)</span>
 <span class="va">ar_nN_alpha</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">fl_alpha</span><span class="op">)</span>
 <span class="co"># Function again updating the hard-coded parameters</span>
@@ -1022,10 +1025,10 @@ fl_alpha
   <span class="va">ar_overall</span> <span class="op">=</span> <span class="va">ar_p1</span><span class="op">*</span><span class="va">ar_p2</span>
   <span class="va">fl_overall</span> <span class="op">=</span> <span class="va">fl_N_agg</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ar_overall</span><span class="op">)</span>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">fl_overall</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>Finally call and solve with the bisection function:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="co"># Bisect and Solve</span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Bisect and Solve</span>
 <span class="va">ls_svr_df_in_func</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'fl_A'</span>, <span class="st">'fl_alpha'</span><span class="op">)</span>
 <span class="va">svr_root_x</span> <span class="op">&lt;-</span> <span class="st">'x'</span>
 <span class="va">df_bisec_dtgch_cbem4</span> <span class="op">&lt;-</span> <span class="fu">fv_opti_bisect_pmap_multi_test</span><span class="op">(</span><span class="va">df</span>, <span class="va">fc_withroot</span>,
@@ -1083,7 +1086,7 @@ fl_alpha
 <span class="co">#&gt; 7       8  4.34  0.00669  7.63 -1.17e-5 -9.18e-11       7.63       7.63</span>
 <span class="co">#&gt; 8       9  4.34  0.00669  7.63  1.56e-5  5.49e-10       7.63       7.63</span>
 <span class="co">#&gt; 9      10  4.36  0.0139  16.1   9.17e-6  1.69e-10      16.1       16.1 </span>
-<span class="co">#&gt; # ... with 2 more variables: bisec_fa_27 &lt;dbl&gt;, bisec_fb_27 &lt;dbl&gt;</span></pre></div>
+<span class="co">#&gt; # ... with 2 more variables: bisec_fa_27 &lt;dbl&gt;, bisec_fb_27 &lt;dbl&gt;</span></code></pre></div>
 </div>
 </div>
   </div>

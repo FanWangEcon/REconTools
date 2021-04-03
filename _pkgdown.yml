@@ -25,6 +25,8 @@ navbar:
           href: https://fanwangecon.github.io/Stat4Econ/
         - text: "Stata Examples Regressions and Tables"
           href: https://fanwangecon.github.io/Stata4Econ/
+        - text: "Matlab Dynamic Savings Problem Package"
+          href: https://fanwangecon.github.io/MEconTools/
         - text: "Matlab Examples Matrix and Graphs"
           href: https://fanwangecon.github.io/M4Econ/
         - text: "Matlab Introductory Math for Econ"
@@ -32,7 +34,7 @@ navbar:
         - text: "Latex and Paper Generation Examples"
           href: https://fanwangecon.github.io/Tex4Econ/
         - text: "Python Examples"
-          href: https://fanwangecon.github.io/pyfan/
+          href: https://fanwangecon.github.io/Py4Econ/
     - text: "Fan"
       href: http://fanwangecon.github.io/
   right:

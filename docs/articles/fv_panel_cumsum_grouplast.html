@@ -73,6 +73,9 @@
       <a href="https://fanwangecon.github.io/Stata4Econ/">Stata Examples Regressions and Tables</a>
     </li>
     <li>
+      <a href="https://fanwangecon.github.io/MEconTools/">Matlab Dynamic Savings Problem Package</a>
+    </li>
+    <li>
       <a href="https://fanwangecon.github.io/M4Econ/">Matlab Examples Matrix and Graphs</a>
     </li>
     <li>
@@ -82,7 +85,7 @@
       <a href="https://fanwangecon.github.io/Tex4Econ/">Latex and Paper Generation Examples</a>
     </li>
     <li>
-      <a href="https://fanwangecon.github.io/pyfan/">Python Examples</a>
+      <a href="https://fanwangecon.github.io/Py4Econ/">Python Examples</a>
     </li>
   </ul>
 </li>
@@ -134,15 +137,18 @@
 <div id="package-and-data-loading-and-parameter-setting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-and-data-loading-and-parameter-setting" class="anchor"></a>Package and Data Loading and Parameter Setting</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># Load Library</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load Library</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># library(tidyverse)</span>
 <span class="co"># library(tidymodels)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rlang.r-lib.org">rlang</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org">rlang</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'rlang' was built under R version 4.0.3</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'tibble' was built under R version 4.0.3</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.0.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -152,6 +158,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'tidyr' was built under R version 4.0.3</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></span><span class="op">)</span>
 <span class="co">#&gt; Warning: replacing previous import 'purrr::list_along' by 'rlang::list_along'</span>
@@ -182,18 +189,20 @@
 <span class="co">#&gt; loading 'REconTools'</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'knitr' was built under R version 4.0.3</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'kableExtra' was built under R version 4.0.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'kableExtra'</span>
 <span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     group_rows</span></pre></div>
+<span class="co">#&gt;     group_rows</span></code></pre></div>
 </div>
 <div id="generate-data-structure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#generate-data-structure" class="anchor"></a>Generate Data Structure</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># Generate X vector</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Generate X vector</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span>
 
 <span class="co"># Number of N</span>
@@ -217,7 +226,7 @@
 
 <span class="co"># Display</span>
 <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tb_long</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -902,9 +911,9 @@ rank_l
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tb_data</span> <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tb_data</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -1365,8 +1374,8 @@ y
 <li>sum</li>
 <li>fill</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="va">tb_data</span> <span class="op">&lt;-</span> <span class="va">tb_data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">tb_data_cum_sum_top</span> <span class="op">&lt;-</span> <span class="va">tb_data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cum_sum_top <span class="op">=</span> <span class="fl">0</span>,
                                           cum_mean_top <span class="op">=</span> <span class="fl">0</span>,
@@ -1432,7 +1441,7 @@ y
 
 <span class="co"># Display Final</span>
 <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tb_data_cum_sum_top</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
+    <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -2247,8 +2256,8 @@ cum_median_top
 <li>With the addition of each row, update <em>df_indi</em>’s row corresponding to the individual, always update to the latest piece of data.</li>
 <li>Compute statistics of interest with df_indi</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="va">tb_data</span> <span class="op">&lt;-</span> <span class="va">tb_data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">tb_data_cum_sum_top</span> <span class="op">&lt;-</span> <span class="va">tb_data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cum_sum_top <span class="op">=</span> <span class="fl">0</span>,
                                           cum_mean_top <span class="op">=</span> <span class="fl">0</span>,
@@ -2312,7 +2321,7 @@ cum_median_top
 
 <span class="co"># Display Final</span>
 <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tb_data_cum_sum_top</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></pre></div>
+    <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive">
 <thead><tr>
 <th style="text-align:right;">
@@ -3127,8 +3136,8 @@ cum_median_top
 <h3 class="hasAnchor">
 <a href="#cumulative-sum-the-last" class="anchor"></a>Cumulative Sum the Last</h3>
 <p>Within group last occurance, cumulative sum of last occurance of individual by date. Think of date as x, y as individual outcomes, and id as individual ID. Each individual is observed at multiple x points. In the example here, at each x, only one id observed.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/ff_panel_cumsum_grouplast.html">ff_panel_cumsum_grouplast</a></span><span class="op">(</span><span class="va">tb_data</span>, svr_id<span class="op">=</span><span class="st">'id'</span>, svr_x<span class="op">=</span><span class="st">'x'</span>, svr_y<span class="op">=</span><span class="st">'y'</span>, svr_cumsumtop <span class="op">=</span> <span class="st">'y_cumsum'</span>, stat<span class="op">=</span><span class="st">'sum'</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ff_panel_cumsum_grouplast.html">ff_panel_cumsum_grouplast</a></span><span class="op">(</span><span class="va">tb_data</span>, svr_id<span class="op">=</span><span class="st">'id'</span>, svr_x<span class="op">=</span><span class="st">'x'</span>, svr_y<span class="op">=</span><span class="st">'y'</span>, svr_cumsumtop <span class="op">=</span> <span class="st">'y_cumsum'</span>, stat<span class="op">=</span><span class="st">'sum'</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 39 x 4</span>
 <span class="co">#&gt; # Groups:   id [5]</span>
 <span class="co">#&gt;       id     x     y y_cumsum</span>
@@ -3143,14 +3152,14 @@ cum_median_top
 <span class="co">#&gt;  8     5     8 2.13     5.79 </span>
 <span class="co">#&gt;  9     2     9 0.436    6.23 </span>
 <span class="co">#&gt; 10     4    10 2.13     6.74 </span>
-<span class="co">#&gt; # ... with 29 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 29 more rows</span></code></pre></div>
 </div>
 <div id="cumulative-average-last" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cumulative-average-last" class="anchor"></a>Cumulative Average Last</h3>
 <p>Thinking of taking Average SAT scores but, only of the last score people have. Calculate a moving average, where the moving window is all past information, and the average is across individuals, and for each individual, we only take the most recent score.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../reference/ff_panel_cumsum_grouplast.html">ff_panel_cumsum_grouplast</a></span><span class="op">(</span><span class="va">tb_data</span>, svr_id<span class="op">=</span><span class="st">'id'</span>, svr_x<span class="op">=</span><span class="st">'x'</span>, svr_y<span class="op">=</span><span class="st">'y'</span>, svr_cumsumtop <span class="op">=</span> <span class="st">'y_movingaverage_mean'</span>, stat<span class="op">=</span><span class="st">'mean'</span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ff_panel_cumsum_grouplast.html">ff_panel_cumsum_grouplast</a></span><span class="op">(</span><span class="va">tb_data</span>, svr_id<span class="op">=</span><span class="st">'id'</span>, svr_x<span class="op">=</span><span class="st">'x'</span>, svr_y<span class="op">=</span><span class="st">'y'</span>, svr_cumsumtop <span class="op">=</span> <span class="st">'y_movingaverage_mean'</span>, stat<span class="op">=</span><span class="st">'mean'</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 39 x 4</span>
 <span class="co">#&gt; # Groups:   id [5]</span>
 <span class="co">#&gt;       id     x     y y_movingaverage_mean</span>
@@ -3165,7 +3174,7 @@ cum_median_top
 <span class="co">#&gt;  8     5     8 2.13                 1.45 </span>
 <span class="co">#&gt;  9     2     9 0.436                1.25 </span>
 <span class="co">#&gt; 10     4    10 2.13                 1.35 </span>
-<span class="co">#&gt; # ... with 29 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 29 more rows</span></code></pre></div>
 </div>
 <div id="large-dataframe-cumulative-sum-quick-and-slow" class="section level3">
 <h3 class="hasAnchor">
@@ -3175,8 +3184,8 @@ cum_median_top
 <h4 class="hasAnchor">
 <a href="#slow-and-fast-algorithm-comparison" class="anchor"></a>Slow and Fast Algorithm Comparison</h4>
 <p>First Explore algorithms, initial algorithm very slow, improved algorithm dramtically faster. Using option quick to control</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="co"># Initialize</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Initialize</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">67890</span><span class="op">)</span>
 
 <span class="va">it_loop</span> <span class="op">&lt;-</span> <span class="fl">3</span>
@@ -3229,28 +3238,28 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Moving Stat Took SLOW VERBOSE False:'</span>, <span class="va">end_time_slow_verbose</span> <span class="op">-</span> <span class="va">start_time_slow_verbose</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; it_ctr: 1 , it_N: 5 , it_max_N: 10 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0349800586700439"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0209870338439941"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.174899816513062"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.172919034957886"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0278778076171875"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0258841514587402"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:0.146355867385864"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:0.110512018203735"</span>
 <span class="co">#&gt; it_ctr: 2 , it_N: 17 , it_max_N: 20 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0519711971282959"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.250855922698975"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:2.72143602371216"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:2.06980204582214"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0238950252532959"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.202108860015869"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:1.96733117103577"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:1.48744487762451"</span>
 <span class="co">#&gt; it_ctr: 3 , it_N: 30 , it_max_N: 30 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0309829711914062"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.801558971405029"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:8.87691307067871"</span>
-<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:6.97857785224915"</span></pre></div>
+<span class="co">#&gt; [1] "Df Generation Took:0.0238950252532959"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.656109094619751"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE True:6.32612299919128"</span>
+<span class="co">#&gt; [1] "Moving Stat Took SLOW VERBOSE False:5.28172492980957"</span></code></pre></div>
 </div>
 <div id="fast-algorithm-large-matrix-testing" class="section level4">
 <h4 class="hasAnchor">
 <a href="#fast-algorithm-large-matrix-testing" class="anchor"></a>Fast Algorithm Large Matrix Testing</h4>
 <p>Panel structure gets somewhat large, 1000 individuals, each observed on average 100 times. This would be a very substantial panel. About 33 seconds, not very fast, could be improved later.</p>
 <p>The structure is iterative by construction, difficult to fully vectorize. Perhaps achievable as well and faster with some moving average function, rolling window functions.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># Initialize</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Initialize</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">67890</span><span class="op">)</span>
 
 <span class="va">it_loop</span> <span class="op">&lt;-</span> <span class="fl">5</span>
@@ -3289,20 +3298,20 @@ cum_median_top
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Moving Stat Took QUICK True:'</span>, <span class="va">end_time_fast</span> <span class="op">-</span> <span class="va">start_time_fast</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; it_ctr: 1 , it_N: 5 , it_max_N: 10 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0269839763641357"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0179901123046875"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0238969326019287"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.0378339290618896"</span>
 <span class="co">#&gt; it_ctr: 2 , it_N: 16 , it_max_N: 12 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0259678363800049"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.178909063339233"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0248889923095703"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.179211139678955"</span>
 <span class="co">#&gt; it_ctr: 3 , it_N: 27 , it_max_N: 15 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0279889106750488"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.37378716468811"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0448029041290283"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.333527088165283"</span>
 <span class="co">#&gt; it_ctr: 4 , it_N: 38 , it_max_N: 17 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0269839763641357"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.591660976409912"</span>
+<span class="co">#&gt; [1] "Df Generation Took:0.0238950252532959"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.473915100097656"</span>
 <span class="co">#&gt; it_ctr: 5 , it_N: 50 , it_max_N: 20 </span>
-<span class="co">#&gt; [1] "Df Generation Took:0.0299830436706543"</span>
-<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.730576038360596"</span></pre></div>
+<span class="co">#&gt; [1] "Df Generation Took:0.0288710594177246"</span>
+<span class="co">#&gt; [1] "Moving Stat Took QUICK True:0.654116868972778"</span></code></pre></div>
 </div>
 </div>
 </div>

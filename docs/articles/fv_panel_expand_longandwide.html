@@ -73,6 +73,9 @@
       <a href="https://fanwangecon.github.io/Stata4Econ/">Stata Examples Regressions and Tables</a>
     </li>
     <li>
+      <a href="https://fanwangecon.github.io/MEconTools/">Matlab Dynamic Savings Problem Package</a>
+    </li>
+    <li>
       <a href="https://fanwangecon.github.io/M4Econ/">Matlab Examples Matrix and Graphs</a>
     </li>
     <li>
@@ -82,7 +85,7 @@
       <a href="https://fanwangecon.github.io/Tex4Econ/">Latex and Paper Generation Examples</a>
     </li>
     <li>
-      <a href="https://fanwangecon.github.io/pyfan/">Python Examples</a>
+      <a href="https://fanwangecon.github.io/Py4Econ/">Python Examples</a>
     </li>
   </ul>
 </li>
@@ -163,10 +166,11 @@
 <div id="package-and-data-loading-and-parameter-setting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-and-data-loading-and-parameter-setting" class="anchor"></a>Package and Data Loading and Parameter Setting</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># Load Library</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load Library</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.0.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -176,7 +180,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'tidyr' was built under R version 4.0.3</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'broom' was built under R version 4.0.3</span>
 <span class="co"># library(tidymodels)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fanwangecon.github.io/REconTools/">REconTools</a></span><span class="op">)</span>
 <span class="co">#&gt; Warning: replacing previous import 'purrr::list_along' by 'rlang::list_along'</span>
@@ -332,13 +338,13 @@
 <span class="co">#&gt; 1 Cebu               50      600       600           600      600         600</span>
 <span class="co">#&gt; # ... with 8 more variables: hgt_n &lt;int&gt;, wgt_n &lt;int&gt;, hgt0_n &lt;int&gt;,</span>
 <span class="co">#&gt; #   wgt0_n &lt;int&gt;, prot_n &lt;int&gt;, cal_n &lt;int&gt;, p.A.prot_n &lt;int&gt;,</span>
-<span class="co">#&gt; #   p.A.nProt_n &lt;int&gt;</span></pre></div>
+<span class="co">#&gt; #   p.A.nProt_n &lt;int&gt;</span></code></pre></div>
 </div>
 <div id="generate-additional-group-variables" class="section level2">
 <h2 class="hasAnchor">
 <a href="#generate-additional-group-variables" class="anchor"></a>Generate Additional Group Variables</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># Create Additional Categorical Variables, ever 6 months for averaging</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create Additional Categorical Variables, ever 6 months for averaging</span>
 <span class="va">df_hw_cebu</span> <span class="op">=</span> <span class="va">df_hw_cebu</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mth6 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">svymthRound</span>,
                                     `0`<span class="op">=</span><span class="st">"m00t06"</span>, `2`<span class="op">=</span><span class="st">"m00t06"</span>, `4`<span class="op">=</span><span class="st">"m00t06"</span>, `6`<span class="op">=</span><span class="st">"m00t06"</span>,
                                     `8`<span class="op">=</span><span class="st">"m08t12"</span>, `10`<span class="op">=</span><span class="st">"m08t12"</span>, `12`<span class="op">=</span><span class="st">"m08t12"</span>,
@@ -358,7 +364,7 @@
                                     `16`<span class="op">=</span><span class="st">"m10t16"</span>, `18`<span class="op">=</span><span class="st">"m18t24"</span>, `20`<span class="op">=</span><span class="st">"m18t24"</span>, `22`<span class="op">=</span><span class="st">"m18t24"</span>, `24`<span class="op">=</span><span class="st">"m18t24"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Re-order variables so that months come earlier</span>
-<span class="va">df_hw_cebu</span> <span class="op">=</span> <span class="va">df_hw_cebu</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">indi.id</span>, <span class="va">svymthRound</span>, <span class="va">mth6</span>, <span class="va">mth8</span>, <span class="va">mth10</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="va">df_hw_cebu</span> <span class="op">=</span> <span class="va">df_hw_cebu</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">indi.id</span>, <span class="va">svymthRound</span>, <span class="va">mth6</span>, <span class="va">mth8</span>, <span class="va">mth10</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="averaging-over-group-variables" class="section level2">
 <h2 class="hasAnchor">
@@ -367,8 +373,8 @@
 <div id="expand-columns-by-info-for-each-month-of-age" class="section level3">
 <h3 class="hasAnchor">
 <a href="#expand-columns-by-info-for-each-month-of-age" class="anchor"></a>Expand columns by Info for Each Month of Age</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Generate New Variable</span>
 
 <span class="co"># Variables to do groupings by</span>
@@ -401,14 +407,14 @@
 
 <span class="co"># Merge Back, now dataframe is both wide and long</span>
 <span class="va">df_hw_cebu_mth_widelong</span> <span class="op">&lt;-</span> <span class="va">df_hw_cebu</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">df_hw_cebu_mth_wide</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = "indi.id"</span></pre></div>
+<span class="co">#&gt; Joining, by = "indi.id"</span></code></pre></div>
 </div>
 <div id="aggregate-by-subgroup-first-columns-by-info-for-each-month-of-age" class="section level3">
 <h3 class="hasAnchor">
 <a href="#aggregate-by-subgroup-first-columns-by-info-for-each-month-of-age" class="anchor"></a>Aggregate by Subgroup first columns by Info for Each Month of Age</h3>
 <p>First, do not create additional dates based subgroups, just use raw dates variables, with unique indi/date, and generate the wide + long version of data.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Generate New Variable</span>
 
 <span class="co"># Variables to do groupings by</span>
@@ -438,7 +444,7 @@
 <span class="co">#&gt; Joining, by = "indi.id"</span>
 <span class="co">#&gt; Joining, by = "indi.id"</span>
 
-<span class="co">## Testing Regression Linear Including RHS Lag Input interaction with time</span></pre></div>
+<span class="co">## Testing Regression Linear Including RHS Lag Input interaction with time</span></code></pre></div>
 </div>
 </div>
 <div id="regression-testings" class="section level2">
@@ -447,16 +453,16 @@
 <div id="regression-testings-small-subsets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#regression-testings-small-subsets" class="anchor"></a>Regression Testings Small Subsets</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">df_hw_cebu_widelong</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">df_hw_cebu_widelong</span><span class="op">)</span>
 <span class="va">vf_months</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">svymthRound</span><span class="op">)</span><span class="op">)</span>
-<span class="va">vf_mth6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mth6</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="va">vf_mth6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mth6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="regression-testings-small-subsets-single-months" class="section level3">
 <h3 class="hasAnchor">
 <a href="#regression-testings-small-subsets-single-months" class="anchor"></a>Regression Testings Small Subsets Single Months</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># Regression Model:</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Regression Model:</span>
 <span class="co"># h_t = a_0*t + a_1*1{t}*N_t + a_2*1{t}*N_{t-1}</span>
 <span class="va">rs_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hgt</span> <span class="op">~</span>
                <span class="va">svymthRound</span> <span class="op">+</span>
@@ -486,13 +492,13 @@
                <span class="va">vf_months</span><span class="op">[</span>,<span class="fl">12</span><span class="op">]</span><span class="op">:</span><span class="va">svymthRound24</span> ,
              data<span class="op">=</span><span class="va">df_hw_cebu_widelong</span><span class="op">)</span>
 <span class="va">rsm_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">rs_test</span><span class="op">)</span>
-<span class="co">#rsm_test</span></pre></div>
+<span class="co">#rsm_test</span></code></pre></div>
 </div>
 <div id="regression-testing-every-single-month" class="section level3">
 <h3 class="hasAnchor">
 <a href="#regression-testing-every-single-month" class="anchor"></a>Regression Testing Every Single Month</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">rs_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hgt</span> <span class="op">~</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rs_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hgt</span> <span class="op">~</span>
              <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">indi.id</span><span class="op">)</span><span class="op">:</span><span class="va">svymthRound</span> <span class="op">+</span>
              <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">indi.id</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">svymthRound</span><span class="op">)</span> <span class="op">+</span>
              <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">indi.id</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">svymthRound</span><span class="op">)</span> <span class="op">+</span>
@@ -509,7 +515,7 @@
              <span class="va">vf_months</span><span class="op">[</span>,<span class="fl">11</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">:</span><span class="va">svymthRound22</span> <span class="op">+</span>
              <span class="va">vf_months</span><span class="op">[</span>,<span class="fl">12</span><span class="op">]</span><span class="op">:</span><span class="va">svymthRound24</span> ,
            data<span class="op">=</span><span class="va">df_hw_cebu_widelong</span><span class="op">)</span>
-<span class="va">rsm_coef</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span><span class="op">(</span><span class="va">rs_test</span><span class="op">)</span>
+<span class="va">rsm_coef</span> <span class="op">=</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">rs_test</span><span class="op">)</span>
 <span class="co"># vf_months[, 11:12]factor(svymthRound)24:svymthRound22</span>
 <span class="va">rsm_coef_inputs</span> <span class="op">=</span> <span class="va">rsm_coef</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'vf_months'</span>, <span class="va">term</span><span class="op">)</span><span class="op">)</span>
 <span class="va">rsm_coef_inputs</span>
@@ -526,13 +532,13 @@
 <span class="co">#&gt;  8 vf_months[, 1:12]factor(svymthRound)16:~  -0.0242   0.0142      -1.71  0.0890</span>
 <span class="co">#&gt;  9 vf_months[, 1:12]factor(svymthRound)18:~  -0.0193   0.0108      -1.78  0.0756</span>
 <span class="co">#&gt; 10 vf_months[, 1:12]factor(svymthRound)20:~  -0.0104   0.00731     -1.42  0.157 </span>
-<span class="co">#&gt; # ... with 68 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 68 more rows</span></code></pre></div>
 </div>
 <div id="regression-testing-6-months-inputs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#regression-testing-6-months-inputs" class="anchor"></a>Regression Testing 6 months Inputs</h3>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">rs_test_mth4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hgt</span> <span class="op">~</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rs_test_mth4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hgt</span> <span class="op">~</span>
              <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">indi.id</span><span class="op">)</span><span class="op">:</span><span class="va">svymthRound</span> <span class="op">+</span>
              <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">indi.id</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">svymthRound</span><span class="op">)</span> <span class="op">+</span>
              <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">indi.id</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">svymthRound</span><span class="op">)</span> <span class="op">+</span>
@@ -541,7 +547,7 @@
              <span class="va">vf_mth6</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">:</span><span class="va">mth6m14t18</span> <span class="op">+</span>
                <span class="va">vf_mth6</span><span class="op">[</span>,<span class="fl">4</span><span class="op">]</span><span class="op">:</span><span class="va">mth6m20t24</span> ,
            data<span class="op">=</span><span class="va">df_hw_cebu_widelong</span><span class="op">)</span>
-<span class="va">rsm_coef_mth4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span><span class="op">(</span><span class="va">rs_test_mth4</span><span class="op">)</span>
+<span class="va">rsm_coef_mth4</span> <span class="op">=</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">rs_test_mth4</span><span class="op">)</span>
 <span class="va">rsm_coef_inputs</span> <span class="op">=</span> <span class="va">rsm_coef_mth4</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'vf_mth6'</span>, <span class="va">term</span><span class="op">)</span><span class="op">)</span>
 <span class="va">rsm_coef_inputs</span>
 <span class="co">#&gt; # A tibble: 10 x 5</span>
@@ -556,7 +562,7 @@
 <span class="co">#&gt;  7 vf_mth6[, 2:4]factor(mth6)m20t24:mth6m0~  0.0103    0.00631     1.63  0.105  </span>
 <span class="co">#&gt;  8 vf_mth6[, 3:4]factor(mth6)m14t18:mth6m1~ -0.00144   0.00118    -1.22  0.225  </span>
 <span class="co">#&gt;  9 vf_mth6[, 3:4]factor(mth6)m20t24:mth6m1~ -0.00164   0.00235    -0.700 0.484  </span>
-<span class="co">#&gt; 10 vf_mth6[, 4]:mth6m20t24                  -0.00129   0.00136    -0.945 0.345</span></pre></div>
+<span class="co">#&gt; 10 vf_mth6[, 4]:mth6m20t24                  -0.00129   0.00136    -0.945 0.345</span></code></pre></div>
 </div>
 </div>
   </div>

@@ -529,10 +529,10 @@ ff_sup_clean_mlx <- function(st_prj_root,
           try(file.remove(paste0(st_folder_rmd, st_file_wno_suffix, '.Rmd')))
 
           # Steps:
-          message(toString(system(paste0("ls -F"), intern=TRUE)))
-          message(toString(shell(paste0("echo %cd%"), intern=TRUE)))
-          message(toString(shell(paste0("ls -F"), intern=TRUE)))
-          message(toString(system(paste0("echo %cd%"), intern=TRUE)))
+          # message(toString(system(paste0("ls -F"), intern=TRUE)))
+          # message(toString(shell(paste0("echo %cd%"), intern=TRUE)))
+          # message(toString(shell(paste0("ls -F"), intern=TRUE)))
+          # message(toString(system(paste0("echo %cd%"), intern=TRUE)))
 
           # cd "C:/Users/fan/M4Econ/amto/array"
           # matlab -batch "matlab.internal.liveeditor.openAndConvert('fs_accumarray.mlx','fs_accumarray.tex');exit"

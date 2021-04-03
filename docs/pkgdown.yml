@@ -1,4 +1,4 @@
-pandoc: 2.11.1.1
+pandoc: '2.11'
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
@@ -7,7 +7,7 @@ articles:
   fv_panel_cumsum_grouplast: fv_panel_cumsum_grouplast.html
   fv_panel_expand_longandwide: fv_panel_expand_longandwide.html
   fv_summ_bygroup: fv_summ_bygroup.html
-last_built: 2020-12-09T03:31Z
+last_built: 2021-04-03T16:57Z
 urls:
   reference: https://fanwangecon.github.io/REconTools/reference
   article: https://fanwangecon.github.io/REconTools/articles

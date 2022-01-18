@@ -1,4 +1,4 @@
-[![HitCount](http://hits.dwyl.com/fanwangecon/REconTools.svg)](https://github.com/FanWangEcon/REconTools)  [![Star](https://img.shields.io/github/stars/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/stargazers) [![Fork](https://img.shields.io/github/forks/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/network/members) [![Star](https://img.shields.io/github/watchers/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/watchers) [![DOI](https://zenodo.org/badge/232354596.svg)](https://zenodo.org/badge/latestdoi/232354596)
+[![Star](https://img.shields.io/github/stars/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/stargazers) [![Fork](https://img.shields.io/github/forks/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/network/members) [![Star](https://img.shields.io/github/watchers/fanwangecon/REconTools?style=social)](https://github.com/FanWangEcon/REconTools/watchers) [![DOI](https://zenodo.org/badge/232354596.svg)](https://zenodo.org/badge/latestdoi/232354596)
 
 
 # A Collection of R Functions

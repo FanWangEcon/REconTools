@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://fanwangecon.github.io/REconTools/404.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_sample_discrete.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/fv_panel_cumsum_grouplast.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/fv_summ_bygroup.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/authors.html</loc>
+  </url>
+  <url>
     <loc>https://fanwangecon.github.io/REconTools/index.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/news/index.html</loc>
   </url>
   <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/df_hgt_wgt.html</loc>
@@ -31,16 +64,25 @@
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_panel_expand_longrosterwide.html</loc>
   </url>
   <url>
+    <loc>https://fanwangecon.github.io/REconTools/reference/ff_panel_longandwide.html</loc>
+  </url>
+  <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_allvars_bygroup.html</loc>
   </url>
   <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_bygroup.html</loc>
   </url>
   <url>
+    <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_by_group.html</loc>
+  </url>
+  <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_count_unique_by_groups.html</loc>
   </url>
   <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/REconTools/reference/ff_summ_percentiles_by_groups.html</loc>
   </url>
   <url>
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_sup_clean_mlx.html</loc>
@@ -64,18 +106,9 @@
     <loc>https://fanwangecon.github.io/REconTools/reference/ff_sup_rmd2htmlpdfr.html</loc>
   </url>
   <url>
-    <loc>https://fanwangecon.github.io/REconTools/articles/fv_dist_gini_vector_pos.html</loc>
+    <loc>https://fanwangecon.github.io/REconTools/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://fanwangecon.github.io/REconTools/articles/fv_opti_bisect_pmap_multi.html</loc>
-  </url>
-  <url>
-    <loc>https://fanwangecon.github.io/REconTools/articles/fv_panel_cumsum_grouplast.html</loc>
-  </url>
-  <url>
-    <loc>https://fanwangecon.github.io/REconTools/articles/fv_panel_expand_longandwide.html</loc>
-  </url>
-  <url>
-    <loc>https://fanwangecon.github.io/REconTools/articles/fv_summ_bygroup.html</loc>
+    <loc>https://fanwangecon.github.io/REconTools/reference/REconTools-package.html</loc>
   </url>
 </urlset>

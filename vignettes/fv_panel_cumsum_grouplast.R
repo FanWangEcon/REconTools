@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 rm(list = ls(all.names = TRUE))
 # library(tidyverse)
 # library(tidymodels)
-library(rlang)
+# library(rlang)
 
 library(tibble)
 library(dplyr)

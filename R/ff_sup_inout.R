@@ -48,7 +48,6 @@ ff_sup_rmd2htmlpdfr <-
     #'                     ls_bool_convert=ls_bool_convert,
     #'                     bl_verbose=bl_verbose)
     #'
-
     # # Specify Parameters
     # ar_spt_root = c('C:/Users/fan/R4Econ/amto/array/', 'C:/Users/fan/R4Econ/math/integration')
     # ar_spn_skip <- c('basics', 'integrate')

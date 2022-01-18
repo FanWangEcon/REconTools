@@ -87,3 +87,22 @@ cat('ar_beta_mostrich_n1000:', fv_dist_gini_vector_pos_test(ar_beta_mostrich_n10
 ar_unif_n1000_NEGATIVE = runif(1000, min=-1, max=1)
 cat('\n\nSHOULD/DOES NOT WORK TEST\n ar_unif_n1000_NEGATIVE:', fv_dist_gini_vector_pos_test(ar_unif_n1000_NEGATIVE), '\n')
 
+## -----------------------------------------------------------------------------
+# array
+ar_x <- seq(1, 100, length.out = 30)
+# prob array
+ar_prob_x_unif <- rep.int(1, length(ar_x))/sum(rep.int(1, length(ar_x)))
+# prob higher at lower values
+ar_prob_x_lowval_highwgt <- rev(cumsum(ar_prob_x_unif))/sum(cumsum(ar_prob_x_unif))
+# prob higher at lower values
+ar_prob_x_highval_highwgt <- (cumsum(ar_prob_x_unif))/sum(cumsum(ar_prob_x_unif))
+# show
+print(cbind(ar_x, ar_prob_x_unif, ar_prob_x_lowval_highwgt, ar_prob_x_highval_highwgt))
+
+## -----------------------------------------------------------------------------
+library(REconTools)
+ff_dist_gini_vector_pos(ar_x)
+ff_dist_gini_random_var(ar_x, ar_prob_x_unif)
+ff_dist_gini_random_var(ar_x, ar_prob_x_lowval_highwgt)
+ff_dist_gini_random_var(ar_x, ar_prob_x_highval_highwgt)
+

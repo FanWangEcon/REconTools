@@ -30,7 +30,7 @@ Suppose we have data from N years, but each year's data is incomplete, so inform
 rm(list = ls(all.names = TRUE))
 # library(tidyverse)
 # library(tidymodels)
-library(rlang)
+# library(rlang)
 
 library(tibble)
 library(dplyr)

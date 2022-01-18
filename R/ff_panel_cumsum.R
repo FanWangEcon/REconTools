@@ -21,7 +21,8 @@ ff_panel_cumsum_grouplast <- function(df, svr_id, svr_x, svr_y, svr_cumsumtop = 
     #' \url{https://fanwangecon.github.io/REconTools/articles/fv_panel_cumsum_grouplast.html}
     #' \url{https://github.com/FanWangEcon/REconTools/blob/master/R/ff_panel_cumsum.R}
     #' @export
-    #' @import dplyr tidyr tibble rlang
+    #' @import dplyr tidyr tibble
+    #' @importFrom rlang parse_expr
     #' @examples
     #' library(tidyr)
     #' library(dplyr)
@@ -126,7 +127,7 @@ ff_panel_cumsum_grouplast <- function(df, svr_id, svr_x, svr_y, svr_cumsumtop = 
             func = paste0(stat, '(y)')
             fl_cum_sum_top_cur <- tb_data[1:row_ctr,] %>% arrange(!!sym(svr_id), !!sym(svr_x)) %>%
                 group_by(!!sym(svr_id)) %>% slice(n()) %>% ungroup() %>%
-                summarize(y_sum_top_up2row = !!parse_expr(func)) %>% pull()
+                summarize(y_sum_top_up2row = !!(rlang::parse_expr(func))) %>% pull()
           }
 
           # Store results
